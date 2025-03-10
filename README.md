@@ -1,2 +1,3 @@
 # MediConnect
-Esta app web tiene la funcion de poder manejar categorias de productos, productos, medicos y clientes todo en la misma app para que sea mas facil de gestionar la clinica administrativamente como para que esta pueda tener mas repercusion ya que tiene mas visivilidad en internet
+## Descripcion App
+App que realiza la funcion de gestion de una clinica media internamente, tanto del appartado del administrador como poder crear productos con diferentes categorias tambien creadas por el administrador como la gestion de los pacientes de la clinica gestionados por los medicos pertenecientes a esta.
