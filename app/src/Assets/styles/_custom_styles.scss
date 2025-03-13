@@ -1,0 +1,111 @@
+* {
+  font-family: "Poppins", "Hanken Grotesk", sans-serif;
+  font-size: 0.9rem;
+  scroll-behavior: smooth !important;
+}
+
+body {
+  overflow: hidden;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: bold !important;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+/* ScrollBar */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #999;
+  transition: 0.2s;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.bigBalls {
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  margin: auto;
+}
+
+#notifications {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  width: auto;
+  padding: 10px;
+  z-index: 999;
+}
+
+.generalNotification {
+  min-width: 300px;
+}
+
+.sidebar-nav-item-selected {
+  background-color: $gray-300 !important;
+}
+
+.sidebar-nav-item:not(.sidebar-nav-item-selected):hover {
+  background-color: $gray-200;
+}
+
+.rotate180 {
+  transform: rotate(180deg);
+}
+
+svg {
+  transition: 0.3s !important;
+}
+
+aside.EmojiPickerReact {
+  z-index: 10001 !important;
+}
+.emoji-backdrop {
+  z-index: 1000;
+}
+
+.tab-button {
+  border-bottom-width: 2px !important;
+  border-radius: 0 !important;
+  transition: 0.5s !important;
+}
+
+.active-tab-button {
+  border-bottom-color: $primary !important;
+}
+
+.hide-select-chevron select {
+  //   /* for Firefox */
+  -moz-appearance: none !important;
+  //   /* for Safari, Chrome, Opera */
+  -webkit-appearance: none !important;
+}

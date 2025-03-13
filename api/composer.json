@@ -1,0 +1,7 @@
+{
+    "require": {
+        "illuminate/validation": "^10.24",
+        "illuminate/translation": "^10.24",
+        "phpmailer/phpmailer": "^6.8"
+    }
+}

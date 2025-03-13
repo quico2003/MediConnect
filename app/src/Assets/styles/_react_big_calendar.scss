@@ -1,0 +1,29 @@
+.rbc-row-segment {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.rbc-event {
+  box-shadow: 0 0 5px 2px #99999950;
+  background: white;
+  transition: 0.2s;
+  border: 1px solid #ccced1 !important;
+  margin-bottom: 5px;
+}
+
+.rbc-event:hover {
+  box-shadow: none;
+  background: #fefefe;
+}
+
+.rbc-event-content {
+  color: $dark;
+}
+.rbc-row-segment {
+  display: flex;
+  justify-content: end;
+}
+
+.rbc-show-more {
+  color: $dark;
+}

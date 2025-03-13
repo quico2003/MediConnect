@@ -1,0 +1,28 @@
+.modal .ck.ck-content {
+  min-height: 200px;
+  max-height: 500px;
+}
+
+.ck.ck-content {
+  min-height: 200px;
+  border: none !important;
+  overflow: auto !important;
+  border-top: 1px solid #ccced1 !important;
+}
+
+.ck-editor.ck-rounded-corners {
+  border-radius: 0.5rem !important;
+  overflow: hidden !important;
+  border: 1px solid #ccced1 !important;
+}
+
+.ck.ck-toolbar {
+  border: none !important;
+}
+
+.ck.ck-editor__editable.ck-focused:not(.ck-editor__nested-editable) {
+  box-shadow: none;
+  border: 1px solid #212529 !important;
+  border-bottom-left-radius: 0.5rem !important;
+  border-bottom-right-radius: 0.5rem !important;
+}

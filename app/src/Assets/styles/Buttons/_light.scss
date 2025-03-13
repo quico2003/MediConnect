@@ -1,0 +1,13 @@
+// Overwrite the color for light button
+.btn.btn-icon {
+  // background: transparent;
+  border: 0;
+}
+
+.btn.btn-icon:hover {
+  background: $gray-200 !important;
+}
+
+.btn.btn-icon.active {
+  background: $gray-300 !important;
+}
