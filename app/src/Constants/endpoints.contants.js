@@ -9,10 +9,10 @@ export const Endpoints = {
     loginAdmin: "/auth/admin/login",
     get: "/auth/admin/get",
     changeImage: "/auth/admin/changeImageProfile",
+    logout: "/auth/admin/logout",
 
 
     login: "/auth/login",
-    logout: "/auth/logout",
     forgotPassword: "/auth/forgotpassword",
     resetPassword: "/auth/resetpassword",
     resetPasswordFinal: "/auth/resetpasswordStep2",

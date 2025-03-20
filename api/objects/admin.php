@@ -87,6 +87,13 @@ class Admin
         return $this->update();
     }
 
+    function logout()
+    {
+        $this->token = null;
+        $this->expiredate = null;
+        return $this->update();
+    }
+
     function update(): bool
     {
 

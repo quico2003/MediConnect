@@ -44,7 +44,7 @@ const ProfileDropdown = () => {
     request("post", getEndpoint(Endpoints.Auth.logout))
       .then((res) => {
         localStorage.clear();
-        replace(Paths[Views.login].path);
+        replace(Paths[Views.loginAdmin].path);
       })
       .catch((err) => errorNotification(err.message));
   };
