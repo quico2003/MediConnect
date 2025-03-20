@@ -9,7 +9,7 @@ $data = postInput();
 
 try {
     $db->beginTransaction();
-    checkAuth(false);
+    checkAuthAdmin(false);
 
     $input = validate($data, [
         'name' => 'required|string',

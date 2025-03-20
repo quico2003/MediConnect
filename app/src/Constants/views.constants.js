@@ -5,7 +5,11 @@ export const Views = {
   //#region Administrator
   loginAdmin: "loginAdmin",
   homeAdmin: "homeAdmin",
+
+
   categories: "categories",
+  new_category: "new_category",
+  edit_category: "edit_category",
 
   //#region General
   auth: "auth",

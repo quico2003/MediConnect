@@ -4,7 +4,7 @@ class FileStorage
 {
     public static function FilePath(string $fileName = ""): string
     {
-        return FILE_STORAGE_PATH . "/files/$fileName";
+        return FILE_STORAGE_PATH . "/avatars/$fileName";
     }
 
     public static function FileURL(string $fileName): string

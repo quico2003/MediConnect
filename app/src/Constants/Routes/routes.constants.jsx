@@ -32,7 +32,9 @@ import CopyInfo from "../../Views/App/Copy/CopyInfo/CopyInfo";
 import PrivacyPolicy from "../../Views/PrivacyPolicy/PrivacyPolicy";
 import LoginAdmin from "../../Views/Auth/Admin/Login/Login";
 import HomeAdmin from "../../Views/App/Admin/Dashboard/Home";
-import Categories from "../../Views/App/Admin/Categories/Categories";
+import Categories from "../../Views/App/Admin/Categories/AllCategories/Categories";
+import NewCategory from "../../Views/App/Admin/Categories/NewCategory/NewCategory";
+import EditCategory from "../../Views/App/Admin/Categories/EditCategory/EditCategory";
 
 const getRoute = (path, component, exact = true) => ({
   path,
@@ -63,6 +65,9 @@ export const AppAdminRoutes = [
   
   getRoute(Paths[Views.homeAdmin].path, HomeAdmin),
   getRoute(Paths[Views.categories].path, Categories),
+  getRoute(Paths[Views.new_category].path, NewCategory),
+  getRoute(Paths[Views.edit_category].path, EditCategory),
+  
 ];
 
 

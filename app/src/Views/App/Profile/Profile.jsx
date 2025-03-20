@@ -35,9 +35,9 @@ const Profile = () => {
 
   const fetchData = async () => {
     startFetching();
-    return await request("get", getEndpoint(Endpoints.user.profile.get))
+    return await request("get", getEndpoint(Endpoints.Auth.get))
       .then((res) => {
-        setProfile(res.profile);
+        setProfile(res.data);
       })
       .catch(errorNotification)
       .finally(() => finishFetching());
@@ -57,14 +57,13 @@ const Profile = () => {
 
   const handleSubmitImage = (e) => {
     const file = e.target.files[0];
-    request("file", getEndpoint(Endpoints.user.profile.changeImage), {
+    request("file", getEndpoint(Endpoints.Auth.changeImage), {
       accessor: "image",
       image: [file],
-      user: profile.user_id,
     })
       .then((res) => {
-        setProfile({ ...profile, avatar: res.file });
-        successNotification(ViewStrings.messages.profileUpdated);
+        console.log("HEY");
+
         window.location.reload();
       })
       .catch((err) => {
@@ -73,7 +72,7 @@ const Profile = () => {
             errorNotification(ViewStrings.messages.errorImageType);
             break;
           default:
-            errorNotification(err.code);
+            errorNotification("err.code");
             break;
         }
       });

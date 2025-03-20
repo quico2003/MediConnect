@@ -57,6 +57,7 @@ export const validateData = (params) => {
     if (
       item === undefined ||
       item === null ||
+      item === '' ||
       (Array.isArray(item) && item.length === 0)
     )
       return false;

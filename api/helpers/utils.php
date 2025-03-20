@@ -178,8 +178,8 @@ if (!function_exists('validate')) {
 }
 
 
-if (!function_exists('checkAuth')) {
-    function checkAuth($checkToken = true)
+if (!function_exists('checkAuthAdmin')) {
+    function checkAuthAdmin($checkToken = true)
     {
         $allheaders = getallheaders();
 
@@ -191,7 +191,7 @@ if (!function_exists('checkAuth')) {
             $database = new Database();
             $db = $database->getConnection();
             $token = isset($allheaders['Authorization']) ? $allheaders['Authorization'] : false;
-            $adminId = User::checkToken($db, $token);
+            $adminId = Admin::checkToken($db, $token);
             $database->conn = null;
             if ($adminId) {
                 return $adminId;
@@ -288,8 +288,11 @@ if (!function_exists('convertSearchValues')) {
                         }
                     }
                 }
-            } else $string .= "$value ";
+            } else
+                $string .= "$value ";
         }
+        logAPI("HOL");
+        logAPI($string);
         return $string;
     }
 }

@@ -13,6 +13,7 @@ const DeleteCopiesModal = ({ show, onClose, data }) => {
 
   const { showNotification: errorNotification } = useNotification();
   const { showNotification: successNotification } = useNotification("success");
+  
   const handleSubmit = () => {
     request("post", getEndpoint(Endpoints.Copies.deleteCopy.delete), {
       guid: data,

@@ -26,6 +26,18 @@ const ProfileDropdown = () => {
   const { showNotification: errorNotification } = useNotification();
   const { finishFetching } = useLoaded();
 
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    return await request("get", getEndpoint(Endpoints.Auth.get))
+      .then((res) => {
+        setProfile(res.data);
+      })
+      .catch(errorNotification)
+      .finally(() => finishFetching());
+  };
 
 
   const handleSignOut = () => {
@@ -63,30 +75,30 @@ const ProfileDropdown = () => {
       ) : (
         <Dropdown>
           <Dropdown.Toggle as={Button} variant="link">
-           
-              <img
-                className="rounded-circle"
-                src={
-                  profile.avatar ||
-                  `https://www.gravatar.com/avatar/${profile.name}?d=identicon`
-                }
-                alt={ViewStrings.Profile}
-                width={25}
-                height={25}
-                style={{}}
-              />
-              <span className="ms-2">{localStorage.getItem(StorageKeys.NAME)}</span>
-          
+
+            <img
+              className="rounded-circle"
+              src={
+                profile.avatar ||
+                `https://www.gravatar.com/avatar/${profile.name}?d=identicon`
+              }
+              alt={ViewStrings.Profile}
+              width={25}
+              height={25}
+              style={{}}
+            />
+            <span className="ms-2">{localStorage.getItem(StorageKeys.NAME)}</span>
+
           </Dropdown.Toggle>
 
           <Dropdown.Menu className="px-2">
-            {/* <Dropdown.Item
+            <Dropdown.Item
               className="rounded-3"
               as={Button}
               onClick={handleOpenProfile}
             >
               {ViewStrings.Profile}
-            </Dropdown.Item> */}
+            </Dropdown.Item>
             <Dropdown.Item
               className="rounded-3"
               as={Button}

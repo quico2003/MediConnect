@@ -16,7 +16,7 @@ include_once $document_root . '/helpers/emails/forgot_password_content.php';
 
 //Objects
 include_once $document_root . '/objects/admin.php';
-
+include_once $document_root . '/objects/category.php';
 
 include_once $document_root . '/objects/customexception.php';
 include_once $document_root . '/objects/book.php';
@@ -33,7 +33,7 @@ include_once $document_root . '/objects/_media.php';
 
 //Resources
 include_once $document_root . '/resources/AdminResource.php';
-
+include_once $document_root . '/resources/CategoryResource.php';
 
 include_once $document_root . '/resources/BookResource.php';
 include_once $document_root . '/resources/UserResource.php';

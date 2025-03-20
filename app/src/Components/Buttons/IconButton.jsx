@@ -3,7 +3,7 @@ import { Button } from "react-bootstrap";
 
 const IconButton = ({
   Icon,
-  
+  variant = "light",
   size = 18,
   color,
   onClick,
@@ -42,7 +42,7 @@ const IconButton = ({
       as={as}
       to={to}
       replace={replace}
-      variant="light"
+      variant={variant}
       className={buttonClassNames}
       onClick={onClick}
       style={{

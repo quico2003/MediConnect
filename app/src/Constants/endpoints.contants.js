@@ -7,6 +7,9 @@ export const Endpoints = {
   Auth: {
 
     loginAdmin: "/auth/admin/login",
+    get: "/auth/admin/get",
+    changeImage: "/auth/admin/changeImageProfile",
+
 
     login: "/auth/login",
     logout: "/auth/logout",
@@ -20,6 +23,14 @@ export const Endpoints = {
       getAll: "/dashboard/getHistory",
     },
   },
+  Categories: {
+    getAll: "/category/getAll",
+    get: "/category/get",
+    create: "/category/create",
+    update: "/category/update",
+    delete: "/category/delete",
+  },
+
   Books: {
     allBooks: {
       getAll: "/books/getAll",

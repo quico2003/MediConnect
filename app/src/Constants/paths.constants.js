@@ -11,7 +11,10 @@ export const Paths = {
   //#region Administrator
   [Views.loginAdmin]: getPath(`/my-admin`),
   [Views.homeAdmin]: getPath(`/my-admin/home`, "SideBarHome", "e88a"),
+
   [Views.categories]: getPath(`/my-admin/categories`, "SideBarCategories", "e574"),
+  [Views.new_category]: getPath(`/my-admin/categories/new`),
+  [Views.edit_category]: getPath(`/my-admin/categories/edit/:category_guid`),
 
 
   //#region General

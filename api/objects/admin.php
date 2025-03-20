@@ -13,6 +13,7 @@ class Admin
     public string $password;
     public string $create_at;
     public string|null $token;
+    public string|null $avatar;
     public string|null $expiredate;
 
     public function __construct(PDO $db)
@@ -59,6 +60,25 @@ class Admin
         createException($stmt->errorInfo());
 
     }
+    public static function get(PDO $db, int $id): Admin|bool
+    {
+
+        $query = "SELECT * FROM `" . self::$table_name . "` WHERE id=:id";
+
+        $stmt = $db->prepare($query);
+
+        $stmt->bindParam(":id", $id);
+
+        if ($stmt->execute()) {
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                return self::getMainObject($db, $row);
+            }
+
+            return false;
+        }
+        createException($stmt->errorInfo());
+
+    }
 
     function createSession(): bool
     {
@@ -72,7 +92,7 @@ class Admin
 
         $query = "UPDATE `" . self::$table_name . "`
         SET name=:name, email=:email, password=:password,
-         token=:token, expiredate=:expiredate WHERE id=:id";
+         token=:token, expiredate=:expiredate, avatar=:avatar WHERE id=:id";
 
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(":name", $this->name);
@@ -80,6 +100,7 @@ class Admin
         $stmt->bindParam(":password", $this->password);
         $stmt->bindParam(":token", $this->token);
         $stmt->bindParam(":expiredate", $this->expiredate);
+        $stmt->bindParam(":avatar", $this->avatar);
         $stmt->bindParam(":id", $this->id);
 
         try {
@@ -89,7 +110,23 @@ class Admin
         } catch (\Exception $th) {
             createException($stmt->errorInfo());
         }
-        
+
+    }
+
+    public static function checkToken($db, $token)
+    {
+        $query = "SELECT * FROM `" . self::$table_name . "` WHERE DATE(expiredate) > DATE(NOW()) AND token=:token";
+
+        $stmt = $db->prepare($query);
+
+        $stmt->bindParam(":token", $token);
+
+        if ($stmt->execute()) {
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                return intval($row['id']);
+            }
+        }
+        return null; //Return null if user with token not found
     }
     private static function getMainObject(PDO $db, array $row): Admin
     {
@@ -101,6 +138,7 @@ class Admin
         $newObj->password = $row['password'];
         $newObj->create_at = $row['created_at'];
         $newObj->token = $row['token'];
+        $newObj->avatar = $row['avatar'];
         $newObj->expiredate = $row['expiredate'];
         return $newObj;
     }

@@ -11,7 +11,7 @@ const TableComponent = ({ fetching, className = "", data, columns }) => {
       <tr {...headerGroup.getHeaderGroupProps()}>
         {headerGroup.headers.map((column) => (
           <th
-            className="py-3"
+            className= "py-3"
             {...column.getHeaderProps({
               style: {
                 width: column.width || "auto",
