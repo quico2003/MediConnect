@@ -56,22 +56,49 @@ const ProfileDropdown = () => {
     <>
       {/* Content */}
       {isMobileView ? (
-        <Button
-          className="d-flex align-items-center text-secondary"
-          variant="link"
-        >
-          <img
-            className="rounded-circle"
-            src={
-              profile.avatar ||
-              `https://www.gravatar.com/avatar/${profile.name}?d=identicon`
-            }
-            alt="Profile"
-            width={25}
-            height={25}
-            style={{}}
-          />
-        </Button>
+        <Dropdown>
+          <Dropdown.Toggle as={Button} variant="link">
+
+            <img
+              className="rounded-circle"
+              src={
+                profile.avatar ||
+                `https://www.gravatar.com/avatar/${profile.name}?d=identicon`
+              }
+              alt={ViewStrings.Profile}
+              width={25}
+              height={25}
+              style={{}}
+            />
+
+          </Dropdown.Toggle>
+
+          <Dropdown.Menu className="px-2">
+            <Dropdown.Item
+              className="rounded-3"
+              as={Button}
+              onClick={handleOpenProfile}
+            >
+              {ViewStrings.Profile}
+            </Dropdown.Item>
+            <Dropdown.Item
+              className="rounded-3"
+              as={Button}
+              onClick={handleOpenAccount}
+            >
+              {ViewStrings.Account}
+            </Dropdown.Item>
+            <Dropdown.Divider />
+            <Dropdown.Item
+              as={Button}
+              variant="danger"
+              className="text-danger rounded-3"
+              onClick={handleSignOut}
+            >
+              {ViewStrings.Logout}
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
       ) : (
         <Dropdown>
           <Dropdown.Toggle as={Button} variant="link">

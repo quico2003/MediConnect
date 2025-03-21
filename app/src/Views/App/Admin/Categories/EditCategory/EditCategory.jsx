@@ -6,15 +6,19 @@ import GeneralLayout from "../../../../../Layouts/GeneralLayout/GeneralLayout";
 import PanelLayout from "../../../../../Layouts/PanelLayout/PanelLayout";
 import SectionLayout from "../../../../../Layouts/SectionLayout/SectionLayout";
 import useNotification from "../../../../../Hooks/useNotification";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { Endpoints, getEndpoint } from "../../../../../Constants/endpoints.contants";
 import { Button } from "react-bootstrap";
 import { validateData } from "../../../../../Config/GeneralFunctions";
 import { Views } from "../../../../../Constants/views.constants";
 import { Paths } from "../../../../../Constants/paths.constants";
+import { StringsContext } from "../../../../../Context/strings.context";
 
 const EditCategory = () => {
+
+    const { strings } = useContext(StringsContext);
+    const ViewStrings = strings.Categories.edit;
 
     //Hacer peticiones y redirigir a otra pagina
     const request = useRequest();
@@ -77,7 +81,7 @@ const EditCategory = () => {
 
     return (
 
-        <GeneralLayout showBackButton title="Edit Category">
+        <GeneralLayout showBackButton title={ViewStrings.editCategory}>
             <PanelLayout loaded={loaded}>
                 <SectionLayout>
                     <FormControl
@@ -86,9 +90,9 @@ const EditCategory = () => {
                         maxLength={50}
                         vertical={false}
                         value={data.name}
-                        title="Name:"
+                        title={ViewStrings.name}
                         onChange={handleInput}
-                        placeholder="Name of the category..."
+                        placeholder={ViewStrings.placeholderName}
                     />
                     <FormControl
                         as="textarea"
@@ -96,9 +100,9 @@ const EditCategory = () => {
                         maxLength={500}
                         vertical={false}
                         value={data.description}
-                        title="Description:"
+                        title={ViewStrings.description}
                         onChange={handleInput}
-                        placeholder="Description of the category..."
+                        placeholder={ViewStrings.placeholderDescription}
                     />
                 </SectionLayout>
                 <div className="d-flex justify-content-end align-items-center">

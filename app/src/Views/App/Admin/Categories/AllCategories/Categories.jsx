@@ -4,7 +4,7 @@ import GeneralLayout from "../../../../../Layouts/GeneralLayout/GeneralLayout";
 import PanelLayout from "../../../../../Layouts/PanelLayout/PanelLayout";
 import ReactTable from "../../../../../Components/Table/Table";
 import useRequest from "../../../../../Hooks/useRequest";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Configuration } from "../../../../../Config/app.config";
 import useLoaded from "../../../../../Hooks/useLoaded";
 import { Endpoints, getEndpoint } from "../../../../../Constants/endpoints.contants";
@@ -18,9 +18,13 @@ import { Views } from "../../../../../Constants/views.constants";
 import DeleteCategoryModal from "../../../../../Modals/Category/DeleteCategoryModal";
 import useModalManager from "../../../../../Hooks/useModalManager";
 import ViewCategoryModal from "../../../../../Modals/Category/viewCategoryModal";
+import { StringsContext } from "../../../../../Context/strings.context";
 
 
 const Categories = () => {
+
+    const { strings } = useContext(StringsContext);
+    const ViewStrings = strings.Categories;
 
     //Siempre usar para hacer llamadas
     const request = useRequest();
@@ -110,7 +114,7 @@ const Categories = () => {
                 data={viewCategoryData}
             />
 
-            <GeneralLayout title="Categories" rightSection={<Button size="sm" as={Link} to={Paths[Views.new_category].path}>
+            <GeneralLayout title={ViewStrings.title} rightSection={<Button size="sm" as={Link} to={Paths[Views.new_category].path}>
                 + Add Category
             </Button>} >
                 <PanelLayout loaded={loaded}>
@@ -120,8 +124,8 @@ const Categories = () => {
                         onEventChange={fetchData}
                         data={data}
                         emptyData={{
-                            text: "NADA",
-                            description: "No hay nada"
+                            text: ViewStrings.notFoundComponent.title,
+                            description: ViewStrings.notFoundComponent.description
                         }
                         }
                         columns={CategoriesColumns(

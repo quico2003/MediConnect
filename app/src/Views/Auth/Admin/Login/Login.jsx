@@ -1,22 +1,33 @@
 import { useContext, useState } from "react";
 import Button from 'react-bootstrap/Button';
 import FormControl from "../../../../Components/Form/FormControl/FormControl";
-import { Card } from "react-bootstrap";
+import { Card, Form, Image, InputGroup } from "react-bootstrap";
 import { Endpoints, getEndpoint } from "../../../../Constants/endpoints.contants";
 import useRequest from "../../../../Hooks/useRequest";
 import { Paths } from "../../../../Constants/paths.constants";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { Views } from "../../../../Constants/views.constants";
-import { AdminContext } from "../../../../Context/admin.context";
 import { StorageKeys } from "../../../../Constants/storekeys.constants";
 import { UserContext } from "../../../../Context/user.context";
+import logo from "../../../../Assets/images/Logo/logo-maximised-en.png"
+import FormControlPassword from "../../../../Components/Form/FormControl/FormControlPassword";
+import { EmailRegex } from "../../../../Utils/Regex";
+import { validateLoginAdmin } from "../../../../Config/GeneralFunctions";
+import { StringsContext } from "../../../../Context/strings.context";
+import useNotification from "../../../../Hooks/useNotification";
 
 const LoginAdmin = () => {
-    const request = useRequest();
 
+    const { strings } = useContext(StringsContext);
+    const ViewStrings = strings.General.Login;
+
+    const request = useRequest();
     const { replace } = useHistory();
 
     const { setUser } = useContext(UserContext);
+
+    const { showNotification: successNotification } = useNotification("success");
+    const { showNotification: errorNotification } = useNotification();
 
     //variable data that contains an object with email and password that are nothing at the beginning
     const [data, setData] = useState({
@@ -26,8 +37,6 @@ const LoginAdmin = () => {
 
     //This function is saved in a variable the e.taget which is the value of the form
     const handleInput = (e) => {
-
-        console.log(e.target);
         const { id, value } = e.target;
         setData({ ...data, [id]: value });
 
@@ -44,7 +53,7 @@ const LoginAdmin = () => {
             false,
             false
         ).then((res) => {
-            const { name, email, expiredate, token} = res.data;
+            const { name, email, expiredate, token } = res.data;
             setUser({
                 name,
                 email,
@@ -53,48 +62,57 @@ const LoginAdmin = () => {
             localStorage.setItem(StorageKeys.EMAIL, email);
             localStorage.setItem(StorageKeys.TOKEN, token);
             localStorage.setItem(StorageKeys.NAME, name);
-            console.log('Login correcto.');
             replace(Paths[Views.homeAdmin].path);
+            successNotification(ViewStrings.successNotification)
         })
-        .catch((err) => console.log(err));
+            .catch((err) => errorNotification(ViewStrings.errorNotification));
     };
 
+    const checkForm = () => {
+        const { email, password } = data;
+        return validateLoginAdmin(email, password);
+    }
 
     //Render to DOM
     return (
 
-        <Card>
-            <Card.Header>
-
-                <Card.Title>Login Admin</Card.Title>
-
+        <Card style={{ maxWidth: "30rem", width: "90vw" }}>
+            <Card.Header className="d-flex justify-content-center">
+                <Image src={logo} fluid />
             </Card.Header>
-
-            <Card.Body>
-
+            <Card.Body className="">
                 <FormControl
-                    title="Email address: "
+                    title={ViewStrings.emailAddres}
                     required
                     controlId="email"
                     value={data.email}
                     onChange={handleInput}
+                    vertical={false}
+                    isInvalid={data.email && !EmailRegex.test(data.email)}
+
                 />
 
-                <FormControl title="Password: "
+
+                <FormControlPassword
+                    title={ViewStrings.password}
                     required
                     controlId="password"
                     value={data.password}
                     onChange={handleInput}
+                    vertical={false}
+                    type={"password"}
+                    isInvalid={data.password && data.password.length < 6}
                 />
 
-                <Button onClick={handleSubmit}>
-                    Submit
-                </Button>
+
+                <div className="d-flex justify-content-end">
+                    <Button disabled={!checkForm()} onClick={handleSubmit}>
+                        Submit
+                    </Button>
+                </div>
 
             </Card.Body>
-
         </Card>
-
     );
 }
 export default LoginAdmin;

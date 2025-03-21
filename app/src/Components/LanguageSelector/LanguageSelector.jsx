@@ -38,7 +38,7 @@ const LanguageSelector = () => {
       </Dropdown.Toggle>
 
       <Dropdown.Menu
-        className="p-0 w-100 border-0 shadow rounded-sm overflow-hidden"
+        className="m-3 w-100 border-0 shadow rounded-sm overflow-hidden"
         style={{ minWidth: 130 }}
       >
         {languages.map((lang, idx) => (

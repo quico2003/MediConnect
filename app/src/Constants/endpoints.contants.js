@@ -11,152 +11,20 @@ export const Endpoints = {
     changeImage: "/auth/admin/changeImageProfile",
     logout: "/auth/admin/logout",
 
-
     login: "/auth/login",
     forgotPassword: "/auth/forgotpassword",
     resetPassword: "/auth/resetpassword",
     resetPasswordFinal: "/auth/resetpasswordStep2",
     checkUser: "/auth/checkUser",
   },
-  Dashboard: {
-    allInfo: {
-      getAll: "/dashboard/getHistory",
-    },
-  },
+ 
   Categories: {
     getAll: "/category/getAll",
     get: "/category/get",
     create: "/category/create",
     update: "/category/update",
     delete: "/category/delete",
-  },
-
-  Books: {
-    allBooks: {
-      getAll: "/books/getAll",
-      edit: "/books/get",
-    },
-    editBook: {
-      update: "/books/update",
-    },
-    deleteBook: {
-      delete: "/books/delete",
-    },
-    createBook: {
-      create: "/books/create",
-    },
-  },
-  Students: {
-    allStudents: {
-      getAll: "/students/getAll",
-      edit: "/students/get",
-      getHistory: "/students/getHistory",
-    },
-    editStudent: {
-      update: "/students/update",
-    },
-    deleteStudent: {
-      delete: "/students/delete",
-    },
-    createStudent: {
-      create: "/students/create",
-    },
-  },
-  Subjects: {
-    allSubjects: {
-      getAllNames: "/subjects/getAllNames",
-      getAll: "/subjects/getAll",
-      getAllAbbr: "/subjects/getAllAbbr",
-      edit: "/subjects/get",
-      getAllByCourse: "/subjects/getAllByCourse",
-      getAllByCourseThatHaveBooks: "/subjects/getAllByCourseThatHaveCourse",
-    },
-    editSubject: {
-      update: "/subjects/update",
-    },
-    deleteSubject: {
-      delete: "/subjects/delete",
-    },
-    createSubject: {
-      create: "/subjects/create",
-    },
-  },
-  Courses: {
-    allCourses: {
-      getAllNames: "/courses/getAllNamesToAdd",
-      getAllNamesToAssign: "/courses/getAllNamesToAssign",
-      getAllAbbr: "/courses/getAllAbbr",
-      getAllSeasons: "/courses/getAllSeasons",
-      getAll: "/courses/getAll",
-      edit: "/courses/get",
-    },
-    editCourse: {
-      update: "/courses/update",
-    },
-    deleteCourse: {
-      delete: "/courses/delete",
-    },
-    createCourse: {
-      create: "/courses/create",
-    },
-  },
-  Copies: {
-    allCopies: {
-      getAll: "/copies/getAll",
-      getAllCodes: "/copies/getAllCodes",
-      getAllWithBadState: "/copies/getAllCopiesWithBadState",
-    },
-    editCopy: {
-      updateState: "/copies/updateState",
-    },
-    infoCopy: {
-      getInfo: "/copies/getInfo",
-    },
-    historyCopy: {
-      getHistory: "/copies/getHistory",
-    },
-    deleteCopy: {
-      delete: "/copies/delete",
-    },
-    createCopy: {
-      create: "/copies/create",
-    },
-  },
-  user: {
-    profile: {
-      get: "/user/getProfile",
-      changeImage: "/user/changeImageProfile",
-    },
-    account: {
-      get: "/user/getAccount",
-    },
-    editUser: {
-      update: "/user/update",
-    },
-    editEmail: {
-      update: "/user/emailUpdate",
-    },
-    editPassword: {
-      update: "/user/passwordUpdate",
-    },
-  },
-  assign: {
-    create: {
-      assign: "/assign/assign",
-    },
-    check: {
-      checkAssign: "/assign/assignExplicitBook",
-    },
-  },
-  unassign: {
-    search: {
-      student: "/unassign/checkNia",
-      copies: "/unassign/searchStudent",
-    },
-    unassign: {
-      copies: "/unassign/unassign",
-    },
-  },
+  }
 };
 
 export const getEndpoint = (path, params = null, isCustom = false) => {

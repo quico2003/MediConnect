@@ -26,7 +26,6 @@ try {
         foreach ($input->assignedSubjects as $copyObj) {
             $copy = Copy::getByUniqId($db, $copyObj['copy_uniqid']);
             $subject = Subject::getByGuid($db, $copyObj['value']);
-            logAPI($subject);
             if (History::checkIfStudentHaveSubjectAssigned($db, $subject->id, $student->id)) continue;
             $newHistory = new History($db);
             $newHistory->copy_id = $copy->id;

@@ -1,24 +1,24 @@
 import { useContext, useEffect, useState } from "react";
-import useRequest from "../../../Hooks/useRequest";
-import useNotification from "../../../Hooks/useNotification";
-import useLoaded from "../../../Hooks/useLoaded";
-import PanelLayout from "../../../Layouts/PanelLayout/PanelLayout";
-import GeneralLayout from "../../../Layouts/GeneralLayout/GeneralLayout";
-import { StringsContext } from "../../../Context/strings.context";
-import { Endpoints, getEndpoint } from "../../../Constants/endpoints.contants";
-import FormControl from "../../../Components/Form/FormControl/FormControl";
-import { validateData } from "../../../Config/GeneralFunctions";
+import useRequest from "../../../../Hooks/useRequest";
+import useNotification from "../../../../Hooks/useNotification";
+import useLoaded from "../../../../Hooks/useLoaded";
+import PanelLayout from "../../../../Layouts/PanelLayout/PanelLayout";
+import GeneralLayout from "../../../../Layouts/GeneralLayout/GeneralLayout";
+import { StringsContext } from "../../../../Context/strings.context";
+import { Endpoints, getEndpoint } from "../../../../Constants/endpoints.contants";
+import FormControl from "../../../../Components/Form/FormControl/FormControl";
+import { validateData } from "../../../../Config/GeneralFunctions";
 import { Button, Image, Row, Col } from "react-bootstrap";
-import { PhoneRegexSpain } from "../../../Utils/Regex";
-import SectionLayout from "../../../Layouts/SectionLayout/SectionLayout";
+import { PhoneRegexSpain } from "../../../../Utils/Regex";
+import SectionLayout from "../../../../Layouts/SectionLayout/SectionLayout";
 import { IoMdImages } from "react-icons/io";
-import { Colors } from "../../../Utils/Colors";
+import { Colors } from "../../../../Utils/Colors";
 
 const Profile = () => {
   const request = useRequest();
 
   const { strings } = useContext(StringsContext);
-  const ViewStrings = strings.User.Profile;
+  const ViewStrings = strings.Admin.Profile;
   const GeneralStrings = strings.General.App;
 
   const { showNotification: successNotification } = useNotification("success");
@@ -44,15 +44,15 @@ const Profile = () => {
   };
 
   const handleSubmit = () => {
-    if (checkForm()) {
-      request("post", getEndpoint(Endpoints.user.editUser.update), {
-        ...profile,
-      })
-        .then(() => {
-          successNotification(ViewStrings.messages.profileUpdated);
-        })
-        .catch((err) => errorNotification(err.message));
-    } else errorNotification(ViewStrings.messages.inputError);
+    // if (checkForm()) {
+    //   request("post", getEndpoint(Endpoints.user.editUser.update), {
+    //     ...profile,
+    //   })
+    //     .then(() => {
+    //       successNotification(ViewStrings.messages.profileUpdated);
+    //     })
+    //     .catch((err) => errorNotification(err.message));
+    // } else errorNotification(ViewStrings.messages.inputError);
   };
 
   const handleSubmitImage = (e) => {
@@ -72,7 +72,7 @@ const Profile = () => {
             errorNotification(ViewStrings.messages.errorImageType);
             break;
           default:
-            errorNotification("err.code");
+            errorNotification(ViewStrings.messages.errorCode);
             break;
         }
       });
@@ -186,31 +186,12 @@ const Profile = () => {
               placeholder={ViewStrings.inputs.nameInput.placeholder}
               onChange={handleInput}
             />
-            <FormControl
-              controlId="surnames"
-              maxLength={50}
-              showMaxLength
-              vertical={false}
-              value={profile.surnames}
-              title={ViewStrings.inputs.surnameInput.title}
-              placeholder={ViewStrings.inputs.surnameInput.placeholder}
-              onChange={handleInput}
-            />
-            <FormControl
-              controlId="phone"
-              maxLength={9}
-              showMaxLength
-              vertical={false}
-              value={profile.phone}
-              title={ViewStrings.inputs.phoneInput.title}
-              placeholder={ViewStrings.inputs.phoneInput.placeholder}
-              onChange={handleInput}
-            />
+           
           </SectionLayout>
 
           <div className="d-flex justify-content-end w-100 align-items-center">
             <Button disabled={!checkForm()} onClick={handleSubmit}>
-              {GeneralStrings.Update}
+              {GeneralStrings.update}
             </Button>
           </div>
         </PanelLayout>

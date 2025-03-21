@@ -23,24 +23,9 @@ export const NavItems = () => {
     },
     {
       id: "category_section",
-      title: "categorias",
+      title: ViewStrings.ControlPanel,
       items: [Paths[Views.categories]],
-    },
-    {
-      id: "administration_section",
-      title: ViewStrings.Assignment,
-      items: [Paths[Views.assign_book], Paths[Views.unassign_book]],
-    },
-    {
-      id: "administration_section",
-      title: ViewStrings.Administration,
-      items: [
-        Paths[Views.courses],
-        Paths[Views.subjects],
-        Paths[Views.books],
-        Paths[Views.students],
-      ],
-    },
+    }
   ];
   return items;
 };

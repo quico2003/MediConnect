@@ -1,4 +1,5 @@
 import { StorageKeys } from "../Constants/storekeys.constants";
+import { EmailRegex } from "../Utils/Regex";
 import { Configuration, isDev } from "./app.config";
 
 export const getToken = () => {
@@ -64,3 +65,15 @@ export const validateData = (params) => {
   }
   return true;
 };
+
+
+export const validateLoginAdmin = (email, password) => {
+
+  if (email && EmailRegex.test(email)) {
+    if (password && password.length >= 6) {
+      return true;
+    }
+    return false;
+  }
+  return false;
+}

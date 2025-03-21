@@ -1,22 +1,23 @@
-import { useContext, useEffect, useState } from "react";
-import useRequest from "../../../Hooks/useRequest";
-import useNotification from "../../../Hooks/useNotification";
-import PanelLayout from "../../../Layouts/PanelLayout/PanelLayout";
-import GeneralLayout from "../../../Layouts/GeneralLayout/GeneralLayout";
-import { StringsContext } from "../../../Context/strings.context";
-import { Endpoints, getEndpoint } from "../../../Constants/endpoints.contants";
-import FormControl from "../../../Components/Form/FormControl/FormControl";
-import { validateData } from "../../../Config/GeneralFunctions";
+import { useContext, useState } from "react";
+import useNotification from "../../../../Hooks/useNotification";
+import PanelLayout from "../../../../Layouts/PanelLayout/PanelLayout";
+import GeneralLayout from "../../../../Layouts/GeneralLayout/GeneralLayout";
+import { StringsContext } from "../../../../Context/strings.context";
+import { Endpoints, getEndpoint } from "../../../../Constants/endpoints.contants";
+import FormControl from "../../../../Components/Form/FormControl/FormControl";
+import { validateData } from "../../../../Config/GeneralFunctions";
 import { Button } from "react-bootstrap";
-import { EmailRegex, PasswordRegex } from "../../../Utils/Regex";
-import SectionLayout from "../../../Layouts/SectionLayout/SectionLayout";
-import { Paths } from "../../../Constants/paths.constants";
-import { Views } from "../../../Constants/views.constants";
+import { EmailRegex, PasswordRegex } from "../../../../Utils/Regex";
+import SectionLayout from "../../../../Layouts/SectionLayout/SectionLayout";
+import { Paths } from "../../../../Constants/paths.constants";
+import { Views } from "../../../../Constants/views.constants";
+import useRequest from "../../../../Hooks/useRequest";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+
 
 const Account = () => {
   const { strings } = useContext(StringsContext);
-  const ViewStrings = strings.User.Account;
+  const ViewStrings = strings.Admin.Account;
   const request = useRequest();
 
   const { replace } = useHistory();
@@ -28,7 +29,7 @@ const Account = () => {
 
   const handleSubmitEmail = () => {
     if (checkFormEmail()) {
-      request("post", getEndpoint(Endpoints.user.editEmail.update), {
+      request("post", getEndpoint(Endpoints.admin.editEmail.update), {
         currentEmail: data.currentEmail,
         newEmail: data.newEmail,
       })
@@ -42,7 +43,7 @@ const Account = () => {
 
   const handleSubmitPassword = () => {
     if (checkFormPassword()) {
-      request("post", getEndpoint(Endpoints.user.editPassword.update), {
+      request("post", getEndpoint(Endpoints.admin.editPassword.update), {
         currentPassword: data.currentPassword,
         newPassword: data.newPassword,
       })

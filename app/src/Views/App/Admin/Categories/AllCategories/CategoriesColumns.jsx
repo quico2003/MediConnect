@@ -7,19 +7,22 @@ import { Views } from "../../../../../Constants/views.constants";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { ButtonGroup } from "react-bootstrap";
 import { IoMdEye } from "react-icons/io";
+import { useContext } from "react";
+import { StringsContext } from "../../../../../Context/strings.context";
 
 export const CategoriesColumns = (openDeleteCategoryModal, openViewCategoryModal) => {
-  // const { strings } = useContext(StringsContext);
-  // const ViewStrings = strings.Courses.Columns;
+  const { strings } = useContext(StringsContext);
+  const ViewStrings = strings.Categories.Columns;
+
   const columns = [
     {
-      Header: "Name",
+      Header: ViewStrings.name,
       Cell: (row) =>
         getColumnValue(row, (item) => <p className="mb-0">{item.name}</p>),
       width: "100%",
     },
     {
-      Header: "Actions",
+      Header: ViewStrings.actions,
       Cell: (row) =>
         getColumnValue(row, (item) => (
           <div className="d-flex">

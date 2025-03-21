@@ -21,19 +21,20 @@ const SideBarBrand = () => {
   return (
     <div
       className="d-flex flex-column justify-content-center align-items-center p-3"
-      style={{ height: 85 }}
+      style={{ height: 100 }}
     >
       <div
         // style={{ height: 100 }}
-        className={`d-flex align-items-center w-100 ${
-          isMobileView ? "justify-content-between" : "justify-content-center"
-        }`}
+        className={`d-flex align-items-center w-100 ${isMobileView ? "justify-content-center" : "justify-content-center"
+          }`}
       >
         {Configuration.theme.general.sidebar.showLogo ? (
+
+
           <img
             className="img-fluid"
             title={`${Configuration.APP_NAME} logo`}
-            alt="ECOBOOK main logo"
+            alt="MediConnect main logo"
             src={isMobileView || expanded ? logoMaximised : logoMinimised}
             style={{
               width: isMobileView || expanded ? "240px" : "35px",
@@ -46,7 +47,9 @@ const SideBarBrand = () => {
               transition: ".3s",
             }}
           />
+
         ) : (
+
           Configuration.theme.general.sidebar.showTitle &&
           (expanded || isMobileView ? (
             <h1 className="my-5">{Configuration.APP_NAME}</h1>
@@ -54,7 +57,9 @@ const SideBarBrand = () => {
             <h1 className="my-0">{Configuration.APP_NAME.slice(0, 1)}</h1>
           ))
         )}
+
         {isMobileView && <ToggleSideBarButton />}
+
       </div>
     </div>
   );

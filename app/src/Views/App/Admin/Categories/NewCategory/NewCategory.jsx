@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import FormControl from "../../../../../Components/Form/FormControl/FormControl";
 import useRequest from "../../../../../Hooks/useRequest";
 import GeneralLayout from "../../../../../Layouts/GeneralLayout/GeneralLayout";
@@ -10,11 +10,14 @@ import { validateData } from "../../../../../Config/GeneralFunctions";
 import { Endpoints, getEndpoint } from "../../../../../Constants/endpoints.contants";
 import useNotification from "../../../../../Hooks/useNotification";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { Path } from "@react-pdf/renderer";
 import { Paths } from "../../../../../Constants/paths.constants";
 import { Views } from "../../../../../Constants/views.constants";
+import { StringsContext } from "../../../../../Context/strings.context";
 
 const NewCategory = () => {
+
+    const { strings } = useContext(StringsContext);
+    const ViewStrings = strings.Categories.add;
 
     const request = useRequest();
     const { push } = useHistory();
@@ -31,7 +34,7 @@ const NewCategory = () => {
 
     const handleSubmit = () => {
         if (checkForm()) {
-            request("post", getEndpoint(Endpoints.Categories.create), {...data})
+            request("post", getEndpoint(Endpoints.Categories.create), { ...data })
                 .then((res) => {
                     push(Paths[Views.categories].path);
                     successNotification("Category created", true);
@@ -50,7 +53,7 @@ const NewCategory = () => {
     }
 
     return (
-        <GeneralLayout showBackButton title="New Category">
+        <GeneralLayout showBackButton title={ViewStrings.newCategory}>
             <PanelLayout>
                 <SectionLayout>
                     <FormControl
@@ -60,9 +63,9 @@ const NewCategory = () => {
                         showMaxLength={true}
                         vertical={false}
                         value={data.name}
-                        title="Name:"
+                        title={ViewStrings.name}
                         onChange={handleInput}
-                        placeholder="Name of the category..."
+                        placeholder={ViewStrings.placeholderName}
                     />
                     <FormControl
                         required
@@ -72,9 +75,9 @@ const NewCategory = () => {
                         showMaxLength={true}
                         vertical={false}
                         value={data.description}
-                        title="Description:"
+                        title={ViewStrings.description}
                         onChange={handleInput}
-                        placeholder="Description of the category..."
+                        placeholder={ViewStrings.placeholderDescription}
                     />
 
                 </SectionLayout>

@@ -32,7 +32,7 @@ const NotFoundComponent = ({
 
   useEffect(() => {
     let token = localStorage.getItem(StorageKeys.TOKEN);
-    if (token) setHomePath(Paths[Views.dashboard].path);
+    if (token) setHomePath(Paths[Views.homeAdmin].path);
     else setHomePath(Paths[Views.login].path);
   }, []);
 

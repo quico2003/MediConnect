@@ -47,7 +47,7 @@ const FormControl = ({
       inputClassname
     );
 
-    const inputEditorClassName = classNames("border-0", props.className);
+    const inputEditorClassName = classNames( props.className);
 
     return (
       <div className={inputClassName}>

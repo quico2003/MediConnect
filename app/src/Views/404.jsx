@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
+import { useHistory, useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import { Paths } from "../Constants/paths.constants";
 import { StorageKeys } from "../Constants/storekeys.constants";
 import { Views } from "../Constants/views.constants";
@@ -9,6 +9,8 @@ import NotFoundComponent from "../Components/NotFoundComponent";
 export const NotFound = () => {
   const { pathname } = useLocation();
   const { isMobileView } = useSelector((state) => state.Config);
+
+  const { push } = useHistory();
 
   const [textToShow, setTextToShow] = useState({
     text: "404",
@@ -20,22 +22,7 @@ export const NotFound = () => {
       </span>
     ),
   });
-
-  useEffect(() => {
-    if (pathname.includes("Y2hldHV1MTY=")) {
-      setTextToShow({
-        text: "😎🤘",
-        description: (
-          <span>
-            You found the easter egg!
-            <br />
-            Are you on working hours? 🤨
-          </span>
-        ),
-      });
-    }
-  }, [pathname]);
-
+  
   const settings = {
     elasticity: 6, // 0 - 10
     zoom: isMobileView ? 2 : 4,
@@ -51,9 +38,13 @@ export const NotFound = () => {
 
   useEffect(() => {
     let token = localStorage.getItem(StorageKeys.TOKEN);
-    if (token) setHomePath(Paths[Views.dashboard].path);
-    else setHomePath(Paths[Views.login].path);
+    if (token) setHomePath(Paths[Views.homeAdmin].path);
+    else setHomePath(Paths[Views.loginAdmin].path);
   }, []);
+
+ const handleRedirect = () => {
+  push(homePath);
+ }
 
   const controller = (e) => {
     let elasticity = settings.elasticity;
@@ -109,32 +100,13 @@ export const NotFound = () => {
   );
 
   return (
-    // <div
-    //   className="d-flex justify-content-center flex-column align-items-center p-5"
-    //   style={{ userSelect: "none" }}
-    // >
-    //   <div
-    //     className="position-relative d-flex justify-content-center w-100"
-    //     style={{ height: "50vh" }}
-    //   >
-    //     <div className="position-relative d-flex justify-content-center align-items-center m-auto">
-    //       <Number id="image-layer1" color="#777" text={textToShow.text} />
-    //       <Number id="image-layer2" color="#999" text={textToShow.text} />
-    //       <Number id="image-layer3" color="#aaa" text={textToShow.text} />
-    //     </div>
-    //   </div>
-    //   <div className="mb-2 d-flex flex-column justify-content-center align-items-center">
-    //     <p className="mb-0 text-center">{textToShow.description}</p>
-    //     <Link replace to={homePath}>
-    //       Go Home 🚀
-    //     </Link>
-    //   </div>
-    // </div>
+
     <NotFoundComponent
       buttonText="Go Home 🚀"
       description={textToShow.description}
       text={textToShow.text}
       to={homePath}
+      onClick={handleRedirect}
     />
   );
 };

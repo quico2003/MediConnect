@@ -1,780 +1,114 @@
 {
-  "General": {
-    "App": {
-      "Yes": "Yes",
-      "No": "No",
-      "Create": "Create",
-      "Next": "Next",
-      "Update": "Update",
-      "Delete": "Delete",
-      "Cancel": "Cancel",
-      "Rank": "Rank",
-      "search": "Search...",
-      "rows": "rows"
-    },
-    "Tables": {
-      "Actions": "Actions"
-    },
-    "NavBar": {
-      "Sections": {
-        "Management": "Management"
-      }
-    }
-  },
-  "PrintModal": {
-    "title": "Custom Printing",
-    "Close": "Close",
-    "Barcodes": "Barcodes",
-    "Loading": "Loading document...",
-    "Download": "Download PDF",
-    "Text": "Choose how you want to print the barcodes.",
-    "titleCopies": "Copies",
-    "PlaceholderCopies": "How many copies?",
-    "titleColumns": "Columns",
-    "PlaceholderColumns": "How many columns?",
-    "titleRows": "Rows",
-    "PlaceholderRows": "How many rows?",
-    "PlaceholderOffset": "Position do you want to start?",
-    "DefaultConf": "Default config."
-  },
-  "Search": {
-    "GeneralView": {
-      "title": "Search",
-      "searchPlaceholder": "Search..."
-    }
-  },
   "ProfileDropdown": {
     "Profile": "Profile",
     "Account": "Account",
     "Logout": "Logout"
   },
-  "Dashboard": {
-    "title": "Home",
-    "subtitle": "APP DATA STATISTICS",
-    "titleBadCopies": "Bad Copies",
-    "titleGoodCopies": "Good Copies",
-    "smallPanels": {
-      "titleCourses": "Total Courses",
-      "titleSubjects": "Total Subjects",
-      "titleBooks": "Total Books",
-      "titleStudents": "Total Students"
-    },
-    "bigChartStudents": {
-      "title": "Students",
-      "subtitle": "All students from the last 12 months",
-      "accessor": "students",
-      "emptyGraph": "There is not enough data yet to display the graph."
-    },
-    "bigChartCopies": {
-      "title": "Copies",
-      "subtitle": "All copies from the last 12 months",
-      "accessor": "copies",
-      "emptyGraph": "There is not enough data yet to display the graph."
-    },
-    "tableOfCopies": {
-      "title": "Copies to Withdraw",
-      "placeholder": "Search for the code ...",
-      "code": "Code",
-      "state": "State",
-      "book": "Book",
-      "course": "Course",
-      "subject": "Subject",
-      "action": "Action",
-      "applyButton": "Apply"
-    },
-    "customPieChart": "Copies count by status",
-    "emptyData": {
-      "text": "Optimal copies",
-      "description": "There are no copies in poor condition.",
-      "subDescription": "Copies that are in poor condition will be displayed to be removed from the system."
-    }
-  },
-  "BarcodeScanModal": {
-    "title": "Scanning Barcode...",
-    "close": "Close"
-  },
-  "Assign": {
-    "NewAssign": {
-      "title": "Assign",
-      "addCourse": "+ Add Course",
-      "scanning": "Scanning...",
-      "scanReader": "Scan with reader",
-      "scanWebcam": "Scan with webcam",
-      "tileSection": {
-        "titleIdentification": "Student's Identification",
-        "titleAssignament": "Subjects Assignments",
-        "pendingAssign": "Pending to assign",
-        "asigned": "Assigned",
-        "allsubjectsAssigned": "All subjects already assigned!",
-        "allpendingAssign": "Select some subject from the previous list",
-        "assigned": "Assigned"
-      },
-      "inputs": {
-        "niaInput": {
-          "title": "NIA:",
-          "placeholder": "Type Student NIA..."
-        },
-        "courseInput": {
-          "title": "Course:"
-        },
-        "repeatStudentInput": {
-          "title": "Specific subjects?"
-        }
-      },
-      "messages": {
-        "checkInputs": "Check all input fields",
-        "notCoursesYet": "Not courses available yet. Please create new courses.",
-        "Assigndone": "The assignment of the book has been correct",
-        "copyAsigned": "The Copy is already asigned",
-        "copyNotAvailable": "This copy is not available for this subject",
-        "subjectAlreadyAsigned": "The student has already been assigned this subject.",
-        "notExist": "Copy Not Exist",
-        "NiaNotExist": "NIA not Exist!"
-      }
-    },
-    "AssignModal": {
-      "title": "Assign Book of",
-      "scanning": "Scanning...",
-      "scan": "Scan",
-      "cancel": "Cancel",
-      "confirm": "Confirm",
-      "label": "Book Code",
-      "placeholder": "Book Code..."
-    }
-  },
-  "Unassign": {
-    "title": "Unassign",
-    "studentName": "Student:",
-    "Modal": {
-      "buttonClose": "Close",
-      "buttonCancel": "Cancel",
-      "buttonConfirm": "Confirm",
-      "messageDeleted": "Book deleted successfully!",
-      "code": "Code",
-      "state": "State",
-      "observations": "Observations"
-    },
-    "inputs": {
-      "niaInput": {
-        "title": "NIA:",
-        "placeholder": "Type Student Nia..."
-      }
-    },
-    "step2": {
-      "title": "Books pending return",
-      "scanning": "Scanning...",
-      "scanReader": "Scan with reader",
-      "scanWebcam": "Scan with webcam",
-      "messages": {
-        "bookError": "Book not found"
-      },
-      "notFoundComponent": {
-        "buttonText": "Next Student",
-        "description": "This student has all the books delivered.",
-        "text": "Nothing to return",
-        "subDescription": "Click the folllowing button to unassign books to another student."
-      }
-    }
-  },
-  "CopyHistory": {
-    "General": {
-      "title": "General Student Information",
-      "Nia": "NIA",
-      "Name": "Name",
-      "Email": "Email",
-      "phone": "Phone"
-    },
-    "CopyInfo": {
-      "title": "Copy Information",
-      "Code": "Code",
-      "BookName": "Book Name",
-      "ISBN": "ISBN",
-      "Course": "Course",
-      "Subject": "Subject"
-    },
-    "Delivery": {
-      "title": "Delivery Information",
-      "deliveryDate": "Delivery Date",
-      "state": "State"
-    },
-    "Return": {
-      "title": "Return Information",
-      "returnDate": "Return Date",
-      "state": "State",
-      "Observations": "Observations"
-    },
-    "InUse": "In Use",
-    "Close": "Close"
-  },
-  "Books": {
-    "AllBooks": {
-      "title": "Books",
-      "addBook": "+ New Book",
-      "table": {
-        "columns": {
-          "name": "Name",
-          "description": "Description"
-        }
-      },
-      "filterButton": "Apply",
-      "notFoundComponent": {
-        "buttonText": "+ New Book",
-        "description": "Do you want to create new Book?",
-        "text": "No Books found",
-        "subDescription": "Press de following button"
-      },
-      "columns": {
-        "name": "Name",
-        "isbn": "ISBN",
-        "subject": "Subject",
-        "stock": "Stock",
-        "enabled": "Enabled",
-        "actions": "Actions"
-      }
-    },
-    "EditBook": {
-      "title": "Edit Book",
-      "sections": {
-        "basicSection": "Basic Info"
-      },
-      "inputs": {
-        "nameInput": {
-          "title": "Name:",
-          "placeholder": "Type book name..."
-        },
-        "isbnInput": {
-          "title": "ISBN:",
-          "placeholder": "Type book ISBN ..."
-        },
-        "enabledCheck": {
-          "title": "Enabled:"
-        },
-        "stockInput": {
-          "title": "Stock:",
-          "placeholder": "Type book stock..."
-        }
-      },
-      "messages": {
-        "inputsError": "Check all input fields",
-        "bookUpdated": "Book updated successfully!"
-      }
-    },
-    "NewBook": {
-      "title": "New Book",
-      "subTitle": "Book Info",
-      "sections": {
-        "basicSection": "Basic Info"
-      },
-      "inputs": {
-        "nameInput": {
-          "title": "Name:",
-          "placeholder": "Type book name..."
-        },
-        "isbnInput": {
-          "title": "ISBN:",
-          "placeholder": "Type book ISBN ..."
-        },
-        "subject": {
-          "title": "Subject:",
-          "placeholder": "Select the subject of the book ..."
-        },
-        "course": {
-          "title": "Course:",
-          "placeholder": "Select the course of the book ..."
-        },
-        "stockInput": {
-          "title": "Stock:",
-          "placeholder": "Type book stock..."
-        }
-      },
-      "messages": {
-        "inputError": "Check all input fields",
-        "isbnError": "ISBN already exists!",
-        "bookCreated": "Book Created successfully!"
-      }
-    },
-    "deleteBook": {
-      "title": "Confirm Action",
-      "text": "Are you sure you want to delete the book?",
-      "cancel": "Cancel",
-      "confirm": "Confirm",
-      "message": "Book deleted successfully!"
-    }
-  },
-  "Students": {
-    "AllStudents": {
-      "title": "Students",
-      "addStudent": "+ New Student",
-      "table": {
-        "columns": {
-          "name": "Name",
-          "description": "Description"
-        }
-      },
-      "tabs": {
-        "student_info": "Info",
-        "student_history": "History"
-      },
-      "notFoundComponent": {
-        "buttonText": "+ New Student",
-        "description": "Do you want to create new Students?",
-        "text": "No Students found",
-        "subDescription": "Press de following button"
-      },
-      "columns": {
-        "nia": "NIA",
-        "fullName": "Full Name",
-        "email": "Email",
-        "actions": "Actions"
-      }
-    },
-    "EditStudent": {
-      "title": "Student",
-      "sections": {
-        "studentIdentification": "Student's Identification",
-        "studentProfile": "Student's profile"
-      },
-      "inputs": {
-        "niaInput": {
-          "title": "NIA:",
-          "placeholder": "Type Student Nia..."
-        },
-        "nameInput": {
-          "title": "Name:",
-          "placeholder": "Type Student Name ..."
-        },
-        "surnameInput": {
-          "title": "Surnames:",
-          "placeholder": "Type Student Surname ..."
-        },
-        "phoneInput": {
-          "title": "Phone:",
-          "placeholder": "Type Student Phone..."
-        },
-        "emailInput": {
-          "title": "Email:",
-          "placeholder": "Type Student Email ..."
-        }
-      },
-      "messages": {
-        "inputError": "Check all input fields",
-        "studentsUpdated": "Student updated successfully!"
-      }
-    },
-    "NewStudent": {
-      "title": "New Student",
-      "subtitle": "Student's Identification",
-      "subtitleSection": "Student's Profile",
-      "sections": {
-        "basicSection": "Basic Info"
-      },
-      "inputs": {
-        "niaInput": {
-          "title": "NIA:",
-          "placeholder": "Type Student Nia..."
-        },
-        "nameInput": {
-          "title": "Name:",
-          "placeholder": "Type Student Name ..."
-        },
-        "surnameInput": {
-          "title": "Surnames:",
-          "placeholder": "Type Student Surname ..."
-        },
-        "phoneInput": {
-          "title": "Phone:",
-          "placeholder": "Type Student Phone..."
-        },
-        "emailInput": {
-          "title": "Email:",
-          "placeholder": "Type Student Email ..."
-        },
-        "repeatStudentInput": {
-          "title": "Repeat Student:"
-        },
-        "courseInput": {
-          "title": "Course:",
-          "placeholder": "Choose the Student's course..."
-        }
-      },
-      "messages": {
-        "checkInputs": "Check all input fields",
-        "studentsCreated": "Student created successfully!"
-      }
-    },
-    "studentHistory": {
-      "title": "Student Books History",
-      "subtitle": "Books the student has had",
-      "emptyData": {
-        "text": "No history found",
-        "buttonText": "Go Back!",
-        "description": "This student has never had books in his possession.",
-        "subDescription": "Press de following button to return back."
-      },
-      "columns": {
-        "book": "Book",
-        "code": "Code",
-        "initialState": "Initial State",
-        "finalState": "Final State",
-        "initialDate": "Initial Date",
-        "finalDate": "Final Date"
-      },
-      "state": {
-        "usless": "Usless",
-        "bad": "Bad",
-        "good": "Good",
-        "veryGood": "Very Good",
-        "new": "New",
-        "inUse": "In use"
-      }
-    },
-    "deleteStudent": {
-      "title": "Confirm Action",
-      "text": "Are you sure you want to delete the Student?",
-      "cancel": "Cancel",
-      "confirm": "Confirm",
-      "message": "Student deleted successfully!"
-    }
-  },
-  "Copies": {
-    "tabs": {
-      "copy_info": "Info",
-      "copy_history": "History"
-    },
-    "columns": {
-      "season": "Season",
-      "nia": "NIA",
-      "name": "Name",
-      "email": "Email",
-      "action": "Action"
-    },
-    "AllCopies": {
-      "title": "Copies",
-      "addCopy": "+ New Copy",
-      "table": {
-        "columns": {
-          "name": "Name",
-          "description": "Description"
-        }
-      },
-      "messages": {
-        "statusUpdate": "Status updated successfully!"
-      },
-      "buttonTitle": "Print All Barcodes",
-      "placeholder": "Search the code ...",
-      "emptyData": {
-        "text": "No Copies found",
-        "buttonText": "Go Back!",
-        "description": "Your search does not match any copy.",
-        "subDescription": "Press the following button to go back."
-      },
-      "columns": {
-        "code": "Code",
-        "state": "State",
-        "actions": "Actions"
-      }
-    },
-    "copyInfo": {
-      "tit": "Copy Info",
-      "title": "General Info",
-      "copyCode": "Copy Code",
-      "course": "Course",
-      "subject": "Subject",
-      "bookName": "Book Name",
-      "state": "State",
-      "barcode": "Barcode"
-    },
-    "copyHistory": {
-      "title": "Copy History",
-      "extrafilters": "Students who have had this book",
-      "emptyData": {
-        "text": "No history found",
-        "buttonText": "Go Back!",
-        "description": "No student has had this book.",
-        "subDescription": "Press de following button to return back."
-      }
-    },
-    "NewCopy": {
-      "title": "New Copy",
-      "subtitle": "Copy Info",
-      "inputs": {
-        "stateInput": {
-          "title": "State",
-          "placeholder": "Select the state ..."
-        }
-      },
-      "messages": {
-        "inputError": "Check all input fields",
-        "copyCreated": "Copy created successfully!"
-      }
-    },
-    "deleteCopies": {
-      "title": "Confirm Action",
-      "text": "Are you sure you want to delete the copy?",
-      "cancel": "Cancel",
-      "confirm": "Confirm",
-      "message": "Copy deleted successfully!"
-    }
-  },
-  "Courses": {
-    "AllCourses": {
-      "title": "Courses",
-      "addCourse": "+ New Course",
-      "table": {
-        "columns": {
-          "name": "Name",
-          "description": "Description"
-        }
-      },
-      "filterButton": "Apply",
-      "emptyData": {
-        "text": "No Courses found",
-        "buttonText": "+ New Course",
-        "description": "Do you want to create new Course?",
-        "subDescription": "Press de following button"
-      }
-    },
-    "Columns": {
-      "abbr": "Abbreviation",
-      "season": "Season",
-      "name": "Name",
-      "actions": "Actions"
-    },
-    "NewCourse": {
-      "title": "New Course",
-      "subtitle": "Course Info",
-      "inputs": {
-        "abbrInput": {
-          "title": "Abbreviation:",
-          "placeholder": "Type Course abbreviation..."
-        },
-        "nameInput": {
-          "title": "Name:",
-          "placeholder": "Type Course Name..."
-        },
-        "seasonInput": {
-          "title": "Season:",
-          "placeholder": "Type season (Ej: 23-24)"
-        }
-      },
-      "messages": {
-        "inputError": "Check all input fields",
-        "courseCreated": "Course created successfully!"
-      }
-    },
-    "EditCourse": {
-      "title": "Edit Course",
-      "subtitle": "Course Info",
-      "inputs": {
-        "abbrInput": {
-          "title": "Abbreviation:",
-          "placeholder": "Type Course abbreviation..."
-        },
-        "nameInput": {
-          "title": "Name:",
-          "placeholder": "Type Course Name..."
-        }
-      },
-      "messages": {
-        "inputError": "Check all input fields",
-        "courseCreated": "Course created successfully!"
-      }
-    },
-    "deleteCourses": {
-      "title": "Confirm Action",
-      "text": "Are you sure you want to delete the course?",
-      "cancel": "Cancel",
-      "confirm": "Confirm",
-      "message": "Course deleted successfully!"
-    },
-    "filterCourse": "Course:",
-    "filterSeason": "Season:"
-  },
-  "Subjects": {
-    "AllSubjects": {
-      "title": "Subjects",
-      "addSubject": "+ New Subject",
-      "table": {
-        "columns": {
-          "name": "Name",
-          "description": "Description"
-        }
-      },
-      "filterButton": "Apply",
-      "emptyData": {
-        "text": "No Subjects Found",
-        "buttonText": "+ New Subject",
-        "description": "Do you want to create new subject?",
-        "subDescription": "Press de following button"
-      },
-      "columns": {
-        "course": "Course",
-        "name": "Name",
-        "abbr": "Abbreviation",
-        "actions": "Actions"
-      }
-    },
-    "NewSubject": {
-      "title": "New Subject",
-      "inputs": {
-        "abbrInput": {
-          "title": "Abbreviation:",
-          "placeholder": "Type subject abbreviation..."
-        },
-        "course": {
-          "title": "Course:",
-          "placeholder": "Select Course..."
-        },
-        "nameInput": {
-          "title": "Name:",
-          "placeholder": "Type subject Name..."
-        }
-      },
-      "messages": {
-        "subjectCreated": "Subject created successfully!"
-      }
-    },
-    "EditSubject": {
-      "title": "Edit Subject",
-      "subtitle": "Subject Info",
-      "inputs": {
-        "abbrInput": {
-          "title": "Abbreviation:",
-          "placeholder": "Type Course abbreviation..."
-        },
-        "nameInput": {
-          "title": "Name:",
-          "placeholder": "Type Course Name..."
-        }
-      },
-      "messages": {
-        "subjectUpdated": "Subject updated successfully!",
-        "checkInputs": "Check all input fields"
-      }
-    },
-    "deleteSubjects": {
-      "title": "Confirm Action",
-      "text": "Are you sure you want to delete the subject?",
-      "cancel": "Cancel",
-      "confirm": "Confirm",
-      "message": "Subject deleted successfully!"
-    }
-  },
-  "privacyPolicy": {
-    "titles": {
-      "privacyPolicy": "Privacy Policy",
-      "date": "Effective Date:",
-      "description": "Description",
-      "informationWeCollect": "Information We Collect",
-      "howWeUseInformation": "How We Use Your Information",
-      "informationDisclosure": "Information Disclosure",
-      "informationSecurity": "Information Security",
-      "changesPrivacyPolicy": "Changes to this Privacy Policy",
-      "contact": "Contact"
-    },
-    "paragraphs": {
-      "description": "This Privacy Policy describes how 'Book Bank' collects, uses, and shares users' personal information who use our application.",
-      "informationWeCollect": "When you use our application, we may collect certain types of information, including but not limited to: Personal identification information, such as your name, email address, postal address, phone number, and payment details. Information about your educational institution, such as the institution's name, educational level, and the course you are enrolled in. Information about the books you have requested or donated through the application. Usage information of the application, such as log data, IP address, browser type, pages visited, and time spent on the application.",
-      "howWeUseInformation": " We use the collected information for the following purposes: Providing and maintaining application functionality. Processing book transactions and requests. Communicating with you about your account, transactions, and application updates. Personalizing your experience within the application. Improving our services and developing new features.",
-      "informationDisclosure": "We do not sell or share your personal information with third parties, except in the following circumstances: When necessary to process a book transaction or request. With your explicit consent. When we are legally obligated to do so to comply with the law, protect our legal rights, or respond to legal requests.",
-      "informationSecurity": "We implement security measures to protect your information against unauthorized access, misuse, or disclosure. However, you should be aware that no security measure is absolutely infallible.",
-      "changesPrivacyPolicy": "We reserve the right to update this Privacy Policy at any time. We will notify you of significant changes through a prominent notice in our application or by email.",
-      "contactP1": "If you have any questions about this Privacy Policy, please contact us at ",
-      "contactP2": ". By using our application, you agree to the terms described in this Privacy Policy."
-    }
-  },
   "navBar": {
     "SideBarHome": "Home",
     "SideBarCategories": "Categories",
-    "SideBarAssign": "Assign",
-    "SideBarUnassign": "Unassign",
-    "SideBarCourses": "Courses",
-    "SideBarSubjects": "Subjects",
-    "SideBarBooks": "Books",
-    "SideBarStudents": "Students",
-    "SideBarPrivacyPolicy": "Privacy Policy",
+    "SideBarPrivacyPolicy": "Privacy policy",
     "Dashboard": "Dashboard",
-    "Assignment": "Assignment",
-    "Administration": "Administration"
+    "ControlPanel": "Control Panel"
   },
-  "User": {
+  "Categories": {
+    "title": "Categories",
+    "add": {
+      "newCategory": "New Category",
+      "name": "Name",
+      "placeholderName": "Name of the category",
+      "description": "Description",
+      "placeholderDescription": "Description of the category..."
+    },
+    "edit": {
+      "editCategory": "Edit Category",
+      "name": "Name",
+      "placeholderName": "Name of the category",
+      "description": "Description",
+      "placeholderDescription": "Description of the category..."
+    },
+    "Columns": {
+      "name": "Name",
+      "actions": "Actions"
+    },
+    "notFoundComponent": {
+      "title": "Not found categories",
+      "description": "Add new category."
+    }
+  },
+  "Admin": {
     "Profile": {
       "title": "Profile",
-      "sections": {
-        "profileImage": "Profile Image",
-        "basicSection": "Basic user information"
-      },
       "buttonChangeImage": "Change",
+      "messages": {
+        "errorImageType": "Error image type",
+        "errorCode": "Error in select image"
+      },
+      "sections": {
+        "profileImage": "Profile",
+        "basicSection": "Info"
+      },
       "inputs": {
         "nameInput": {
-          "title": "Name:",
-          "placeholder": "Type your name..."
-        },
-        "surnameInput": {
-          "title": "Surnames:",
-          "placeholder": "Type your surnames..."
-        },
-        "phoneInput": {
-          "title": "Phone:",
-          "placeholder": "Type your number phone..."
-        },
-        "passwordInput": {
-          "title": "New Password:",
-          "placeholder": "Type your new password..."
-        },
-        "emailInput": {
-          "title": "New Email:",
-          "placeholder": "Type your new email..."
+          "title": "Name",
+          "placeholder": "Insert name..."
         }
-      },
-      "messages": {
-        "inputError": "Check all input fields",
-        "errorImageType": "Only image files (png, gif, jpg, jpeg, webp) are allowed.",
-        "profileUpdated": "Profile updated successfully!"
       }
     },
     "Account": {
       "title": "Account",
+      "messages": {
+        "profileUpdated": "Error image type",
+        "inputsError": "Error in select image"
+      },
       "sections": {
         "email": "Email",
         "password": "Password"
       },
       "inputs": {
-        "currentPasswordInput": {
-          "title": "Current Password:",
-          "placeholder": "Type your current password..."
-        },
-        "newPassword": {
-          "title": "New Password:",
-          "placeholder": "Type your new password..."
-        },
-        "newPasswordCopy": {
-          "title": "Repeat the new password:",
-          "placeholder": "Type your new password..."
-        },
         "currentEmailInput": {
-          "title": "Current email:",
-          "placeholder": "Type your current email..."
-        },
-        "newEmail": {
-          "title": "New Email:",
-          "placeholder": "Type your new email..."
-        },
-        "newEmailCopy": {
-          "title": "Repeat the new email:",
-          "placeholder": "Type your new email..."
+          "title": "Current Email",
+          "placeholder": "Insert current email"
         },
         "changeEmailButton": {
-          "title": "Confirm Change"
+          "title": "Update email"
+        },
+        "newEmail": {
+          "title": "New Email",
+          "placeholder": "Insert new email..."
+        },
+        "newEmailCopy": {
+          "title": "Repeat new Email",
+          "placeholder": "Repeat new email..."
+        },
+        "currentPasswordInput": {
+          "title": "Current password",
+          "placeholder": "Insert current password"
+        },
+        "newPassword": {
+          "title": "New Password",
+          "placeholder": "Insert new password..."
+        },
+        "newPasswordCopy": {
+          "title": "Repeat Password",
+          "placeholder": "Repeat new password..."
         },
         "changePasswordButton": {
-          "title": "Change Password"
+          "title": "Update Password"
         }
-      },
-      "messages": {
-        "inputsError": "Check all input fields",
-        "profileUpdated": "Profile updated successfully!"
       }
+    }
+  },
+  "General": {
+    "App": {
+      "search": "Search",
+      "update": "Update"
+    },
+    "Login": {
+      "emailAddres": "Email address",
+      "password": "Password",
+      "errorNotification": "Email or Password incorrect",
+      "successNotification": "Admin Loged in"
     }
   }
 }
