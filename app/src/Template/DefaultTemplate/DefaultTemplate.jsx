@@ -11,12 +11,15 @@ import useSideBar from "../../Hooks/useSideBar";
 import FooterNavbar from "./FooterNavbar/FooterNavbar";
 import SideBar from "./SideBar/SideBar";
 import UpperNavbar from "./UpperNavbar/UpperNavbar";
+import { toggleAdminAvatar, toggleAdminEmail, toggleAdminName } from "../../Redux/actions/AdminInfoActions";
+import { useDispatch } from "react-redux";
 
 const FOOTER_HEIGHT = Configuration.theme.general.footer.height;
 const NAVBAR_HEIGHT = Configuration.theme.general.navbar.height;
 
 const DefaultTemplate = ({ children, ...props }) => {
   const request = useRequest();
+  const dispatch = useDispatch();
   const { menuOpen } = useSideBar();
 
   const { setUser } = useContext(UserContext);
@@ -33,12 +36,11 @@ const DefaultTemplate = ({ children, ...props }) => {
   }, []);
 
   const checkUser = () => {
-    request("get", getEndpoint(Endpoints.Auth.checkUser)).then((res) => {
-      const { token, email, fullName } = res.data;
-      setUser({
-        email,
-        fullName,
-      });
+    request("get", getEndpoint(Endpoints.Auth.checkAdmin)).then((res) => {
+      const { token, email, avatar, name } = res.data;
+      dispatch(toggleAdminName(name));
+      dispatch(toggleAdminEmail(email));
+      dispatch(toggleAdminAvatar(avatar));
       localStorage.setItem(StorageKeys.EMAIL, email);
       localStorage.setItem(StorageKeys.TOKEN, token);
     });

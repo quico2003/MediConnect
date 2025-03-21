@@ -15,11 +15,15 @@ import { EmailRegex } from "../../../../Utils/Regex";
 import { validateLoginAdmin } from "../../../../Config/GeneralFunctions";
 import { StringsContext } from "../../../../Context/strings.context";
 import useNotification from "../../../../Hooks/useNotification";
+import { toggleAdminAvatar, toggleAdminEmail, toggleAdminName } from "../../../../Redux/actions/AdminInfoActions";
+import { useDispatch } from "react-redux";
 
 const LoginAdmin = () => {
 
     const { strings } = useContext(StringsContext);
     const ViewStrings = strings.General.Login;
+
+    const dispatch = useDispatch();
 
     const request = useRequest();
     const { replace } = useHistory();
@@ -53,15 +57,11 @@ const LoginAdmin = () => {
             false,
             false
         ).then((res) => {
-            const { name, email, expiredate, token } = res.data;
-            setUser({
-                name,
-                email,
-                expiredate,
-            });
-            localStorage.setItem(StorageKeys.EMAIL, email);
+            const { name, email, token, avatar } = res.data;
+            dispatch(toggleAdminName(name));
+            dispatch(toggleAdminEmail(email));
+            dispatch(toggleAdminAvatar(avatar));
             localStorage.setItem(StorageKeys.TOKEN, token);
-            localStorage.setItem(StorageKeys.NAME, name);
             replace(Paths[Views.homeAdmin].path);
             successNotification(ViewStrings.successNotification)
         })

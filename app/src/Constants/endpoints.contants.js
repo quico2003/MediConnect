@@ -10,6 +10,7 @@ export const Endpoints = {
     get: "/auth/admin/get",
     changeImage: "/auth/admin/changeImageProfile",
     logout: "/auth/admin/logout",
+    checkAdmin: "/auth/admin/checkAdmin",
 
     login: "/auth/login",
     forgotPassword: "/auth/forgotpassword",
@@ -17,7 +18,7 @@ export const Endpoints = {
     resetPasswordFinal: "/auth/resetpasswordStep2",
     checkUser: "/auth/checkUser",
   },
- 
+
   Categories: {
     getAll: "/category/getAll",
     get: "/category/get",

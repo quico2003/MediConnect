@@ -13,37 +13,27 @@ import useNotification from "../../../../Hooks/useNotification";
 import useLoaded from "../../../../Hooks/useLoaded";
 import { StringsContext } from "../../../../Context/strings.context";
 import { StorageKeys } from "../../../../Constants/storekeys.constants";
+import { useDispatch } from "react-redux";
+import { toogleClearAll } from "../../../../Redux/actions/AdminInfoActions";
 
 const ProfileDropdown = () => {
   const { strings } = useContext(StringsContext);
   const ViewStrings = strings.ProfileDropdown;
 
   const request = useRequest();
+  const dispatch = useDispatch();
   const { isMobileView } = useSelector((state) => state.Config);
 
   const { push, replace } = useHistory();
-  const [profile, setProfile] = useState([]);
   const { showNotification: errorNotification } = useNotification();
-  const { finishFetching } = useLoaded();
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = async () => {
-    return await request("get", getEndpoint(Endpoints.Auth.get))
-      .then((res) => {
-        setProfile(res.data);
-      })
-      .catch(errorNotification)
-      .finally(() => finishFetching());
-  };
-
+  const profile = useSelector((state) => state.AdminInfo)
 
   const handleSignOut = () => {
     request("post", getEndpoint(Endpoints.Auth.logout))
       .then((res) => {
         localStorage.clear();
+        dispatch(toogleClearAll());
         replace(Paths[Views.loginAdmin].path);
       })
       .catch((err) => errorNotification(err.message));
@@ -114,7 +104,7 @@ const ProfileDropdown = () => {
               height={25}
               style={{}}
             />
-            <span className="ms-2">{localStorage.getItem(StorageKeys.NAME)}</span>
+            <span className="ms-2">{profile.name}</span>
 
           </Dropdown.Toggle>
 

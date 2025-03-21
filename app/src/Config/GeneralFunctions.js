@@ -6,10 +6,6 @@ export const getToken = () => {
   return localStorage.getItem(StorageKeys.TOKEN);
 };
 
-export const getOrganisationGuid = () => {
-  return localStorage.getItem(StorageKeys.ORG_GUID);
-};
-
 export const changeTitle = () => {
   const { APP_NAME } = Configuration;
   const title = isDev ? `Development - ${APP_NAME}` : APP_NAME;

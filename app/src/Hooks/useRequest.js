@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-import { getOrganisationGuid, getToken } from "../Config/GeneralFunctions";
+import {  getToken } from "../Config/GeneralFunctions";
 import { Configuration } from "../Config/app.config";
 import { Paths } from "../Constants/paths.constants";
 import { Views } from "../Constants/views.constants";

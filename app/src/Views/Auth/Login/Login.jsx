@@ -45,7 +45,8 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e && e.preventDefault();
-    if (checkForm()) {1
+    if (checkForm()) {
+      1
       request(
         "post",
         getEndpoint(Endpoints.Auth.login),

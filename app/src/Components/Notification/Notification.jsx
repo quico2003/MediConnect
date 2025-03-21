@@ -18,14 +18,6 @@ const Notification = ({
 
   const [testMode, setTestMode] = useState(false);
 
-  useEffect(() => {
-    let testMode = localStorage.getItem(StorageKeys.TEST_MODE);
-    if (testMode) {
-      testMode = JSON.parse(testMode);
-      setTestMode(testMode);
-    }
-  }, []);
-
   const handleClick = () => {
     switch (action) {
       case "redirect":
