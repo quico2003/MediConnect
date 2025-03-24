@@ -88,6 +88,41 @@ class Category
         createException($stmt->errorInfo());
     }
 
+    public static function getAllWithoutPagination(PDO $db): array
+    {
+        $query = "SELECT * FROM `" . self::$table_name . "` WHERE deleted_at IS NULL";
+
+        $stmt = $db->prepare($query);
+
+
+        if ($stmt->execute()) {
+            $arrayToReturn = [];
+
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $arrayToReturn[] = self::getMainObject($db, $row);
+            }
+            return $arrayToReturn;
+        }
+        createException($stmt->errorInfo());
+    }
+    public static function getList(PDO $db): array
+    {
+        $query = "SELECT * FROM `" . self::$table_name . "` WHERE deleted_at IS NULL";
+
+        $stmt = $db->prepare($query);
+
+
+        if ($stmt->execute()) {
+            $arrayToReturn = [];
+
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $arrayToReturn[] = ["value" => $row["guid"], "label" => $row["name"]];
+            }
+            return $arrayToReturn;
+        }
+        createException($stmt->errorInfo());
+    }
+
     public static function getAllCount(PDO $db, string $search = "", array $filters = []): int
     {
         $query = "SELECT COUNT(id) as total FROM `" . self::$table_name . "` c WHERE deleted_at IS NULL";
@@ -124,7 +159,7 @@ class Category
 
         $stmt->bindParam(":guid", $guid);
         if ($stmt->execute()) {
-            while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 return self::getMainObject($db, $row);
             }
         }
@@ -136,14 +171,14 @@ class Category
     {
         $query = "UPDATE `" . self::$table_name . "` 
         SET name=:name, description=:description, deleted_at=:deleted_at, searchdata=:searchdata WHERE guid=:guid";
-        
+
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(":name", $this->name);
         $stmt->bindParam(":description", $this->description);
         $stmt->bindValue(":deleted_at", $this->deleted_at);
         $stmt->bindParam(":guid", $this->guid);
         $stmt->bindValue(":searchdata", convertSearchValues($this->serchableValues()));
-        
+
         try {
             $stmt->execute();
             return true;

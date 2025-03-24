@@ -15,6 +15,9 @@ export const Paths = {
   [Views.categories]: getPath(`/my-admin/categories`, "SideBarCategories", "e574"),
   [Views.new_category]: getPath(`/my-admin/categories/new`),
   [Views.edit_category]: getPath(`/my-admin/categories/edit/:category_guid`),
+  
+  [Views.products]: getPath(`/my-admin/products`, "SideBarProducts", "f05b"),
+  [Views.new_product]: getPath(`/my-admin/products/new`),
 
   [Views.profileView]: getPath(`/my-admin/profile`),
   [Views.accountView]: getPath(`/my-admin/account`),

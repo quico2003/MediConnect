@@ -7,6 +7,7 @@
   "navBar": {
     "SideBarHome": "Home",
     "SideBarCategories": "Categories",
+    "SideBarProducts": "Products",
     "SideBarPrivacyPolicy": "Privacy policy",
     "Dashboard": "Dashboard",
     "ControlPanel": "Control Panel"
@@ -34,6 +35,29 @@
     "notFoundComponent": {
       "title": "Not found categories",
       "description": "Add new category."
+    }
+  },
+  "Products": {
+    "title": "Products",
+    "add": {
+      "newProduct": "New Product",
+      "name": "Name",
+      "price": "Price",
+      "brand": "Brand",
+      "placeholderName": "Name of the product",
+      "placeholderPrice": "Price of the product",
+      "placeholderBrand": "Brand of the product",
+      "description": "Description",
+      "placeholderDescription": "Description of the product..."
+    },
+    "Columns": {
+      "name": "Name",
+      "brand": "Brand",
+      "price": "Price"
+    },
+    "notFoundComponent": {
+      "title": "Not found products",
+      "description": "Add new product."
     }
   },
   "Admin": {

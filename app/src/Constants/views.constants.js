@@ -8,6 +8,9 @@ export const Views = {
   categories: "categories",
   new_category: "new_category",
   edit_category: "edit_category",
+  
+  products: "products",
+  new_product: "new_product",
 
   profileView: "profileView",
   accountView: "accountView",

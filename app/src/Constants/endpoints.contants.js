@@ -1,4 +1,5 @@
 import { Configuration } from "../Config/app.config";
+import Products from "../Views/App/Admin/Products/AllProducts/Products";
 import LoginAdmin from "../Views/Auth/Admin/Login/Login";
 
 const BASE_URL = `${Configuration.API_URL}/endpoints`;
@@ -21,8 +22,16 @@ export const Endpoints = {
 
   Categories: {
     getAll: "/category/getAll",
+    getList: "/category/getList",
     get: "/category/get",
     create: "/category/create",
+    update: "/category/update",
+    delete: "/category/delete",
+  },
+  Products: {
+    getAll: "/category/getAll",
+    get: "/category/get",
+    create: "/product/create",
     update: "/category/update",
     delete: "/category/delete",
   }

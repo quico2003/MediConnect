@@ -15,6 +15,8 @@ import NewCategory from "../../Views/App/Admin/Categories/NewCategory/NewCategor
 import EditCategory from "../../Views/App/Admin/Categories/EditCategory/EditCategory";
 import Profile from "../../Views/App/Admin/Profile/Profile";
 import Account from "../../Views/App/Admin/Account/Account";
+import Products from "../../Views/App/Admin/Products/AllProducts/Products";
+import NewProduct from "../../Views/App/Admin/Products/NewProduct/NewProduct";
 
 
 const getRoute = (path, component, exact = true) => ({
@@ -40,9 +42,14 @@ export const AuthAdminRoutes = [
 
 export const AppAdminRoutes = [
   getRoute(Paths[Views.homeAdmin].path, HomeAdmin),
+
   getRoute(Paths[Views.categories].path, Categories),
   getRoute(Paths[Views.new_category].path, NewCategory),
   getRoute(Paths[Views.edit_category].path, EditCategory),
+  
+  getRoute(Paths[Views.products].path, Products),
+  getRoute(Paths[Views.new_product].path, NewProduct),
+
   getRoute(Paths[Views.profileView].path, Profile),
   getRoute(Paths[Views.accountView].path, Account),
 

@@ -24,7 +24,10 @@ export const NavItems = () => {
     {
       id: "category_section",
       title: ViewStrings.ControlPanel,
-      items: [Paths[Views.categories]],
+      items: [
+      Paths[Views.categories],
+      Paths[Views.products]
+    ],
     }
   ];
   return items;
