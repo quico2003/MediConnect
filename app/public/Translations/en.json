@@ -53,7 +53,9 @@
     "Columns": {
       "name": "Name",
       "brand": "Brand",
-      "price": "Price"
+      "price": "Price",
+      "categoryName": "Category",
+      "actions": "Actions"
     },
     "notFoundComponent": {
       "title": "Not found products",

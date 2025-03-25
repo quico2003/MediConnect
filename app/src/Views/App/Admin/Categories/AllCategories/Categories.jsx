@@ -31,7 +31,7 @@ const Categories = () => {
     //Coje ruta en la que estas
     const { search } = useLocation();
     const [data, setData] = useState([]);
-    const [filterSelected, setFilterSelected] = useState();
+    const [filterSelected] = useState();
     const [totalPages, setTotalPages] = useState(1);
     const { startFetching, finishFetching, fetching, loaded } = useLoaded();
     //Para los errores saber su funcionameino no codigo interno

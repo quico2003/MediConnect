@@ -166,6 +166,20 @@ class Category
         createException("Category not found");
     }
 
+    public static function getById(PDO $db, string $id): Category
+    {
+        $query = "SELECT * FROM `" . self::$table_name . "` WHERE id=:id AND deleted_at IS NULL";
+
+        $stmt = $db->prepare($query);
+
+        $stmt->bindParam(":id", $id);
+        if ($stmt->execute()) {
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                return self::getMainObject($db, $row);
+            }
+        }
+        createException("Category not found");
+    }
 
     function update(): bool
     {

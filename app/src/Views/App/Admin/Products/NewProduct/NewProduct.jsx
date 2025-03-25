@@ -12,6 +12,7 @@ import useNotification from "../../../../../Hooks/useNotification";
 import RequiredField from "../../../../../Components/Form/RequiredField/RequiredField";
 import { validateData } from "../../../../../Config/GeneralFunctions";
 import Dropzone, { useDropzone } from "react-dropzone";
+import FormControlPrice from "../../../../../Components/Form/FormControl/FormControlPrice";
 
 const NewProduct = () => {
 
@@ -26,6 +27,9 @@ const NewProduct = () => {
     const [categories, setCategories] = useState({});
     const [dataInput, setDataInput] = useState({});
     const [selectedOption, setSelectedOption] = useState(null);
+
+    //Array save images
+    const [images, setImages] = useState([]);
 
     useEffect(() => {
         fetchData();
@@ -44,6 +48,7 @@ const NewProduct = () => {
     const handleInput = (e) => {
         const { id, value } = e.target;
         setDataInput({ ...dataInput, [id]: value });
+        console.log(dataInput);
     }
 
     //Save Select in dataInput
@@ -52,12 +57,16 @@ const NewProduct = () => {
         setDataInput({ ...dataInput, "category": obj.value });
     }
 
-    
+
 
     //Send information at api
     const handleSubmit = () => {
         if (checkForm()) {
-            request("post", getEndpoint(Endpoints.Products.create), { ...dataInput })
+            request("file", getEndpoint(Endpoints.Products.create), {
+                accessor: "image",
+                image: images,
+                ...dataInput
+            })
                 .then((res) => {
                     successNotification("Product created", true);
                 })
@@ -69,14 +78,46 @@ const NewProduct = () => {
 
     }
 
-    //DropZOne
-    
+    //DropZone
+    const onDrop = useCallback((acceptedFiles) => {
+        setImages((prevImages) => [...prevImages, ...acceptedFiles]);
+    }, []);
+
+
+    //configuration the dropZone
+    const { getRootProps, getInputProps } = useDropzone({
+        accept: "image/*",
+        multiple: true,
+        onDrop
+    });
+
+    //Delete image on array
+    const deleteImage = useCallback((index) => {
+        setImages((prevImages) => prevImages.filter((_, i) => i !== index));
+    }, []);
+
+
+    useEffect(() => {
+        console.log(images);
+    }, [images])
+
+
 
     //Checked form
     const checkForm = () => {
         const { name, category, price, brand, description } = dataInput;
         return validateData([name, category, price, brand, description]);
     }
+
+    const files = images.map((file, index) => (
+        <div key={index} className="d-flex w-100 justify-content-around align-items-center">
+            <img src={URL.createObjectURL(file)} className="p-2" alt={`Imagen ${index + 1}`} style={{ width: '200px', height: 'auto', objectFit: 'cover' }} />
+            {file.name}
+            <Button onClick={() => deleteImage(index)} variant="danger">
+                Borrar
+            </Button>
+        </div>
+    ));
 
 
     return (
@@ -107,11 +148,9 @@ const NewProduct = () => {
                         value={selectedOption}
                     />
 
-                    <FormControl
+                    <FormControlPrice
                         required
                         controlId="price"
-                        type="number"
-                        step="0.50"
                         vertical={true}
                         className="pb-2"
                         title={ViewStrings.price}
@@ -119,6 +158,7 @@ const NewProduct = () => {
                         onChange={handleInput}
                         value={dataInput.price}
                     />
+                    
 
                     <FormControl
                         required
@@ -142,7 +182,17 @@ const NewProduct = () => {
                         value={dataInput.description}
                     />
 
-                    
+                    <div {...getRootProps({ className: "dropzone d-flex align-items-center justify-content-center border border-3 rounded-4 p-5" })}>
+                        <input {...getInputProps()} />
+                        <span>Drag 'n' drop some files here</span>
+                    </div>
+                    <aside className=" p-4 gap-4">
+                        {files}
+                    </aside>
+
+
+
+
 
 
                 </SectionLayout>

@@ -18,6 +18,8 @@ class Product
 
     public string $description;
 
+    public string $searchData;
+
     public int $created_by;
 
     public int $category_id;
@@ -28,7 +30,9 @@ class Product
 
     public string|null $deleted_at;
 
-    public string|null $uniqId;
+    public string|null $uniqid;
+
+    public string|null $images;
 
 
     public function __construct(PDO $db)
@@ -38,8 +42,11 @@ class Product
 
     private function serchableValues(): array
     {
+        $category = Category::getById($this->conn, $this->category_id);
         return [
             $this->name,
+            $this->brand,
+            $category->name
         ];
     }
 
@@ -48,7 +55,7 @@ class Product
     {
         $query = "INSERT INTO `" . self::$table_name . "` SET
         guid=:guid, name=:name, price=:price, brand=:brand, description=:description,
-        created_by=:created_by, category_id=:category_id, searchdata=:searchdata";
+        created_by=:created_by, category_id=:category_id, images=:images, searchdata=:searchdata";
 
         $stmt = $this->conn->prepare($query);
         $this->guid = createGUID();
@@ -59,6 +66,7 @@ class Product
         $stmt->bindParam(":description", $this->description);
         $stmt->bindParam(":created_by", $this->created_by);
         $stmt->bindParam(":category_id", $this->category_id);
+        $stmt->bindParam(":images", $this->images);
         $stmt->bindValue(":searchdata", convertSearchValues($this->serchableValues()));
 
         try {
@@ -70,6 +78,68 @@ class Product
 
     }
 
+    public static function getAll(PDO $db, int $page, int $offset, string $search = "", array $filters = []): array
+    {
+
+        $query = "SELECT * FROM `" . self::$table_name . "` WHERE deleted_at IS NULL";
+
+        foreach ($filters as $index => $object) {
+            $query .= " AND $object->id = :val$index";
+        }
+
+        applySearchOnQuery($query);
+        doPagination($offset, $page, $query);
+
+        $stmt = $db->prepare($query);
+
+        applySearchOnBindedValue($search, $stmt);
+
+        foreach ($filters as $index => $object) {
+            $value = $object->value;
+            $stmt->bindValue(":val$index", $value, PDO::PARAM_INT);
+        }
+
+        if ($stmt->execute()) {
+            $arrayToReturn = [];
+
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $arrayToReturn[] = self::getMainObject($db, $row);
+            }
+            return $arrayToReturn;
+        }
+        createException($stmt->errorInfo());
+    }
+
+
+    public static function getAllCount(PDO $db, string $search = "", array $filters = []): int
+    {
+        $query = "SELECT COUNT(id) as total FROM `" . self::$table_name . "` c WHERE deleted_at IS NULL";
+
+        foreach ($filters as $index => $object) {
+            $query .= " AND $object->id = :val$index";
+        }
+
+        applySearchOnQuery($query);
+
+        $stmt = $db->prepare($query);
+
+        applySearchOnBindedValue($search, $stmt);
+
+        foreach ($filters as $index => $object) {
+            $value = $object->value;
+            $stmt->bindValue(":val$index", $value, PDO::PARAM_INT);
+        }
+
+        if ($stmt->execute()) {
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                return intval($row['total']);
+            }
+            return 0;
+        }
+        createException($stmt->errorInfo());
+    }
+
+
     private static function getMainObject(PDO $db, array $row): Product
     {
 
@@ -80,12 +150,14 @@ class Product
         $newObj->price = floatval($row['price']);
         $newObj->brand = $row['brand'];
         $newObj->description = $row['description'];
+        $newObj->searchData = $row['searchData'];
         $newObj->created_by = intval($row['created_by']);
         $newObj->category_id = intval($row['category_id']);
+        $newObj->images = $row['images'];
         $newObj->created_at = $row['created_at'];
         $newObj->updated_at = $row['updated_at'];
         $newObj->deleted_at = $row['deleted_at'];
-        $newObj->unicId = $row['uniqId'];
+        $newObj->uniqid = $row['uniqid'];
         return $newObj;
 
     }

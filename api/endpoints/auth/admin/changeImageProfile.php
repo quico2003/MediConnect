@@ -12,6 +12,7 @@ try {
     if (!$_FILES)
         createException('No files selected');
     $files = getFiles();
+
     $admin = Admin::get($db, $adminId);
 
     foreach ($files as $index => $file) {

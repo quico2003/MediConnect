@@ -29,11 +29,11 @@ export const Endpoints = {
     delete: "/category/delete",
   },
   Products: {
-    getAll: "/category/getAll",
-    get: "/category/get",
+    getAll: "/product/getAll",
+    //get: "/category/get",
     create: "/product/create",
-    update: "/category/update",
-    delete: "/category/delete",
+    //update: "/category/update",
+    //delete: "/category/delete",
   }
 };
 

@@ -1,7 +1,14 @@
 import { useContext } from "react"
 import { StringsContext } from "../../../../../Context/strings.context"
+import { getColumnValue } from "../../../../../Config/GeneralFunctions";
+import { ButtonGroup } from "react-bootstrap";
+import IconButton from "../../../../../Components/Buttons/IconButton";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { IoMdEye } from "react-icons/io";
+import { MdDelete, MdEdit } from "react-icons/md";
+import classNames from "classnames";
 
-export const ProductsColumns = () => {
+export const ProductsColumns = (openViewProductModal) => {
 
     const { strings } = useContext(StringsContext);
     const ViewStrings = strings.Products.Columns;
@@ -11,19 +18,25 @@ export const ProductsColumns = () => {
             Header: ViewStrings.name,
             Cell: (row) =>
                 getColumnValue(row, (item) => <p className="mb-0">{item.name}</p>),
-            width: "100%",
+            
         },
         {
             Header: ViewStrings.brand,
             Cell: (row) =>
                 getColumnValue(row, (item) => <p className="mb-0">{item.brand}</p>),
-            width: "100%",
+            
+        },
+        {
+            Header: ViewStrings.categoryName,
+            Cell: (row) =>
+                getColumnValue(row, (item) => <p className="mb-0">{item.categoryName}</p>),
+            
         },
         {
             Header: ViewStrings.price,
             Cell: (row) =>
-                getColumnValue(row, (item) => <p className="mb-0">{item.price}</p>),
-            width: "100%",
+                getColumnValue(row, (item) => <p className="mb-0"><strong>{item.price}€</strong></p>),
+
         },
         {
             Header: ViewStrings.actions,
@@ -33,19 +46,17 @@ export const ProductsColumns = () => {
                         <ButtonGroup>
                             <IconButton
                                 Icon={IoMdEye}
-                                onClick={() => openViewCategoryModal(item.guid)}
+                                onClick={() => openViewProductModal(item.guid)}
                             />
                             <IconButton
                                 Icon={MdEdit}
-                                as={Link}
-                                to={replacePaths(Paths[Views.edit_category].path, [
-                                    { category_guid: item.guid },
-                                ])}
+                                
+                                
                             />
                             <IconButton
                                 variant="danger"
                                 Icon={MdDelete}
-                                onClick={() => openDeleteCategoryModal(item)}
+                                onClick={() => console.log("Modal para borrar")}
                             />
                         </ButtonGroup>
                     </div>
