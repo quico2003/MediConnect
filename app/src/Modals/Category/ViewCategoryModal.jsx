@@ -1,4 +1,4 @@
-import { Button, Form, FormGroup, Modal } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
 import ModalLayout from "../../Layouts/ModalLayout/ModalLayout";
 import useRequest from "../../Hooks/useRequest";
 import useNotification from "../../Hooks/useNotification";
@@ -13,7 +13,6 @@ const ViewCategoryModal = ({ show, onClose, data }) => {
     const request = useRequest();
 
     const { showNotification: errorNotification } = useNotification();
-    const { showNotification: successNotification } = useNotification("success");
 
     useEffect(() => {
         if (show) {          

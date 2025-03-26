@@ -15,6 +15,8 @@ import { Endpoints, getEndpoint } from "../../../../../Constants/endpoints.conta
 import useNotification from "../../../../../Hooks/useNotification";
 import { Configuration } from "../../../../../Config/app.config";
 import useModalManager from "../../../../../Hooks/useModalManager";
+import ViewProductModal from "../../../../../Modals/Products/ViewProductModal";
+import DeleteProductModal from "../../../../../Modals/Products/DeleteProductModal";
 
 const Products = () => {
 
@@ -26,7 +28,7 @@ const Products = () => {
     const request = useRequest();
     const { search } = useLocation();
     const [data, setData] = useState([]);
-    
+
     const [filterSelected] = useState();
     const [totalPages, setTotalPages] = useState(1);
     const searchParams = useQuery();
@@ -41,6 +43,14 @@ const Products = () => {
         openModal: openViewProductModal,
         show: showViewProductModal,
         data: ViewProductData,
+    } = useModalManager();
+
+    //Modal of delete Product
+    const {
+        closeModal: closeDeleteProductModal,
+        openModal: openDeleteProductModal,
+        show: showDeleteProductModal,
+        data: DeleteProductData,
     } = useModalManager();
 
     useEffect(() => {
@@ -70,37 +80,66 @@ const Products = () => {
                 setTotalPages(res.totalPages);
             })
             .catch(errorNotification)
-            .finally(()=> finishFetching());
-        
+            .finally(() => finishFetching());
+
+    }
+
+    const handleCloseViewProductModal = (refresh) => {
+        if (refresh) {
+            closeViewProductModal();
+        }
+
+    }
+
+    const handleCloseDeleteProductModal = (refresh) => {
+        if (refresh) fetchData();
+        closeDeleteProductModal();
+
     }
 
 
 
-
     return (
-        <GeneralLayout title={ViewStrings.title} rightSection={<Button size="sm" as={Link} to={Paths[Views.new_product].path}>
 
-            + Add Product
+        <>
+            <ViewProductModal
+                onClose={handleCloseViewProductModal}
+                show={showViewProductModal}
+                data={ViewProductData}
+            />
 
-        </Button>} >
+            <DeleteProductModal
+                onClose={handleCloseDeleteProductModal}
+                show={showDeleteProductModal}
+                data={DeleteProductData}
+            />
 
-            <PanelLayout loaded={loaded}>
-                <ReactTable
-                    totalPages={totalPages}
-                    fetching={fetching}
-                    onEventChange={fetchData}
-                    data={data}
-                    emptyData={{
-                        text: ViewStrings.notFoundComponent.title,
-                        description: ViewStrings.notFoundComponent.description
-                    }}
-                    columns={ProductsColumns()}
-                />
+            <GeneralLayout title={ViewStrings.title} rightSection={<Button size="sm" as={Link} to={Paths[Views.new_product].path}>
 
-            </PanelLayout>
+                + Add Product
 
-        </GeneralLayout>
+            </Button>} >
 
+                <PanelLayout loaded={loaded}>
+                    <ReactTable
+                        totalPages={totalPages}
+                        fetching={fetching}
+                        onEventChange={fetchData}
+                        data={data}
+                        emptyData={{
+                            text: ViewStrings.notFoundComponent.title,
+                            description: ViewStrings.notFoundComponent.description
+                        }}
+                        columns={ProductsColumns(
+                            openViewProductModal,
+                            openDeleteProductModal
+                        )}
+                    />
+
+                </PanelLayout>
+
+            </GeneralLayout>
+        </>
     )
 
 }

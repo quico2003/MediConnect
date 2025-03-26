@@ -30,10 +30,10 @@ export const Endpoints = {
   },
   Products: {
     getAll: "/product/getAll",
-    //get: "/category/get",
+    get: "/product/get",
     create: "/product/create",
     //update: "/category/update",
-    //delete: "/category/delete",
+    delete: "/product/delete",
   }
 };
 

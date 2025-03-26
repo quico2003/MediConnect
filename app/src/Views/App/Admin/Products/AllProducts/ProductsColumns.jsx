@@ -3,12 +3,11 @@ import { StringsContext } from "../../../../../Context/strings.context"
 import { getColumnValue } from "../../../../../Config/GeneralFunctions";
 import { ButtonGroup } from "react-bootstrap";
 import IconButton from "../../../../../Components/Buttons/IconButton";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import { IoMdEye } from "react-icons/io";
 import { MdDelete, MdEdit } from "react-icons/md";
-import classNames from "classnames";
 
-export const ProductsColumns = (openViewProductModal) => {
+
+export const ProductsColumns = (openViewProductModal, openDeleteProductModal) => {
 
     const { strings } = useContext(StringsContext);
     const ViewStrings = strings.Products.Columns;
@@ -35,7 +34,7 @@ export const ProductsColumns = (openViewProductModal) => {
         {
             Header: ViewStrings.price,
             Cell: (row) =>
-                getColumnValue(row, (item) => <p className="mb-0"><strong>{item.price}€</strong></p>),
+                getColumnValue(row, (item) => <p className="mb-0">{item.price}€</p>),
 
         },
         {
@@ -56,7 +55,7 @@ export const ProductsColumns = (openViewProductModal) => {
                             <IconButton
                                 variant="danger"
                                 Icon={MdDelete}
-                                onClick={() => console.log("Modal para borrar")}
+                                onClick={() => openDeleteProductModal(item.guid)}
                             />
                         </ButtonGroup>
                     </div>
