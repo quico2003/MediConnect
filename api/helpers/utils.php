@@ -291,8 +291,7 @@ if (!function_exists('convertSearchValues')) {
             } else
                 $string .= "$value ";
         }
-        logAPI("HOL");
-        logAPI($string);
+
         return $string;
     }
 }

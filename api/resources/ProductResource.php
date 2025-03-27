@@ -22,4 +22,17 @@ class ProductResource
         }
         return $itemsArray;
     }
+
+    public static function getProductResourceAdmin(Product $product)
+    {
+        $newItem = self::getProduct($product, ["guid", "name", "price", "brand", "description", "created_at", "updated_at", "categoryName", "creator", "imagesURL"]);
+        return $newItem;
+    }
+
+
+    public static function getProductResourceAdminForUpdate(Product $product)
+    {
+        $newItem = self::getProduct($product, ["guid", "name", "price", "brand", "description", "imagesExist", "updated_at", "category", "imagesURL"]);
+        return $newItem;
+    }
 }

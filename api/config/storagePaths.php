@@ -15,8 +15,8 @@ class FileStorage
     {
         return API_URL . "/endpoints/media/getMedia.php?file=$fileName";
     }
-    public static function FileURLProducts(string $guid): string
+    public static function FileURLProducts(string $fileName): string
     {
-        return API_URL . "/endpoints/media/getMediaProducts.php?file=$guid";
+        return API_URL . "/endpoints/media/getMediaProducts.php?file=$fileName";
     }
 }

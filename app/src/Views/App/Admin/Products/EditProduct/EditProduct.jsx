@@ -13,11 +13,10 @@ import RequiredField from "../../../../../Components/Form/RequiredField/Required
 import { validateData } from "../../../../../Config/GeneralFunctions";
 import { useDropzone } from "react-dropzone";
 import FormControlPrice from "../../../../../Components/Form/FormControl/FormControlPrice";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { Paths } from "../../../../../Constants/paths.constants";
-import { Views } from "../../../../../Constants/views.constants";
+import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
 
-const NewProduct = () => {
+
+const EditProduct = () => {
 
     const { strings } = useContext(StringsContext);
     const ViewStrings = strings.Products.add;
@@ -25,124 +24,145 @@ const NewProduct = () => {
     const request = useRequest();
     const { push } = useHistory();
 
+    const { product_guid } = useParams();
+
     const { showNotification: successNotification } = useNotification("success");
     const { showNotification: errorNotification } = useNotification();
 
     const [categories, setCategories] = useState({});
-    const [dataInput, setDataInput] = useState({});
+    const [data, setData] = useState({});
     const [selectedOption, setSelectedOption] = useState(null);
-
-    //Array save images
-    const [images, setImages] = useState([]);
+    const [existingImages, setExistingImages] = useState([]);
+    const [existingImagesGuid, setExistingImagesGuid] = useState([]);
+    const [newImages, setNewImages] = useState([]);
+    const [deleteImages, setDeleteImages] = useState([]);
 
     useEffect(() => {
         fetchData();
-    }, [])
+    }, []);
 
-    //Get of the categories
     const fetchData = async () => {
-        return await request("get", getEndpoint(Endpoints.Categories.getList))
-            .then((res) => {
-                setCategories(res.categories);
-            })
-            .catch((err) => console.log("error.", err))
-    }
+        try {
+            const resProduct = await request("get", getEndpoint(Endpoints.Products.getForUpdate), { guid: product_guid });
+            const resCategories = await request("get", getEndpoint(Endpoints.Categories.getList));
+            setCategories(resCategories.categories);
+            setData(resProduct.data);
+            console.log(resProduct);
+            if (resProduct.data && resProduct.data.category) {
+                const selectedCategory = resCategories.categories.find((cat) => cat.value === resProduct.data.category);
+                setSelectedOption(selectedCategory);
+                setData((prevData) => ({ ...prevData, category: selectedCategory.value }));
+            }
+            if (resProduct.data.imagesExist) {
+                setExistingImagesGuid(resProduct.data.imagesExist)
+                setExistingImages(resProduct.data.imagesURL)
+            }
+        } catch (err) {
+            errorNotification("Error fetching product", true);
+        }
+    };
 
-    //Save normal Input in dataInput
-    const handleInput = (e) => {
-        const { id, value } = e.target;
-        setDataInput({ ...dataInput, [id]: value });
-        console.log(dataInput);
-    }
-
-    //Save Select in dataInput
-    const handleSelect = (obj) => {
-        setSelectedOption(obj);
-        setDataInput({ ...dataInput, "category": obj.value });
-    }
-
-
-
-    //Send information at api
     const handleSubmit = () => {
+
+        console.log(data);
+        console.log(existingImages);
+        console.log(existingImagesGuid);
+        console.log(deleteImages)
+        console.log(newImages);
+
         if (checkForm()) {
-            request("file", getEndpoint(Endpoints.Products.create), {
+            request("file", getEndpoint(Endpoints.Products.update), {
                 accessor: "image",
-                image: images,
-                ...dataInput
+                newImages: newImages,
+                existImages: existingImages,
+                ...data,
             })
                 .then((res) => {
                     push(Paths[Views.products].path);
-                    successNotification("Product created", true);
+                    successNotification("Product updated", true);
 
                 })
                 .catch(() => {
-                    errorNotification("Error create product", true);
+                    errorNotification("Error update product", true);
                 })
         }
 
-
     }
 
-    //DropZone
+    const handleInput = (e) => {
+        const { id, value } = e.target;
+        setData({ ...data, [id]: value });
+    }
+
+    const handleSelect = (obj) => {
+        setSelectedOption(obj);
+        setData({ ...data, "category": obj.value });
+    }
+
     const onDrop = useCallback((acceptedFiles) => {
-        setImages((prevImages) => [...prevImages, ...acceptedFiles]);
+        setNewImages((prevImages) => [...prevImages, ...acceptedFiles]);
     }, []);
 
-
-    //configuration the dropZone
     const { getRootProps, getInputProps } = useDropzone({
         accept: "image/*",
         multiple: true,
         onDrop
     });
 
-    //Delete image on array
-    const deleteImage = useCallback((index) => {
-        setImages((prevImages) => prevImages.filter((_, i) => i !== index));
-    }, []);
-
-
-    useEffect(() => {
-        console.log(images);
-    }, [images])
-
-
-
-    //Checked form
-    const checkForm = () => {
-        const { name, category, price, brand, description } = dataInput;
-        return validateData([name, category, price, brand, description]);
-    }
-
-    const files = images.map((file, index) => (
+    const files = [...existingImages, ...newImages].map((file, index) => (
         <div key={index} className="d-flex w-100 justify-content-around align-items-center">
-            <img src={URL.createObjectURL(file)} className="p-2" alt={`Imagen ${index + 1}`} style={{ width: '200px', height: 'auto', objectFit: 'cover' }} />
-            {file.name}
-            <Button onClick={() => deleteImage(index)} variant="danger">
+            {typeof file === 'string' ? (
+                <img src={file} className="p-2" style={{ width: '200px', height: 'auto', objectFit: 'cover' }} />
+            ) : (
+                <img src={URL.createObjectURL(file)} className="p-2" style={{ width: '200px', height: 'auto', objectFit: 'cover' }} />
+            )}
+            <Button onClick={() => deleteImage(index, typeof file !== 'string')} variant="danger">
                 Borrar
             </Button>
         </div>
     ));
 
+    const deleteImage = (index, isNewImage = false) => {
+        if (isNewImage) {
+            // Eliminar imagen de newImages
+            setNewImages((prevImages) => prevImages.filter((_, i) => i !== index));
+        } else {
+            // Si es una imagen existente
+            setExistingImages((prevImages) => {
+                const updatedExistingImages = prevImages.filter((_, i) => i !== index);
+
+                // Obtener el GUID correspondiente al índice eliminado de existingImagesGuid
+                const deletedImageGuid = existingImagesGuid[index];
+
+                // Agregar el GUID a deletedImages
+                setDeleteImages((prevDeletedImages) => [...prevDeletedImages, deletedImageGuid]);
+
+                return updatedExistingImages;
+            });
+        }
+    };
+
+
+    const checkForm = () => {
+        const { name, category, price, brand, description } = data;
+        return validateData([name, category, price, brand, description]);
+    }
 
     return (
         <GeneralLayout showBackButton title={ViewStrings.newProduct}>
             <PanelLayout>
                 <SectionLayout>
-
                     <FormControl
                         required
                         controlId="name"
                         maxLength={50}
                         showMaxLength={true}
                         vertical={false}
-                        value={dataInput.name}
+                        value={data.name}
                         title={ViewStrings.name}
                         onChange={handleInput}
                         placeholder={ViewStrings.placeholderName}
                     />
-
                     <FormLabel className="mb-0">Categorías de productos<RequiredField /></FormLabel>
                     <Select
                         options={categories}
@@ -153,7 +173,6 @@ const NewProduct = () => {
                         onChange={handleSelect}
                         value={selectedOption}
                     />
-
                     <FormControlPrice
                         required
                         controlId="price"
@@ -162,10 +181,8 @@ const NewProduct = () => {
                         title={ViewStrings.price}
                         placeholder={ViewStrings.placeholderPrice}
                         onChange={handleInput}
-                        value={dataInput.price}
+                        value={data.price}
                     />
-                    
-
                     <FormControl
                         required
                         controlId="brand"
@@ -174,9 +191,8 @@ const NewProduct = () => {
                         title={ViewStrings.brand}
                         placeholder={ViewStrings.placeholderBrand}
                         onChange={handleInput}
-                        value={dataInput.brand}
+                        value={data.brand}
                     />
-
                     <FormControl
                         required
                         controlId="description"
@@ -185,7 +201,7 @@ const NewProduct = () => {
                         title={ViewStrings.description}
                         placeholder={ViewStrings.placeholderDescription}
                         onChange={handleInput}
-                        value={dataInput.description}
+                        value={data.description}
                     />
 
                     <div {...getRootProps({ className: "dropzone d-flex align-items-center justify-content-center border border-3 rounded-4 p-5" })}>
@@ -195,22 +211,16 @@ const NewProduct = () => {
                     <aside className=" p-4 gap-4">
                         {files}
                     </aside>
-
-
-
-
-
-
                 </SectionLayout>
+
                 <div className="d-flex justify-content-end align-items-center">
                     <Button disabled={!checkForm()} onClick={handleSubmit}>
                         Create
                     </Button>
                 </div>
             </PanelLayout>
-
         </GeneralLayout>
-    )
+    );
+};
 
-}
-export default NewProduct;
+export default EditProduct;

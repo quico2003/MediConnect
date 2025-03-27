@@ -11,19 +11,31 @@ try {
     $db->beginTransaction();
     checkAuthAdmin();
 
-    
+
     $input = validate($data, [
         'guid' => 'required|string',
     ]);
 
-    $category = Category::getByGuid($db, $input->guid);
+    $product = Product::getByGuid($db, $input->guid);
 
-    $category->delete();
+    $arrayImagesDecode = json_decode($product->images);
+
+    if ($arrayImagesDecode) {
+        foreach ($arrayImagesDecode as $image) {
+            $ruta = FileStorage::FilePathProducts($image);
+            unlink($ruta);
+        }
+    }
+
+    $product->images = "[]";
+
+
+    $product->delete();
 
     $db->commit();
 
     Response::sendResponse();
-    
+
 } catch (\Exception $th) {
     $db->rollBack();
     print_r(value: json_encode(array("status" => false, "message" => $th->getMessage(), 'code' => $th->getCode())));

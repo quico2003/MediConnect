@@ -35,6 +35,7 @@ class Product
     public string|null $images;
 
 
+
     public function __construct(PDO $db)
     {
         $this->conn = $db;
@@ -55,7 +56,7 @@ class Product
     {
         $query = "INSERT INTO `" . self::$table_name . "` SET
         guid=:guid, name=:name, price=:price, brand=:brand, description=:description,
-        created_by=:created_by, category_id=:category_id, images=:images, searchdata=:searchdata";
+        created_by=:created_by, category_id=:category_id, images=:images, searchData=:searchData";
 
         $stmt = $this->conn->prepare($query);
         $this->guid = createGUID();
@@ -67,7 +68,7 @@ class Product
         $stmt->bindParam(":created_by", $this->created_by);
         $stmt->bindParam(":category_id", $this->category_id);
         $stmt->bindParam(":images", $this->images);
-        $stmt->bindValue(":searchdata", convertSearchValues($this->serchableValues()));
+        $stmt->bindValue(":searchData", convertSearchValues($this->serchableValues()));
 
         try {
             $stmt->execute();
@@ -76,6 +77,38 @@ class Product
             createException($stmt->errorInfo());
         }
 
+    }
+
+    function update(): bool
+    {
+        $query = "UPDATE `" . self::$table_name . "` SET name=:name, price=:price, brand=:brand,
+        description=:description, deleted_at=:deleted_at, category_id=:category_id,
+        images=:images, searchData=:searchData WHERE guid=:guid";
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(":name", $this->name);
+        $stmt->bindParam(":price", $this->price);
+        $stmt->bindParam(":brand", $this->brand);
+        $stmt->bindParam(":description", $this->description);
+        $stmt->bindValue(":deleted_at", $this->deleted_at);
+        $stmt->bindValue(":category_id", $this->category_id);
+        $stmt->bindParam(":images", $this->images);
+        $stmt->bindValue(":searchData", convertSearchValues($this->serchableValues()));
+        $stmt->bindParam(":guid", $this->guid);
+
+        try {
+            $stmt->execute();
+            return true;
+        } catch (\Exception $th) {
+            createException($stmt->errorInfo());
+        }
+
+    }
+
+    function delete(): bool
+    {
+        $this->deleted_at = newDate();
+        return $this->update();
     }
 
     public static function getAll(PDO $db, int $page, int $offset, string $search = "", array $filters = []): array
@@ -137,6 +170,22 @@ class Product
             return 0;
         }
         createException($stmt->errorInfo());
+    }
+
+    public static function getByGuid(PDO $db, string $guid): Product
+    {
+
+        $query = "SELECT * FROM `" . self::$table_name . "` WHERE guid=:guid AND deleted_at IS NULL";
+
+        $stmt = $db->prepare($query);
+
+        $stmt->bindParam(":guid", $guid);
+        if ($stmt->execute()) {
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                return self::getMainObject($db, $row);
+            }
+        }
+        createException("Product not found");
     }
 
 

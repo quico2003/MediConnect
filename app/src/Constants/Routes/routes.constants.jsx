@@ -17,6 +17,7 @@ import Profile from "../../Views/App/Admin/Profile/Profile";
 import Account from "../../Views/App/Admin/Account/Account";
 import Products from "../../Views/App/Admin/Products/AllProducts/Products";
 import NewProduct from "../../Views/App/Admin/Products/NewProduct/NewProduct";
+import EditProduct from "../../Views/App/Admin/Products/EditProduct/EditProduct";
 
 
 const getRoute = (path, component, exact = true) => ({
@@ -49,7 +50,8 @@ export const AppAdminRoutes = [
   
   getRoute(Paths[Views.products].path, Products),
   getRoute(Paths[Views.new_product].path, NewProduct),
-
+  getRoute(Paths[Views.edit_product].path, EditProduct),
+  
   getRoute(Paths[Views.profileView].path, Profile),
   getRoute(Paths[Views.accountView].path, Account),
 

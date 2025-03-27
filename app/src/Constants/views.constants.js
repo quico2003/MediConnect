@@ -11,6 +11,7 @@ export const Views = {
   
   products: "products",
   new_product: "new_product",
+  edit_product: "edit_product",
 
   profileView: "profileView",
   accountView: "accountView",

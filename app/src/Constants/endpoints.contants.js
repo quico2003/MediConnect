@@ -31,8 +31,9 @@ export const Endpoints = {
   Products: {
     getAll: "/product/getAll",
     get: "/product/get",
+    getForUpdate: "/product/getForUpdate",
     create: "/product/create",
-    //update: "/category/update",
+    //update: "/product/update",
     delete: "/product/delete",
   }
 };

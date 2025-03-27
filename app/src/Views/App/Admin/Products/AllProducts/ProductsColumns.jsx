@@ -5,6 +5,9 @@ import { ButtonGroup } from "react-bootstrap";
 import IconButton from "../../../../../Components/Buttons/IconButton";
 import { IoMdEye } from "react-icons/io";
 import { MdDelete, MdEdit } from "react-icons/md";
+import { Paths, replacePaths } from "../../../../../Constants/paths.constants";
+import { Views } from "../../../../../Constants/views.constants";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 
 export const ProductsColumns = (openViewProductModal, openDeleteProductModal) => {
@@ -49,8 +52,10 @@ export const ProductsColumns = (openViewProductModal, openDeleteProductModal) =>
                             />
                             <IconButton
                                 Icon={MdEdit}
-                                
-                                
+                                as={Link}
+                                to={replacePaths(Paths[Views.edit_product].path, [
+                                    { product_guid: item.guid },
+                                ])}
                             />
                             <IconButton
                                 variant="danger"

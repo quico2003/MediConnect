@@ -18,9 +18,13 @@ const DeleteProductModal = ({ show, onClose, data }) => {
             .then((res) => {
                 successNotification("Product deleted.")
                 onClose(true);
+                
 
             })
-            .catch((err) => console.log(err))
+            .catch((err) => {
+                errorNotification(err.message);
+                onClose(true);
+            })
 
     }
 
