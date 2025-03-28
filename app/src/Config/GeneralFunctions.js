@@ -62,6 +62,34 @@ export const validateData = (params) => {
   return true;
 };
 
+export const validateDataCreateUser = (params) => {
+  for (let i = 0; i < params.length; i++) {
+    const item = params[i];
+
+    if (
+      item === undefined ||
+      item === null ||
+      item === '' ||
+      (Array.isArray(item) && item.length === 0)
+    )
+      return false;
+  }
+
+  const email = params[3];
+  const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  if (!emailRegex.test(email)) {
+    return false;
+  }
+
+  const password = params[4];
+  const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z0-9!@#$%^&*]{6,}$/;
+  if (!passwordRegex.test(password)) {
+    return false;
+  }
+
+  return true;
+};
+
 
 export const validateLoginAdmin = (email, password) => {
 

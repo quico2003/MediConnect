@@ -22,13 +22,20 @@ export const NavItems = () => {
       items: [Paths[Views.homeAdmin]],
     },
     {
-      id: "category_section",
-      title: ViewStrings.ControlPanel,
+      id: "product_section",
+      title: ViewStrings.ControlPanelProducts,
       items: [
       Paths[Views.categories],
       Paths[Views.products]
     ],
-    }
+    },
+    {
+      id: "doctors_section",
+      title: ViewStrings.ControlPanelDoctors,
+      items: [
+        Paths[Views.doctors]
+      ],
+    },
   ];
   return items;
 };

@@ -8,9 +8,11 @@
     "SideBarHome": "Home",
     "SideBarCategories": "Categories",
     "SideBarProducts": "Products",
+    "SideBarDoctors": "Doctors",
+    "ControlPanelDoctors": "Control Panel Doctors",
     "SideBarPrivacyPolicy": "Privacy policy",
     "Dashboard": "Dashboard",
-    "ControlPanel": "Control Panel"
+    "ControlPanelProducts": "Control Panel Products"
   },
   "Categories": {
     "title": "Categories",
@@ -44,11 +46,51 @@
       "name": "Name",
       "price": "Price",
       "brand": "Brand",
+      "category": "Category",
+      "images": "Images",
+      "create": "Create",
+      "delete": "Delete",
       "placeholderName": "Name of the product",
       "placeholderPrice": "Price of the product",
       "placeholderBrand": "Brand of the product",
       "description": "Description",
-      "placeholderDescription": "Description of the product..."
+      "placeholderDescription": "Description of the product...",
+      "placeholderImages": "Click or drag an image..."
+    },
+    "view": {
+      "title": "Product Info.",
+      "name": "Name",
+      "price": "Price",
+      "brand": "Brand",
+      "exit": "Exit",
+      "createdAt": "Created at",
+      "updatedAt": "Updated at",
+      "category": "Category",
+      "description": "Description",
+      "creator": "Creator",
+      "images": "Images"
+    },
+    "delete": {
+      "title": "Product Delete",
+      "descriptionAction": "Are you sure you want to delete this product?",
+      "cancel": "Cancel",
+      "delete": "Delete"
+    },
+    "update": {
+      "newProduct": "Edit Product",
+      "name": "Name",
+      "price": "Price",
+      "brand": "Brand",      
+      "category": "Category",      
+      "images": "Images",      
+      "update": "Update",      
+      "delete": "Delete",      
+      "placeholderName": "Name of the product",
+      "placeholderPrice": "Price of the product",
+      "placeholderBrand": "Brand of the product",
+      "description": "Description",
+      "placeholderDescription": "Description of the product...",
+      "placeholderImages": "Click or drag an image..."
     },
     "Columns": {
       "name": "Name",

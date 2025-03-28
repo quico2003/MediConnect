@@ -1,6 +1,4 @@
 import { Configuration } from "../Config/app.config";
-import Products from "../Views/App/Admin/Products/AllProducts/Products";
-import LoginAdmin from "../Views/Auth/Admin/Login/Login";
 
 const BASE_URL = `${Configuration.API_URL}/endpoints`;
 
@@ -28,13 +26,23 @@ export const Endpoints = {
     update: "/category/update",
     delete: "/category/delete",
   },
+  
   Products: {
     getAll: "/product/getAll",
     get: "/product/get",
     getForUpdate: "/product/getForUpdate",
     create: "/product/create",
-    //update: "/product/update",
+    update: "/product/update",
     delete: "/product/delete",
+  },
+  
+  Doctors: {
+    getAll: "/doctor/getAll",
+    get: "/doctor/get",
+    getForUpdate: "/doctor/getForUpdate",
+    create: "/doctor/create",
+    update: "/doctor/update",
+    delete: "/doctor/delete",
   }
 };
 

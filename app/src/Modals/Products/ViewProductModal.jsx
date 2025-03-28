@@ -1,12 +1,17 @@
 import { Button, Modal } from "react-bootstrap";
 import ModalLayout from "../../Layouts/ModalLayout/ModalLayout";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import useRequest from "../../Hooks/useRequest";
 import useNotification from "../../Hooks/useNotification";
 import { Endpoints, getEndpoint } from "../../Constants/endpoints.contants";
 import Slider from "react-slick";
+import { StringsContext } from "../../Context/strings.context";
 
 const ViewProductModal = ({ show, onClose, data }) => {
+
+
+    const { strings } = useContext(StringsContext);
+    const ViewStrings = strings.Products.view;
 
     const [dataProduct, setDataProduct] = useState();
 
@@ -36,15 +41,6 @@ const ViewProductModal = ({ show, onClose, data }) => {
         onClose(true);
     }
 
-    const settingsSlicke = {
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1
-
-    };
-
     const renderImages = () => {
 
         return dataProduct?.imagesURL.map((image, index) => (
@@ -62,12 +58,12 @@ const ViewProductModal = ({ show, onClose, data }) => {
             onHide={hideModal}
             header={true}
             customHeader={
-                <Modal.Title className="ms-2">Product Info</Modal.Title>
+                <Modal.Title className="ms-2">{ViewStrings.title}</Modal.Title>
             }
             footer={
                 <div>
                     <Button onClick={exitClick} variant="danger">
-                        Exit
+                        {ViewStrings.exit}
                     </Button>
                 </div>
             }
@@ -77,38 +73,34 @@ const ViewProductModal = ({ show, onClose, data }) => {
 
                 <div className="ms-2">
                     <div className="d-flex flex-column gap-2 mb-2 ">
-                        <span className="fw-bold">Name:</span><span>{dataProduct?.name}</span>
+                        <span className="fw-bold">{ViewStrings.name}:</span><span>{dataProduct?.name}</span>
                     </div>
                     <div className="d-flex flex-column gap-2 mb-2 ">
-                        <span className="fw-bold">Price:</span><span>{dataProduct?.price}</span>
+                        <span className="fw-bold">{ViewStrings.price}:</span><span>{dataProduct?.price}</span>
                     </div>
                     <div className="d-flex flex-column gap-2 mb-2 ">
-                        <span className="fw-bold">Brand:</span><span>{dataProduct?.brand}</span>
+                        <span className="fw-bold">{ViewStrings.brand}:</span><span>{dataProduct?.brand}</span>
                     </div>
                     <div className="d-flex flex-column gap-2 mb-2 ">
-                        <span className="fw-bold">Description:</span><span>{dataProduct?.description}</span>
+                        <span className="fw-bold">{ViewStrings.description}:</span><span>{dataProduct?.description}</span>
                     </div>
                     <div className="d-flex flex-column gap-2 mb-2 ">
-                        <span className="fw-bold">Created_at:</span><span>{dataProduct?.created_at}</span>
+                        <span className="fw-bold">{ViewStrings.createdAt}:</span><span>{dataProduct?.created_at}</span>
                     </div>
                     <div className="d-flex flex-column gap-2 mb-2 ">
-                        <span className="fw-bold">Update_at:</span><span>{dataProduct?.updated_at}</span>
+                        <span className="fw-bold">{ViewStrings.updatedAt}:</span><span>{dataProduct?.updated_at}</span>
                     </div>
                     <div className="d-flex flex-column gap-2 mb-2 ">
-                        <span className="fw-bold">Category:</span><span>{dataProduct?.categoryName}</span>
+                        <span className="fw-bold">{ViewStrings.category}:</span><span>{dataProduct?.categoryName}</span>
                     </div>
                     <div className="d-flex flex-column gap-2 mb-2 ">
-                        <span className="fw-bold">Creator:</span><span>{dataProduct?.creator}</span>
+                        <span className="fw-bold">{ViewStrings.creator}:</span><span>{dataProduct?.creator}</span>
                     </div>
-
+                    <span className="fw-bold">{ViewStrings.images}:</span>
                     <div className="d-flex overflow-auto ">
                         {renderImages()}
                     </div>
                 </div>
-
-
-
-
 
             </Modal.Body>
 

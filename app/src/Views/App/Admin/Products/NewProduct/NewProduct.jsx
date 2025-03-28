@@ -61,8 +61,6 @@ const NewProduct = () => {
         setDataInput({ ...dataInput, "category": obj.value });
     }
 
-
-
     //Send information at api
     const handleSubmit = () => {
         if (checkForm()) {
@@ -80,8 +78,6 @@ const NewProduct = () => {
                     errorNotification("Error create product", true);
                 })
         }
-
-
     }
 
     //DropZone
@@ -103,12 +99,6 @@ const NewProduct = () => {
     }, []);
 
 
-    useEffect(() => {
-        console.log(images);
-    }, [images])
-
-
-
     //Checked form
     const checkForm = () => {
         const { name, category, price, brand, description } = dataInput;
@@ -120,7 +110,7 @@ const NewProduct = () => {
             <img src={URL.createObjectURL(file)} className="p-2" alt={`Imagen ${index + 1}`} style={{ width: '200px', height: 'auto', objectFit: 'cover' }} />
             {file.name}
             <Button onClick={() => deleteImage(index)} variant="danger">
-                Borrar
+                {ViewStrings.delete}
             </Button>
         </div>
     ));
@@ -143,7 +133,7 @@ const NewProduct = () => {
                         placeholder={ViewStrings.placeholderName}
                     />
 
-                    <FormLabel className="mb-0">Categorías de productos<RequiredField /></FormLabel>
+                    <FormLabel className="mb-0">{ViewStrings.category}<RequiredField /></FormLabel>
                     <Select
                         options={categories}
                         closeMenuOnSelect={true}
@@ -190,21 +180,17 @@ const NewProduct = () => {
 
                     <div {...getRootProps({ className: "dropzone d-flex align-items-center justify-content-center border border-3 rounded-4 p-5" })}>
                         <input {...getInputProps()} />
-                        <span>Drag 'n' drop some files here</span>
+                        <span>{ViewStrings.placeholderImages}</span>
                     </div>
                     <aside className=" p-4 gap-4">
                         {files}
                     </aside>
 
 
-
-
-
-
                 </SectionLayout>
                 <div className="d-flex justify-content-end align-items-center">
                     <Button disabled={!checkForm()} onClick={handleSubmit}>
-                        Create
+                        {ViewStrings.create}
                     </Button>
                 </div>
             </PanelLayout>

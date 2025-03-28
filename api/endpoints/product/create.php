@@ -22,6 +22,7 @@ try {
         'description' => 'required|string',
     ]);
 
+    logAPI($input);
 
     $category = Category::getByGuid($db, $input->category);
 

@@ -1,7 +1,5 @@
 <?php
 
-
-
 include_once $document_root . '/helpers/utils.php';
 include_once $document_root . '/config/storagePaths.php';
 include_once $document_root . '/config/database.php';
@@ -18,18 +16,18 @@ include_once $document_root . '/helpers/emails/forgot_password_content.php';
 include_once $document_root . '/objects/admin.php';
 include_once $document_root . '/objects/category.php';
 include_once $document_root . '/objects/product.php';
-
+include_once $document_root . '/objects/userprofile.php';
+include_once $document_root . '/objects/user.php';
 include_once $document_root . '/objects/customexception.php';
+include_once $document_root . '/objects/_media.php';
+
 include_once $document_root . '/objects/book.php';
 include_once $document_root . '/objects/copy.php';
 include_once $document_root . '/objects/course.php';
 include_once $document_root . '/objects/subject.php';
-include_once $document_root . '/objects/user.php';
-include_once $document_root . '/objects/userprofile.php';
 include_once $document_root . '/objects/student.php';
 include_once $document_root . '/objects/history.php';
 include_once $document_root . '/objects/studentprofile.php';
-include_once $document_root . '/objects/_media.php';
 
 
 //Resources

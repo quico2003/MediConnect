@@ -18,6 +18,8 @@ import Account from "../../Views/App/Admin/Account/Account";
 import Products from "../../Views/App/Admin/Products/AllProducts/Products";
 import NewProduct from "../../Views/App/Admin/Products/NewProduct/NewProduct";
 import EditProduct from "../../Views/App/Admin/Products/EditProduct/EditProduct";
+import Doctors from "../../Views/App/Admin/Doctors/AllDoctors/Doctors";
+import NewDoctor from "../../Views/App/Admin/Doctors/NewDoctor/NewDoctor";
 
 
 const getRoute = (path, component, exact = true) => ({
@@ -51,6 +53,10 @@ export const AppAdminRoutes = [
   getRoute(Paths[Views.products].path, Products),
   getRoute(Paths[Views.new_product].path, NewProduct),
   getRoute(Paths[Views.edit_product].path, EditProduct),
+
+  getRoute(Paths[Views.doctors].path, Doctors),
+  getRoute(Paths[Views.new_doctor].path, NewDoctor),
+  getRoute(Paths[Views.edit_doctor].path, EditProduct),
   
   getRoute(Paths[Views.profileView].path, Profile),
   getRoute(Paths[Views.accountView].path, Account),

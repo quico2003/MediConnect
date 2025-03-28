@@ -14,12 +14,14 @@ import { validateData } from "../../../../../Config/GeneralFunctions";
 import { useDropzone } from "react-dropzone";
 import FormControlPrice from "../../../../../Components/Form/FormControl/FormControlPrice";
 import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { Paths } from "../../../../../Constants/paths.constants";
+import { Views } from "../../../../../Constants/views.constants";
 
 
 const EditProduct = () => {
 
     const { strings } = useContext(StringsContext);
-    const ViewStrings = strings.Products.add;
+    const ViewStrings = strings.Products.update;
 
     const request = useRequest();
     const { push } = useHistory();
@@ -47,7 +49,6 @@ const EditProduct = () => {
             const resCategories = await request("get", getEndpoint(Endpoints.Categories.getList));
             setCategories(resCategories.categories);
             setData(resProduct.data);
-            console.log(resProduct);
             if (resProduct.data && resProduct.data.category) {
                 const selectedCategory = resCategories.categories.find((cat) => cat.value === resProduct.data.category);
                 setSelectedOption(selectedCategory);
@@ -64,28 +65,20 @@ const EditProduct = () => {
 
     const handleSubmit = () => {
 
-        console.log(data);
-        console.log(existingImages);
-        console.log(existingImagesGuid);
-        console.log(deleteImages)
-        console.log(newImages);
-
-        if (checkForm()) {
-            request("file", getEndpoint(Endpoints.Products.update), {
-                accessor: "image",
+            request("post", getEndpoint(Endpoints.Products.update), {
                 newImages: newImages,
-                existImages: existingImages,
-                ...data,
+                deleteImages: deleteImages,
+                ...data
             })
                 .then((res) => {
                     push(Paths[Views.products].path);
                     successNotification("Product updated", true);
 
                 })
-                .catch(() => {
-                    errorNotification("Error update product", true);
+                .catch((err) => {
+                    errorNotification("Error update product", err);
                 })
-        }
+      
 
     }
 
@@ -117,24 +110,20 @@ const EditProduct = () => {
                 <img src={URL.createObjectURL(file)} className="p-2" style={{ width: '200px', height: 'auto', objectFit: 'cover' }} />
             )}
             <Button onClick={() => deleteImage(index, typeof file !== 'string')} variant="danger">
-                Borrar
+                {ViewStrings.delete}
             </Button>
         </div>
     ));
 
     const deleteImage = (index, isNewImage = false) => {
         if (isNewImage) {
-            // Eliminar imagen de newImages
             setNewImages((prevImages) => prevImages.filter((_, i) => i !== index));
         } else {
-            // Si es una imagen existente
             setExistingImages((prevImages) => {
                 const updatedExistingImages = prevImages.filter((_, i) => i !== index);
 
-                // Obtener el GUID correspondiente al índice eliminado de existingImagesGuid
                 const deletedImageGuid = existingImagesGuid[index];
 
-                // Agregar el GUID a deletedImages
                 setDeleteImages((prevDeletedImages) => [...prevDeletedImages, deletedImageGuid]);
 
                 return updatedExistingImages;
@@ -163,7 +152,7 @@ const EditProduct = () => {
                         onChange={handleInput}
                         placeholder={ViewStrings.placeholderName}
                     />
-                    <FormLabel className="mb-0">Categorías de productos<RequiredField /></FormLabel>
+                    <FormLabel className="mb-0">{ViewStrings.category}<RequiredField /></FormLabel>
                     <Select
                         options={categories}
                         closeMenuOnSelect={true}
@@ -204,9 +193,10 @@ const EditProduct = () => {
                         value={data.description}
                     />
 
+                    <FormLabel className="mb-0">{ViewStrings.images}<RequiredField /></FormLabel>
                     <div {...getRootProps({ className: "dropzone d-flex align-items-center justify-content-center border border-3 rounded-4 p-5" })}>
                         <input {...getInputProps()} />
-                        <span>Drag 'n' drop some files here</span>
+                        <span>{ViewStrings.placeholderImages}</span>
                     </div>
                     <aside className=" p-4 gap-4">
                         {files}
@@ -215,7 +205,7 @@ const EditProduct = () => {
 
                 <div className="d-flex justify-content-end align-items-center">
                     <Button disabled={!checkForm()} onClick={handleSubmit}>
-                        Create
+                        {ViewStrings.update}
                     </Button>
                 </div>
             </PanelLayout>

@@ -29,6 +29,7 @@ try {
     foreach ($products as $product) {
 
         $category = Category::getById($db, $product->category_id);
+        
         $product->categoryName = $category->name;
     }
 
