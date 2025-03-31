@@ -13,9 +13,8 @@ export const Views = {
   new_product: "new_product",
   edit_product: "edit_product", 
   
-  doctors: "doctors",
-  new_doctor: "new_doctor",
-  edit_doctor: "edit_doctor", 
+  users: "users",
+  new_user: "new_user",
 
   profileView: "profileView",
   accountView: "accountView",

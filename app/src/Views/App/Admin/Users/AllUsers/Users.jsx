@@ -12,7 +12,7 @@ import useLoaded from "../../../../../Hooks/useLoaded";
 import { StringsContext } from "../../../../../Context/strings.context";
 import useQuery from "../../../../../Hooks/useQuery";
 
-const Doctors = () => {
+const Users = () => {
     
     const { strings } = useContext(StringsContext);
     const ViewStrings = strings.Products;
@@ -39,7 +39,7 @@ const Doctors = () => {
 
     return (
         <GeneralLayout title="Doctors" rightSection={
-            <Button size="sm" as={Link} to={Paths[Views.new_doctor].path}>
+            <Button size="sm" as={Link} to={Paths[Views.new_user].path}>
                 +Add Doctor
             </Button>
         }>
@@ -61,4 +61,4 @@ const Doctors = () => {
         </GeneralLayout>
     )
 }
-export default Doctors;
+export default Users;

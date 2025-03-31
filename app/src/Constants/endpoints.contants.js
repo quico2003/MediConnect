@@ -36,13 +36,13 @@ export const Endpoints = {
     delete: "/product/delete",
   },
   
-  Doctors: {
-    getAll: "/doctor/getAll",
-    get: "/doctor/get",
-    getForUpdate: "/doctor/getForUpdate",
-    create: "/doctor/create",
-    update: "/doctor/update",
-    delete: "/doctor/delete",
+  Users: {
+    getAll: "/users/getAll",
+    get: "/user/get",
+    getForUpdate: "/user/getForUpdate",
+    create: "/user/create",
+    update: "/user/update",
+    delete: "/user/delete",
   }
 };
 

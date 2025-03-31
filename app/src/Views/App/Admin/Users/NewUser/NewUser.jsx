@@ -15,7 +15,7 @@ import { Endpoints, getEndpoint } from "../../../../../Constants/endpoints.conta
 import { Paths } from "../../../../../Constants/paths.constants";
 import { Views } from "../../../../../Constants/views.constants";
 
-const NewDoctor = () => {
+const NewUser = () => {
 
     const request = useRequest();
     const { push } = useHistory();
@@ -27,12 +27,12 @@ const NewDoctor = () => {
 
     const handleSubmit = () => {
         if(checkForm){
-            request("post", getEndpoint(Endpoints.Doctors.create), {...data})
+            request("post", getEndpoint(Endpoints.Users.create), {...data})
             .then((res) => {
                 successNotification("Doctor exit created.");
-                push(Paths[Views.doctors].path);
+                push(Paths[Views.users].path);
             })
-            .catch(() => errorNotification("Error created doctor."));
+            .catch(() => errorNotification("Error created user."));
         }
 
     }
@@ -51,7 +51,7 @@ const NewDoctor = () => {
     }
 
     return (
-        <GeneralLayout showBackButton title="New Doctor">
+        <GeneralLayout showBackButton title="New User">
             <PanelLayout>
                 <SectionLayout>
 
@@ -63,7 +63,7 @@ const NewDoctor = () => {
                         title="First name"
                         value={data.firstName}
                         onChange={handleInput}
-                        placeholder="First name of the doctor"
+                        placeholder="First name of the user"
                     />
 
                     <FormControl
@@ -74,7 +74,7 @@ const NewDoctor = () => {
                         title="Last name"
                         value={data.lastName}
                         onChange={handleInput}
-                        placeholder="Last name of the doctor"
+                        placeholder="Last name of the user"
                     />
 
                     <FormControl
@@ -85,7 +85,7 @@ const NewDoctor = () => {
                         title="Specialty"
                         value={data.specialty}
                         onChange={handleInput}
-                        placeholder="Specialty of the doctor"
+                        placeholder="Specialty of the user"
                     />
 
                     <FormControl
@@ -96,7 +96,7 @@ const NewDoctor = () => {
                         title="email"
                         value={data.email}
                         onChange={handleInput}
-                        placeholder="Email of the doctor"
+                        placeholder="Email of the user"
                         isInvalid={data.email && !EmailRegex.test(data.email)}
                     />
 
@@ -124,4 +124,4 @@ const NewDoctor = () => {
     )
 
 }
-export default NewDoctor;
+export default NewUser;

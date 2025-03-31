@@ -30,10 +30,10 @@ export const NavItems = () => {
     ],
     },
     {
-      id: "doctors_section",
-      title: ViewStrings.ControlPanelDoctors,
+      id: "users_section",
+      title: ViewStrings.ControlPanelUsers,
       items: [
-        Paths[Views.doctors]
+        Paths[Views.users]
       ],
     },
   ];

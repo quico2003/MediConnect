@@ -20,9 +20,8 @@ export const Paths = {
   [Views.new_product]: getPath(`/my-admin/products/new`),
   [Views.edit_product]: getPath(`/my-admin/products/edit/:product_guid`),
   
-  [Views.doctors]: getPath(`/my-admin/doctors`, "SideBarDoctors", "f109"),
-  [Views.new_doctor]: getPath(`/my-admin/doctors/new`),
-  [Views.edit_doctor]: getPath(`/my-admin/doctors/edit/:doctor_guid`),
+  [Views.users]: getPath(`/my-admin/users`, "SideBarUsers", "f109"),
+  [Views.new_user]: getPath(`/my-admin/users/new`),
 
   [Views.profileView]: getPath(`/my-admin/profile`),
   [Views.accountView]: getPath(`/my-admin/account`),
