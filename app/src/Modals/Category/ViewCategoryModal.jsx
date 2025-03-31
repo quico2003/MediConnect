@@ -28,10 +28,6 @@ const ViewCategoryModal = ({ show, onClose, data }) => {
         .catch((err) => errorNotification("Error en la respuesta del view."));
     }
 
-    const exitClick = () => {
-        onClose(true);
-    };
-
     const hideModal = () => {
         onClose(true);
     }
@@ -50,7 +46,7 @@ const ViewCategoryModal = ({ show, onClose, data }) => {
             }
             footer={
                 <div className="d-flex justify-content-end gap-2">
-                    <Button onClick={exitClick} variant="danger" size="lm">
+                    <Button onClick={hideModal} variant="danger" size="lm">
                         Exit
                     </Button>
                 </div>

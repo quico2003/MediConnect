@@ -33,10 +33,6 @@ const ViewProductModal = ({ show, onClose, data }) => {
             .catch((err) => errorNotification("No se ha encontrado el producto"));
     }
 
-    const exitClick = () => {
-        onClose(true);
-    }
-
     const hideModal = () => {
         onClose(true);
     }
@@ -62,7 +58,7 @@ const ViewProductModal = ({ show, onClose, data }) => {
             }
             footer={
                 <div>
-                    <Button onClick={exitClick} variant="danger">
+                    <Button onClick={hideModal} variant="danger">
                         {ViewStrings.exit}
                     </Button>
                 </div>

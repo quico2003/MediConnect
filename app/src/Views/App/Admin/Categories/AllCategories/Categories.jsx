@@ -86,17 +86,12 @@ const Categories = () => {
     };
 
     const handleCloseDeleteCategoryModal = (refresh) => {
-        if (refresh) {
-            fetchData();
-            closeDeleteCategoryModal();
-        }
+        if (refresh) fetchData();
+        closeDeleteCategoryModal();
     };
 
-    const handleCloseViewCategoryModal = (refresh) => {
-        if (refresh) {
-            closeViewCategoryModal();
-        }
-
+    const handleCloseViewCategoryModal = () => {
+        closeViewCategoryModal();
     };
 
 

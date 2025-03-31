@@ -37,11 +37,9 @@ export const Endpoints = {
   },
   
   Users: {
-    getAll: "/users/getAll",
+    getAll: "/user/getAll",
     get: "/user/get",
-    getForUpdate: "/user/getForUpdate",
-    create: "/user/create",
-    update: "/user/update",
+    create: "/user/register",
     delete: "/user/delete",
   }
 };

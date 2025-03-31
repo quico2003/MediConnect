@@ -26,5 +26,6 @@ include_once $document_root . '/objects/_media.php';
 include_once $document_root . '/resources/AdminResource.php';
 include_once $document_root . '/resources/CategoryResource.php';
 include_once $document_root . '/resources/ProductResource.php';
+include_once $document_root . '/resources/UserResource.php';
 
 

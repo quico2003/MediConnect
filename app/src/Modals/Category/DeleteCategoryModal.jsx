@@ -15,8 +15,6 @@ const DeleteCategoryModal = ({ show, onClose, data }) => {
 
 
     const handleSubmit = () => {
-        console.log(data);
-        
         request("post", getEndpoint(Endpoints.Categories.delete), { guid: data.guid})
         .then((res) => {
             successNotification("Deleted.")

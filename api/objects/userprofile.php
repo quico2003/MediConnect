@@ -27,7 +27,8 @@ class UserProfile
             user_id=:user_id,
             first_name=:first_name,
             second_name=:second_name,
-            specialty=:specialty
+            specialty=:specialty,
+            avatar=:avatar
             ";
 
         $stmt = $this->conn->prepare($query);
@@ -35,6 +36,7 @@ class UserProfile
         $stmt->bindParam(":first_name", $this->first_name);
         $stmt->bindParam(":second_name", $this->second_name); 
         $stmt->bindParam(":specialty", $this->specialty); 
+        $stmt->bindParam(":avatar", $this->avatar); 
 
         try {
             $stmt->execute();
@@ -42,6 +44,21 @@ class UserProfile
         } catch (\Exception $th) {
             createException($stmt->errorInfo());
         }
+    }
+
+    public static function getById(PDO $db, string $id): UserProfile
+    {
+        $query = "SELECT * FROM `" . self::$table_name . "` WHERE user_id=:id";
+
+        $stmt = $db->prepare($query);
+
+        $stmt->bindParam(":id",$id);
+        if ($stmt->execute()) {
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                return self::getMainObject($db, $row);
+            }
+        }
+        createException("Profile User Not found");
     }
 
    

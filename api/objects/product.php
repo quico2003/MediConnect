@@ -7,32 +7,19 @@ class Product
     private static string $table_name = "products";
 
     public int $id;
-
     public string $guid;
-
     public string $name;
-
     public float $price;
-
     public string $brand;
-
     public string $description;
-
     public string $searchData;
-
     public int $created_by;
-
     public int $category_id;
-
     public string $created_at;
-
     public string $updated_at;
-
     public string|null $deleted_at;
-
-    public string|null $uniqid;
-
     public string|null $images;
+    public string|null $uniqid;
 
 
 

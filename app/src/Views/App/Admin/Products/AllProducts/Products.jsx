@@ -42,7 +42,7 @@ const Products = () => {
         closeModal: closeViewProductModal,
         openModal: openViewProductModal,
         show: showViewProductModal,
-        data: ViewProductData,
+        data: viewProductData,
     } = useModalManager();
 
     //Modal of delete Product
@@ -84,17 +84,14 @@ const Products = () => {
 
     }
 
-    const handleCloseViewProductModal = (refresh) => {
-        if (refresh) {
-            closeViewProductModal();
-        }
-
-    }
-
+    
     const handleCloseDeleteProductModal = (refresh) => {
         if (refresh) fetchData();
-        closeDeleteProductModal();
-
+        closeDeleteProductModal();    
+    }
+    
+    const handleCloseViewProductModal = () => {
+        closeViewProductModal();
     }
 
     return (
@@ -103,7 +100,7 @@ const Products = () => {
             <ViewProductModal
                 onClose={handleCloseViewProductModal}
                 show={showViewProductModal}
-                data={ViewProductData}
+                data={viewProductData}
             />
 
             <DeleteProductModal
