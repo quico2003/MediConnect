@@ -34,7 +34,7 @@ Para crear productos con diferentes fotos en una dropzone primero creatmos un ar
 El handleSubmit ya enviava antes la informacion correctamente excepto las imagnes asi que se deve enviar de forma file al endpoint y con el body accessor: "image", el array de imagenes y la informacion del producto como nombre, descripcion...
 
 
-    ```js
+```js
     const handleSubmit = () => {
         if (checkForm()) {
             request("file", getEndpoint(Endpoints.Products.create), {
@@ -52,7 +52,7 @@ El handleSubmit ya enviava antes la informacion correctamente excepto las imagne
 
 
     }
-    ```
+```
 
 La dropzone tiene una configuracion especifica guardada en una funcion.
 
