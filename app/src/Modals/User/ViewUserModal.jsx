@@ -1,11 +1,15 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ModalLayout from "../../Layouts/ModalLayout/ModalLayout";
 import useRequest from "../../Hooks/useRequest";
 import { Button, Modal } from "react-bootstrap";
 import { Endpoints, getEndpoint } from "../../Constants/endpoints.contants";
 import useNotification from "../../Hooks/useNotification";
+import { StringsContext } from "../../Context/strings.context";
 
 const ViewUserModal = ({ show, onClose, data }) => {
+
+    const { strings } = useContext(StringsContext);
+    const ViewStrings = strings.user.view;
 
     const [dataUser, setDataUser] = useState([]);
 
@@ -14,7 +18,6 @@ const ViewUserModal = ({ show, onClose, data }) => {
     const { showNotification: errorNotification } = useNotification();
 
     useEffect(() => {
-
         if (show) {
             fetchDataUser();
         }
@@ -26,14 +29,11 @@ const ViewUserModal = ({ show, onClose, data }) => {
                 setDataUser(res.data);
             })
             .catch((err) => errorNotification("Error en la respuesta del view."));
-
     }
-
  
     const hideModal = () => {
         onClose(true);
     }
-
 
     return (
         <ModalLayout
@@ -43,7 +43,7 @@ const ViewUserModal = ({ show, onClose, data }) => {
             header={true}
             customHeader={
                 <div className="d-flex align-items-center justify-content-between w-100">
-                    <Modal.Title className="ms-2">User Info</Modal.Title>
+                    <Modal.Title className="ms-2">{ViewStrings.title}</Modal.Title>
                 </div>
             }
             footer={
@@ -54,42 +54,36 @@ const ViewUserModal = ({ show, onClose, data }) => {
                 </div>
             }
         >
-
             <div className="mb-1">
                 <Modal.Body>
-                    <div className="category-info">
-                        <div className="d-flex flex-column gap-2 mb-2">
-                            <span className="fw-bold">Email:</span><span>{dataUser?.email}</span>
+                    <div className="d-flex flex-column align-items-center gap-3">
+                        <div className="d-flex align-items-center gap-2 mb-2">
+                            <img src={dataUser?.avatar} className="border border-5 border-dark rounded-circle w-100" />
                         </div>
-                        <div className="d-flex flex-column gap-2 mb-2">
-                            <span className="fw-bold">First Name:</span><span>{dataUser?.firstName}</span>
+                        <div className="d-flex align-items-center flex-column gap-2 mb-2">
+                            <span className="fw-bold">{ViewStrings.email}</span><span>{dataUser?.email}</span>
                         </div>
-                        <div className="d-flex flex-column gap-2 mb-2">
-                            <span className="fw-bold">Second Name:</span><span>{dataUser?.secondName}</span>
+                        <div className="d-flex align-items-center flex-column gap-2 mb-2">
+                            <span className="fw-bold">{ViewStrings.firstName}</span><span>{dataUser?.firstName}</span>
                         </div>
-                        <div className="d-flex flex-column gap-2 mb-2">
-                            <span className="fw-bold">Specialty:</span><span>{dataUser?.specialty}</span>
+                        <div className="d-flex align-items-center flex-column gap-2 mb-2">
+                            <span className="fw-bold">{ViewStrings.lastName}</span><span>{dataUser?.secondName}</span>
                         </div>
-                        <div className="d-flex flex-column gap-2 mb-2">
-                            <span className="fw-bold">Creator:</span><span>{dataUser?.creator}</span>
+                        <div className="d-flex align-items-center flex-column gap-2 mb-2">
+                            <span className="fw-bold">{ViewStrings.specialty}</span><span>{dataUser?.specialty}</span>
                         </div>
-                        <div className="d-flex flex-column gap-2 mb-2">
-                            <span className="fw-bold">Created at:</span><span>{dataUser?.created_at}</span>
+                        <div className="d-flex align-items-center flex-column gap-2 mb-2">
+                            <span className="fw-bold">{ViewStrings.creator}</span><span>{dataUser?.creator}</span>
                         </div>
-                        <div className="d-flex flex-column gap-2 mb-2">
-                            <span className="fw-bold">Updated at:</span><span>{dataUser?.updated_at}</span>
+                        <div className="d-flex align-items-center flex-column gap-2 mb-2">
+                            <span className="fw-bold">{ViewStrings.created_at}</span><span>{dataUser?.created_at}</span>
                         </div>
-                        <div className="d-flex flex-column gap-2 mb-2">
-                            <span>Avatar</span>
-                            <img src={dataUser?.avatar} className="border border-5 border-dark rounded-circle"></img>
+                        <div className="d-flex align-items-center flex-column gap-2 mb-2">
+                            <span className="fw-bold">{ViewStrings.updated_at}</span><span>{dataUser?.updated_at}</span>
                         </div>
-
                     </div>
-
                 </Modal.Body>
-
             </div>
-
         </ModalLayout>
     )
 }

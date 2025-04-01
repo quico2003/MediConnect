@@ -3,7 +3,6 @@
 class User
 {
     private PDO $conn;
-
     private static string $table_name = "user";
 
     public int $id;
@@ -26,7 +25,7 @@ class User
     private function serchableValues(): array
     {
         return [
-            $this->email,
+            $this->email
         ];
     }
 
@@ -157,7 +156,6 @@ class User
 
     public static function getByEmail(PDO $db, string $email): User|bool
     {
-
         $query = "SELECT * FROM `" . self::$table_name . "` WHERE email=:email";
 
         $stmt = $db->prepare($query);

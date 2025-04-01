@@ -17,8 +17,6 @@ try {
 
     $user = User::getByGuid($db, $input->guid);
 
-    logAPI($user);
-
     $user->delete();
 
     $db->commit();

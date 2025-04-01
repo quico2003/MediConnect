@@ -22,13 +22,22 @@ class ProductResource
         }
         return $itemsArray;
     }
+    
+    public static function getProductsArrayWithoutCategory(array $products): array
+    {
+        $itemsArray = [];
+        foreach ($products as $product) {
+            $newItem = self::getProduct($product, ["guid", "name", "price", "brand"]);
+            $itemsArray[] = $newItem;
+        }
+        return $itemsArray;
+    }
 
     public static function getProductResourceAdmin(Product $product)
     {
         $newItem = self::getProduct($product, ["guid", "name", "price", "brand", "description", "created_at", "updated_at", "categoryName", "creator", "imagesURL"]);
         return $newItem;
     }
-
 
     public static function getProductResourceAdminForUpdate(Product $product)
     {

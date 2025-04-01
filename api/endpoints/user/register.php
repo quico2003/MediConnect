@@ -11,8 +11,6 @@ try {
     $db->beginTransaction();
     $adminId = checkAuthAdmin();
 
-    logAPI($adminId);
-
     $input = validate($data, [
         'email' => 'required|string',
         'firstName' => 'required|string',
@@ -20,8 +18,6 @@ try {
         'password' => 'required|string',
         'specialty' => 'required|string',
     ]);
-
-    logAPI($input);
 
     $user_exist = User::getByEmail($db, $input->email);
     if (!$user_exist) {
@@ -41,7 +37,7 @@ try {
 
         $user->update();
 
-    }else{
+    } else {
         createException("Email alredy exist", 409);
     }
 

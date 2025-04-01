@@ -1,12 +1,16 @@
 import { Button, Modal } from "react-bootstrap";
 import useNotification from "../../Hooks/useNotification";
 import useRequest from "../../Hooks/useRequest";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import ModalLayout from "../../Layouts/ModalLayout/ModalLayout";
 import { Endpoints, getEndpoint } from "../../Constants/endpoints.contants";
+import { StringsContext } from "../../Context/strings.context";
 
 
 const DeleteCategoryModal = ({ show, onClose, data }) => {
+
+    const { strings } = useContext(StringsContext);
+    const ViewStrings = strings.Categories.delete;
 
     const request = useRequest();
 
@@ -15,15 +19,15 @@ const DeleteCategoryModal = ({ show, onClose, data }) => {
 
 
     const handleSubmit = () => {
-        request("post", getEndpoint(Endpoints.Categories.delete), { guid: data.guid})
-        .then((res) => {
-            successNotification("Deleted.")
-            onClose(true); 
-        })
-        .catch((err) => {
-            errorNotification(err.message);
-            onClose(true); 
-        })
+        request("post", getEndpoint(Endpoints.Categories.delete), { guid: data.guid })
+            .then((res) => {
+                successNotification(ViewStrings.messageDeleted);
+                onClose(true);
+            })
+            .catch((err) => {
+                errorNotification(err.message);
+                onClose(true);
+            })
     };
 
     const hideModal = () => {
@@ -38,21 +42,21 @@ const DeleteCategoryModal = ({ show, onClose, data }) => {
             header={true}
             customHeader={
                 <div className="d-flex align-items-center justify-content-between w-100">
-                    <Modal.Title className="ms-2">Delete Categoria</Modal.Title>
+                    <Modal.Title className="ms-2">{ViewStrings.title}</Modal.Title>
                 </div>
             }
             footer={
                 <div className="d-flex justify-content-end gap-2">
                     <Button variant="light" size="lm" onClick={hideModal}>
-                        Cancel
+                        {ViewStrings.buttonCancel}
                     </Button>
                     <Button onClick={handleSubmit} variant="danger" size="lm">
-                        Confirm
+                        {ViewStrings.buttonDelete}
                     </Button>
                 </div>
             }>
             <div className="mb-1">
-                <p>Are you sure you want to delete the '{data?.name}' category?</p>
+                <p>{ViewStrings.body}'{data?.name}'{ViewStrings.body1}</p>
             </div>
         </ModalLayout>
     );

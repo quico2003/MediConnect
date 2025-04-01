@@ -34,12 +34,14 @@ export const Endpoints = {
     create: "/product/create",
     update: "/product/update",
     delete: "/product/delete",
+    getAllWithoutCategory: "/product/getAllWithoutCategory"
   },
   
   Users: {
     getAll: "/user/getAll",
     get: "/user/get",
     create: "/user/register",
+    update: "/user/update",
     delete: "/user/delete",
   }
 };

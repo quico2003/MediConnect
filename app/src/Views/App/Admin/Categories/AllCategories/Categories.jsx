@@ -28,14 +28,17 @@ const Categories = () => {
 
     //Siempre usar para hacer llamadas
     const request = useRequest();
+    
     //Coje ruta en la que estas
     const { search } = useLocation();
     const [data, setData] = useState([]);
     const [filterSelected] = useState();
     const [totalPages, setTotalPages] = useState(1);
     const { startFetching, finishFetching, fetching, loaded } = useLoaded();
+    
     //Para los errores saber su funcionameino no codigo interno
     const { showNotification: errorNotification } = useNotification();
+    
     //Recojer todo lo que hay detras del ? de la ruta
     const searchParams = useQuery();
 
@@ -94,7 +97,6 @@ const Categories = () => {
         closeViewCategoryModal();
     };
 
-
     return (
         <>
             <DeleteCategoryModal
@@ -110,7 +112,7 @@ const Categories = () => {
             />
 
             <GeneralLayout title={ViewStrings.title} rightSection={<Button size="sm" as={Link} to={Paths[Views.new_category].path}>
-                + Add Category
+                {ViewStrings.buttonAdd}
             </Button>} >
                 <PanelLayout loaded={loaded}>
                     <ReactTable

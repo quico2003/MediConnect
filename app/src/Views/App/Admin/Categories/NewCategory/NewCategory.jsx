@@ -35,16 +35,12 @@ const NewCategory = () => {
     const handleSubmit = () => {
         if (checkForm()) {
             request("post", getEndpoint(Endpoints.Categories.create), { ...data })
-                .then((res) => {
+                .then(() => {
                     push(Paths[Views.categories].path);
-                    successNotification("Category created", true);
+                    successNotification(ViewStrings.messageSuccess);
                 })
-                .catch(() => {
-                    errorNotification("Error create category", true);
-                })
+                .catch(() => errorNotification(ViewStrings.messageError))
         }
-
-
     }
 
     const checkForm = () => {
@@ -83,7 +79,7 @@ const NewCategory = () => {
                 </SectionLayout>
                 <div className="d-flex justify-content-end align-items-center">
                     <Button disabled={!checkForm()} onClick={handleSubmit}>
-                        Create
+                        {ViewStrings.buttonCreate}
                     </Button>
                 </div>
             </PanelLayout>

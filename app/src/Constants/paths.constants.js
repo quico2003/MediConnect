@@ -22,6 +22,7 @@ export const Paths = {
   
   [Views.users]: getPath(`/my-admin/users`, "SideBarUsers", "f109"),
   [Views.new_user]: getPath(`/my-admin/users/new`),
+  [Views.edit_user]: getPath(`/my-admin/users/edit/:user_guid`),
 
   [Views.profileView]: getPath(`/my-admin/profile`),
   [Views.accountView]: getPath(`/my-admin/account`),

@@ -3,7 +3,6 @@
 class Product
 {
     private PDO $conn;
-
     private static string $table_name = "products";
 
     public int $id;
@@ -14,7 +13,7 @@ class Product
     public string $description;
     public string $searchData;
     public int $created_by;
-    public int $category_id;
+    public int|null $category_id;
     public string $created_at;
     public string $updated_at;
     public string|null $deleted_at;
@@ -101,7 +100,38 @@ class Product
     public static function getAll(PDO $db, int $page, int $offset, string $search = "", array $filters = []): array
     {
 
-        $query = "SELECT * FROM `" . self::$table_name . "` WHERE deleted_at IS NULL";
+        $query = "SELECT * FROM `" . self::$table_name . "` WHERE deleted_at IS NULL AND category_id IS NOT NULL";
+
+        foreach ($filters as $index => $object) {
+            $query .= " AND $object->id = :val$index";
+        }
+
+        applySearchOnQuery($query);
+        doPagination($offset, $page, $query);
+
+        $stmt = $db->prepare($query);
+
+        applySearchOnBindedValue($search, $stmt);
+
+        foreach ($filters as $index => $object) {
+            $value = $object->value;
+            $stmt->bindValue(":val$index", $value, PDO::PARAM_INT);
+        }
+
+        if ($stmt->execute()) {
+            $arrayToReturn = [];
+
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $arrayToReturn[] = self::getMainObject($db, $row);
+            }
+            return $arrayToReturn;
+        }
+        createException($stmt->errorInfo());
+    }
+    public static function getAllWithoutCategory(PDO $db, int $page, int $offset, string $search = "", array $filters = []): array
+    {
+
+        $query = "SELECT * FROM `" . self::$table_name . "` WHERE deleted_at IS NULL AND category_id IS NULL";
 
         foreach ($filters as $index => $object) {
             $query .= " AND $object->id = :val$index";
@@ -130,10 +160,26 @@ class Product
         createException($stmt->errorInfo());
     }
 
+    public static function getAllWithoutPagination(PDO $db): array
+    {
+        $query = "SELECT * FROM `" . self::$table_name . "` WHERE deleted_at IS NULL";
+
+        $stmt = $db->prepare($query);
+
+        if ($stmt->execute()) {
+            $arrayToReturn = [];
+
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $arrayToReturn[] = self::getMainObject($db, $row);
+            }
+            return $arrayToReturn;
+        }
+        createException($stmt->errorInfo());
+    }
 
     public static function getAllCount(PDO $db, string $search = "", array $filters = []): int
     {
-        $query = "SELECT COUNT(id) as total FROM `" . self::$table_name . "` c WHERE deleted_at IS NULL";
+        $query = "SELECT COUNT(id) as total FROM `" . self::$table_name . "` c WHERE deleted_at IS NULL AND category_id IS NOT NULL";
 
         foreach ($filters as $index => $object) {
             $query .= " AND $object->id = :val$index";
@@ -159,6 +205,33 @@ class Product
         createException($stmt->errorInfo());
     }
 
+    public static function getAllCountWithoutCategory(PDO $db, string $search = "", array $filters = []): int
+    {
+        $query = "SELECT COUNT(id) as total FROM `" . self::$table_name . "` c WHERE deleted_at IS NULL AND category_id IS NULL";
+
+        foreach ($filters as $index => $object) {
+            $query .= " AND $object->id = :val$index";
+        }
+
+        applySearchOnQuery($query);
+
+        $stmt = $db->prepare($query);
+
+        applySearchOnBindedValue($search, $stmt);
+
+        foreach ($filters as $index => $object) {
+            $value = $object->value;
+            $stmt->bindValue(":val$index", $value, PDO::PARAM_INT);
+        }
+
+        if ($stmt->execute()) {
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                return intval($row['total']);
+            }
+            return 0;
+        }
+        createException($stmt->errorInfo());
+    }
     public static function getByGuid(PDO $db, string $guid): Product
     {
 

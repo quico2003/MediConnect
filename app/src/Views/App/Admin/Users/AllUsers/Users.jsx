@@ -16,13 +16,12 @@ import { Endpoints, getEndpoint } from "../../../../../Constants/endpoints.conta
 import { UsersColumns } from "./UsersColumns";
 import useModalManager from "../../../../../Hooks/useModalManager";
 import ViewUserModal from "../../../../../Modals/User/ViewUserModal";
-import ViewProductModal from "../../../../../Modals/Products/ViewProductModal";
 import DeleteUserModal from "../../../../../Modals/User/DeleteUserModal";
 
 const Users = () => {
 
     const { strings } = useContext(StringsContext);
-    const ViewStrings = strings.Products;
+    const ViewStrings = strings.user;
 
     const request = useRequest();
     const { search } = useLocation();
@@ -36,7 +35,6 @@ const Users = () => {
 
     const { showNotification: errorNotification } = useNotification();
 
-    //Modal of view User
     const {
         closeModal: closeViewUserModal,
         openModal: openViewUserModal,
@@ -44,7 +42,6 @@ const Users = () => {
         data: viewUserData,
     } = useModalManager();
 
-    //Modal of delete User
     const {
         closeModal: closeDeleteUserModal,
         openModal: openDeleteUserModal,
@@ -77,7 +74,7 @@ const Users = () => {
                 setData(res.users);
                 setTotalPages(res.totalPages);
             })
-            .catch(errorNotification)
+            .catch((err) => errorNotification(err))
             .finally(() => finishFetching());
     }
     
@@ -90,11 +87,9 @@ const Users = () => {
         closeViewUserModal();
     };
 
-
     return (
 
         <>
-
             <ViewUserModal
                 onClose={handleCloseViewUserModal}
                 show={showViewUserModal}
@@ -108,12 +103,11 @@ const Users = () => {
             />
 
 
-            <GeneralLayout title="Doctors" rightSection={
+            <GeneralLayout title={ViewStrings.title} rightSection={
                 <Button size="sm" as={Link} to={Paths[Views.new_user].path}>
-                    +Add User
+                    {ViewStrings.buttonAdd}
                 </Button>
             }>
-
                 <PanelLayout loaded={loaded}>
                     <ReactTable
                         totalPages={totalPages}
@@ -121,17 +115,15 @@ const Users = () => {
                         onEventChange={fetchData}
                         data={data}
                         emptyData={{
-                            text: "Don't found users",
-                            description: ""
+                            text: ViewStrings.emptyData.text,
+                            description: ViewStrings.emptyData.description
                         }}
                         columns={UsersColumns(
                             openViewUserModal,
                             openDeleteUserModal
                         )}
                     />
-
                 </PanelLayout>
-
             </GeneralLayout>
         </>
     )

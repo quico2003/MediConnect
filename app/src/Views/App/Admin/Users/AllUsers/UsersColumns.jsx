@@ -4,32 +4,39 @@ import { MdDelete, MdEdit } from "react-icons/md";
 import IconButton from "../../../../../Components/Buttons/IconButton";
 import { ButtonGroup } from "react-bootstrap";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { Paths, replacePaths } from "../../../../../Constants/paths.constants";
+import { Views } from "../../../../../Constants/views.constants";
+import { useContext } from "react";
+import { StringsContext } from "../../../../../Context/strings.context";
 
 export const UsersColumns = (openViewUserModal, openDeleteUserModal) => {
 
+    const { strings } = useContext(StringsContext);
+    const ViewStrings = strings.user.columns;
+
     const columns = [
         {
-            Header: "name",
+            Header: ViewStrings.firstName,
             Cell: (row) =>
                 getColumnValue(row, (item) => <p className="mb-0">{item.firstName}</p>)
         },
         {
-            Header: "surname",
+            Header: ViewStrings.lastName,
             Cell: (row) =>
                 getColumnValue(row, (item) => <p className="mb-0">{item.secondName}</p>)
         },
         {
-            Header: "email",
+            Header: ViewStrings.email,
             Cell: (row) =>
                 getColumnValue(row, (item) => <p className="mb-0">{item.email}</p>)
         },
         {
-            Header: "Specialty",
+            Header: ViewStrings.specialty,
             Cell: (row) =>
                 getColumnValue(row, (item) => <p className="mb-0">{item.specialty}</p>)
         },
         {
-            Header: "actions",
+            Header: ViewStrings.actions,
             Cell: (row) =>
                 getColumnValue(row, (item) => (
                     <div className="d-flex">
@@ -41,7 +48,9 @@ export const UsersColumns = (openViewUserModal, openDeleteUserModal) => {
                             <IconButton
                                 Icon={MdEdit}
                                 as={Link}
-
+                                to={replacePaths(Paths[Views.edit_user].path, [
+                                    { user_guid: item.guid },
+                                ])}
                             />
                             <IconButton
                                 variant="danger"

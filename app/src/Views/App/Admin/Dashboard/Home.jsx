@@ -1,6 +1,12 @@
+import ProductsWithoutCategory from "./getAll/ProductsWithoutCategory";
+
 const HomeAdmin = () => {
 
-    return <h1>Graficas para el administrador.</h1>
+    return (
+        <>
+            <ProductsWithoutCategory />
+        </>
+    )
 
 
 }

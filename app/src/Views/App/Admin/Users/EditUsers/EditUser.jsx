@@ -1,119 +1,139 @@
+import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
+import useRequest from "../../../../../Hooks/useRequest";
+import useNotification from "../../../../../Hooks/useNotification";
+import { useContext, useEffect, useState } from "react";
+import { Endpoints, getEndpoint } from "../../../../../Constants/endpoints.contants";
 import GeneralLayout from "../../../../../Layouts/GeneralLayout/GeneralLayout";
 import PanelLayout from "../../../../../Layouts/PanelLayout/PanelLayout";
 import SectionLayout from "../../../../../Layouts/SectionLayout/SectionLayout";
-import FormControlPassword from "../../../../../Components/Form/FormControl/FormControlPassword";
-import { useContext, useState } from "react";
-import FormControl from "../../../../../Components/Form/FormControl/FormControl";
 import { Button } from "react-bootstrap";
-import useRequest from "../../../../../Hooks/useRequest";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import useNotification from "../../../../../Hooks/useNotification";
+import FormControlPassword from "../../../../../Components/Form/FormControl/FormControlPassword";
 import { validateDataCreateUser } from "../../../../../Config/GeneralFunctions";
 import { EmailRegex } from "../../../../../Utils/Regex";
-import { Endpoints, getEndpoint } from "../../../../../Constants/endpoints.contants";
+import FormControl from "../../../../../Components/Form/FormControl/FormControl";
 import { Paths } from "../../../../../Constants/paths.constants";
 import { Views } from "../../../../../Constants/views.constants";
 import { StringsContext } from "../../../../../Context/strings.context";
 
-const NewUser = () => {
+const EditUser = () => {
 
     const { strings } = useContext(StringsContext);
-    const ViewStrings = strings.user.add;
+    const ViewStrings = strings.user;
 
     const request = useRequest();
     const { push } = useHistory();
+
+    const { user_guid } = useParams();
 
     const { showNotification: successNotification } = useNotification("success");
     const { showNotification: errorNotification } = useNotification();
 
     const [data, setData] = useState({});
+    const [initialData, setInitialData] = useState({});
+
+    const [loaded, setLoded] = useState(false);
+
+    useEffect(() => {
+        fetchData();
+    }, [user_guid]);
+
+    const fetchData = async () => {
+        request("get", getEndpoint(Endpoints.Users.get), { guid: user_guid })
+            .then((res) => {
+                setData(res.data);
+                setInitialData(res.data);
+            })
+            .catch(() => errorNotification(ViewStrings.errors.userNotFound))
+            .finally(() => setLoded(true))
+    }
 
     const handleSubmit = () => {
-        if(checkForm()){
-            request("post", getEndpoint(Endpoints.Users.create), {...data})
-            .then((res) => {
-                successNotification(ViewStrings.userCreated);
-                push(Paths[Views.users].path);
-            })
-            .catch((err) => errorNotification(err.message));
+        if (checkForm()) {
+            request("post", getEndpoint(Endpoints.Users.update), { ...data })
+                .then(() => {
+                    push(Paths[Views.users].path);
+                    successNotification(ViewStrings.edit.userUpdated);
+                })
+                .catch((err) => errorNotification(err));
         }
     }
 
     const handleInput = (e) => {
         const { id, value } = e.target;
         setData({ ...data, [id]: value });
-        console.log(data);
     }
 
     const checkForm = () => {
-        const { firstName, lastName, specialty, email, password} = data;
-        return validateDataCreateUser([firstName, lastName, specialty, email, password]);
+        const { firstName, secondName, specialty, email, password } = data;
+        return validateDataCreateUser([firstName, secondName, specialty, email, password])
+            && JSON.stringify(data) !== JSON.stringify(initialData);
     }
 
     return (
-        <GeneralLayout showBackButton title={ViewStrings.title}>
-            <PanelLayout>
+        <GeneralLayout showBackButton title={ViewStrings.edit.title}>
+            <PanelLayout loaded={loaded}>
                 <SectionLayout>
                     <FormControl
                         required
                         controlId="firstName"
                         showMaxLength={true}
                         vertical={false}
-                        title={ViewStrings.firstName}
+                        title={ViewStrings.edit.firstName}
                         value={data.firstName}
                         onChange={handleInput}
-                        placeholder={ViewStrings.placeholderFirstName}
+                        placeholder={ViewStrings.edit.placeholderFirstName}
                     />
                     <FormControl
                         required
-                        controlId="lastName"
+                        controlId="secondName"
                         showMaxLength={true}
                         vertical={false}
-                        title={ViewStrings.lastName}
-                        value={data.lastName}
+                        title={ViewStrings.edit.lastName}
+                        value={data.secondName}
                         onChange={handleInput}
-                        placeholder={ViewStrings.placeholderLastName}
+                        placeholder={ViewStrings.edit.placeholderLastName}
                     />
                     <FormControl
                         required
                         controlId="specialty"
                         showMaxLength={true}
                         vertical={false}
-                        title={ViewStrings.specialty}
+                        title={ViewStrings.edit.specialty}
                         value={data.specialty}
                         onChange={handleInput}
-                        placeholder={ViewStrings.placeholderSpecialty}
+                        placeholder={ViewStrings.edit.placeholderSpecialty}
                     />
                     <FormControl
                         required
                         controlId="email"
                         showMaxLength={true}
                         vertical={false}
-                        title={ViewStrings.email}
+                        title={ViewStrings.edit.email}
                         value={data.email}
                         onChange={handleInput}
-                        placeholder={ViewStrings.placeholderEmail}
+                        placeholder={ViewStrings.edit.placeholderEmail}
                         isInvalid={data.email && !EmailRegex.test(data.email)}
                     />
                     <FormControlPassword
                         required
                         controlId="password"
                         vertical={true}
-                        title={ViewStrings.password}
+                        title={ViewStrings.edit.password}
                         value={data.password}
                         onChange={handleInput}
                         type={"password"}
-                        placeholder={ViewStrings.placeholderPassword}
+                        placeholder={ViewStrings.edit.placeholderPassword}
                         isInvalid={data.password && data.password.length < 6}
                     />
                 </SectionLayout>
                 <div className="d-flex justify-content-end align-items-center">
                     <Button disabled={!checkForm()} onClick={handleSubmit}>
-                        Create
+                        {ViewStrings.buttonUpdate}
                     </Button>
                 </div>
             </PanelLayout>
         </GeneralLayout>
     )
+
 }
-export default NewUser;
+export default EditUser;

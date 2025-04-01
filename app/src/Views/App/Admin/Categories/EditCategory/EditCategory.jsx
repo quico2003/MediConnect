@@ -48,24 +48,23 @@ const EditCategory = () => {
 
     const fechData = async () => {
         request("get", getEndpoint(Endpoints.Categories.get), { guid: category_guid })
-            .then(res => {
+            .then((res) => {
                 setData(res.data);
                 setInitialData(res.data);
             })
-            .catch(err => errorNotification("Categoria no encontrada."))
+            .catch(() => errorNotification(ViewStrings.categoryNotFound))
             .finally(() => setLoded(true))
     }
 
     const handleSubmit = () => {
         if (checkForm()) {
             request("post", getEndpoint(Endpoints.Categories.update), { ...data })
-                .then((res) => {
+                .then(() => {
                     push(Paths[Views.categories].path);
-                    successNotification("Category updated", true);
+                    successNotification(ViewStrings.categoryUpdated, true);
                 })
-                .catch(() => errorNotification("Error updated category", true));
+                .catch(() => errorNotification(ViewStrings.categoryError, true));
         }
-
     }
 
     const handleInput = (e) => {
@@ -107,7 +106,7 @@ const EditCategory = () => {
                 </SectionLayout>
                 <div className="d-flex justify-content-end align-items-center">
                     <Button disabled={!checkForm()} onClick={handleSubmit}>
-                        Update
+                        {ViewStrings.buttonUpdate}
                     </Button>
                 </div>
             </PanelLayout>

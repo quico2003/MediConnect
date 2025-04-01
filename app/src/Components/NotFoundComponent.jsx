@@ -18,8 +18,8 @@ const NotFoundComponent = ({
   const { isMobileView } = useSelector((state) => state.Config);
 
   const settings = {
-    elasticity: 1.5, // 0 - 10
-    zoom: isMobileView ? 2 : 4,
+    elasticity: 0.5, // 0 - 10
+    zoom: isMobileView ? 2 : 3,
   };
 
   const [homePath, setHomePath] = useState("");

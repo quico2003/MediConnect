@@ -9,6 +9,7 @@ Conclusion es que para hacer una ruta se deven modificar 3 ficheros que son el a
 
 Para crear un conponente simplemente crear carpeta como por ejemplo la carpeta de admin que incica que la vista de lo que hay dentro es para el administrador, luego carpeta Login indica que es el login del administrador y despues se crea un fichero .jsx con este tipo de estructura inicial.
 
+```js
 const LoginAdmin = () => { 
     return(
     <>
@@ -19,6 +20,7 @@ const LoginAdmin = () => {
     );
  }
 export default LoginAdmin;
+```
 
 
 toda la app trabaja bajo dos componentes padre que son AuthLayout.jsx que nosotros lo usaremos solo para cuando un administrador entre dentro de la route /my-admin para poderse logear.
@@ -32,6 +34,7 @@ Para crear productos con diferentes fotos en una dropzone primero creatmos un ar
 El handleSubmit ya enviava antes la informacion correctamente excepto las imagnes asi que se deve enviar de forma file al endpoint y con el body accessor: "image", el array de imagenes y la informacion del producto como nombre, descripcion...
 
 
+    ```js
     const handleSubmit = () => {
         if (checkForm()) {
             request("file", getEndpoint(Endpoints.Products.create), {
@@ -49,26 +52,30 @@ El handleSubmit ya enviava antes la informacion correctamente excepto las imagne
 
 
     }
+    ```
 
 La dropzone tiene una configuracion especifica guardada en una funcion.
 
+```js
  const { getRootProps, getInputProps } = useDropzone({
         accept: "image/*",
         multiple: true,
         onDrop
     });
-
+```
 
 Las imagenes se guardan en el array de una forma ya que las imagenes son asincronas:
  
+```js
  const onDrop = useCallback((acceptedFiles) => {
         setImages((prevImages) => [...prevImages, ...acceptedFiles]);
     }, []);
-
+```
 
 Esta es la forma en la que el php recive la info del file para poder recorrer el array y hacer todas las validaciones que deve hacer para guardar alfinal en una columna el array con formato "["guid.excension","guid.excension","guid.excension"...]"
 
 
+```js
 if (!$_FILES)
         createException('No files selected');
     $files = getFiles();
@@ -96,7 +103,7 @@ $arrayImages = [];
     }
 
     $product->images = json_encode($arrayImages);
-
+```
 
 
 

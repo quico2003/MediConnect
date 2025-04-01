@@ -24,7 +24,6 @@ try {
     $users = User::getAll($db, $input->page, $input->offset, $input->search, $filter);
     $usersCount = User::getAllCount($db, $input->search, $filter);
 
-
     foreach ($users as $user) {
         $userProfile = UserProfile::getById($db, $user->id);
         $admin = Admin::get($db, $user->created_by);
@@ -46,7 +45,7 @@ try {
         "totalPages" => $totalPages
     ]);
 
-}  catch (\Exception $th) {
+} catch (\Exception $th) {
     $db->rollBack();
     print_r(json_encode(array("status" => false, "message" => $th->getMessage(), 'code' => $th->getCode())));
 }

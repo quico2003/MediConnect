@@ -15,6 +15,7 @@ export const Views = {
   
   users: "users",
   new_user: "new_user",
+  edit_user: "edit_user",
 
   profileView: "profileView",
   accountView: "accountView",
