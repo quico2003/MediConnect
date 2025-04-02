@@ -5,7 +5,7 @@ import useRequest from '../../../../../Hooks/useRequest';
 import useLoaded from '../../../../../Hooks/useLoaded';
 import PanelLayout from '../../../../../Layouts/PanelLayout/PanelLayout';
 
-const CategoriesChart = () => {
+const CategoriesChart = ({ needUpdate, setNeedUpdate }) => {
 
     const request = useRequest();
     const [data, setData] = useState([])
@@ -13,15 +13,22 @@ const CategoriesChart = () => {
     const { startFetching, finishFetching, fetching, loaded } = useLoaded();
 
     useEffect(() => {
+        if (needUpdate) {
+            fetchData();
+            setNeedUpdate(!needUpdate)
+        }
+    }, [needUpdate])
+    useEffect(() => {
         fetchData();
+
     }, [])
 
     const fetchData = async () => {
         startFetching();
         return await request("get", getEndpoint(Endpoints.Dashboard.countProductsForCategory))
-        .then((res) => setData(res.categories))
-        .catch((err) => console.log(err.message))
-        .finally(() => finishFetching());
+            .then((res) => setData(res.categories))
+            .catch((err) => console.log(err.message))
+            .finally(() => finishFetching());
     };
 
     return (
@@ -47,7 +54,7 @@ const CategoriesChart = () => {
 
 
         </PanelLayout>
-        
+
     );
 
 }

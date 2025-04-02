@@ -15,7 +15,7 @@ import useModalManager from "../../../../../Hooks/useModalManager";
 import DeleteProductModal from "../../../../../Modals/Products/DeleteProductModal";
 import AssignNewCategoryModal from "../../../../../Modals/Products/assignNewCategoryModal";
 
-const ProductsWithoutCategory = () => {
+const ProductsWithoutCategory = ({ setNeedUpdate }) => {
 
     const { strings } = useContext(StringsContext);
     const ViewStrings = strings.Products;
@@ -82,6 +82,7 @@ const ProductsWithoutCategory = () => {
 
     const handleCloseAssignCategoryModal = (refresh) => {
         if (refresh) fetchData();
+        setNeedUpdate(refresh)
         coseAssignCategoryModal();
     }
 

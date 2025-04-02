@@ -36,7 +36,10 @@ const AssignNewCategoryModal = ({ show, onClose, data }) => {
             productGuid: data,
             categoryGuid: selectedOption.value
         })
-            .then(() => successNotification("Categoria asignada a producto."))
+            .then(() => {
+                successNotification("Categoria asignada a producto.");
+                onClose(true);
+            })
             .catch(() => errorNotification("Error al asignar categoria a producto."))
     }
 

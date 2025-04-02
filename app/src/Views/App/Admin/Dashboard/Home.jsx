@@ -1,16 +1,18 @@
+import { useState } from "react";
 import ProductsWithoutCategory from "./getAll/ProductsWithoutCategory";
 import CategoriesChart from "./usersChart/UsersChart";
 
 const HomeAdmin = () => {
+    const [needUpdate, setNeedUpdate] = useState(false);
 
     return (
         <>
             <div>
                 <div>
-                    <ProductsWithoutCategory />
+                    <ProductsWithoutCategory setNeedUpdate={setNeedUpdate} />
                 </div>
                 <div>
-                    <CategoriesChart />
+                    <CategoriesChart needUpdate={needUpdate} setNeedUpdate={setNeedUpdate} />
                 </div>
             </div>
 
