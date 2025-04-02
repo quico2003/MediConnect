@@ -34,7 +34,8 @@ export const Endpoints = {
     create: "/product/create",
     update: "/product/update",
     delete: "/product/delete",
-    getAllWithoutCategory: "/product/getAllWithoutCategory"
+    getAllWithoutCategory: "/product/getAllWithoutCategory",
+    assignCategory: "/product/assignCategory"
   },
   
   Users: {
@@ -43,6 +44,10 @@ export const Endpoints = {
     create: "/user/register",
     update: "/user/update",
     delete: "/user/delete",
+  },
+
+  Dashboard: {
+    countProductsForCategory: "/dashboard/countProductsForCategory"
   }
 };
 

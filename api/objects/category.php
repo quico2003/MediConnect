@@ -178,7 +178,7 @@ class Category
                 return self::getMainObject($db, $row);
             }
         }
-        createException("Category not found");
+        createException("category not found");
     }
 
     function update(): bool

@@ -4,7 +4,6 @@ import { useContext, useEffect, useState } from "react";
 import useRequest from "../../Hooks/useRequest";
 import useNotification from "../../Hooks/useNotification";
 import { Endpoints, getEndpoint } from "../../Constants/endpoints.contants";
-import Slider from "react-slick";
 import { StringsContext } from "../../Context/strings.context";
 
 const ViewProductModal = ({ show, onClose, data }) => {

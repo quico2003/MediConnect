@@ -23,12 +23,19 @@ try {
     if ($arrayImagesDecode) {
         foreach ($arrayImagesDecode as $image) {
             $ruta = FileStorage::FilePathProducts($image);
-            unlink($ruta);
+            if (file_exists($ruta)) {
+                unlink($ruta);
+            }
         }
     }
 
     $product->images = "[]";
 
+    if ($product->category_id == 0) {
+        $product->category_id = null;
+    }
+
+    logAPI($product);
 
     $product->delete();
 

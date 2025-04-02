@@ -22,7 +22,7 @@ try {
 
     foreach ($productsOfTheCategory as $product) {
         if ($product->category_id == $category->id) {
-            // Actualizar el category_id a null en la base de datos
+            //Actualizar el category_id a null en la base de datos
             $updateQuery = "UPDATE products SET category_id = NULL WHERE id = :product_id";
             $stmt = $db->prepare($updateQuery);
             $stmt->bindParam(':product_id', $product->id);

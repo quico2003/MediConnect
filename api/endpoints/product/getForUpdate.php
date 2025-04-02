@@ -22,7 +22,6 @@ try {
 
     //category of product
     $category = Category::getById($db, $product->category_id);
-
     $product->category = $category->guid;
 
     //Realiza un array con la decodificacion del string de imagenes

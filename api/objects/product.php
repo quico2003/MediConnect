@@ -29,6 +29,12 @@ class Product
 
     private function serchableValues(): array
     {
+        if ($this->category_id == null) {
+            return [
+                $this->name,
+                $this->brand
+            ];
+        }
         $category = Category::getById($this->conn, $this->category_id);
         return [
             $this->name,

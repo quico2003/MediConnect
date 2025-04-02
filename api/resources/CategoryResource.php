@@ -23,6 +23,16 @@ class CategoryResource
         }
         return $itemsArray;
     }
+    
+    public static function getCountProductsForCategoryArray(array $categories): array
+    {
+        $itemsArray = [];
+        foreach ($categories as $category) {
+            $newItem = self::getCategory($category, ["name", "productsCount"]);
+            $itemsArray[] = $newItem;
+        }
+        return $itemsArray;
+    }
 
     public static function getCategorySimpleResource(Category $category)
     {

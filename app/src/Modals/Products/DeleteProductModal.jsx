@@ -25,7 +25,7 @@ const DeleteProductModal = ({ show, onClose, data }) => {
                 onClose(true);
             })
             .catch((err) => {
-                errorNotification(err.message);
+                errorNotification("err.message");
                 onClose(true);
             })
 
