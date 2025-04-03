@@ -27,6 +27,7 @@ export const Paths = {
   [Views.profileView]: getPath(`/my-admin/profile`),
   [Views.accountView]: getPath(`/my-admin/account`),
 
+  [Views.privacyPolicy]: getPath("/my-admin/privacy-Policy"),
 
   //#region General
   [Views.default]: getPath(`/`),

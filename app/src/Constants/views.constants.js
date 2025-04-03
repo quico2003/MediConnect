@@ -20,18 +20,20 @@ export const Views = {
   profileView: "profileView",
   accountView: "accountView",
 
+  privacyPolicy: "privaciPolicy",
+  
   //#region General
   auth: "auth",
   app: "app",
   default: "default",
   notFound: "not_found",
   inMaintenance: "in_maintenance",
+  forgotPassword: "forgotPassword",
   //#endregion
 
   //#region Auth
   login: "login",
   signUp: "signUp",
-  forgotPassword: "forgotPassword",
   resetPassword: "resetPassword",
   //#endregion
 

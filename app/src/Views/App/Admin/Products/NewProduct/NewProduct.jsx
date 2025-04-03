@@ -82,13 +82,19 @@ const NewProduct = () => {
 
     //DropZone
     const onDrop = useCallback((acceptedFiles) => {
+        const pngFiles = acceptedFiles.filter((file) => file.type === "image/png" || file.type === "image/jpg" || file.type === "image/jpeg");
+
+        if (pngFiles.length > 0) {
         setImages((prevImages) => [...prevImages, ...acceptedFiles]);
+        } else{
+            errorNotification("Only PNG/JPG/JPEG files are allowed.");
+        }
     }, []);
 
 
     //configuration the dropZone
     const { getRootProps, getInputProps } = useDropzone({
-        accept: "image/*",
+        accept: "image",
         multiple: true,
         onDrop
     });
@@ -154,7 +160,7 @@ const NewProduct = () => {
                         onChange={handleInput}
                         value={dataInput.price}
                     />
-                    
+
 
                     <FormControl
                         required
@@ -177,6 +183,7 @@ const NewProduct = () => {
                         onChange={handleInput}
                         value={dataInput.description}
                     />
+                    <FormLabel className="mb-2">{ViewStrings.images}<RequiredField /></FormLabel>
 
                     <div {...getRootProps({ className: "dropzone d-flex align-items-center justify-content-center border border-3 rounded-4 p-5" })}>
                         <input {...getInputProps()} />

@@ -21,6 +21,7 @@ import EditProduct from "../../Views/App/Admin/Products/EditProduct/EditProduct"
 import NewUser from "../../Views/App/Admin/Users/NewUser/NewUser";
 import Users from "../../Views/App/Admin/Users/AllUsers/Users";
 import EditUser from "../../Views/App/Admin/Users/EditUsers/EditUser";
+import PrivacyPolicy from "../../Views/Auth/PrivacyPolicy/PrivacyPolicy";
 
 
 const getRoute = (path, component, exact = true) => ({
@@ -61,13 +62,13 @@ export const AppAdminRoutes = [
   
   getRoute(Paths[Views.profileView].path, Profile),
   getRoute(Paths[Views.accountView].path, Account),
-
+  
+  getRoute(Paths[Views.privacyPolicy].path, PrivacyPolicy),
 ];
 
 
 
 export const AppRoutes = [
-
 
 ];
 

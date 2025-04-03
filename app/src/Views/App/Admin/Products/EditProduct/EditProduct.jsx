@@ -64,22 +64,19 @@ const EditProduct = () => {
     };
 
     const handleSubmit = () => {
-
-            request("post", getEndpoint(Endpoints.Products.update), {
-                newImages: newImages,
-                deleteImages: deleteImages,
-                ...data
+        request("file", getEndpoint(Endpoints.Products.update), {
+            accessor: "image",
+            image: newImages,
+            deleteImages: JSON.stringify(deleteImages),
+            ...data
+        })
+            .then((res) => {
+                push(Paths[Views.products].path);
+                successNotification("Product updated", true);
             })
-                .then((res) => {
-                    push(Paths[Views.products].path);
-                    successNotification("Product updated", true);
-
-                })
-                .catch((err) => {
-                    errorNotification("Error update product", err);
-                })
-      
-
+            .catch((err) => {
+                errorNotification("Error update product", err);
+            })
     }
 
     const handleInput = (e) => {
@@ -93,31 +90,43 @@ const EditProduct = () => {
     }
 
     const onDrop = useCallback((acceptedFiles) => {
-        setNewImages((prevImages) => [...prevImages, ...acceptedFiles]);
+        const pngFiles = acceptedFiles.filter((file) => file.type === "image/png" || file.type === "image/jpg" || file.type === "image/jpeg");
+
+        if (pngFiles.length > 0) {
+            setNewImages((prevImages) => [...prevImages, ...pngFiles]);
+        } else {
+            errorNotification("Only PNG/JPG/JPEG files are allowed.");
+        }
+
     }, []);
 
     const { getRootProps, getInputProps } = useDropzone({
-        accept: "image/*",
+        accept: "image/png",
         multiple: true,
         onDrop
     });
 
     const files = [...existingImages, ...newImages].map((file, index) => (
-        <div key={index} className="d-flex w-100 justify-content-around align-items-center">
-            {typeof file === 'string' ? (
-                <img src={file} className="p-2" style={{ width: '200px', height: 'auto', objectFit: 'cover' }} />
-            ) : (
-                <img src={URL.createObjectURL(file)} className="p-2" style={{ width: '200px', height: 'auto', objectFit: 'cover' }} />
-            )}
-            <Button onClick={() => deleteImage(index, typeof file !== 'string')} variant="danger">
+
+        < div key={index} className="d-flex w-100 justify-content-around align-items-center" >
+            {
+                typeof file === 'string' ? (
+                    <img src={file} className="p-2" style={{ width: '200px', height: 'auto', objectFit: 'cover' }} />
+                ) : (
+                    <img src={URL.createObjectURL(file)} className="p-2" style={{ width: '200px', height: 'auto', objectFit: 'cover' }} />
+                )
+            }
+            < Button onClick={() => deleteImage(index, typeof file !== 'string', file)} variant="danger" >
                 {ViewStrings.delete}
-            </Button>
-        </div>
+            </Button >
+        </div >
     ));
 
-    const deleteImage = (index, isNewImage = false) => {
+
+    const deleteImage = (index, isNewImage = false, file) => {
         if (isNewImage) {
-            setNewImages((prevImages) => prevImages.filter((_, i) => i !== index));
+            const fileIndex = newImages.indexOf(file);
+            if (fileIndex !== -1) setNewImages((prevImages) => prevImages.filter((_, i) => i !== fileIndex));
         } else {
             setExistingImages((prevImages) => {
                 const updatedExistingImages = prevImages.filter((_, i) => i !== index);
@@ -134,7 +143,7 @@ const EditProduct = () => {
 
     const checkForm = () => {
         const { name, category, price, brand, description } = data;
-        return validateData([name, category, price, brand, description]);
+        return validateData([name, category, price, brand, description]) && [...existingImages, ...newImages].length > 0;
     }
 
     return (
@@ -193,7 +202,7 @@ const EditProduct = () => {
                         value={data.description}
                     />
 
-                    <FormLabel className="mb-0">{ViewStrings.images}<RequiredField /></FormLabel>
+                    <FormLabel className="mb-2">{ViewStrings.images}<RequiredField /></FormLabel>
                     <div {...getRootProps({ className: "dropzone d-flex align-items-center justify-content-center border border-3 rounded-4 p-5" })}>
                         <input {...getInputProps()} />
                         <span>{ViewStrings.placeholderImages}</span>

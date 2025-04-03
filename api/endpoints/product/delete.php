@@ -29,7 +29,7 @@ try {
         }
     }
 
-    $product->images = "[]";
+    $product->images = json_encode([]);
 
     if ($product->category_id == 0) {
         $product->category_id = null;

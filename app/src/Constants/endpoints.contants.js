@@ -10,6 +10,9 @@ export const Endpoints = {
     changeImage: "/auth/admin/changeImageProfile",
     logout: "/auth/admin/logout",
     checkAdmin: "/auth/admin/checkAdmin",
+    updateAdminProfile: "/auth/admin/updateAdminProfile",
+    updateAdminEmail: "/auth/admin/updateAdminEmail",
+    updateAdminPassword: "/auth/admin/updateAdminPassword",
 
     login: "/auth/login",
     forgotPassword: "/auth/forgotpassword",

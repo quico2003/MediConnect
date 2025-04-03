@@ -8,8 +8,7 @@ import { StringsContext } from "../../../../Context/strings.context";
 import { Endpoints, getEndpoint } from "../../../../Constants/endpoints.contants";
 import FormControl from "../../../../Components/Form/FormControl/FormControl";
 import { validateData } from "../../../../Config/GeneralFunctions";
-import { Button, Image, Row, Col } from "react-bootstrap";
-import { PhoneRegexSpain } from "../../../../Utils/Regex";
+import { Button } from "react-bootstrap";
 import SectionLayout from "../../../../Layouts/SectionLayout/SectionLayout";
 import { IoMdImages } from "react-icons/io";
 import { Colors } from "../../../../Utils/Colors";
@@ -27,6 +26,8 @@ const Profile = () => {
   const { startFetching, finishFetching, loaded } = useLoaded();
 
   const [profile, setProfile] = useState([]);
+  const [InitialProfile, setInitialProfile] = useState([]);
+
   const [hovered, setHovered] = useState(false);
 
   useEffect(() => {
@@ -38,21 +39,21 @@ const Profile = () => {
     return await request("get", getEndpoint(Endpoints.Auth.get))
       .then((res) => {
         setProfile(res.data);
+        setInitialProfile(res.data);
       })
       .catch(errorNotification)
       .finally(() => finishFetching());
   };
 
   const handleSubmit = () => {
-    // if (checkForm()) {
-    //   request("post", getEndpoint(Endpoints.user.editUser.update), {
-    //     ...profile,
-    //   })
-    //     .then(() => {
-    //       successNotification(ViewStrings.messages.profileUpdated);
-    //     })
-    //     .catch((err) => errorNotification(err.message));
-    // } else errorNotification(ViewStrings.messages.inputError);
+    if (checkForm()) {
+      request("post", getEndpoint(Endpoints.Auth.updateAdminProfile), {...profile})
+        .then(() => {
+          window.location.reload();
+          successNotification(ViewStrings.messages.profileUpdated)
+        })
+        .catch((err) => errorNotification(err.message));
+    } else errorNotification(ViewStrings.messages.inputError);
   };
 
   const handleSubmitImage = (e) => {
@@ -62,8 +63,7 @@ const Profile = () => {
       image: [file],
     })
       .then((res) => {
-        console.log("HEY");
-
+        //reload page
         window.location.reload();
       })
       .catch((err) => {
@@ -84,8 +84,8 @@ const Profile = () => {
   };
 
   const checkForm = () => {
-    const { name, surnames, phone } = profile;
-    return validateData([name, surnames, phone]) && PhoneRegexSpain.test(phone);
+    const { name } = profile;
+    return validateData([name]) && profile.name !== InitialProfile.name;
   };
 
   const handleMouseEnter = () => {
@@ -98,7 +98,7 @@ const Profile = () => {
 
   return (
     <>
-      <GeneralLayout showBackButton={true} title={ViewStrings.title}>
+      <GeneralLayout title={ViewStrings.title}>
         <PanelLayout loaded={loaded}>
           <h5>{ViewStrings.sections.profileImage}</h5>
           <div className="d-flex justify-content-center ">

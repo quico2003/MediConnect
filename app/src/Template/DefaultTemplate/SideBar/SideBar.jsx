@@ -172,7 +172,7 @@ const SideBar = () => {
               height: 50,
             }}
           >
-            <Button variant="link" as={Link} to="/privacy-policy">
+            <Button variant="link" as={Link} to="/my-admin/privacy-policy">
               {ViewStrings.SideBarPrivacyPolicy}
             </Button>
           </div>

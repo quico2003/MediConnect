@@ -13,11 +13,14 @@ import { Paths } from "../../../../Constants/paths.constants";
 import { Views } from "../../../../Constants/views.constants";
 import useRequest from "../../../../Hooks/useRequest";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import FormControlPassword from "../../../../Components/Form/FormControl/FormControlPassword";
 
 
 const Account = () => {
+
   const { strings } = useContext(StringsContext);
   const ViewStrings = strings.Admin.Account;
+
   const request = useRequest();
 
   const { replace } = useHistory();
@@ -25,63 +28,61 @@ const Account = () => {
   const { showNotification: successNotification } = useNotification("success");
   const { showNotification: errorNotification } = useNotification();
 
-  const [data, setData] = useState([]);
+  const [dataEmail, setDataEmail] = useState([]);
+  const [dataPassword, setDataPassword] = useState([]);
 
   const handleSubmitEmail = () => {
     if (checkFormEmail()) {
-      request("post", getEndpoint(Endpoints.admin.editEmail.update), {
-        currentEmail: data.currentEmail,
-        newEmail: data.newEmail,
-      })
+      request("post", getEndpoint(Endpoints.Auth.updateAdminEmail), { ...dataEmail })
         .then(() => {
-          successNotification(ViewStrings.messages.profileUpdated);
-          replace(Paths[Views.login].path);
+          successNotification(ViewStrings.messages.updateEmail);
+          replace(Paths[Views.loginAdmin].path);
         })
         .catch((err) => errorNotification(err.message));
-    } else errorNotification(ViewStrings.messages.inputsError);
+    }
   };
 
   const handleSubmitPassword = () => {
     if (checkFormPassword()) {
-      request("post", getEndpoint(Endpoints.admin.editPassword.update), {
-        currentPassword: data.currentPassword,
-        newPassword: data.newPassword,
-      })
+      request("post", getEndpoint(Endpoints.Auth.updateAdminPassword), {...dataPassword})
         .then(() => {
-          successNotification(ViewStrings.messages.profileUpdated);
-          replace(Paths[Views.login].path);
+          successNotification(ViewStrings.messages.updatePassword);
+          replace(Paths[Views.loginAdmin].path);
         })
         .catch((err) => errorNotification(err.message));
-    } else errorNotification(ViewStrings.messages.inputsError);
+    }
   };
 
-  const handleInput = (e) => {
+  const handleInputEmail = (e) => {
     const { id, value } = e.target;
-    setData({ ...data, [id]: value });
+    setDataEmail({ ...dataEmail, [id]: value });
+  };
+
+  const handleInputPassword = (e) => {
+    const { id, value } = e.target;
+    setDataPassword({ ...dataPassword, [id]: value });
   };
 
   const checkFormEmail = () => {
-    const { currentEmail, newEmail, newEmailCopy } = data;
+    const { currentEmail, newEmail, newEmailCopy } = dataEmail;
     return (
       validateData([currentEmail, newEmail, newEmailCopy]) &&
       EmailRegex.test(currentEmail) &&
       EmailRegex.test(newEmail) &&
       EmailRegex.test(newEmailCopy) &&
       currentEmail !== newEmail &&
-      newEmail === newEmailCopy
-    );
+      newEmail === newEmailCopy);
   };
 
   const checkFormPassword = () => {
-    const { currentPassword, newPassword, newPasswordCopy } = data;
+    const { currentPassword, newPassword, newPasswordCopy } = dataPassword;
     return (
       validateData([currentPassword, newPassword, newPasswordCopy]) &&
       PasswordRegex.test(currentPassword) &&
       PasswordRegex.test(newPassword) &&
       PasswordRegex.test(newPasswordCopy) &&
       currentPassword !== newPassword &&
-      newPassword === newPasswordCopy
-    );
+      newPassword === newPasswordCopy);
   };
 
   return (
@@ -94,8 +95,8 @@ const Account = () => {
             vertical={false}
             title={ViewStrings.inputs.currentEmailInput.title}
             placeholder={ViewStrings.inputs.currentEmailInput.placeholder}
-            onChange={handleInput}
-            value={data.currentEmail}
+            onChange={handleInputEmail}
+            value={dataEmail.currentEmail}
           />
           <FormControl
             controlId="newEmail"
@@ -103,8 +104,8 @@ const Account = () => {
             showMaxLength={false}
             title={ViewStrings.inputs.newEmail.title}
             placeholder={ViewStrings.inputs.newEmail.placeholder}
-            onChange={handleInput}
-            value={data.newEmail}
+            onChange={handleInputEmail}
+            value={dataEmail.newEmail}
           />
           <FormControl
             controlId="newEmailCopy"
@@ -112,8 +113,8 @@ const Account = () => {
             showMaxLength={false}
             title={ViewStrings.inputs.newEmailCopy.title}
             placeholder={ViewStrings.inputs.newEmailCopy.placeholder}
-            onChange={handleInput}
-            value={data.newEmailCopy}
+            onChange={handleInputEmail}
+            value={dataEmail.newEmailCopy}
           />
           <div className="d-flex justify-content-end w-100 align-items-center">
             <Button disabled={!checkFormEmail()} onClick={handleSubmitEmail}>
@@ -128,26 +129,26 @@ const Account = () => {
             vertical={false}
             title={ViewStrings.inputs.currentPasswordInput.title}
             placeholder={ViewStrings.inputs.currentPasswordInput.placeholder}
-            onChange={handleInput}
-            value={data.currentPassword}
+            onChange={handleInputPassword}
+            value={dataPassword.currentPassword}
           />
-          <FormControl
+          <FormControlPassword
             controlId="newPassword"
             vertical={false}
             showMaxLength={false}
             title={ViewStrings.inputs.newPassword.title}
             placeholder={ViewStrings.inputs.newPassword.placeholder}
-            onChange={handleInput}
-            value={data.newPassword}
+            onChange={handleInputPassword}
+            value={dataPassword.newPassword}
           />
-          <FormControl
+          <FormControlPassword
             controlId="newPasswordCopy"
             vertical={false}
             showMaxLength={false}
             title={ViewStrings.inputs.newPasswordCopy.title}
             placeholder={ViewStrings.inputs.newPasswordCopy.placeholder}
-            onChange={handleInput}
-            value={data.newPasswordCopy}
+            onChange={handleInputPassword}
+            value={dataPassword.newPasswordCopy}
           />
           <div className="d-flex justify-content-end w-100 align-items-center">
             <Button
