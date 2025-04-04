@@ -5,6 +5,7 @@ import useRequest from "../../Hooks/useRequest";
 import useNotification from "../../Hooks/useNotification";
 import { Endpoints, getEndpoint } from "../../Constants/endpoints.contants";
 import { StringsContext } from "../../Context/strings.context";
+import Barcode from "react-barcode";
 
 const ViewProductModal = ({ show, onClose, data }) => {
 
@@ -91,6 +92,10 @@ const ViewProductModal = ({ show, onClose, data }) => {
                     <div className="d-flex flex-column gap-2 mb-2 ">
                         <span className="fw-bold">{ViewStrings.creator}:</span><span>{dataProduct?.creator}</span>
                     </div>
+                    <div className="d-flex flex-column gap-2 mb-2 ">
+                        <span className="fw-bold">barCode:</span><span> <Barcode value={dataProduct?.uniqid} displayValue={false} /></span>
+                    </div>
+
                     <span className="fw-bold">{ViewStrings.images}:</span>
                     <div className="d-flex overflow-auto ">
                         {renderImages()}

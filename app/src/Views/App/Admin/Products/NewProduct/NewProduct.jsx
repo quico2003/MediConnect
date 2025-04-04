@@ -45,14 +45,13 @@ const NewProduct = () => {
             .then((res) => {
                 setCategories(res.categories);
             })
-            .catch((err) => console.log("error.", err))
+            .catch((err) => errorNotification(err.message))
     }
 
     //Save normal Input in dataInput
     const handleInput = (e) => {
         const { id, value } = e.target;
         setDataInput({ ...dataInput, [id]: value });
-        console.log(dataInput);
     }
 
     //Save Select in dataInput
@@ -82,22 +81,24 @@ const NewProduct = () => {
 
     //DropZone
     const onDrop = useCallback((acceptedFiles) => {
-        const pngFiles = acceptedFiles.filter((file) => file.type === "image/png" || file.type === "image/jpg" || file.type === "image/jpeg");
+        const nonEmptyFiles = acceptedFiles.filter(file => file.size > 0); // Filter out empty files
+        const validFiles = nonEmptyFiles.filter((file) => file.type.startsWith("image/"));
 
-        if (pngFiles.length > 0) {
-        setImages((prevImages) => [...prevImages, ...acceptedFiles]);
-        } else{
-            errorNotification("Only PNG/JPG/JPEG files are allowed.");
+        if (validFiles.length > 0) {
+            setImages((prevImages) => [...prevImages, ...validFiles]);
+        } else {
+            errorNotification("Only valid image files (PNG/JPG/JPEG) are allowed.");
         }
     }, []);
 
 
-    //configuration the dropZone
+
     const { getRootProps, getInputProps } = useDropzone({
-        accept: "image",
+        // accept: 'image/png, image/jpeg',
         multiple: true,
         onDrop
     });
+
 
     //Delete image on array
     const deleteImage = useCallback((index) => {

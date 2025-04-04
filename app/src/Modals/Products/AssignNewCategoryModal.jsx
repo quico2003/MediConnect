@@ -10,7 +10,6 @@ import Select from "react-select";
 const AssignNewCategoryModal = ({ show, onClose, data }) => {
 
     const { showNotification: successNotification } = useNotification("success");
-    const { showNotification: warningNotification } = useNotification("warning");
     const { showNotification: errorNotification } = useNotification();
 
     const request = useRequest();
@@ -28,7 +27,7 @@ const AssignNewCategoryModal = ({ show, onClose, data }) => {
             .then((res) => {
                 setCategories(res.categories);
             })
-            .catch((err) => console.log("error.", err))
+            .catch((err) => errorNotification(err.message))
     }
 
     const handleSubmit = () => {

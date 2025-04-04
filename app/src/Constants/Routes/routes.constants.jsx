@@ -21,7 +21,7 @@ import EditProduct from "../../Views/App/Admin/Products/EditProduct/EditProduct"
 import NewUser from "../../Views/App/Admin/Users/NewUser/NewUser";
 import Users from "../../Views/App/Admin/Users/AllUsers/Users";
 import EditUser from "../../Views/App/Admin/Users/EditUsers/EditUser";
-import PrivacyPolicy from "../../Views/Auth/PrivacyPolicy/PrivacyPolicy";
+import PrivacyPolicy from "../../Views/App/Admin/PrivacyPolicy/PrivacyPolicy";
 
 
 const getRoute = (path, component, exact = true) => ({
@@ -51,18 +51,18 @@ export const AppAdminRoutes = [
   getRoute(Paths[Views.categories].path, Categories),
   getRoute(Paths[Views.new_category].path, NewCategory),
   getRoute(Paths[Views.edit_category].path, EditCategory),
-  
+
   getRoute(Paths[Views.products].path, Products),
   getRoute(Paths[Views.new_product].path, NewProduct),
   getRoute(Paths[Views.edit_product].path, EditProduct),
-  
+
   getRoute(Paths[Views.users].path, Users),
   getRoute(Paths[Views.new_user].path, NewUser),
   getRoute(Paths[Views.edit_user].path, EditUser),
-  
+
   getRoute(Paths[Views.profileView].path, Profile),
   getRoute(Paths[Views.accountView].path, Account),
-  
+
   getRoute(Paths[Views.privacyPolicy].path, PrivacyPolicy),
 ];
 

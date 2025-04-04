@@ -1,61 +1,37 @@
-import { useContext, useEffect, useState } from "react";
-import { Form } from "react-bootstrap";
-import { useSelector } from "react-redux";
-import {
-  useHistory,
-  useLocation,
-} from "react-router-dom/cjs/react-router-dom.min";
-import { replacePaths } from "../../Constants/paths.constants";
-import useQuery from "../../Hooks/useQuery";
-import FormControl from "../Form/FormControl/FormControl";
-import { StringsContext } from "../../Context/strings.context";
+import { useContext, useEffect, useState, forwardRef } from "react";
+import { Form, FormControl } from "react-bootstrap";
 
-const Searcher = ({ onChange, borderless, label, autoFocus, placeholder }) => {
-  const { strings } = useContext(StringsContext);
-  const ViewStrings = strings.General.App;
-
-  const searchParams = useQuery();
-
-  const { push } = useHistory();
-  const { pathname } = useLocation();
-
-  const { isMobileView } = useSelector((state) => state.Config);
-
+const Searcher = forwardRef(({ onChange, borderless, label, autoFocus, placeholder }, ref) => {
   const [currentValue, setCurrentValue] = useState("");
 
   useEffect(() => {
-    const searchValue = searchParams.get("search");
-    if (searchValue) setCurrentValue(searchValue);
-  }, []);
+    if (autoFocus && ref && ref.current) {
+      ref.current.focus();
+    }
+  }, [autoFocus, ref]);
 
   const handleInput = (e) => {
     const { value } = e.target;
     setCurrentValue(value);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    push(replacePaths(pathname, [], [{ search: currentValue }]));
-    onChange && onChange(currentValue);
+    onChange && onChange(value);
   };
 
   return (
-    <Form
-      onSubmit={handleSubmit}
-      style={{ width: isMobileView ? "100%" : "auto" }}
-    >
+    <Form>
       <FormControl
+        id="inputRead"
+        ref={ref} //Pasamos la referencia directamente al input
         autoFocus={autoFocus}
         showMaxLength={false}
         formGroupProps={{ className: "mb-0 w-100" }}
         title={label}
         onChange={handleInput}
         value={currentValue}
-        placeholder={placeholder || ViewStrings.search}
+        placeholder={placeholder}
         className={`mb-0 ${borderless ? "border-0 shadow-none" : ""}`}
       />
     </Form>
   );
-};
+});
 
 export default Searcher;

@@ -20,9 +20,10 @@ const FormControl = ({
   inputClassname,
   formGroupProps = { className: "mb-2 w-100" },
   autoFocus,
+  ref,
   ...props
 }) => {
-  
+
   const [currentValue, setCurrentValue] = useState(value || "");
 
   useEffect(() => {
@@ -47,12 +48,13 @@ const FormControl = ({
       inputClassname
     );
 
-    const inputEditorClassName = classNames( props.className);
+    const inputEditorClassName = classNames(props.className);
 
     return (
       <div className={inputClassName}>
         <BFormControl
           {...props}
+          ref={ref}
           className={inputEditorClassName}
           style={{
             ...props.style,

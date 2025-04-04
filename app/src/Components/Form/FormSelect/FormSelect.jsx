@@ -58,11 +58,7 @@ const FormSelect = ({
           }}
           value={value || currentValue || null}
           disabled={disabled}
-          defaultValue={
-            placeholder
-              ? "default"
-              : props.defaultValue || (!hideDefaultOption && "default")
-          }
+     
           onChange={handleValue}
         >
           {!hideDefaultOption && (

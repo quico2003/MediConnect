@@ -39,7 +39,6 @@ const SeasonFilterSelector = ({ onChange }) => {
     <FormSelect
       controlId="season"
       onClean={handleCleanValue}
-      defaultValue="default"
       value={seasonSelected}
       options={seasons}
       title={ViewStrings.filterSeason}

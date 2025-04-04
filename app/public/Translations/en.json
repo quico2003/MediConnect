@@ -259,10 +259,66 @@
       "buttonExit": "Exit"
     }
   },
+  "PrivacyPolicy": {
+    "title": "Privacy Policy",
+    "item1": {
+      "title": "Introduction",
+      "description": "Welcome to MediConnect. In this privacy policy, we inform you about how we collect, use, share, and protect your personal data when you use our website/application."
+    },
+    "item2": {
+      "title": "Data We Collect",
+      "description": "We collect personal information from users in the following ways:",
+      "item1": "Information provided by the user: When you register, log in, or complete forms on the site, we may collect information such as your name, email address, address, phone number, etc.",
+      "item2": "Usage information: We automatically collect information about how you interact with our site, such as your IP address, browser, device type, and pages visited.",
+      "item3": "Cookies and similar technologies: We use cookies and tracking technologies to improve user experience and personalize content and ads."
+    },
+    "item3": {
+      "title": "How We Use Your Data",
+      "description": "We use the collected information to:",
+      "item1": "Provide the services you have requested.",
+      "item2": "Improve the functionality of our website and ensure its security.",
+      "item3": "Send communications about updates, news, or changes to the service (if you have given your consent).",
+      "item4": "Personalize your experience and show you relevant content.",
+      "item5": "Comply with legal obligations and resolve disputes."
+    },
+    "item4": {
+      "title": "Sharing Your Data",
+      "description": "We do not sell or rent your personal information. However, we may share your data with: Service providers: Companies that help us operate our site or provide services (e.g., web hosting services, data analysis). Legal obligations: If required to comply with the law or a legal request, such as a court order."
+    },
+    "item5": {
+      "title": "Protecting Your Data",
+      "description": "We implement appropriate security measures to protect your personal data. However, please note that no method of internet transmission or electronic storage is 100% secure, so we cannot guarantee absolute security."
+    },
+    "item6": {
+      "title": "Your Rights",
+      "description": "Depending on your location, you may have certain rights regarding your personal data, including the right to:",
+      "item1": "Access, correct, or delete your personal information.",
+      "item2": "Object to or restrict the processing of your data.",
+      "item3": "Request a copy of your data in a structured, commonly used format.",
+      "item4": "If you wish to exercise any of these rights, please contact us at info@mediconnect.com."
+    },
+    "item7": {
+      "title": "Data Retention",
+      "description": "We will retain your personal information for as long as necessary to fulfill the purposes described in this policy, unless the law requires or permits a longer retention period."
+    },
+    "item8": {
+      "title": "Links to Other Sites",
+      "description": "Our website may contain links to other websites. We are not responsible for the privacy practices of those sites, and we recommend reading their privacy policies before providing any personal information."
+    },
+    "item9": {
+      "title": "Changes to This Policy",
+      "description": "We may update this privacy policy occasionally. We will notify you of any changes by posting the new privacy policy on this page. The date of the last update will be at the bottom of this page."
+    },
+    "item10": {
+      "title": "Contact",
+      "description": "If you have any questions about this privacy policy or the processing of your data, feel free to contact us at info@mediconnect.com."
+    }
+  },
   "General": {
     "App": {
       "search": "Search",
-      "update": "Update"
+      "update": "Update",
+      "rows": "rows"
     },
     "Login": {
       "emailAddres": "Email address",

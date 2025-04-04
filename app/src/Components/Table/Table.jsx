@@ -8,6 +8,7 @@ import TableComponent from "./Components/TableComponent";
 import NotFoundComponent from "../NotFoundComponent";
 import IconButton from "../Buttons/IconButton";
 import { IoFilter } from "react-icons/io5";
+import { debounce } from 'lodash';
 
 const ReactTable = ({
   fetching,
@@ -31,9 +32,11 @@ const ReactTable = ({
   const handlePageSize = (size) => {
     fetchData(1, size, currentSearch);
   };
-  const handleSearcher = (search) => {
+
+  const handleSearcher = debounce((search) => {
     fetchData(currentPage, currentPageSize, search);
-  };
+  }, 750);
+
   const handlePagination = (page) => {
     fetchData(page, currentPageSize, currentSearch);
   };
@@ -72,6 +75,7 @@ const ReactTable = ({
               <Searcher
                 autoFocus={searcherProps?.autoFocus}
                 placeholder={searcherProps?.placeholder}
+                ref={searcherProps?.ref}
                 onChange={handleSearcher}
               />
             </div>

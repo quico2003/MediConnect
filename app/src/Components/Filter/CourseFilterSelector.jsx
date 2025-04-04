@@ -39,10 +39,9 @@ const CourseFilterSelector = ({ onChange }) => {
     <FormSelect
       controlId="course_id"
       onClean={handleCleanValue}
-      defaultValue="default"
       value={courseSelected}
       options={courses}
-      title={ViewStrings.filterCourse}
+      title={"ASDASD"}
       onChange={handleCourseSelected}
     />
   );

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import GeneralLayout from "../../../../../Layouts/GeneralLayout/GeneralLayout";
 import { StringsContext } from "../../../../../Context/strings.context";
 import { Paths } from "../../../../../Constants/paths.constants";
@@ -17,21 +17,24 @@ import { Configuration } from "../../../../../Config/app.config";
 import useModalManager from "../../../../../Hooks/useModalManager";
 import ViewProductModal from "../../../../../Modals/Products/ViewProductModal";
 import DeleteProductModal from "../../../../../Modals/Products/DeleteProductModal";
-
+import IconButton from "../../../../../Components/Buttons/IconButton";
+import { MdBarcodeReader } from "react-icons/md";
 const Products = () => {
 
     //Translations
     const { strings } = useContext(StringsContext);
     const ViewStrings = strings.Products;
-
+    const [filterSelected, setFilterSelected] = useState();
+    const inputRef = useRef(null);
     //Use fetch database
     const request = useRequest();
     const { search } = useLocation();
     const [data, setData] = useState([]);
+    const [autoFocus, setAutoFocus] = useState(false);
 
-    const [filterSelected] = useState();
     const [totalPages, setTotalPages] = useState(1);
     const searchParams = useQuery();
+    const ref = useRef();
 
     const { startFetching, finishFetching, fetching, loaded } = useLoaded();
 
@@ -75,24 +78,29 @@ const Products = () => {
                 filter: JSON.stringify(filter ? [filter] : []),
             })
             .then((res) => {
-                console.log(res);
                 setData(res.products);
                 setTotalPages(res.totalPages);
             })
             .catch(errorNotification)
             .finally(() => finishFetching());
-
     }
 
-    
     const handleCloseDeleteProductModal = (refresh) => {
         if (refresh) fetchData();
-        closeDeleteProductModal();    
+        closeDeleteProductModal();
     }
-    
+
     const handleCloseViewProductModal = () => {
         closeViewProductModal();
     }
+
+    const handleAutofocus = () => {
+        setAutoFocus(true);
+        // Aquí es donde ponemos el foco al input
+        if (inputRef.current) {
+            inputRef.current.focus();
+        }
+    };
 
     return (
 
@@ -109,14 +117,27 @@ const Products = () => {
                 data={DeleteProductData}
             />
 
-            <GeneralLayout title={ViewStrings.title} rightSection={<Button size="sm" as={Link} to={Paths[Views.new_product].path}>
+            <GeneralLayout title={ViewStrings.title}
+                rightSection={
+                    <div className="d-flex gap-2">
+                        <IconButton
+                            Icon={MdBarcodeReader}
+                            onClick={handleAutofocus}
+                        />
+                        <Button size="sm" as={Link} to={Paths[Views.new_product].path}>
+                            + Add new Product
+                        </Button>
 
-                + Add Product
-
-            </Button>} >
-
+                    </div>
+                }
+            >
                 <PanelLayout loaded={loaded}>
                     <ReactTable
+                        searcherProps={{
+                            autoFocus: autoFocus,
+                            placeholder: "Write...",
+                            ref: inputRef,
+                        }}
                         totalPages={totalPages}
                         fetching={fetching}
                         onEventChange={fetchData}
@@ -130,12 +151,9 @@ const Products = () => {
                             openDeleteProductModal
                         )}
                     />
-
                 </PanelLayout>
-
             </GeneralLayout>
         </>
     )
-
 }
 export default Products;

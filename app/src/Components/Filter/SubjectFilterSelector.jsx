@@ -35,7 +35,6 @@ const SubjectFilterSelector = ({ onChange }) => {
     <FormSelect
       controlId="subject_id"
       onClean={handleCleanValue}
-      defaultValue="default"
       value={subjectSelected}
       options={subjects}
       title="Subject:"

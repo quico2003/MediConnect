@@ -29,24 +29,23 @@ const NewUser = () => {
     const [data, setData] = useState({});
 
     const handleSubmit = () => {
-        if(checkForm()){
-            request("post", getEndpoint(Endpoints.Users.create), {...data})
-            .then((res) => {
-                successNotification(ViewStrings.userCreated);
-                push(Paths[Views.users].path);
-            })
-            .catch((err) => errorNotification(err.message));
+        if (checkForm()) {
+            request("post", getEndpoint(Endpoints.Users.create), { ...data })
+                .then((res) => {
+                    successNotification(ViewStrings.userCreated);
+                    push(Paths[Views.users].path);
+                })
+                .catch((err) => errorNotification(err.message));
         }
     }
 
     const handleInput = (e) => {
         const { id, value } = e.target;
         setData({ ...data, [id]: value });
-        console.log(data);
     }
 
     const checkForm = () => {
-        const { firstName, lastName, specialty, email, password} = data;
+        const { firstName, lastName, specialty, email, password } = data;
         return validateDataCreateUser([firstName, lastName, specialty, email, password]);
     }
 

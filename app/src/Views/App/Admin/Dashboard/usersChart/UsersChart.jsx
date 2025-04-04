@@ -4,6 +4,7 @@ import { Endpoints, getEndpoint } from '../../../../../Constants/endpoints.conta
 import useRequest from '../../../../../Hooks/useRequest';
 import useLoaded from '../../../../../Hooks/useLoaded';
 import PanelLayout from '../../../../../Layouts/PanelLayout/PanelLayout';
+import useNotification from '../../../../../Hooks/useNotification';
 
 const CategoriesChart = ({ needUpdate, setNeedUpdate }) => {
 
@@ -11,6 +12,7 @@ const CategoriesChart = ({ needUpdate, setNeedUpdate }) => {
     const [data, setData] = useState([])
 
     const { startFetching, finishFetching, fetching, loaded } = useLoaded();
+    const { showNotification: errorNotification } = useNotification();
 
     useEffect(() => {
         if (needUpdate) {
@@ -27,7 +29,7 @@ const CategoriesChart = ({ needUpdate, setNeedUpdate }) => {
         startFetching();
         return await request("get", getEndpoint(Endpoints.Dashboard.countProductsForCategory))
             .then((res) => setData(res.categories))
-            .catch((err) => console.log(err.message))
+            .catch((err) => errorNotification(err.message))
             .finally(() => finishFetching());
     };
 
