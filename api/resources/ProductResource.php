@@ -35,7 +35,7 @@ class ProductResource
 
     public static function getProductResourceAdmin(Product $product)
     {
-        $newItem = self::getProduct($product, ["guid", "name", "price", "brand", "description", "created_at", "updated_at", "categoryName", "creator", "imagesURL"]);
+        $newItem = self::getProduct($product, ["guid", "name", "price", "brand", "description", "created_at", "updated_at", "categoryName", "creator", "imagesURL", "uniqid"]);
         return $newItem;
     }
 

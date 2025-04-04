@@ -32,15 +32,18 @@ class Product
         if ($this->category_id == null) {
             return [
                 $this->name,
-                $this->brand
+                $this->brand,
+                $this->uniqid
+            ];
+        } else {
+            $category = Category::getById($this->conn, $this->category_id);
+            return [
+                $this->name,
+                $this->uniqid,
+                $this->brand,
+                $category->name
             ];
         }
-        $category = Category::getById($this->conn, $this->category_id);
-        return [
-            $this->name,
-            $this->brand,
-            $category->name
-        ];
     }
 
 
@@ -48,7 +51,7 @@ class Product
     {
         $query = "INSERT INTO `" . self::$table_name . "` SET
         guid=:guid, name=:name, price=:price, brand=:brand, description=:description,
-        created_by=:created_by, category_id=:category_id, images=:images, searchData=:searchData";
+        created_by=:created_by, category_id=:category_id, images=:images, uniqid=:uniqid, searchData=:searchData";
 
         $stmt = $this->conn->prepare($query);
         $this->guid = createGUID();
@@ -60,6 +63,7 @@ class Product
         $stmt->bindParam(":created_by", $this->created_by);
         $stmt->bindParam(":category_id", $this->category_id);
         $stmt->bindParam(":images", $this->images);
+        $stmt->bindParam(":uniqid", $this->uniqid);
         $stmt->bindValue(":searchData", convertSearchValues($this->serchableValues()));
 
         try {

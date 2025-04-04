@@ -31,6 +31,7 @@ try {
     $product->description = $input->description;
     $product->created_by = $adminId;
     $product->category_id = $category->id;
+    $product->uniqid = uniqid();
 
     $arrayImages = [];
     foreach ($files as $index => $file) {
