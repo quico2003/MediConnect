@@ -1,61 +1,61 @@
 import { Configuration } from "../Config/app.config";
 
-const BASE_URL = `${Configuration.API_URL}/endpoints`;
+const BASE_URL_ADMIN = `${Configuration.API_URL}/endpoints/my-admin`;
+const BASE_URL_USER = `${Configuration.API_URL}/endpoints/my-user`;
 
-export const Endpoints = {
+export const EndpointsAdmin = {
   Auth: {
-
-    loginAdmin: "/auth/admin/login",
-    get: "/auth/admin/get",
-    changeImage: "/auth/admin/changeImageProfile",
-    logout: "/auth/admin/logout",
-    checkAdmin: "/auth/admin/checkAdmin",
-    updateAdminProfile: "/auth/admin/updateAdminProfile",
-    updateAdminEmail: "/auth/admin/updateAdminEmail",
-    updateAdminPassword: "/auth/admin/updateAdminPassword",
-
-    login: "/auth/login",
-    forgotPassword: "/auth/forgotpassword",
-    resetPassword: "/auth/resetpassword",
-    resetPasswordFinal: "/auth/resetpasswordStep2",
-    checkUser: "/auth/checkUser",
+    loginAdmin: `${BASE_URL_ADMIN}/auth/login`,
+    get: `${BASE_URL_ADMIN}/auth/get`,
+    changeImage: `${BASE_URL_ADMIN}/auth/changeImageProfile`,
+    logout: `${BASE_URL_ADMIN}/auth/logout`,
+    checkAdmin: `${BASE_URL_ADMIN}/auth/checkAdmin`,
+    updateAdminProfile: `${BASE_URL_ADMIN}/auth/updateAdminProfile`,
+    updateAdminEmail: `${BASE_URL_ADMIN}/auth/updateAdminEmail`,
+    updateAdminPassword: `${BASE_URL_ADMIN}/auth/updateAdminPassword`,
   },
 
   Categories: {
-    getAll: "/category/getAll",
-    getList: "/category/getList",
-    get: "/category/get",
-    create: "/category/create",
-    update: "/category/update",
-    delete: "/category/delete",
+    getAll: `${BASE_URL_ADMIN}/category/getAll`,
+    getList: `${BASE_URL_ADMIN}/category/getList`,
+    get: `${BASE_URL_ADMIN}/category/get`,
+    create: `${BASE_URL_ADMIN}/category/create`,
+    update: `${BASE_URL_ADMIN}/category/update`,
+    delete: `${BASE_URL_ADMIN}/category/delete`,
   },
-  
+
   Products: {
-    getAll: "/product/getAll",
-    get: "/product/get",
-    getForUpdate: "/product/getForUpdate",
-    create: "/product/create",
-    update: "/product/update",
-    delete: "/product/delete",
-    getAllWithoutCategory: "/product/getAllWithoutCategory",
-    assignCategory: "/product/assignCategory"
+    getAll: `${BASE_URL_ADMIN}/product/getAll`,
+    get: `${BASE_URL_ADMIN}/product/get`,
+    getForUpdate: `${BASE_URL_ADMIN}/product/getForUpdate`,
+    create: `${BASE_URL_ADMIN}/product/create`,
+    update: `${BASE_URL_ADMIN}/product/update`,
+    delete: `${BASE_URL_ADMIN}/product/delete`,
+    getAllWithoutCategory: `${BASE_URL_ADMIN}/product/getAllWithoutCategory`,
+    assignCategory: `${BASE_URL_ADMIN}/product/assignCategory`
   },
-  
+
   Users: {
-    getAll: "/user/getAll",
-    get: "/user/get",
-    create: "/user/register",
-    update: "/user/update",
-    delete: "/user/delete",
+    getAll: `${BASE_URL_ADMIN}/user/getAll`,
+    get: `${BASE_URL_ADMIN}/user/get`,
+    create: `${BASE_URL_ADMIN}/user/register`,
+    update: `${BASE_URL_ADMIN}/user/update`,
+    delete: `${BASE_URL_ADMIN}/user/delete`,
   },
 
   Dashboard: {
-    countProductsForCategory: "/dashboard/countProductsForCategory"
+    countProductsForCategory: `${BASE_URL_ADMIN}/dashboard/countProductsForCategory`
   }
 };
 
+export const EndpointUser = {
+  Auth: {
+
+  },
+};
+
 export const getEndpoint = (path, params = null, isCustom = false) => {
-  let url = `${BASE_URL}${path}.php`;
+  let url = `${path}.php`;
   if (isCustom) url = path;
 
   if (params) {

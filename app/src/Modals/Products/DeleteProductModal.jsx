@@ -1,7 +1,7 @@
 import { Button, Modal } from "react-bootstrap";
 import ModalLayout from "../../Layouts/ModalLayout/ModalLayout";
 import useRequest from "../../Hooks/useRequest";
-import { Endpoints, getEndpoint } from "../../Constants/endpoints.contants";
+import { EndpointsAdmin, getEndpoint } from "../../Constants/endpoints.contants";
 import useNotification from "../../Hooks/useNotification";
 import { StringsContext } from "../../Context/strings.context";
 import { useContext } from "react";
@@ -19,7 +19,7 @@ const DeleteProductModal = ({ show, onClose, data }) => {
 
     const handleSubmit = () => {
 
-        request("post", getEndpoint(Endpoints.Products.delete), { guid: data })
+        request("post", getEndpoint(EndpointsAdmin.Products.delete), { guid: data })
             .then((res) => {
                 successNotification("Product deleted.")
                 onClose(true);

@@ -18,7 +18,7 @@ const NotFoundComponent = ({
   const { isMobileView } = useSelector((state) => state.Config);
 
   const settings = {
-    elasticity: 0.5, // 0 - 10
+    elasticity: 0.1, // 0 - 10
     zoom: isMobileView ? 2 : 3,
   };
 

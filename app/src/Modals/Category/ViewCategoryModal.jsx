@@ -3,7 +3,7 @@ import ModalLayout from "../../Layouts/ModalLayout/ModalLayout";
 import useRequest from "../../Hooks/useRequest";
 import useNotification from "../../Hooks/useNotification";
 import { useContext, useEffect, useState } from "react";
-import { Endpoints, getEndpoint } from "../../Constants/endpoints.contants";
+import { EndpointsAdmin, getEndpoint } from "../../Constants/endpoints.contants";
 import { StringsContext } from "../../Context/strings.context";
 
 const ViewCategoryModal = ({ show, onClose, data }) => {
@@ -24,7 +24,7 @@ const ViewCategoryModal = ({ show, onClose, data }) => {
     }, [show]);
 
     const fetchDataCategory = async () => {
-        request("get", getEndpoint(Endpoints.Categories.get), { guid: data })
+        request("get", getEndpoint(EndpointsAdmin.Categories.get), { guid: data })
             .then((res) => {
                 setDataCategory(res.data);
             })

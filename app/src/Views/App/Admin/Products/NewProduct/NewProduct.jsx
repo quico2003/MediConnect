@@ -7,7 +7,7 @@ import FormControl from "../../../../../Components/Form/FormControl/FormControl"
 import Select from "react-select";
 import { Button, FormLabel } from "react-bootstrap";
 import useRequest from "../../../../../Hooks/useRequest";
-import { Endpoints, getEndpoint } from "../../../../../Constants/endpoints.contants";
+import { EndpointsAdmin, getEndpoint } from "../../../../../Constants/endpoints.contants";
 import useNotification from "../../../../../Hooks/useNotification";
 import RequiredField from "../../../../../Components/Form/RequiredField/RequiredField";
 import { validateData } from "../../../../../Config/GeneralFunctions";
@@ -41,7 +41,7 @@ const NewProduct = () => {
 
     //Get of the categories
     const fetchData = async () => {
-        return await request("get", getEndpoint(Endpoints.Categories.getList))
+        return await request("get", getEndpoint(EndpointsAdmin.Categories.getList))
             .then((res) => {
                 setCategories(res.categories);
             })
@@ -63,7 +63,7 @@ const NewProduct = () => {
     //Send information at api
     const handleSubmit = () => {
         if (checkForm()) {
-            request("file", getEndpoint(Endpoints.Products.create), {
+            request("file", getEndpoint(EndpointsAdmin.Products.create), {
                 accessor: "image",
                 image: images,
                 ...dataInput

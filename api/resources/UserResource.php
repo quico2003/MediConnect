@@ -28,4 +28,10 @@ class UserResource
         return $newItem;
     }
 
+    public static function getSimpleUserWithLogin(User $user)
+    {
+        $newItem = self::getUser($user, ["email", "firstName", "secondName", "specialty",  "avatar", "token", "expiredate"]);
+        return $newItem;
+    }
+
 }

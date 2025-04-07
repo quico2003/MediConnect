@@ -130,7 +130,8 @@ class User
     {
         $query = "
             UPDATE `" . self::$table_name . "` 
-            SET email=:email, password=:password, searchdata=:searchData, deleted_at=:deleted_at
+            SET email=:email, password=:password, searchdata=:searchData,
+            token=:token, expiredate=:expiredate, deleted_at=:deleted_at
             WHERE id=:id";
 
         $stmt = $this->conn->prepare($query);
@@ -138,6 +139,8 @@ class User
         $stmt->bindParam(":password", $this->password);
         $stmt->bindValue(":searchData", convertSearchValues($this->serchableValues()));
         $stmt->bindParam(":deleted_at", $this->deleted_at);
+        $stmt->bindParam(":expiredate", $this->expiredate);
+        $stmt->bindParam(":token", $this->token);
         $stmt->bindParam(":id", $this->id);
 
         try {
@@ -171,6 +174,29 @@ class User
         }
         createException($stmt->errorInfo());
 
+    }
+
+    public static function checkToken($db, $token)
+    {
+        $query = "SELECT * FROM `" . self::$table_name . "` WHERE DATE(expiredate) > DATE(NOW()) AND token=:token";
+
+        $stmt = $db->prepare($query);
+
+        $stmt->bindParam(":token", $token);
+
+        if ($stmt->execute()) {
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                return intval($row['id']);
+            }
+        }
+        return null; //Return null if user with token not found
+    }
+
+    function createSession(): bool
+    {
+        $this->token = createToken();
+        $this->expiredate = newDate(1, "day");
+        return $this->update();
     }
 
     private static function getMainObject(PDO $db, array $row): User

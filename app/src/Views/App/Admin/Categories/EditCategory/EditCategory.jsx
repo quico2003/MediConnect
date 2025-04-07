@@ -8,8 +8,8 @@ import SectionLayout from "../../../../../Layouts/SectionLayout/SectionLayout";
 import useNotification from "../../../../../Hooks/useNotification";
 import { useContext, useEffect, useState } from "react";
 
-import { Endpoints, getEndpoint } from "../../../../../Constants/endpoints.contants";
-import { Button } from "react-bootstrap";
+import { EndpointsAdmin, getEndpoint } from "../../../../../Constants/endpoints.contants";
+import { Button, Spinner } from "react-bootstrap";
 import { validateData } from "../../../../../Config/GeneralFunctions";
 import { Views } from "../../../../../Constants/views.constants";
 import { Paths } from "../../../../../Constants/paths.constants";
@@ -35,6 +35,8 @@ const EditCategory = () => {
     const [data, setData] = useState({});
     const [initialData, setInitialData] = useState({});
 
+    const [submiting, setSubmiting] = useState(false);
+
     //Rueda de cargado
     const [loaded, setLoded] = useState(false);
 
@@ -47,7 +49,7 @@ const EditCategory = () => {
     }, [category_guid]);
 
     const fechData = async () => {
-        request("get", getEndpoint(Endpoints.Categories.get), { guid: category_guid })
+        request("get", getEndpoint(EndpointsAdmin.Categories.get), { guid: category_guid })
             .then((res) => {
                 setData(res.data);
                 setInitialData(res.data);
@@ -58,12 +60,14 @@ const EditCategory = () => {
 
     const handleSubmit = () => {
         if (checkForm()) {
-            request("post", getEndpoint(Endpoints.Categories.update), { ...data })
+            setSubmiting(true);
+            request("post", getEndpoint(EndpointsAdmin.Categories.update), { ...data })
                 .then(() => {
                     push(Paths[Views.categories].path);
                     successNotification(ViewStrings.categoryUpdated, true);
                 })
-                .catch(() => errorNotification(ViewStrings.categoryError, true));
+                .catch(() => errorNotification(ViewStrings.categoryError, true))
+                .finally(() => setSubmiting(false))
         }
     }
 
@@ -94,6 +98,7 @@ const EditCategory = () => {
                         placeholder={ViewStrings.placeholderName}
                     />
                     <FormControl
+                        required
                         as="textarea"
                         controlId="description"
                         maxLength={500}
@@ -105,8 +110,8 @@ const EditCategory = () => {
                     />
                 </SectionLayout>
                 <div className="d-flex justify-content-end align-items-center">
-                    <Button disabled={!checkForm()} onClick={handleSubmit}>
-                        {ViewStrings.buttonUpdate}
+                    <Button disabled={!checkForm() || submiting} onClick={handleSubmit}>
+                        {submiting ? <Spinner size="sm" /> : ViewStrings.buttonUpdate}
                     </Button>
                 </div>
             </PanelLayout>

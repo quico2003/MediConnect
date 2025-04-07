@@ -1,4 +1,4 @@
-import { Endpoints, getEndpoint } from "../../Constants/endpoints.contants";
+import { EndpointsAdmin, getEndpoint } from "../../Constants/endpoints.contants";
 import { useContext, useEffect, useState } from "react";
 import useRequest from "../../Hooks/useRequest";
 import useNotification from "../../Hooks/useNotification";
@@ -20,7 +20,7 @@ const CourseFilterSelector = ({ onChange }) => {
   }, []);
 
   const fetchData = async () => {
-    request("get", getEndpoint(Endpoints.Courses.allCourses.getAllAbbr))
+    request("get", getEndpoint(EndpointsAdmin.Courses.allCourses.getAllAbbr))
       .then((res) => setCourses(res.courses))
       .catch(errorNotification);
   };

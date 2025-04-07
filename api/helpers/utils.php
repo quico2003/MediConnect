@@ -75,11 +75,10 @@ if (!function_exists('createGUID')) {
 if (!function_exists('createRandomNumber')) {
     function createRandomNumber()
     {
-        $number1 = mt_rand(0, 9);
         $number2 = str_pad(mt_rand(0, 999999), 6, "0", STR_PAD_LEFT);
         $number3 = str_pad(mt_rand(0, 999999), 6, "0", STR_PAD_LEFT);
 
-        return "$number1$number2$number3";
+        return "$number2$number3";
     }
 }
 
@@ -196,6 +195,30 @@ if (!function_exists('checkAuthAdmin')) {
             $database->conn = null;
             if ($adminId) {
                 return $adminId;
+            } else {
+                createException("Token Expired", 401);
+            }
+        }
+    }
+}
+
+if (!function_exists('checkAuthUser')) {
+    function checkAuthUser($checkToken = true)
+    {
+        $allheaders = getallheaders();
+
+        $apikey = isset($allheaders['X-Api-Key']) ? $allheaders['X-Api-Key'] : false;
+
+        if ($apikey !== PUBLIC_API_KEY)
+            createException('Api Key not valid', 403);
+        if ($checkToken) {
+            $database = new Database();
+            $db = $database->getConnection();
+            $token = isset($allheaders['Authorization']) ? $allheaders['Authorization'] : false;
+            $userId = User::checkToken($db, $token);
+            $database->conn = null;
+            if ($userId) {
+                return $userId;
             } else {
                 createException("Token Expired", 401);
             }

@@ -7,7 +7,7 @@ import FormControl from "../../../../../Components/Form/FormControl/FormControl"
 import Select from "react-select";
 import { Button, FormLabel } from "react-bootstrap";
 import useRequest from "../../../../../Hooks/useRequest";
-import { Endpoints, getEndpoint } from "../../../../../Constants/endpoints.contants";
+import { EndpointsAdmin, getEndpoint } from "../../../../../Constants/endpoints.contants";
 import useNotification from "../../../../../Hooks/useNotification";
 import RequiredField from "../../../../../Components/Form/RequiredField/RequiredField";
 import { validateData } from "../../../../../Config/GeneralFunctions";
@@ -45,8 +45,8 @@ const EditProduct = () => {
 
     const fetchData = async () => {
         try {
-            const resProduct = await request("get", getEndpoint(Endpoints.Products.getForUpdate), { guid: product_guid });
-            const resCategories = await request("get", getEndpoint(Endpoints.Categories.getList));
+            const resProduct = await request("get", getEndpoint(EndpointsAdmin.Products.getForUpdate), { guid: product_guid });
+            const resCategories = await request("get", getEndpoint(EndpointsAdmin.Categories.getList));
             setCategories(resCategories.categories);
             setData(resProduct.data);
             if (resProduct.data && resProduct.data.category) {
@@ -64,7 +64,7 @@ const EditProduct = () => {
     };
 
     const handleSubmit = () => {
-        request("file", getEndpoint(Endpoints.Products.update), {
+        request("file", getEndpoint(EndpointsAdmin.Products.update), {
             accessor: "image",
             image: newImages,
             deleteImages: JSON.stringify(deleteImages),

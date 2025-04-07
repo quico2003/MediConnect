@@ -5,7 +5,7 @@ import useLoaded from "../../../../Hooks/useLoaded";
 import PanelLayout from "../../../../Layouts/PanelLayout/PanelLayout";
 import GeneralLayout from "../../../../Layouts/GeneralLayout/GeneralLayout";
 import { StringsContext } from "../../../../Context/strings.context";
-import { Endpoints, getEndpoint } from "../../../../Constants/endpoints.contants";
+import { EndpointsAdmin, getEndpoint } from "../../../../Constants/endpoints.contants";
 import FormControl from "../../../../Components/Form/FormControl/FormControl";
 import { validateData } from "../../../../Config/GeneralFunctions";
 import { Button } from "react-bootstrap";
@@ -36,7 +36,7 @@ const Profile = () => {
 
   const fetchData = async () => {
     startFetching();
-    return await request("get", getEndpoint(Endpoints.Auth.get))
+    return await request("get", getEndpoint(EndpointsAdmin.Auth.get))
       .then((res) => {
         setProfile(res.data);
         setInitialProfile(res.data);
@@ -47,7 +47,7 @@ const Profile = () => {
 
   const handleSubmit = () => {
     if (checkForm()) {
-      request("post", getEndpoint(Endpoints.Auth.updateAdminProfile), {...profile})
+      request("post", getEndpoint(EndpointsAdmin.Auth.updateAdminProfile), { ...profile })
         .then(() => {
           window.location.reload();
           successNotification(ViewStrings.messages.profileUpdated)
@@ -58,7 +58,7 @@ const Profile = () => {
 
   const handleSubmitImage = (e) => {
     const file = e.target.files[0];
-    request("file", getEndpoint(Endpoints.Auth.changeImage), {
+    request("file", getEndpoint(EndpointsAdmin.Auth.changeImage), {
       accessor: "image",
       image: [file],
     })
@@ -186,7 +186,7 @@ const Profile = () => {
               placeholder={ViewStrings.inputs.nameInput.placeholder}
               onChange={handleInput}
             />
-           
+
           </SectionLayout>
 
           <div className="d-flex justify-content-end w-100 align-items-center">

@@ -1,9 +1,6 @@
 import { Redirect } from "react-router-dom";
 import { getToken } from "../../Config/GeneralFunctions";
 import { NotFound } from "../../Views/404";
-import ForgotPassword from "../../Views/Auth/ForgotPassword/ForgotPassword";
-import Login from "../../Views/Auth/Login/Login";
-import ResetPassword from "../../Views/Auth/ResetPassword/ResetPassword";
 import InMaintenance from "../../Views/InMaintenance";
 import { HomePath, Paths } from "../paths.constants";
 import { Views } from "../views.constants";
@@ -22,6 +19,7 @@ import NewUser from "../../Views/App/Admin/Users/NewUser/NewUser";
 import Users from "../../Views/App/Admin/Users/AllUsers/Users";
 import EditUser from "../../Views/App/Admin/Users/EditUsers/EditUser";
 import PrivacyPolicy from "../../Views/App/Admin/PrivacyPolicy/PrivacyPolicy";
+import LoginUser from "../../Views/Auth/User/Login/login";
 
 
 const getRoute = (path, component, exact = true) => ({
@@ -30,14 +28,17 @@ const getRoute = (path, component, exact = true) => ({
   exact,
 });
 
+// Region User
+
 export const AuthRoutes = [
-  getRoute(Paths[Views.login].path, Login),
-  getRoute(Paths[Views.signUp].path, Login),
-  getRoute(Paths[Views.forgotPassword].path, ForgotPassword),
-  getRoute(Paths[Views.resetPassword].path, ResetPassword),
+  getRoute(Paths[Views.login].path, LoginUser),
 ];
 
+export const AppRoutes = [
 
+];
+
+// Region Admin
 
 export const AuthAdminRoutes = [
   getRoute(Paths[Views.loginAdmin].path, LoginAdmin),
@@ -68,9 +69,6 @@ export const AppAdminRoutes = [
 
 
 
-export const AppRoutes = [
-
-];
 
 export const OtherRoutes = [
   //Special Routes

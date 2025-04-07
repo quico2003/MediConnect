@@ -1,22 +1,31 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import ProductsWithoutCategory from "./getAll/ProductsWithoutCategory";
-import CategoriesChart from "./usersChart/UsersChart";
+import CategoriesChart from "./categoriesChart/CategoriesChart";
+import { Col, Row } from "react-bootstrap";
+import GeneralLayout from "../../../../Layouts/GeneralLayout/GeneralLayout";
+import { StringsContext } from "../../../../Context/strings.context";
 
 const HomeAdmin = () => {
+
+    const { strings } = useContext(StringsContext);
+    const ViewStrings = strings.dashboard;
+
     const [needUpdate, setNeedUpdate] = useState(false);
 
     return (
-        <>
-            <div>
-                <div>
+        <GeneralLayout title={ViewStrings.title}>
+            <Row>
+                <Col xs={12} xxl={6}>
+                    <h5 className="text-secondary px-2">{ViewStrings.withoutCategories.title}</h5>
                     <ProductsWithoutCategory setNeedUpdate={setNeedUpdate} />
-                </div>
-                <div>
+                </Col >
+                <Col xs={12} xxl={6}>
+                    <h5 className="text-secondary px-2">{ViewStrings.productByCategoties.title}</h5>
                     <CategoriesChart needUpdate={needUpdate} setNeedUpdate={setNeedUpdate} />
-                </div>
-            </div>
+                </Col >
+            </Row>
 
-        </>
+        </GeneralLayout>
     )
 
 

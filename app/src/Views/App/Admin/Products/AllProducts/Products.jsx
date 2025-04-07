@@ -11,7 +11,7 @@ import { Link, useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import useQuery from "../../../../../Hooks/useQuery";
 import { ProductsColumns } from "./ProductsColumns";
 import { Views } from "../../../../../Constants/views.constants";
-import { Endpoints, getEndpoint } from "../../../../../Constants/endpoints.contants";
+import { EndpointsAdmin, getEndpoint } from "../../../../../Constants/endpoints.contants";
 import useNotification from "../../../../../Hooks/useNotification";
 import { Configuration } from "../../../../../Config/app.config";
 import useModalManager from "../../../../../Hooks/useModalManager";
@@ -70,7 +70,7 @@ const Products = () => {
         startFetching();
         return await request(
             "get",
-            getEndpoint(Endpoints.Products.getAll),
+            getEndpoint(EndpointsAdmin.Products.getAll),
             {
                 page,
                 offset,
@@ -125,7 +125,7 @@ const Products = () => {
                             onClick={handleAutofocus}
                         />
                         <Button size="sm" as={Link} to={Paths[Views.new_product].path}>
-                            + Add new Product
+                            {ViewStrings.buttonAdd}
                         </Button>
 
                     </div>

@@ -1,4 +1,4 @@
-import { Endpoints, getEndpoint } from "../../Constants/endpoints.contants";
+import { EndpointsAdmin, getEndpoint } from "../../Constants/endpoints.contants";
 import { useEffect, useState } from "react";
 import useRequest from "../../Hooks/useRequest";
 import useNotification from "../../Hooks/useNotification";
@@ -16,7 +16,7 @@ const SubjectFilterSelector = ({ onChange }) => {
   }, []);
 
   const fetchData = async () => {
-    request("get", getEndpoint(Endpoints.Subjects.allSubjects.getAllAbbr))
+    request("get", getEndpoint(EndpointsAdmin.Subjects.allSubjects.getAllAbbr))
       .then((res) => setSubject(res.subjects))
       .catch(errorNotification);
   };

@@ -14,9 +14,19 @@
     "Dashboard": "Dashboard",
     "ControlPanelProducts": "Control Panel Products"
   },
+  "dashboard": {
+    "title": "Dashboard",
+    "withoutCategories": {
+      "title": "Products without categories",
+      "isEmpty": "No products without categories"
+    },
+    "productByCategoties": {
+      "title": "Products by category"
+    }
+  },
   "Categories": {
     "title": "Categories",
-    "buttonAdd": "+Add new category",
+    "buttonAdd": "+Add new",
     "add": {
       "newCategory": "New Category",
       "name": "Name",
@@ -66,6 +76,7 @@
   },
   "Products": {
     "title": "Products",
+    "buttonAdd": "+Add new",
     "add": {
       "newProduct": "New Product",
       "name": "Name",
@@ -194,7 +205,7 @@
   },
   "user": {
     "title": "Medical Team",
-    "buttonAdd": "+Add new practitioner",
+    "buttonAdd": "+Add new",
     "buttonUpdate": "Update",
     "emptyData": {
       "text": "There is no registered practitioners",

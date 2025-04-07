@@ -33,9 +33,9 @@ const ReactTable = ({
     fetchData(1, size, currentSearch);
   };
 
-  const handleSearcher = debounce((search) => {
+  const handleSearcher = (search) => {
     fetchData(currentPage, currentPageSize, search);
-  }, 750);
+  };
 
   const handlePagination = (page) => {
     fetchData(page, currentPageSize, currentSearch);
@@ -117,7 +117,7 @@ const ReactTable = ({
               text={emptyData.text}
               to={emptyData.to}
               subDescription={emptyData.subDescription}
-              size={1}
+              size={0.73}
             />
           ),
         [data, emptyData.text]

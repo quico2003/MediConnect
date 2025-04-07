@@ -2,7 +2,7 @@ import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min
 import useRequest from "../../../../../Hooks/useRequest";
 import useNotification from "../../../../../Hooks/useNotification";
 import { useContext, useEffect, useState } from "react";
-import { Endpoints, getEndpoint } from "../../../../../Constants/endpoints.contants";
+import { EndpointsAdmin, getEndpoint } from "../../../../../Constants/endpoints.contants";
 import GeneralLayout from "../../../../../Layouts/GeneralLayout/GeneralLayout";
 import PanelLayout from "../../../../../Layouts/PanelLayout/PanelLayout";
 import SectionLayout from "../../../../../Layouts/SectionLayout/SectionLayout";
@@ -38,7 +38,7 @@ const EditUser = () => {
     }, [user_guid]);
 
     const fetchData = async () => {
-        request("get", getEndpoint(Endpoints.Users.get), { guid: user_guid })
+        request("get", getEndpoint(EndpointsAdmin.Users.get), { guid: user_guid })
             .then((res) => {
                 setData(res.data);
                 setInitialData(res.data);
@@ -49,12 +49,12 @@ const EditUser = () => {
 
     const handleSubmit = () => {
         if (checkForm()) {
-            request("post", getEndpoint(Endpoints.Users.update), { ...data })
+            request("post", getEndpoint(EndpointsAdmin.Users.update), { ...data })
                 .then(() => {
                     push(Paths[Views.users].path);
                     successNotification(ViewStrings.edit.userUpdated);
                 })
-                .catch((err) => errorNotification(err));
+                .catch((err) => errorNotification(err.message));
         }
     }
 

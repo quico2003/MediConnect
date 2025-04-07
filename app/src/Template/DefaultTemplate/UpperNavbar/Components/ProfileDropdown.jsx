@@ -2,7 +2,7 @@ import { Button, Dropdown } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import {
-  Endpoints,
+  EndpointsAdmin,
   getEndpoint,
 } from "../../../../Constants/endpoints.contants";
 import { Paths } from "../../../../Constants/paths.constants";
@@ -30,7 +30,7 @@ const ProfileDropdown = () => {
   const profile = useSelector((state) => state.AdminInfo)
 
   const handleSignOut = () => {
-    request("post", getEndpoint(Endpoints.Auth.logout))
+    request("post", getEndpoint(EndpointsAdmin.Auth.logout))
       .then((res) => {
         localStorage.clear();
         dispatch(toogleClearAll());

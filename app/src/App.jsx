@@ -18,7 +18,9 @@ import AuthLayout from "./Template/AuthLayout/AuthLayout";
 import DefaultTemplate from "./Template/DefaultTemplate/DefaultTemplate";
 import { getLanguageSelected } from "./Utils/Translations";
 import InMaintenance from "./Views/InMaintenance";
-import { AdminContext } from "./Context/admin.context";
+import AuthLayoutUser from "./Template/AuthLayout/AuthLayoutUser";
+import DefaultTemplateUser from "./Template/DefaultTemplate/DefaultTemplateUser";
+
 
 const App = () => {
   //This will manage the mobile width
@@ -71,15 +73,27 @@ const App = () => {
   const renderRoutes = (routes, layoutType = null) =>
     routes.map((route, idx) => (
       <Route key={idx} path={route.path} exact={route.exact}>
-        {layoutType === "auth" && (
+        
+        {/* Region Admin */}
+        
+        {layoutType === "adminAuth" && (
           <AuthLayout>{renderContent(route)}</AuthLayout>
         )}
-        {layoutType === "app" && (
-          <DefaultTemplate>{renderContent(route)}</DefaultTemplate>
-        )}
+        
         {layoutType === "adminApp" && (
           <DefaultTemplate>{renderContent(route)}</DefaultTemplate>
         )}
+
+        {/* Region User */}
+        
+        {layoutType === "auth" && (
+          <AuthLayoutUser>{renderContent(route)}</AuthLayoutUser>
+        )}
+        
+        {layoutType === "app" && (
+          <DefaultTemplateUser>{renderContent(route)}</DefaultTemplateUser>
+        )}
+        
         {layoutType === null && renderContent(route)}
       </Route>
     ));
@@ -93,13 +107,13 @@ const App = () => {
       <StringsContext.Provider value={stringsContext}>
         <TemplateContext.Provider value={templateContext}>
           <UserContext.Provider value={userContext}>
-              <Switch>
-                {renderRoutes(AuthAdminRoutes, "auth")}
-                {renderRoutes(AppAdminRoutes, "adminApp")}
-                {renderRoutes(AuthRoutes, "auth")}
-                {renderRoutes(AppRoutes, "app")}
-                {renderRoutes(OtherRoutes, getToken() && "app")}
-              </Switch>
+            <Switch>
+              {renderRoutes(AuthAdminRoutes, "adminAuth")}
+              {renderRoutes(AppAdminRoutes, "adminApp")}
+              {renderRoutes(AuthRoutes, "auth")}
+              {renderRoutes(AppRoutes, "app")}
+              {renderRoutes(OtherRoutes, getToken() && "app")}
+            </Switch>
           </UserContext.Provider>
         </TemplateContext.Provider>
       </StringsContext.Provider>

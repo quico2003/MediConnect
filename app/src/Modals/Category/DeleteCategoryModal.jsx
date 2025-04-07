@@ -3,7 +3,7 @@ import useNotification from "../../Hooks/useNotification";
 import useRequest from "../../Hooks/useRequest";
 import { useContext, useEffect } from "react";
 import ModalLayout from "../../Layouts/ModalLayout/ModalLayout";
-import { Endpoints, getEndpoint } from "../../Constants/endpoints.contants";
+import { EndpointsAdmin, getEndpoint } from "../../Constants/endpoints.contants";
 import { StringsContext } from "../../Context/strings.context";
 
 
@@ -19,7 +19,7 @@ const DeleteCategoryModal = ({ show, onClose, data }) => {
 
 
     const handleSubmit = () => {
-        request("post", getEndpoint(Endpoints.Categories.delete), { guid: data.guid })
+        request("post", getEndpoint(EndpointsAdmin.Categories.delete), { guid: data.guid })
             .then((res) => {
                 successNotification(ViewStrings.messageDeleted);
                 onClose(true);

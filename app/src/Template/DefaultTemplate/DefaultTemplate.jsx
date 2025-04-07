@@ -3,7 +3,7 @@ import { Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import { Configuration } from "../../Config/app.config";
-import { Endpoints, getEndpoint } from "../../Constants/endpoints.contants";
+import { EndpointsAdmin, getEndpoint } from "../../Constants/endpoints.contants";
 import { StorageKeys } from "../../Constants/storekeys.constants";
 import { UserContext } from "../../Context/user.context";
 import useRequest from "../../Hooks/useRequest";
@@ -36,7 +36,7 @@ const DefaultTemplate = ({ children, ...props }) => {
   }, []);
 
   const checkUser = () => {
-    request("get", getEndpoint(Endpoints.Auth.checkAdmin)).then((res) => {
+    request("get", getEndpoint(EndpointsAdmin.Auth.checkAdmin)).then((res) => {
       const { token, email, avatar, name } = res.data;
       dispatch(toggleAdminName(name));
       dispatch(toggleAdminEmail(email));

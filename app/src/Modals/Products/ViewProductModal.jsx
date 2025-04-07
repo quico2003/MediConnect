@@ -3,7 +3,7 @@ import ModalLayout from "../../Layouts/ModalLayout/ModalLayout";
 import { useContext, useEffect, useState } from "react";
 import useRequest from "../../Hooks/useRequest";
 import useNotification from "../../Hooks/useNotification";
-import { Endpoints, getEndpoint } from "../../Constants/endpoints.contants";
+import { EndpointsAdmin, getEndpoint } from "../../Constants/endpoints.contants";
 import { StringsContext } from "../../Context/strings.context";
 import Barcode from "react-barcode";
 
@@ -26,7 +26,7 @@ const ViewProductModal = ({ show, onClose, data }) => {
     }, [show]);
 
     const fetchDataProduct = async () => {
-        request("get", getEndpoint(Endpoints.Products.get), { guid: data })
+        request("get", getEndpoint(EndpointsAdmin.Products.get), { guid: data })
             .then((res) => {
                 setDataProduct(res.data);
             })
@@ -93,7 +93,7 @@ const ViewProductModal = ({ show, onClose, data }) => {
                         <span className="fw-bold">{ViewStrings.creator}:</span><span>{dataProduct?.creator}</span>
                     </div>
                     <div className="d-flex flex-column gap-2 mb-2 ">
-                        <span className="fw-bold">barCode:</span><span> <Barcode value={dataProduct?.uniqid} displayValue={false} /></span>
+                        <span className="fw-bold">barCode:</span><span> <Barcode  value={dataProduct?.uniqid} displayValue={false} /></span>
                     </div>
 
                     <span className="fw-bold">{ViewStrings.images}:</span>

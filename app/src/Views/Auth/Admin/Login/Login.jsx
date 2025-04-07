@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import Button from 'react-bootstrap/Button';
 import FormControl from "../../../../Components/Form/FormControl/FormControl";
 import { Card, Form, Image, InputGroup } from "react-bootstrap";
-import { Endpoints, getEndpoint } from "../../../../Constants/endpoints.contants";
+import {  EndpointsAdmin, getEndpoint } from "../../../../Constants/endpoints.contants";
 import useRequest from "../../../../Hooks/useRequest";
 import { Paths } from "../../../../Constants/paths.constants";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
@@ -52,7 +52,7 @@ const LoginAdmin = () => {
 
         request(
             "post",
-            getEndpoint(Endpoints.Auth.loginAdmin),
+            getEndpoint(EndpointsAdmin.Auth.loginAdmin),
             { ...data },
             false,
             false

@@ -1,4 +1,4 @@
-import { Endpoints, getEndpoint } from "../../Constants/endpoints.contants";
+import { EndpointsAdmin, getEndpoint } from "../../Constants/endpoints.contants";
 import { useContext, useEffect, useState } from "react";
 import useRequest from "../../Hooks/useRequest";
 import useNotification from "../../Hooks/useNotification";
@@ -20,7 +20,7 @@ const SeasonFilterSelector = ({ onChange }) => {
   }, []);
 
   const fetchData = async () => {
-    request("get", getEndpoint(Endpoints.Courses.allCourses.getAllSeasons))
+    request("get", getEndpoint(EndpointsAdmin.Courses.allCourses.getAllSeasons))
       .then((res) => setSeasons(res.seasons))
       .catch(errorNotification);
   };

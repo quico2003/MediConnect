@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import ModalLayout from "../../Layouts/ModalLayout/ModalLayout";
 import useRequest from "../../Hooks/useRequest";
 import { Button, Modal } from "react-bootstrap";
-import { Endpoints, getEndpoint } from "../../Constants/endpoints.contants";
+import { EndpointsAdmin, getEndpoint } from "../../Constants/endpoints.contants";
 import useNotification from "../../Hooks/useNotification";
 import { StringsContext } from "../../Context/strings.context";
 
@@ -24,13 +24,13 @@ const ViewUserModal = ({ show, onClose, data }) => {
     }, [show])
 
     const fetchDataUser = async () => {
-        request("get", getEndpoint(Endpoints.Users.get), { guid: data })
+        request("get", getEndpoint(EndpointsAdmin.Users.get), { guid: data })
             .then((res) => {
                 setDataUser(res.data);
             })
             .catch((err) => errorNotification("Error en la respuesta del view."));
     }
- 
+
     const hideModal = () => {
         onClose(true);
     }

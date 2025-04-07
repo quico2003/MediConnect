@@ -3,7 +3,7 @@ import useNotification from "../../../../Hooks/useNotification";
 import PanelLayout from "../../../../Layouts/PanelLayout/PanelLayout";
 import GeneralLayout from "../../../../Layouts/GeneralLayout/GeneralLayout";
 import { StringsContext } from "../../../../Context/strings.context";
-import { Endpoints, getEndpoint } from "../../../../Constants/endpoints.contants";
+import { EndpointsAdmin, getEndpoint } from "../../../../Constants/endpoints.contants";
 import FormControl from "../../../../Components/Form/FormControl/FormControl";
 import { validateData } from "../../../../Config/GeneralFunctions";
 import { Button } from "react-bootstrap";
@@ -33,7 +33,7 @@ const Account = () => {
 
   const handleSubmitEmail = () => {
     if (checkFormEmail()) {
-      request("post", getEndpoint(Endpoints.Auth.updateAdminEmail), { ...dataEmail })
+      request("post", getEndpoint(EndpointsAdmin.Auth.updateAdminEmail), { ...dataEmail })
         .then(() => {
           successNotification(ViewStrings.messages.updateEmail);
           replace(Paths[Views.loginAdmin].path);
@@ -44,7 +44,7 @@ const Account = () => {
 
   const handleSubmitPassword = () => {
     if (checkFormPassword()) {
-      request("post", getEndpoint(Endpoints.Auth.updateAdminPassword), {...dataPassword})
+      request("post", getEndpoint(EndpointsAdmin.Auth.updateAdminPassword), { ...dataPassword })
         .then(() => {
           successNotification(ViewStrings.messages.updatePassword);
           replace(Paths[Views.loginAdmin].path);

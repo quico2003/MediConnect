@@ -2,7 +2,7 @@ import { Button, FormLabel, Modal } from "react-bootstrap";
 import useRequest from "../../Hooks/useRequest"
 import ModalLayout from "../../Layouts/ModalLayout/ModalLayout";
 import { useEffect, useState } from "react";
-import { Endpoints, getEndpoint } from "../../Constants/endpoints.contants";
+import { EndpointsAdmin, getEndpoint } from "../../Constants/endpoints.contants";
 import useNotification from "../../Hooks/useNotification";
 import RequiredField from "../../Components/Form/RequiredField/RequiredField";
 import Select from "react-select";
@@ -23,7 +23,7 @@ const AssignNewCategoryModal = ({ show, onClose, data }) => {
     }, [show]);
 
     const fetchData = async () => {
-        return await request("get", getEndpoint(Endpoints.Categories.getList))
+        return await request("get", getEndpoint(EndpointsAdmin.Categories.getList))
             .then((res) => {
                 setCategories(res.categories);
             })
@@ -31,7 +31,7 @@ const AssignNewCategoryModal = ({ show, onClose, data }) => {
     }
 
     const handleSubmit = () => {
-        return request("post", getEndpoint(Endpoints.Products.assignCategory), {
+        return request("post", getEndpoint(EndpointsAdmin.Products.assignCategory), {
             productGuid: data,
             categoryGuid: selectedOption.value
         })

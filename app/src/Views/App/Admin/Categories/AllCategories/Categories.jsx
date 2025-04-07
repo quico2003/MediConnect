@@ -7,7 +7,7 @@ import useRequest from "../../../../../Hooks/useRequest";
 import { useContext, useEffect, useState } from "react";
 import { Configuration } from "../../../../../Config/app.config";
 import useLoaded from "../../../../../Hooks/useLoaded";
-import { Endpoints, getEndpoint } from "../../../../../Constants/endpoints.contants";
+import { EndpointsAdmin, getEndpoint } from "../../../../../Constants/endpoints.contants";
 import useNotification from "../../../../../Hooks/useNotification";
 import { CategoriesColumns } from "./CategoriesColumns";
 import { Link, useLocation } from "react-router-dom/cjs/react-router-dom.min";
@@ -28,17 +28,17 @@ const Categories = () => {
 
     //Siempre usar para hacer llamadas
     const request = useRequest();
-    
+
     //Coje ruta en la que estas
     const { search } = useLocation();
     const [data, setData] = useState([]);
     const [filterSelected] = useState();
     const [totalPages, setTotalPages] = useState(1);
     const { startFetching, finishFetching, fetching, loaded } = useLoaded();
-    
+
     //Para los errores saber su funcionameino no codigo interno
     const { showNotification: errorNotification } = useNotification();
-    
+
     //Recojer todo lo que hay detras del ? de la ruta
     const searchParams = useQuery();
 
@@ -72,7 +72,7 @@ const Categories = () => {
         startFetching();
         return await request(
             "get",
-            getEndpoint(Endpoints.Categories.getAll),
+            getEndpoint(EndpointsAdmin.Categories.getAll),
             {
                 page,
                 offset,
@@ -116,6 +116,9 @@ const Categories = () => {
             </Button>} >
                 <PanelLayout loaded={loaded}>
                     <ReactTable
+                        searcherProps={{
+                            placeholder: "Write..."
+                        }}
                         totalPages={totalPages}
                         fetching={fetching}
                         onEventChange={fetchData}

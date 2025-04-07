@@ -3,7 +3,7 @@ import { Button, Modal } from "react-bootstrap";
 import useNotification from "../../Hooks/useNotification";
 import useRequest from "../../Hooks/useRequest";
 import ModalLayout from "../../Layouts/ModalLayout/ModalLayout";
-import { Endpoints, getEndpoint } from "../../Constants/endpoints.contants";
+import { EndpointsAdmin, getEndpoint } from "../../Constants/endpoints.contants";
 import { useContext } from "react";
 import { StringsContext } from "../../Context/strings.context";
 
@@ -18,7 +18,7 @@ const DeleteUserModal = ({ show, onClose, data }) => {
     const { showNotification: successNotification } = useNotification("success");
 
     const handleSubmit = () => {
-        request("post", getEndpoint(Endpoints.Users.delete), { guid: data })
+        request("post", getEndpoint(EndpointsAdmin.Users.delete), { guid: data })
             .then(() => {
                 successNotification(ViewStrings.messageDeleted);
                 onClose(true);

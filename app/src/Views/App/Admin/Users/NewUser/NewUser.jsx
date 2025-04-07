@@ -10,7 +10,7 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import useNotification from "../../../../../Hooks/useNotification";
 import { validateDataCreateUser } from "../../../../../Config/GeneralFunctions";
 import { EmailRegex } from "../../../../../Utils/Regex";
-import { Endpoints, getEndpoint } from "../../../../../Constants/endpoints.contants";
+import { EndpointsAdmin, getEndpoint } from "../../../../../Constants/endpoints.contants";
 import { Paths } from "../../../../../Constants/paths.constants";
 import { Views } from "../../../../../Constants/views.constants";
 import { StringsContext } from "../../../../../Context/strings.context";
@@ -30,7 +30,7 @@ const NewUser = () => {
 
     const handleSubmit = () => {
         if (checkForm()) {
-            request("post", getEndpoint(Endpoints.Users.create), { ...data })
+            request("post", getEndpoint(EndpointsAdmin.Users.create), { ...data })
                 .then((res) => {
                     successNotification(ViewStrings.userCreated);
                     push(Paths[Views.users].path);

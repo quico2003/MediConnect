@@ -1,24 +1,24 @@
 import { useContext, useEffect, useState } from "react";
-import GeneralLayout from "../../../../../Layouts/GeneralLayout/GeneralLayout";
 import { StringsContext } from "../../../../../Context/strings.context";
 import PanelLayout from "../../../../../Layouts/PanelLayout/PanelLayout";
 import useRequest from "../../../../../Hooks/useRequest";
 import useLoaded from "../../../../../Hooks/useLoaded";
 import ReactTable from "../../../../../Components/Table/Table";
-import { Link, useLocation } from "react-router-dom/cjs/react-router-dom.min";
+import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import useQuery from "../../../../../Hooks/useQuery";
-import { Endpoints, getEndpoint } from "../../../../../Constants/endpoints.contants";
+import { EndpointsAdmin, getEndpoint } from "../../../../../Constants/endpoints.contants";
 import useNotification from "../../../../../Hooks/useNotification";
 import { Configuration } from "../../../../../Config/app.config";
 import { ProductsWithoutCategoryColumns } from "./ProductsWithoutCategoryColumns";
 import useModalManager from "../../../../../Hooks/useModalManager";
 import DeleteProductModal from "../../../../../Modals/Products/DeleteProductModal";
 import AssignNewCategoryModal from "../../../../../Modals/Products/assignNewCategoryModal";
+import { Placeholder } from "react-bootstrap";
 
 const ProductsWithoutCategory = ({ setNeedUpdate }) => {
 
     const { strings } = useContext(StringsContext);
-    const ViewStrings = strings.Products;
+    const ViewStrings = strings.dashboard.withoutCategories;
 
     const request = useRequest();
     const { search } = useLocation();
@@ -60,7 +60,7 @@ const ProductsWithoutCategory = ({ setNeedUpdate }) => {
         startFetching();
         return await request(
             "get",
-            getEndpoint(Endpoints.Products.getAllWithoutCategory),
+            getEndpoint(EndpointsAdmin.Products.getAllWithoutCategory),
             {
                 page,
                 offset,
@@ -87,6 +87,7 @@ const ProductsWithoutCategory = ({ setNeedUpdate }) => {
     }
 
     return (
+
         <>
             <DeleteProductModal
                 onClose={handleCloseDeleteProductModal}
@@ -99,25 +100,25 @@ const ProductsWithoutCategory = ({ setNeedUpdate }) => {
                 show={showAssignCategoryModal}
                 data={assignCategoryModal}
             />
+            <PanelLayout loaded={loaded}>
+                <ReactTable
+                    searcherProps={{
+                        placeholder: "Write..."
+                    }}
+                    totalPages={totalPages}
+                    fetching={fetching}
+                    onEventChange={fetchData}
 
-            <GeneralLayout title="Products Without Category">
-                <PanelLayout loaded={loaded}>
-                    <ReactTable
-                        totalPages={totalPages}
-                        fetching={fetching}
-                        onEventChange={fetchData}
-                        data={data}
-                        emptyData={{
-                            text: "No found producst without category",
-                            description: "Is Goodd!!"
-                        }}
-                        columns={ProductsWithoutCategoryColumns(
-                            openDeleteProductModal,
-                            openAssignCategoryModal
-                        )}
-                    />
-                </PanelLayout>
-            </GeneralLayout>
+                    data={data}
+                    emptyData={{
+                        text: ViewStrings.isEmpty
+                    }}
+                    columns={ProductsWithoutCategoryColumns(
+                        openDeleteProductModal,
+                        openAssignCategoryModal
+                    )}
+                />
+            </PanelLayout>
         </>
     )
 }

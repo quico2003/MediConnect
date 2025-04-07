@@ -13,10 +13,10 @@ class FileStorage
 
     public static function FileURL(string $fileName): string
     {
-        return API_URL . "/endpoints/media/getMedia.php?file=$fileName";
+        return API_URL . "/endpoints/my-admin/media/getMedia.php?file=$fileName";
     }
     public static function FileURLProducts(string $fileName): string
     {
-        return API_URL . "/endpoints/media/getMediaProducts.php?file=$fileName";
+        return API_URL . "/endpoints/my-admin/media/getMediaProducts.php?file=$fileName";
     }
 }

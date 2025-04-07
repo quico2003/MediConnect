@@ -12,7 +12,7 @@ import useLoaded from "../../../../../Hooks/useLoaded";
 import { StringsContext } from "../../../../../Context/strings.context";
 import useQuery from "../../../../../Hooks/useQuery";
 import { Configuration } from "../../../../../Config/app.config";
-import { Endpoints, getEndpoint } from "../../../../../Constants/endpoints.contants";
+import { EndpointsAdmin, getEndpoint } from "../../../../../Constants/endpoints.contants";
 import { UsersColumns } from "./UsersColumns";
 import useModalManager from "../../../../../Hooks/useModalManager";
 import ViewUserModal from "../../../../../Modals/User/ViewUserModal";
@@ -62,7 +62,7 @@ const Users = () => {
         startFetching();
         return await request(
             "get",
-            getEndpoint(Endpoints.Users.getAll),
+            getEndpoint(EndpointsAdmin.Users.getAll),
             {
                 page,
                 offset,
@@ -77,12 +77,12 @@ const Users = () => {
             .catch((err) => errorNotification(err))
             .finally(() => finishFetching());
     }
-    
+
     const handleCloseDeleteUserModal = (refresh) => {
         if (refresh) fetchData();
         closeDeleteUserModal();
     };
- 
+
     const handleCloseViewUserModal = () => {
         closeViewUserModal();
     };
@@ -110,6 +110,9 @@ const Users = () => {
             }>
                 <PanelLayout loaded={loaded}>
                     <ReactTable
+                        searcherProps={{
+                            placeholder: "Write..."
+                        }}
                         totalPages={totalPages}
                         fetching={fetching}
                         onEventChange={fetchData}

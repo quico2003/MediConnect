@@ -2,72 +2,340 @@
   "ProfileDropdown": {
     "Profile": "Perfil",
     "Account": "Cuenta",
-    "Logout": "Cerrar Sesion"
+    "Logout": "Cerrar sesión"
   },
   "navBar": {
     "SideBarHome": "Inicio",
-    "SideBarCategories": "Categorias",
+    "SideBarCategories": "Categorías",
+    "SideBarProducts": "Productos",
+    "SideBarUsers": "Equipo médico",
+    "ControlPanelUsers": "Panel de control del equipo médico",
     "SideBarPrivacyPolicy": "Política de privacidad",
-    "Dashboard": "Panel",
-    "ControlPanel": "Panel de control"
+    "Dashboard": "Tablero",
+    "ControlPanelProducts": "Panel de control de productos"
+  },
+  "dashboard": {
+    "title": "Tablero",
+    "withoutCategories": {
+      "title": "Productos sin categorías",
+      "isEmpty": "No hay productos sin categorías"
+    },
+    "productByCategoties": {
+      "title": "Productos por categoría"
+    }
   },
   "Categories": {
-    "title": "Categorias",
+    "title": "Categorías",
+    "buttonAdd": "+Agregar nuevo",
     "add": {
-      "newCategory": "Nueva Categoria",
+      "newCategory": "Nueva Categoría",
       "name": "Nombre",
-      "placeholderName": "Nombre de la categoria",
+      "placeholderName": "Nombre de la categoría",
       "description": "Descripción",
-      "placeholderDescription": "Descripcion de la categoria..."
+      "placeholderDescription": "Descripción de la categoría...",
+      "buttonCreate": "Crear",
+      "messageSuccess": "Categoría creada",
+      "messageError": "Error al crear categoría"
     },
     "edit": {
-      "editCategory": "Editar Categoria",
+      "editCategory": "Editar Categoría",
       "name": "Nombre",
-      "placeholderName": "Nombre de la categoria",
+      "placeholderName": "Nombre de la categoría",
       "description": "Descripción",
-      "placeholderDescription": "Descripcion de la categoria..."
+      "placeholderDescription": "Descripción de la categoría...",
+      "buttonUpdate": "Actualizar",
+      "categoryNotFound": "Categoría no encontrada.",
+      "categoryUpdated": "Categoría actualizada",
+      "categoryError": "Error al actualizar categoría"
+    },
+    "delete": {
+      "messageDeleted": "Categoría eliminada.",
+      "title": "Eliminar categoría",
+      "body": "¿Estás seguro de que deseas eliminar la ",
+      "body1": " categoría?",
+      "buttonCancel": "Cancelar",
+      "buttonDelete": "Eliminar"
+    },
+    "view": {
+      "title": "Info. Categoría",
+      "name": "Nombre",
+      "description": "Descripción",
+      "created_at": "Creado el",
+      "updated_at": "Actualizado el",
+      "exit": "Salir",
+      "errorNotification": "Error al mostrar categoría."
     },
     "Columns": {
       "name": "Nombre",
       "actions": "Acciones"
     },
     "notFoundComponent": {
-      "title": "No se an encontrado categorias.",
-      "description": "Crea nuevas."
+      "title": "No hay categorías de productos guardadas.",
+      "description": "Haz clic en el botón para agregar nuevas categorías."
+    }
+  },
+  "Products": {
+    "title": "Productos",
+    "buttonAdd": "+Agregar nuevo",
+    "add": {
+      "newProduct": "Nuevo Producto",
+      "name": "Nombre",
+      "price": "Precio",
+      "brand": "Marca",
+      "category": "Categoría",
+      "images": "Imágenes",
+      "create": "Crear",
+      "delete": "Eliminar",
+      "placeholderName": "Nombre del producto",
+      "placeholderPrice": "Precio del producto",
+      "placeholderBrand": "Marca del producto",
+      "description": "Descripción",
+      "placeholderDescription": "Descripción del producto...",
+      "placeholderImages": "Haz clic o arrastra una imagen..."
+    },
+    "view": {
+      "title": "Info. Producto",
+      "name": "Nombre",
+      "price": "Precio",
+      "brand": "Marca",
+      "exit": "Salir",
+      "createdAt": "Creado el",
+      "updatedAt": "Actualizado el",
+      "category": "Categoría",
+      "description": "Descripción",
+      "creator": "Creador",
+      "images": "Imágenes"
+    },
+    "delete": {
+      "title": "Eliminar Producto",
+      "descriptionAction": "¿Estás seguro de que deseas eliminar este producto?",
+      "cancel": "Cancelar",
+      "delete": "Eliminar"
+    },
+    "update": {
+      "newProduct": "Editar Producto",
+      "name": "Nombre",
+      "price": "Precio",
+      "brand": "Marca",
+      "category": "Categoría",
+      "images": "Imágenes",
+      "update": "Actualizar",
+      "delete": "Eliminar",
+      "placeholderName": "Nombre del producto",
+      "placeholderPrice": "Precio del producto",
+      "placeholderBrand": "Marca del producto",
+      "description": "Descripción",
+      "placeholderDescription": "Descripción del producto...",
+      "placeholderImages": "Haz clic o arrastra una imagen..."
+    },
+    "Columns": {
+      "name": "Nombre",
+      "brand": "Marca",
+      "price": "Precio",
+      "categoryName": "Categoría",
+      "actions": "Acciones"
+    },
+    "notFoundComponent": {
+      "title": "No se encontraron productos",
+      "description": "Agrega un nuevo producto."
     }
   },
   "Admin": {
     "Profile": {
       "title": "Perfil",
-      "buttonChangeImage": "Canviar",
+      "buttonChangeImage": "Cambiar",
       "messages": {
-        "errorImageType": "Error en el tipo de la imagen",
-        "errorCode": "Error al seleccionar la imagen"
+        "errorImageType": "Error en el tipo de imagen",
+        "errorCode": "Error al seleccionar imagen"
       },
       "sections": {
         "profileImage": "Perfil",
-        "basicSection": "Info"
+        "basicSection": "Información"
       },
       "inputs": {
         "nameInput": {
-          "title": "name",
-          "placeholder": "name"
+          "title": "Nombre",
+          "placeholder": "Insertar nombre..."
+        }
+      }
+    },
+    "Account": {
+      "title": "Cuenta",
+      "messages": {
+        "updateEmail": "Correo electrónico actualizado, por favor vuelve a iniciar sesión",
+        "updatePassword": "Contraseña actualizada, por favor vuelve a iniciar sesión"
+      },
+      "sections": {
+        "email": "Correo electrónico",
+        "password": "Contraseña"
+      },
+      "inputs": {
+        "currentEmailInput": {
+          "title": "Correo electrónico actual",
+          "placeholder": "Insertar correo electrónico actual"
         },
-        "surnameInput": {
-          "title": "surname",
-          "placeholder": "surname"
+        "changeEmailButton": {
+          "title": "Actualizar correo electrónico"
         },
-        "phoneInput": {
-          "title": "phone",
-          "placeholder": "phone"
+        "newEmail": {
+          "title": "Nuevo correo electrónico",
+          "placeholder": "Insertar nuevo correo electrónico..."
+        },
+        "newEmailCopy": {
+          "title": "Repetir nuevo correo electrónico",
+          "placeholder": "Repetir nuevo correo electrónico..."
+        },
+        "currentPasswordInput": {
+          "title": "Contraseña actual",
+          "placeholder": "Insertar contraseña actual"
+        },
+        "newPassword": {
+          "title": "Nueva contraseña",
+          "placeholder": "Insertar nueva contraseña..."
+        },
+        "newPasswordCopy": {
+          "title": "Repetir contraseña",
+          "placeholder": "Repetir nueva contraseña..."
+        },
+        "changePasswordButton": {
+          "title": "Actualizar contraseña"
         }
       }
     }
   },
+  "user": {
+    "title": "Equipo médico",
+    "buttonAdd": "+Agregar nuevo",
+    "buttonUpdate": "Actualizar",
+    "emptyData": {
+      "text": "No hay profesionales registrados",
+      "description": "Presiona el botón de agregar para crear nuevos profesionales"
+    },
+    "errors": {
+      "usersNotFound": "No se encontraron profesionales.",
+      "userNotFound": "Profesional no encontrado."
+    },
+    "columns": {
+      "firstName": "Nombre",
+      "lastName": "Apellido",
+      "email": "Correo electrónico",
+      "specialty": "Especialidad",
+      "actions": "Acciones"
+    },
+    "edit": {
+      "userUpdated": "El usuario ha sido actualizado correctamente.",
+      "title": "Editar profesional",
+      "firstName": "Nombre",
+      "placeholderFirstName": "Escribe el nombre del profesional",
+      "lastName": "Apellido",
+      "placeholderLastName": "Escribe el apellido del profesional",
+      "email": "Correo electrónico",
+      "placeholderEmail": "Escribe el correo electrónico del profesional",
+      "specialty": "Especialidad",
+      "placeholderSpecialty": "Escribe la especialidad del profesional",
+      "password": "Contraseña",
+      "placeholderPassword": "Ej: Amanda@123"
+    },
+    "add": {
+      "userCreated": "El usuario ha sido creado correctamente.",
+      "title": "Nuevo profesional",
+      "firstName": "Nombre",
+      "placeholderFirstName": "Escribe el nombre del profesional",
+      "lastName": "Apellido",
+      "placeholderLastName": "Escribe el apellido del profesional",
+      "email": "Correo electrónico",
+      "placeholderEmail": "Escribe el correo electrónico del profesional",
+      "specialty": "Especialidad",
+      "placeholderSpecialty": "Escribe la especialidad del profesional",
+      "password": "Contraseña",
+      "placeholderPassword": "Ej: Jackson@142"
+    },
+    "delete": {
+      "messageDeleted": "Profesional eliminado.",
+      "title": "Eliminar profesional",
+      "body": "¿Estás seguro de que deseas eliminar este usuario?",
+      "buttonCancel": "Cancelar",
+      "buttonDelete": "Eliminar"
+    },
+    "view": {
+      "errorMesage": "Error al mostrar profesional.",
+      "title": "Info. Profesional",
+      "email": "Correo electrónico:",
+      "firstName": "Nombre:",
+      "lastName": "Apellido:",
+      "specialty": "Especialidad:",
+      "creator": "Creador:",
+      "created_at": "Creado el:",
+      "updated_at": "Actualizado el:",
+      "buttonExit": "Salir"
+    }
+  },
+  "PrivacyPolicy": {
+    "title": "Política de privacidad",
+    "item1": {
+      "title": "Introducción",
+      "description": "Bienvenido a MediConnect. En esta política de privacidad, te informamos sobre cómo recopilamos, usamos, compartimos y protegemos tus datos personales cuando usas nuestro sitio web/aplicación."
+    },
+    "item2": {
+      "title": "Datos que recopilamos",
+      "description": "Recopilamos información personal de los usuarios de las siguientes maneras:",
+      "item1": "Información proporcionada por el usuario: Cuando te registras, inicias sesión o completas formularios en el sitio, podemos recopilar información como tu nombre, dirección de correo electrónico, dirección, número de teléfono, etc.",
+      "item2": "Información de uso: Recopilamos automáticamente información sobre cómo interactúas con nuestro sitio, como tu dirección IP, navegador, tipo de dispositivo y páginas visitadas.",
+      "item3": "Cookies y tecnologías similares: Usamos cookies y tecnologías de seguimiento para mejorar la experiencia del usuario y personalizar el contenido y los anuncios."
+    },
+    "item3": {
+      "title": "Cómo usamos tus datos",
+      "description": "Usamos la información recopilada para:",
+      "item1": "Proporcionar los servicios que has solicitado.",
+      "item2": "Mejorar la funcionalidad de nuestro sitio y asegurar su seguridad.",
+      "item3": "Enviar comunicaciones sobre actualizaciones, noticias o cambios en el servicio (si has dado tu consentimiento).",
+      "item4": "Personalizar tu experiencia y mostrarte contenido relevante.",
+      "item5": "Cumplir con las obligaciones legales y resolver disputas."
+    },
+    "item4": {
+      "title": "Compartir tus datos",
+      "description": "No vendemos ni alquilamos tu información personal. Sin embargo, podemos compartir tus datos con: Proveedores de servicios: Empresas que nos ayudan a operar nuestro sitio o proporcionar servicios (por ejemplo, servicios de alojamiento web, análisis de datos). Obligaciones legales: Si se requiere para cumplir con la ley o una solicitud legal, como una orden judicial."
+    },
+    "item5": {
+      "title": "Proteger tus datos",
+      "description": "Implementamos medidas de seguridad adecuadas para proteger tus datos personales. Sin embargo, ten en cuenta que ningún método de transmisión de internet o almacenamiento electrónico es 100% seguro, por lo que no podemos garantizar una seguridad absoluta."
+    },
+    "item6": {
+      "title": "Tus derechos",
+      "description": "Dependiendo de tu ubicación, es posible que tengas ciertos derechos sobre tus datos personales, incluyendo el derecho a:",
+      "item1": "Acceder, corregir o eliminar tu información personal.",
+      "item2": "Oponerte o restringir el procesamiento de tus datos.",
+      "item3": "Solicitar una copia de tus datos en un formato estructurado y de uso común.",
+      "item4": "Si deseas ejercer alguno de estos derechos, por favor contáctanos en info@mediconnect.com."
+    },
+    "item7": {
+      "title": "Retención de datos",
+      "description": "Conservaremos tu información personal durante el tiempo necesario para cumplir con los fines descritos en esta política, a menos que la ley requiera o permita un período de retención más largo."
+    },
+    "item8": {
+      "title": "Enlaces a otros sitios",
+      "description": "Nuestro sitio web puede contener enlaces a otros sitios web. No somos responsables de las prácticas de privacidad de esos sitios, y te recomendamos leer sus políticas de privacidad antes de proporcionar cualquier información personal."
+    },
+    "item9": {
+      "title": "Cambios en esta política",
+      "description": "Podemos actualizar esta política de privacidad ocasionalmente. Te notificaremos sobre cualquier cambio publicando la nueva política de privacidad en esta página. La fecha de la última actualización estará al final de esta página."
+    },
+    "item10": {
+      "title": "Contacto",
+      "description": "Si tienes alguna pregunta sobre esta política de privacidad o sobre el procesamiento de tus datos, no dudes en contactarnos en info@mediconnect.com."
+    }
+  },
   "General": {
     "App": {
-      "search": "buscar",
-      "update": "Actualizar"
+      "search": "Buscar",
+      "update": "Actualizar",
+      "rows": "filas"
+    },
+    "Login": {
+      "emailAddres": "Dirección de correo electrónico",
+      "password": "Contraseña",
+      "errorNotification": "Correo electrónico o contraseña incorrectos",
+      "successNotification": "Administrador iniciado sesión"
     }
   }
 }

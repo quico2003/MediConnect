@@ -2,9 +2,27 @@ import { Container } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import AnimationBalls from "../../Components/AnimationBalls/AnimationBalls";
 import { Colors } from "../../Utils/Colors";
+import { useEffect } from "react";
+import { EndpointsAdmin, getEndpoint } from "../../Constants/endpoints.contants";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { Paths } from "../../Constants/paths.constants";
+import { Views } from "../../Constants/views.constants";
+import useRequest from "../../Hooks/useRequest";
 
 const AuthLayout = ({ children }) => {
   const { isMobileView } = useSelector((state) => state.Config);
+
+  const request = useRequest();
+  
+  const { push } = useHistory();
+
+  useEffect(() => {
+    checkUser();
+  }, []);
+
+  const checkUser = () => {
+    request("get", getEndpoint(EndpointsAdmin.Auth.checkAdmin)).then(() => push(Paths[Views.homeAdmin].path)).catch(() => push(Paths[Views.loginAdmin].path));
+  };
 
   return (
     <div className="w-100 overflow-hidden" style={{ height: "100vh" }}>

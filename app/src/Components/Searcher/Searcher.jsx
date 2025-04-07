@@ -15,12 +15,15 @@ const Searcher = forwardRef(({ onChange, borderless, label, autoFocus, placehold
     setCurrentValue(value);
     onChange && onChange(value);
   };
+  const handleSubmit = (e) => {
+    e.preventDefault(); 
+  };
 
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
       <FormControl
         id="inputRead"
-        ref={ref} //Pasamos la referencia directamente al input
+        ref={ref}
         autoFocus={autoFocus}
         showMaxLength={false}
         formGroupProps={{ className: "mb-0 w-100" }}

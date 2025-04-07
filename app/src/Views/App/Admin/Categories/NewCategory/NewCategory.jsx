@@ -5,9 +5,9 @@ import useRequest from "../../../../../Hooks/useRequest";
 import GeneralLayout from "../../../../../Layouts/GeneralLayout/GeneralLayout";
 import PanelLayout from "../../../../../Layouts/PanelLayout/PanelLayout";
 import SectionLayout from "../../../../../Layouts/SectionLayout/SectionLayout";
-import { Button } from "react-bootstrap";
+import { Button, Spinner } from "react-bootstrap";
 import { validateData } from "../../../../../Config/GeneralFunctions";
-import { Endpoints, getEndpoint } from "../../../../../Constants/endpoints.contants";
+import { EndpointsAdmin, getEndpoint } from "../../../../../Constants/endpoints.contants";
 import useNotification from "../../../../../Hooks/useNotification";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { Paths } from "../../../../../Constants/paths.constants";
@@ -22,6 +22,8 @@ const NewCategory = () => {
     const request = useRequest();
     const { push } = useHistory();
 
+    const [submiting, setSubmiting] = useState(false);
+
     const { showNotification: successNotification } = useNotification("success");
     const { showNotification: errorNotification } = useNotification();
 
@@ -34,12 +36,14 @@ const NewCategory = () => {
 
     const handleSubmit = () => {
         if (checkForm()) {
-            request("post", getEndpoint(Endpoints.Categories.create), { ...data })
+            setSubmiting(true);
+            request("post", getEndpoint(EndpointsAdmin.Categories.create), { ...data })
                 .then(() => {
                     push(Paths[Views.categories].path);
                     successNotification(ViewStrings.messageSuccess);
                 })
                 .catch(() => errorNotification(ViewStrings.messageError))
+                .finally(() => setSubmiting(false))
         }
     }
 
@@ -78,8 +82,8 @@ const NewCategory = () => {
 
                 </SectionLayout>
                 <div className="d-flex justify-content-end align-items-center">
-                    <Button disabled={!checkForm()} onClick={handleSubmit}>
-                        {ViewStrings.buttonCreate}
+                    <Button disabled={!checkForm() || submiting} onClick={handleSubmit}>
+                        {submiting ? <Spinner size="sm" /> : ViewStrings.buttonCreate}
                     </Button>
                 </div>
             </PanelLayout>
