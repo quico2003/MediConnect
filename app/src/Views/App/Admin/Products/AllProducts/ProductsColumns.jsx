@@ -8,9 +8,10 @@ import { MdDelete, MdEdit } from "react-icons/md";
 import { Paths, replacePaths } from "../../../../../Constants/paths.constants";
 import { Views } from "../../../../../Constants/views.constants";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { IoBarcode } from "react-icons/io5";
 
 
-export const ProductsColumns = (openViewProductModal, openDeleteProductModal) => {
+export const ProductsColumns = (openViewProductModal, openViewBarcodeProductModal, openDeleteProductModal) => {
 
     const { strings } = useContext(StringsContext);
     const ViewStrings = strings.Products.Columns;
@@ -49,6 +50,10 @@ export const ProductsColumns = (openViewProductModal, openDeleteProductModal) =>
                             <IconButton
                                 Icon={IoMdEye}
                                 onClick={() => openViewProductModal(item.guid)}
+                            />
+                            <IconButton
+                                Icon={IoBarcode}
+                                onClick={() => openViewBarcodeProductModal(item.uniqid)}
                             />
                             <IconButton
                                 Icon={MdEdit}

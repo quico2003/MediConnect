@@ -105,6 +105,27 @@ class Category
         }
         createException($stmt->errorInfo());
     }
+
+    public static function getProductsForCategories(PDO $db): array
+    {
+        $query = "SELECT c.name AS name, COUNT(*) AS value FROM `" . self::$table_name . "` c 
+        INNER JOIN products p ON p.category_id=c.id
+        WHERE c.deleted_at IS NULL AND p.deleted_at IS NULL
+        GROUP BY c.id";
+
+        $stmt = $db->prepare($query);
+
+        if ($stmt->execute()) {
+            $arrayToReturn = [];
+
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $arrayToReturn[] =  $row;
+            }
+            return $arrayToReturn;
+        }
+        createException($stmt->errorInfo());
+
+    }
     public static function getList(PDO $db): array
     {
         $query = "SELECT * FROM `" . self::$table_name . "` WHERE deleted_at IS NULL";

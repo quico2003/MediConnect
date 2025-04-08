@@ -1,11 +1,12 @@
-import { Button, Modal } from "react-bootstrap";
+import { Button, Col, Modal, Row } from "react-bootstrap";
 import ModalLayout from "../../Layouts/ModalLayout/ModalLayout";
 import { useContext, useEffect, useState } from "react";
 import useRequest from "../../Hooks/useRequest";
 import useNotification from "../../Hooks/useNotification";
 import { EndpointsAdmin, getEndpoint } from "../../Constants/endpoints.contants";
 import { StringsContext } from "../../Context/strings.context";
-import Barcode from "react-barcode";
+import moment from "moment";
+import { dataFormater } from "../../Config/GeneralFunctions";
 
 const ViewProductModal = ({ show, onClose, data }) => {
 
@@ -53,54 +54,72 @@ const ViewProductModal = ({ show, onClose, data }) => {
             show={show}
             onHide={hideModal}
             header={true}
+            size="lg"
             customHeader={
                 <Modal.Title className="ms-2">{ViewStrings.title}</Modal.Title>
             }
             footer={
                 <div>
                     <Button onClick={hideModal} variant="danger">
-                        {ViewStrings.exit}
+                        {ViewStrings.close}
                     </Button>
                 </div>
             }
         >
 
-            <Modal.Body>
+            <Modal.Body className="d-flex flex-column gap-3">
 
-                <div className="ms-2">
-                    <div className="d-flex flex-column gap-2 mb-2 ">
-                        <span className="fw-bold">{ViewStrings.name}:</span><span>{dataProduct?.name}</span>
-                    </div>
-                    <div className="d-flex flex-column gap-2 mb-2 ">
-                        <span className="fw-bold">{ViewStrings.price}:</span><span>{dataProduct?.price}</span>
-                    </div>
-                    <div className="d-flex flex-column gap-2 mb-2 ">
-                        <span className="fw-bold">{ViewStrings.brand}:</span><span>{dataProduct?.brand}</span>
-                    </div>
-                    <div className="d-flex flex-column gap-2 mb-2 ">
-                        <span className="fw-bold">{ViewStrings.description}:</span><span>{dataProduct?.description}</span>
-                    </div>
-                    <div className="d-flex flex-column gap-2 mb-2 ">
-                        <span className="fw-bold">{ViewStrings.createdAt}:</span><span>{dataProduct?.created_at}</span>
-                    </div>
-                    <div className="d-flex flex-column gap-2 mb-2 ">
-                        <span className="fw-bold">{ViewStrings.updatedAt}:</span><span>{dataProduct?.updated_at}</span>
-                    </div>
-                    <div className="d-flex flex-column gap-2 mb-2 ">
-                        <span className="fw-bold">{ViewStrings.category}:</span><span>{dataProduct?.categoryName}</span>
-                    </div>
-                    <div className="d-flex flex-column gap-2 mb-2 ">
-                        <span className="fw-bold">{ViewStrings.creator}:</span><span>{dataProduct?.creator}</span>
-                    </div>
-                    <div className="d-flex flex-column gap-2 mb-2 ">
-                        <span className="fw-bold">barCode:</span><span> <Barcode  value={dataProduct?.uniqid} displayValue={false} /></span>
-                    </div>
+                <Row>
+                    <Col sm={6}>
+                        <div className="d-flex flex-column">
+                            <span className="fw-bold">{ViewStrings.name}:</span><span>{dataProduct?.name}</span>
+                        </div>
+                    </Col>
+                    <Col sm={3}>
+                        <div className="d-flex flex-column">
+                            <span className="fw-bold">{ViewStrings.price}:</span><span>{dataProduct?.price}€</span>
+                        </div>
+                    </Col>
+                    <Col sm={3}>
+                        <div className="d-flex flex-column">
+                            <span className="fw-bold">{ViewStrings.brand}:</span><span>{dataProduct?.brand}</span>
+                        </div>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col sm={6}>
+                        <div className="d-flex flex-column">
+                            <span className="fw-bold">{ViewStrings.category}:</span><span>{dataProduct?.categoryName}</span>
+                        </div>
+                    </Col>
+                    <Col sm={3}>
+                        <div className="d-flex flex-column">
+                            <span className="fw-bold">{ViewStrings.createdAt}:</span><span>{dataFormater(dataProduct?.created_at)}</span>
+                        </div>
+                    </Col>
+                    <Col sm={3}>
+                        <div className="d-flex flex-column">
+                            <span className="fw-bold">{ViewStrings.updatedAt}:</span><span>{dataFormater(dataProduct?.updated_at)}</span>
+                        </div>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col sm={12}>
+                        <div className="d-flex flex-column">
+                            <span className="fw-bold">{ViewStrings.description}:</span><div dangerouslySetInnerHTML={{ __html: dataProduct?.description }}></div>
+                        </div>
+                    </Col>
+                </Row>
 
-                    <span className="fw-bold">{ViewStrings.images}:</span>
-                    <div className="d-flex overflow-auto ">
-                        {renderImages()}
-                    </div>
-                </div>
+                <Row>
+                    <Col sm={12}>
+                        <span className="fw-bold">{ViewStrings.images}:</span>
+                        <div className="d-flex overflow-auto m-3">
+                            {renderImages()}
+                        </div>
+                    </Col>
+                </Row>
+
 
             </Modal.Body>
 

@@ -20,13 +20,14 @@ const FormControlPassword = ({
     onChange,
     value = "",
     required,
+    show = false,
     inputClassname,
     formGroupProps = { className: "mb-2 w-100" },
     autoFocus,
     ...props
 }) => {
 
-    const [showPassword, setShowPassword] = useState(false);
+    const [showPassword, setShowPassword] = useState(show);
 
     const [currentValue, setCurrentValue] = useState(value || "");
 

@@ -16,6 +16,7 @@ import FormControlPrice from "../../../../../Components/Form/FormControl/FormCon
 import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { Paths } from "../../../../../Constants/paths.constants";
 import { Views } from "../../../../../Constants/views.constants";
+import ReactQuill from "react-quill";
 
 
 const EditProduct = () => {
@@ -33,6 +34,7 @@ const EditProduct = () => {
 
     const [categories, setCategories] = useState({});
     const [data, setData] = useState({});
+    const [initialData, setInitialData] = useState({});
     const [selectedOption, setSelectedOption] = useState(null);
     const [existingImages, setExistingImages] = useState([]);
     const [existingImagesGuid, setExistingImagesGuid] = useState([]);
@@ -41,6 +43,11 @@ const EditProduct = () => {
 
     useEffect(() => {
         fetchData();
+        console.log(existingImages);
+        console.log(existingImagesGuid);
+        console.log(newImages);
+        console.log(deleteImages);
+
     }, []);
 
     const fetchData = async () => {
@@ -49,6 +56,7 @@ const EditProduct = () => {
             const resCategories = await request("get", getEndpoint(EndpointsAdmin.Categories.getList));
             setCategories(resCategories.categories);
             setData(resProduct.data);
+            setInitialData(resProduct.data);
             if (resProduct.data && resProduct.data.category) {
                 const selectedCategory = resCategories.categories.find((cat) => cat.value === resProduct.data.category);
                 setSelectedOption(selectedCategory);
@@ -87,6 +95,11 @@ const EditProduct = () => {
     const handleSelect = (obj) => {
         setSelectedOption(obj);
         setData({ ...data, "category": obj.value });
+    }
+
+    const handleInputDescription = (e) => {
+
+        setData({ ...data, "description": e });
     }
 
     const onDrop = useCallback((acceptedFiles) => {
@@ -142,8 +155,14 @@ const EditProduct = () => {
 
 
     const checkForm = () => {
+
+        const changeImages = newImages.length !== 0 || deleteImages.length !== 0 && deleteImages.length == 0;
+
         const { name, category, price, brand, description } = data;
-        return validateData([name, category, price, brand, description]) && [...existingImages, ...newImages].length > 0;
+        return validateData([name, category, price, brand, description]) 
+        && [...existingImages, ...newImages].length > 0 
+        && JSON.stringify(data) !== JSON.stringify(initialData)
+        || changeImages;
     }
 
     return (
@@ -191,17 +210,13 @@ const EditProduct = () => {
                         onChange={handleInput}
                         value={data.brand}
                     />
-                    <FormControl
-                        required
-                        controlId="description"
-                        vertical={false}
-                        className="pb-2"
-                        title={ViewStrings.description}
-                        placeholder={ViewStrings.placeholderDescription}
-                        onChange={handleInput}
+                    <FormLabel className="mb-0">{ViewStrings.description}<RequiredField /></FormLabel>
+                    <ReactQuill
+                        id="description"
+                        theme="snow"
+                        onChange={handleInputDescription}
                         value={data.description}
                     />
-
                     <FormLabel className="mb-2">{ViewStrings.images}<RequiredField /></FormLabel>
                     <div {...getRootProps({ className: "dropzone d-flex align-items-center justify-content-center border border-3 rounded-4 p-5" })}>
                         <input {...getInputProps()} />

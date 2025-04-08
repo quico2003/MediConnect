@@ -16,6 +16,8 @@ import FormControlPrice from "../../../../../Components/Form/FormControl/FormCon
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { Paths } from "../../../../../Constants/paths.constants";
 import { Views } from "../../../../../Constants/views.constants";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 const NewProduct = () => {
 
@@ -52,6 +54,11 @@ const NewProduct = () => {
     const handleInput = (e) => {
         const { id, value } = e.target;
         setDataInput({ ...dataInput, [id]: value });
+    }
+    
+    const handleInputDescription = (e) => {
+        
+        setDataInput({ ...dataInput, "description": e });
     }
 
     //Save Select in dataInput
@@ -109,7 +116,7 @@ const NewProduct = () => {
     //Checked form
     const checkForm = () => {
         const { name, category, price, brand, description } = dataInput;
-        return validateData([name, category, price, brand, description]);
+        return validateData([name, category, price, brand, description]) && images.length > 0;
     }
 
     const files = images.map((file, index) => (
@@ -173,15 +180,11 @@ const NewProduct = () => {
                         onChange={handleInput}
                         value={dataInput.brand}
                     />
-
-                    <FormControl
-                        required
-                        controlId="description"
-                        vertical={false}
-                        className="pb-2"
-                        title={ViewStrings.description}
-                        placeholder={ViewStrings.placeholderDescription}
-                        onChange={handleInput}
+                    <FormLabel className="mb-0">{ViewStrings.description}<RequiredField /></FormLabel>
+                    <ReactQuill
+                        id="description"
+                        theme="snow"
+                        onChange={handleInputDescription}
                         value={dataInput.description}
                     />
                     <FormLabel className="mb-2">{ViewStrings.images}<RequiredField /></FormLabel>

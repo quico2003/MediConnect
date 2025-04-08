@@ -7,7 +7,6 @@ import GeneralLayout from "../../../../../Layouts/GeneralLayout/GeneralLayout";
 import PanelLayout from "../../../../../Layouts/PanelLayout/PanelLayout";
 import SectionLayout from "../../../../../Layouts/SectionLayout/SectionLayout";
 import { Button } from "react-bootstrap";
-import FormControlPassword from "../../../../../Components/Form/FormControl/FormControlPassword";
 import { validateDataCreateUser } from "../../../../../Config/GeneralFunctions";
 import { EmailRegex } from "../../../../../Utils/Regex";
 import FormControl from "../../../../../Components/Form/FormControl/FormControl";
@@ -64,8 +63,8 @@ const EditUser = () => {
     }
 
     const checkForm = () => {
-        const { firstName, secondName, specialty, email, password } = data;
-        return validateDataCreateUser([firstName, secondName, specialty, email, password])
+        const { firstName, secondName, specialty, email } = data;
+        return validateDataCreateUser([firstName, secondName, specialty, email])
             && JSON.stringify(data) !== JSON.stringify(initialData);
     }
 
@@ -113,17 +112,6 @@ const EditUser = () => {
                         onChange={handleInput}
                         placeholder={ViewStrings.edit.placeholderEmail}
                         isInvalid={data.email && !EmailRegex.test(data.email)}
-                    />
-                    <FormControlPassword
-                        required
-                        controlId="password"
-                        vertical={true}
-                        title={ViewStrings.edit.password}
-                        value={data.password}
-                        onChange={handleInput}
-                        type={"password"}
-                        placeholder={ViewStrings.edit.placeholderPassword}
-                        isInvalid={data.password && data.password.length < 6}
                     />
                 </SectionLayout>
                 <div className="d-flex justify-content-end align-items-center">

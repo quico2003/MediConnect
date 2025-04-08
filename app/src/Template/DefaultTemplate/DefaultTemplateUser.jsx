@@ -8,8 +8,11 @@ import SideBar from "./SideBar/SideBar";
 import UpperNavbar from "./UpperNavbar/UpperNavbar";
 import { toggleAdminAvatar, toggleAdminEmail, toggleAdminName } from "../../Redux/actions/AdminInfoActions";
 import { useDispatch } from "react-redux";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Configuration } from "../../Config/app.config";
+import { useSelector } from "react-redux";
+import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 const FOOTER_HEIGHT = Configuration.theme.general.footer.height;
 const NAVBAR_HEIGHT = Configuration.theme.general.navbar.height;

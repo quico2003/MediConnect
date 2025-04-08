@@ -45,8 +45,8 @@ const DeleteProductModal = ({ show, onClose, data }) => {
             }
             footer={
                 <div>
-                    <Button onClick={handleSubmit} variant="danger">{ViewStrings.delete}</Button>
                     <Button onClick={hideModal} variant="ligth">{ViewStrings.cancel}</Button>
+                    <Button onClick={handleSubmit} variant="danger">{ViewStrings.delete}</Button>
                 </div>
             }
         >

@@ -25,6 +25,7 @@ const Categories = () => {
 
     const { strings } = useContext(StringsContext);
     const ViewStrings = strings.Categories;
+    const GeneralViewStrings = strings.General.App;
 
     //Siempre usar para hacer llamadas
     const request = useRequest();
@@ -117,7 +118,7 @@ const Categories = () => {
                 <PanelLayout loaded={loaded}>
                     <ReactTable
                         searcherProps={{
-                            placeholder: "Write..."
+                            placeholder: GeneralViewStrings.write
                         }}
                         totalPages={totalPages}
                         fetching={fetching}

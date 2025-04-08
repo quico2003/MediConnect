@@ -1,3 +1,4 @@
+import moment from "moment";
 import { StorageKeys } from "../Constants/storekeys.constants";
 import { EmailRegex } from "../Utils/Regex";
 import { Configuration, isDev } from "./app.config";
@@ -50,17 +51,24 @@ export const replaceBreadcrumbTitle = (path, title) => {
 
 export const validateData = (params) => {
   for (let i = 0; i < params.length; i++) {
+
     const item = params[i];
+
     if (
       item === undefined ||
-      item === null ||
-      item === '' ||
+      item === null || 
+      (typeof item === 'string' && item.trim() === '') ||
       (Array.isArray(item) && item.length === 0)
     )
       return false;
   }
   return true;
 };
+
+//Format the date of YYYY-MM-DD hh:mm:ss to the YYYY/MM/DD
+export const dataFormater = (date, format = "YYYY/MM/DD HH:mm ") => {
+  return moment(date).format(format);
+}
 
 export const validateDataCreateUser = (params) => {
   for (let i = 0; i < params.length; i++) {
@@ -70,6 +78,7 @@ export const validateDataCreateUser = (params) => {
       item === undefined ||
       item === null ||
       item === '' ||
+      (typeof item === 'string' && item.trim() === '') ||
       (Array.isArray(item) && item.length === 0)
     )
       return false;

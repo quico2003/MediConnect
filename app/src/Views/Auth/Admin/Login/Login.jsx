@@ -107,7 +107,7 @@ const LoginAdmin = () => {
 
                 <div className="d-flex justify-content-end">
                     <Button disabled={!checkForm()} onClick={handleSubmit}>
-                        Submit
+                        {ViewStrings.buttonLogin}
                     </Button>
                 </div>
 

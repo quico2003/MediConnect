@@ -23,11 +23,8 @@ try {
     //category of product
     $category = Category::getById($db, $product->category_id);
 
-    //Admin created a product
-    $admin = Admin::get($db, $product->created_by);
-
     $product->categoryName = $category->name;
-    $product->creator = $admin->name;
+    
 
     //Realiza un array con la decodificacion del string de imagenes
     $imagesDecode = json_decode($product->images);

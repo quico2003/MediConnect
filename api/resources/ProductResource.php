@@ -17,7 +17,7 @@ class ProductResource
     {
         $itemsArray = [];
         foreach ($products as $product) {
-            $newItem = self::getProduct($product, ["guid", "name", "price", "brand", "categoryName"]);
+            $newItem = self::getProduct($product, ["guid", "name", "price", "brand", "categoryName", "uniqid"]);
             $itemsArray[] = $newItem;
         }
         return $itemsArray;
@@ -35,7 +35,7 @@ class ProductResource
 
     public static function getProductResourceAdmin(Product $product)
     {
-        $newItem = self::getProduct($product, ["guid", "name", "price", "brand", "description", "created_at", "updated_at", "categoryName", "creator", "imagesURL", "uniqid"]);
+        $newItem = self::getProduct($product, ["guid", "name", "price", "brand", "description", "created_at", "updated_at", "categoryName", "imagesURL", "uniqid"]);
         return $newItem;
     }
 

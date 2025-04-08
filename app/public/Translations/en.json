@@ -62,7 +62,7 @@
       "description": "Description",
       "created_at": "Created at",
       "updated_at": "Updated at",
-      "exit": "Exit",
+      "close": "Close",
       "errorNotification": "Error displaying category."
     },
     "Columns": {
@@ -77,6 +77,10 @@
   "Products": {
     "title": "Products",
     "buttonAdd": "+Add new",
+    "barCode": {
+      "title": "BarCode",
+      "close": "Close"
+    },
     "add": {
       "newProduct": "New Product",
       "name": "Name",
@@ -98,7 +102,7 @@
       "name": "Name",
       "price": "Price",
       "brand": "Brand",
-      "exit": "Exit",
+      "close": "Close",
       "createdAt": "Created at",
       "updatedAt": "Updated at",
       "category": "Category",
@@ -107,7 +111,7 @@
       "images": "Images"
     },
     "delete": {
-      "title": "Product Delete",
+      "title": "Delete Product",
       "descriptionAction": "Are you sure you want to delete this product?",
       "cancel": "Cancel",
       "delete": "Delete"
@@ -259,7 +263,7 @@
     },
     "view": {
       "errorMesage": "Error displaying Practitioner.",
-      "title": "Info. Practitioner",
+      "title": "Practitioner info",
       "email": "Email:",
       "firstName": "First Name:",
       "lastName": "Last Name:",
@@ -267,7 +271,7 @@
       "creator": "Creator:",
       "created_at": "Created at:",
       "updated_at": "Updated at:",
-      "buttonExit": "Exit"
+      "close": "Close"
     }
   },
   "PrivacyPolicy": {
@@ -329,11 +333,13 @@
     "App": {
       "search": "Search",
       "update": "Update",
-      "rows": "rows"
+      "rows": "rows",
+      "write": "Write..."
     },
     "Login": {
       "emailAddres": "Email address",
       "password": "Password",
+      "buttonLogin": "Login",
       "errorNotification": "Email or Password incorrect",
       "successNotification": "Admin Loged in"
     }

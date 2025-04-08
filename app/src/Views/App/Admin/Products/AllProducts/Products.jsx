@@ -19,11 +19,14 @@ import ViewProductModal from "../../../../../Modals/Products/ViewProductModal";
 import DeleteProductModal from "../../../../../Modals/Products/DeleteProductModal";
 import IconButton from "../../../../../Components/Buttons/IconButton";
 import { MdBarcodeReader } from "react-icons/md";
+import ViewBarcodeProductModal from "../../../../../Modals/Products/ViewBarcodeProductModal";
 const Products = () => {
 
     //Translations
     const { strings } = useContext(StringsContext);
     const ViewStrings = strings.Products;
+    const GeneralViewStrings = strings.General.App;
+
     const [filterSelected, setFilterSelected] = useState();
     const inputRef = useRef(null);
     //Use fetch database
@@ -46,6 +49,14 @@ const Products = () => {
         openModal: openViewProductModal,
         show: showViewProductModal,
         data: viewProductData,
+    } = useModalManager();
+
+    //Modal of view barcode Product
+    const {
+        closeModal: closeViewBarcodeProductModal,
+        openModal: openViewBarcodeProductModal,
+        show: showViewBarcodeProductModal,
+        data: viewBarcodeProductData,
     } = useModalManager();
 
     //Modal of delete Product
@@ -94,6 +105,10 @@ const Products = () => {
         closeViewProductModal();
     }
 
+    const handleCloseViewBarcodeProductModal = () => {
+        closeViewBarcodeProductModal();
+    }
+
     const handleAutofocus = () => {
         setAutoFocus(true);
         // Aquí es donde ponemos el foco al input
@@ -109,6 +124,12 @@ const Products = () => {
                 onClose={handleCloseViewProductModal}
                 show={showViewProductModal}
                 data={viewProductData}
+            />
+
+            <ViewBarcodeProductModal
+                onClose={handleCloseViewBarcodeProductModal}
+                show={showViewBarcodeProductModal}
+                data={viewBarcodeProductData}
             />
 
             <DeleteProductModal
@@ -135,7 +156,7 @@ const Products = () => {
                     <ReactTable
                         searcherProps={{
                             autoFocus: autoFocus,
-                            placeholder: "Write...",
+                            placeholder: GeneralViewStrings.write,
                             ref: inputRef,
                         }}
                         totalPages={totalPages}
@@ -148,6 +169,7 @@ const Products = () => {
                         }}
                         columns={ProductsColumns(
                             openViewProductModal,
+                            openViewBarcodeProductModal,
                             openDeleteProductModal
                         )}
                     />

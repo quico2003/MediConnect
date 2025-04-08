@@ -49,7 +49,7 @@ const ViewUserModal = ({ show, onClose, data }) => {
             footer={
                 <div className="d-flex justify-content-end gap-2">
                     <Button onClick={hideModal} variant="danger" size="lm">
-                        Exit
+                        {ViewStrings.close}
                     </Button>
                 </div>
             }

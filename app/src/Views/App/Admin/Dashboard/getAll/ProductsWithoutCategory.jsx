@@ -19,6 +19,7 @@ const ProductsWithoutCategory = ({ setNeedUpdate }) => {
 
     const { strings } = useContext(StringsContext);
     const ViewStrings = strings.dashboard.withoutCategories;
+    const GeneralViewStrings = strings.General.App;
 
     const request = useRequest();
     const { search } = useLocation();
@@ -103,7 +104,7 @@ const ProductsWithoutCategory = ({ setNeedUpdate }) => {
             <PanelLayout loaded={loaded}>
                 <ReactTable
                     searcherProps={{
-                        placeholder: "Write..."
+                        placeholder: GeneralViewStrings.write
                     }}
                     totalPages={totalPages}
                     fetching={fetching}

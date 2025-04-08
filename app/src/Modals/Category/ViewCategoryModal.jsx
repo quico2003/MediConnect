@@ -5,6 +5,7 @@ import useNotification from "../../Hooks/useNotification";
 import { useContext, useEffect, useState } from "react";
 import { EndpointsAdmin, getEndpoint } from "../../Constants/endpoints.contants";
 import { StringsContext } from "../../Context/strings.context";
+import { dataFormater } from "../../Config/GeneralFunctions";
 
 const ViewCategoryModal = ({ show, onClose, data }) => {
 
@@ -50,7 +51,7 @@ const ViewCategoryModal = ({ show, onClose, data }) => {
             footer={
                 <div className="d-flex justify-content-end gap-2">
                     <Button onClick={hideModal} variant="danger" size="lm">
-                        {ViewStrings.exit}
+                        {ViewStrings.close}
                     </Button>
                 </div>
             }>
@@ -65,10 +66,10 @@ const ViewCategoryModal = ({ show, onClose, data }) => {
                             <span className="fw-bold">{ViewStrings.description}:</span><span>{dataCategory?.description}</span>
                         </div>
                         <div className="d-flex flex-column gap-2 mb-2">
-                            <span className="fw-bold">{ViewStrings.created_at}:</span><span>{dataCategory?.created_at}</span>
+                            <span className="fw-bold">{ViewStrings.created_at}:</span><span>{dataFormater(dataCategory?.created_at)}</span>
                         </div>
                         <div className="d-flex flex-column gap-2 mb-2">
-                            <span className="fw-bold">{ViewStrings.updated_at}:</span><span>{dataCategory?.updated_at}</span>
+                            <span className="fw-bold">{ViewStrings.updated_at}:</span><span>{dataFormater(dataCategory?.updated_at)}</span>
                         </div>
                     </div>
                 </Modal.Body>

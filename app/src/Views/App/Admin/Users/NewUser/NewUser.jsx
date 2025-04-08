@@ -2,14 +2,14 @@ import GeneralLayout from "../../../../../Layouts/GeneralLayout/GeneralLayout";
 import PanelLayout from "../../../../../Layouts/PanelLayout/PanelLayout";
 import SectionLayout from "../../../../../Layouts/SectionLayout/SectionLayout";
 import FormControlPassword from "../../../../../Components/Form/FormControl/FormControlPassword";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import FormControl from "../../../../../Components/Form/FormControl/FormControl";
 import { Button } from "react-bootstrap";
 import useRequest from "../../../../../Hooks/useRequest";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import useNotification from "../../../../../Hooks/useNotification";
 import { validateDataCreateUser } from "../../../../../Config/GeneralFunctions";
-import { EmailRegex } from "../../../../../Utils/Regex";
+import { EmailRegex, PasswordRegex } from "../../../../../Utils/Regex";
 import { EndpointsAdmin, getEndpoint } from "../../../../../Constants/endpoints.contants";
 import { Paths } from "../../../../../Constants/paths.constants";
 import { Views } from "../../../../../Constants/views.constants";
@@ -26,7 +26,7 @@ const NewUser = () => {
     const { showNotification: successNotification } = useNotification("success");
     const { showNotification: errorNotification } = useNotification();
 
-    const [data, setData] = useState({});
+    const [data, setData] = useState({password: "Test1234!"});
 
     const handleSubmit = () => {
         if (checkForm()) {
@@ -96,6 +96,7 @@ const NewUser = () => {
                     />
                     <FormControlPassword
                         required
+                        show = {true}
                         controlId="password"
                         vertical={true}
                         title={ViewStrings.password}
@@ -103,7 +104,7 @@ const NewUser = () => {
                         onChange={handleInput}
                         type={"password"}
                         placeholder={ViewStrings.placeholderPassword}
-                        isInvalid={data.password && data.password.length < 6}
+                        isInvalid={data.password && !PasswordRegex.test(data.password)}
                     />
                 </SectionLayout>
                 <div className="d-flex justify-content-end align-items-center">
