@@ -334,7 +334,10 @@
       "search": "Search",
       "update": "Update",
       "rows": "rows",
-      "write": "Write..."
+      "write": "Write...",
+      "messages": {
+        "profileUpdated": "User updated"
+      }
     },
     "Login": {
       "emailAddres": "Email address",

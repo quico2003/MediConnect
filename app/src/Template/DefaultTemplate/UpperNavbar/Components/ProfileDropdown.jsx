@@ -14,9 +14,10 @@ import useLoaded from "../../../../Hooks/useLoaded";
 import { StringsContext } from "../../../../Context/strings.context";
 import { StorageKeys } from "../../../../Constants/storekeys.constants";
 import { useDispatch } from "react-redux";
-import { toogleClearAll } from "../../../../Redux/actions/AdminInfoActions";
+import { toogleClearAllAdmin } from "../../../../Redux/actions/AdminInfoActions";
+import { toogleClearAllUser } from "../../../../Redux/actions/UserInfoAction";
 
-const ProfileDropdown = () => {
+const ProfileDropdown = ({ role }) => {
   const { strings } = useContext(StringsContext);
   const ViewStrings = strings.ProfileDropdown;
 
@@ -27,20 +28,31 @@ const ProfileDropdown = () => {
   const { push, replace } = useHistory();
   const { showNotification: errorNotification } = useNotification();
 
-  const profile = useSelector((state) => state.AdminInfo)
+  const profileAdmin = useSelector((state) => state.AdminInfo)
+  const profileUser = useSelector((state) => state.UserInfo)
 
   const handleSignOut = () => {
     request("post", getEndpoint(EndpointsAdmin.Auth.logout))
       .then((res) => {
         localStorage.clear();
-        dispatch(toogleClearAll());
-        replace(Paths[Views.loginAdmin].path);
+        if (role) {
+          dispatch(toogleClearAllUser());
+          replace(Paths[Views.login].path);
+        } else {
+          dispatch(toogleClearAllAdmin());
+          replace(Paths[Views.loginAdmin].path);
+        }
       })
       .catch((err) => errorNotification(err.message));
   };
 
-  const handleOpenProfile = () => push(Paths[Views.profileView].path);
-  const handleOpenAccount = () => push(Paths[Views.accountView].path);
+  const handleOpenProfile = () => {
+    if (!role) push(Paths[Views.profileView].path);
+
+  }
+  const handleOpenAccount = () => {
+    if (!role) push(Paths[Views.accountView].path);
+  }
 
   return (
     <>
@@ -52,13 +64,12 @@ const ProfileDropdown = () => {
             <img
               className="rounded-circle"
               src={
-                profile.avatar ||
-                `https://www.gravatar.com/avatar/${profile.name}?d=identicon`
+                profileAdmin.avatar ||
+                `https://www.gravatar.com/avatar/${profileAdmin.name}?d=identicon`
               }
               alt={ViewStrings.Profile}
               width={25}
               height={25}
-              style={{}}
             />
 
           </Dropdown.Toggle>
@@ -96,15 +107,19 @@ const ProfileDropdown = () => {
             <img
               className="rounded-circle"
               src={
-                profile.avatar ||
-                `https://www.gravatar.com/avatar/${profile.name}?d=identicon`
+                profileAdmin.avatar ||
+                `https://www.gravatar.com/avatar/${role ? profileAdmin.userName : profileAdmin.name}?d=identicon`
               }
               alt={ViewStrings.Profile}
               width={25}
               height={25}
               style={{}}
             />
-            <span className="ms-2">{profile.name}</span>
+            <span className="ms-2">
+              {role ?
+                profileUser.userName : profileAdmin.name
+              }
+            </span>
 
           </Dropdown.Toggle>
 

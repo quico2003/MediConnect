@@ -14,6 +14,6 @@ export const toggleAdminAvatar = (payload) => ({
   type: AdminInfoTypes.TOGGLE_AVATAR,
   payload,
 });
-export const toogleClearAll = () => ({
+export const toogleClearAllAdmin = () => ({
   type: AdminInfoTypes.TOGGLE_CLEAR_ALL
 });

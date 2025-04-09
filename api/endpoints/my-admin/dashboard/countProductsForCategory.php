@@ -11,7 +11,6 @@ try {
         checkAuthAdmin();
 
         $productsForCategories = Category::getProductsForCategories($db);
-        logAPI($productsForCategories);
 
         $db->commit();
 

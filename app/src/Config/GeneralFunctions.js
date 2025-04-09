@@ -56,7 +56,7 @@ export const validateData = (params) => {
 
     if (
       item === undefined ||
-      item === null || 
+      item === null ||
       (typeof item === 'string' && item.trim() === '') ||
       (Array.isArray(item) && item.length === 0)
     )
@@ -100,7 +100,7 @@ export const validateDataCreateUser = (params) => {
 };
 
 
-export const validateLoginAdmin = (email, password) => {
+export const validateLogin = (email, password) => {
 
   if (email && EmailRegex.test(email)) {
     if (password && password.length >= 6) {

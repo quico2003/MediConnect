@@ -2,11 +2,11 @@ import { useSelector } from "react-redux";
 import ToggleSideBarButton from "../../../Components/ToggleSideBarButton/ToggleSideBarButton";
 import { Configuration } from "../../../Config/app.config";
 
-import logoMaximisedEn from "../../../Assets/images/Logo/logo-maximised-en.png";
-import logoMaximisedEs from "../../../Assets/images/Logo/logo-maximised-es.png";
+import logoMaximisedAdmin from "../../../Assets/images/Logo/logo-maximised-admin.png";
+import logoMaximisedUser from "../../../Assets/images/Logo/logo-maximised-user.png";
 import logoMinimised from "../../../Assets/images/Logo/logo-minimised.png";
 
-const SideBarBrand = () => {
+const SideBarBrand = ({ role }) => {
   const { isMobileView } = useSelector((state) => state.Config);
 
   const { sidebar } = useSelector((state) => state.Config);
@@ -15,8 +15,7 @@ const SideBarBrand = () => {
   const selectedLanguage = localStorage.getItem("ADMIN_LANGUAGE_SELECTED");
 
   // Determinar qué imagen utilizar según el idioma seleccionado
-  let logoMaximised =
-    selectedLanguage === "es" ? logoMaximisedEs : logoMaximisedEn;
+  let logoMaximised = role ? logoMaximisedUser : logoMaximisedAdmin;
 
   return (
     <div
@@ -29,8 +28,6 @@ const SideBarBrand = () => {
           }`}
       >
         {Configuration.theme.general.sidebar.showLogo ? (
-
-
           <img
             className="img-fluid"
             title={`${Configuration.APP_NAME} logo`}
@@ -47,9 +44,7 @@ const SideBarBrand = () => {
               transition: ".3s",
             }}
           />
-
         ) : (
-
           Configuration.theme.general.sidebar.showTitle &&
           (expanded || isMobileView ? (
             <h1 className="my-5">{Configuration.APP_NAME}</h1>

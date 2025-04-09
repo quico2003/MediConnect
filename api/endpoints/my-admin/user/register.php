@@ -30,7 +30,7 @@ try {
         $userProfile = new UserProfile($db);
         $userProfile->user_id = $user->id;
         $userProfile->first_name = $input->firstName;
-        $userProfile->second_name = $input->lastName;
+        $userProfile->last_name = $input->lastName;
         $userProfile->specialty = $input->specialty;
         $userProfile->avatar = "https://www.gravatar.com/avatar/$user->email?d=identicon";
         $userProfile->store();

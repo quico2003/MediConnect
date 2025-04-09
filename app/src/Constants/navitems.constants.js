@@ -11,7 +11,7 @@ import { Views } from "./views.constants";
  * @array children: Mandatory when no items key exist in the object. Will must contains object og "item" type
  */
 
-export const NavItems = () => {
+export const NavItemsAdmin = () => {
   const { strings } = useContext(StringsContext);
   const ViewStrings = strings.navBar;
 
@@ -25,9 +25,9 @@ export const NavItems = () => {
       id: "product_section",
       title: ViewStrings.ControlPanelProducts,
       items: [
-      Paths[Views.categories],
-      Paths[Views.products]
-    ],
+        Paths[Views.categories],
+        Paths[Views.products]
+      ],
     },
     {
       id: "users_section",
@@ -36,6 +36,20 @@ export const NavItems = () => {
         Paths[Views.users]
       ],
     },
+  ];
+  return items;
+};
+export const NavItemsUser = () => {
+  const { strings } = useContext(StringsContext);
+  const ViewStrings = strings.navBar;
+
+  const items = [
+    {
+      id: "dashboard_section",
+      title: ViewStrings.Dashboard,
+      items: [Paths[Views.home]],
+    },
+   
   ];
   return items;
 };

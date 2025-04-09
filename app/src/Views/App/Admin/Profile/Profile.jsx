@@ -49,11 +49,11 @@ const Profile = () => {
     if (checkForm()) {
       request("post", getEndpoint(EndpointsAdmin.Auth.updateAdminProfile), { ...profile })
         .then(() => {
+          successNotification(GeneralStrings.messages.profileUpdated)
           window.location.reload();
-          successNotification(ViewStrings.messages.profileUpdated)
         })
-        .catch((err) => errorNotification(err.message));
-    } else errorNotification(ViewStrings.messages.inputError);
+        .catch((err) => errorNotification(err.message))
+    }
   };
 
   const handleSubmitImage = (e) => {

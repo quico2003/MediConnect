@@ -25,12 +25,12 @@ try {
     $usersCount = User::getAllCount($db, $input->search, $filter);
 
     foreach ($users as $user) {
-        $userProfile = UserProfile::getById($db, $user->id);
+        $userProfile = UserProfile::getByUserId($db, $user->id);
         $admin = Admin::get($db, $user->created_by);
 
         $user->creator = $admin->name;
         $user->firstName = $userProfile->first_name;
-        $user->secondName = $userProfile->second_name;
+        $user->secondName = $userProfile->last_name;
         $user->specialty = $userProfile->specialty;
         $user->avatar = $userProfile->avatar;
 

@@ -37,6 +37,7 @@ const Account = () => {
         .then(() => {
           successNotification(ViewStrings.messages.updateEmail);
           replace(Paths[Views.loginAdmin].path);
+          localStorage.clear();
         })
         .catch((err) => errorNotification(err.message));
     }
@@ -48,6 +49,7 @@ const Account = () => {
         .then(() => {
           successNotification(ViewStrings.messages.updatePassword);
           replace(Paths[Views.loginAdmin].path);
+          localStorage.clear();
         })
         .catch((err) => errorNotification(err.message));
     }

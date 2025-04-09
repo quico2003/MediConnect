@@ -3,7 +3,7 @@ import { Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import { Configuration } from "../../Config/app.config";
-import { EndpointsAdmin, getEndpoint } from "../../Constants/endpoints.contants";
+import { EndpointsAdmin, EndpointUser, getEndpoint } from "../../Constants/endpoints.contants";
 import { StorageKeys } from "../../Constants/storekeys.constants";
 import { UserContext } from "../../Context/user.context";
 import useRequest from "../../Hooks/useRequest";
@@ -17,7 +17,7 @@ import { useDispatch } from "react-redux";
 const FOOTER_HEIGHT = Configuration.theme.general.footer.height;
 const NAVBAR_HEIGHT = Configuration.theme.general.navbar.height;
 
-const DefaultTemplate = ({ children, ...props }) => {
+const DefaultTemplate = ({ children, role }) => {
   const request = useRequest();
   const dispatch = useDispatch();
   const { menuOpen } = useSideBar();
@@ -32,15 +32,26 @@ const DefaultTemplate = ({ children, ...props }) => {
   const { backgroundColor } = Configuration.theme.general.app;
 
   useEffect(() => {
-    checkUser();
-  }, []);
+    if (role) checkUser();
+    else checkAdmin();
+  }, [role]);
 
-  const checkUser = () => {
+  const checkAdmin = () => {
     request("get", getEndpoint(EndpointsAdmin.Auth.checkAdmin)).then((res) => {
       const { token, email, avatar, name } = res.data;
       dispatch(toggleAdminName(name));
       dispatch(toggleAdminEmail(email));
       dispatch(toggleAdminAvatar(avatar));
+      localStorage.setItem(StorageKeys.EMAIL, email);
+      localStorage.setItem(StorageKeys.TOKEN, token);
+    });
+  };
+  const checkUser = () => {
+    request("get", getEndpoint(EndpointUser.Auth.checkUser)).then((res) => {
+      const { token, email, avatar, firstName, lastName } = res.data;
+      dispatch(toggleUserName({ firstName, lastName }));
+      dispatch(toggleUserEmail(email));
+      dispatch(toggleUserAvatar(avatar));
       localStorage.setItem(StorageKeys.EMAIL, email);
       localStorage.setItem(StorageKeys.TOKEN, token);
     });
@@ -69,7 +80,7 @@ const DefaultTemplate = ({ children, ...props }) => {
           left: calculateSideBarWidth(),
         }}
       >
-        <SideBar />
+        <SideBar role={role} />
       </div>
       <div
         className={`w-100 ${backgroundColor}`}
@@ -78,7 +89,7 @@ const DefaultTemplate = ({ children, ...props }) => {
           overflowY: "auto",
         }}
       >
-        <UpperNavbar />
+        <UpperNavbar role={role} />
         <div
           className=""
           style={{ height: `calc(100vh - ${FOOTER_HEIGHT}px)` }}
@@ -95,14 +106,7 @@ const DefaultTemplate = ({ children, ...props }) => {
         </div>
       </div>
 
-      <Button
-        variant="link"
-        as={Link}
-        to="/Y2hldHV1MTY="
-        style={{ position: "fixed", top: -48, left: -16 }}
-      >
-        Easter Egg!
-      </Button>
+
     </div>
   );
 };

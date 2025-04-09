@@ -8,7 +8,7 @@ class UserProfile
     public int $id;
     public int $user_id;
     public string $first_name;
-    public string $second_name;
+    public string $last_name;
     public string $specialty;
     public string|null $avatar;
 
@@ -31,7 +31,7 @@ class UserProfile
         $stmt = $this->conn->prepare($query);
         $stmt->bindValue(":user_id", $this->user_id);
         $stmt->bindParam(":first_name", $this->first_name);
-        $stmt->bindParam(":second_name", $this->second_name);
+        $stmt->bindParam(":second_name", $this->last_name);
         $stmt->bindParam(":specialty", $this->specialty);
         $stmt->bindParam(":avatar", $this->avatar);
 
@@ -50,7 +50,7 @@ class UserProfile
 
         $stmt = $this->conn->prepare($query);
         $stmt->bindValue(":first_name", $this->first_name);
-        $stmt->bindValue(":second_name", $this->second_name);
+        $stmt->bindValue(":second_name", $this->last_name);
         $stmt->bindValue(":specialty", $this->specialty);
         $stmt->bindValue(":avatar", $this->avatar);
         $stmt->bindValue(":id", $this->id);
@@ -63,13 +63,13 @@ class UserProfile
         }
     }
 
-    public static function getById(PDO $db, string $id): UserProfile
+    public static function getByUserId(PDO $db, string $userId): UserProfile
     {
         $query = "SELECT * FROM `" . self::$table_name . "` WHERE user_id=:id";
 
         $stmt = $db->prepare($query);
 
-        $stmt->bindParam(":id", $id);
+        $stmt->bindParam(":id", $userId);
         if ($stmt->execute()) {
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 return self::getMainObject($db, $row);
@@ -86,7 +86,7 @@ class UserProfile
         $newObj->id = intval($row['id']);
         $newObj->user_id = intval($row['user_id']);
         $newObj->first_name = $row['first_name'];
-        $newObj->second_name = $row['second_name'];
+        $newObj->last_name = $row['last_name'];
         $newObj->specialty = $row['specialty'];
         $newObj->avatar = $row['avatar'];
         return $newObj;

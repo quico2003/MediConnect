@@ -97,6 +97,22 @@ class User
         }
         createException("User not foud");
     }
+   
+    public static function get(PDO $db, int $id): User
+    {
+        $query = "SELECT * FROM `" . self::$table_name . "` WHERE id=:id AND deleted_at IS NULL";
+
+        $stmt = $db->prepare($query);
+
+        $stmt->bindParam(":id", $id);
+
+        if ($stmt->execute()) {
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                return self::getMainObject($db, $row);
+            }
+        }
+        createException("User not foud");
+    }
 
     public static function getAllCount(PDO $db, string $search = "", array $filters = []): int
     {

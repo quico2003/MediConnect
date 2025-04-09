@@ -8,11 +8,11 @@ export const Views = {
   categories: "categories",
   new_category: "new_category",
   edit_category: "edit_category",
-  
+
   products: "products",
   new_product: "new_product",
-  edit_product: "edit_product", 
-  
+  edit_product: "edit_product",
+
   users: "users",
   new_user: "new_user",
   edit_user: "edit_user",
@@ -21,7 +21,8 @@ export const Views = {
   accountView: "accountView",
 
   privacyPolicy: "privaciPolicy",
-  
+  privacyPolicyUser: "privaciPolicyUser",
+
   //#region General
   auth: "auth",
   app: "app",

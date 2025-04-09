@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Cell, Pie } from 'recharts';
 import { EndpointsAdmin, getEndpoint } from '../../../../../Constants/endpoints.contants';
 import useRequest from '../../../../../Hooks/useRequest';
@@ -20,7 +20,7 @@ const CategoriesChart = ({ needUpdate, setNeedUpdate }) => {
             setNeedUpdate(!needUpdate)
         }
     }, [needUpdate])
-    
+
     useEffect(() => {
         fetchData();
     }, [])
@@ -56,6 +56,12 @@ const CategoriesChart = ({ needUpdate, setNeedUpdate }) => {
         return color;
     };
 
+    const cells = useMemo(() => {
+        return data.map((entry, index) => (
+            <Cell key={`cell-${index}`} fill={getRandomColor()} />
+        ));
+    }, [data]);
+
     return (
         <PanelLayout loaded={loaded}>
             <ResponsiveContainer width="100%" height={435}>
@@ -68,12 +74,9 @@ const CategoriesChart = ({ needUpdate, setNeedUpdate }) => {
                         label={renderCustomizedLabel}
                         outerRadius={150}
                         fill="#8884d8"
-                        
                         dataKey="value"
                     >
-                        {data.map((entry, index) => (
-                            <Cell key={`cell-${index}`} fill={getRandomColor()} />
-                        ))}
+                        {cells}
                     </Pie>
                     <Legend />
                 </PieChart>

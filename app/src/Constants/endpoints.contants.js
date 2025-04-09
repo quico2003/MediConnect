@@ -44,13 +44,15 @@ export const EndpointsAdmin = {
   },
 
   Dashboard: {
-    countProductsForCategory: `${BASE_URL_ADMIN}/dashboard/countProductsForCategory`
+    countProductsForCategory: `${BASE_URL_ADMIN}/dashboard/countProductsForCategory`,
+    typeCount: `${BASE_URL_ADMIN}/dashboard/typeCount`,
   }
 };
 
 export const EndpointUser = {
   Auth: {
-
+    loginUser: `${BASE_URL_USER}/auth/login`,
+    checkUser: `${BASE_URL_USER}/auth/checkUser`
   },
 };
 

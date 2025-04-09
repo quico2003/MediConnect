@@ -21,12 +21,12 @@ try {
     ]);
 
     $user = User::getByGuid($db, $input->guid);
-    $userProfile = UserProfile::getById($db, $user->id);
+    $userProfile = UserProfile::getByUserId($db, $user->id);
 
     $user->email = $input->email;
     $user->password = password_hash($input->password, PASSWORD_DEFAULT);
     $userProfile->first_name = $input->firstName;
-    $userProfile->second_name = $input->secondName;
+    $userProfile->last_name = $input->secondName;
     $userProfile->specialty = $input->specialty;
 
     $user->update();

@@ -19,7 +19,6 @@ import DefaultTemplate from "./Template/DefaultTemplate/DefaultTemplate";
 import { getLanguageSelected } from "./Utils/Translations";
 import InMaintenance from "./Views/InMaintenance";
 import AuthLayoutUser from "./Template/AuthLayout/AuthLayoutUser";
-import DefaultTemplateUser from "./Template/DefaultTemplate/DefaultTemplateUser";
 
 
 const App = () => {
@@ -81,7 +80,7 @@ const App = () => {
         )}
         
         {layoutType === "adminApp" && (
-          <DefaultTemplate>{renderContent(route)}</DefaultTemplate>
+          <DefaultTemplate role={0}>{renderContent(route)}</DefaultTemplate>
         )}
 
         {/* Region User */}
@@ -91,7 +90,7 @@ const App = () => {
         )}
         
         {layoutType === "app" && (
-          <DefaultTemplateUser>{renderContent(route)}</DefaultTemplateUser>
+          <DefaultTemplate role={1}>{renderContent(route)}</DefaultTemplate>
         )}
         
         {layoutType === null && renderContent(route)}

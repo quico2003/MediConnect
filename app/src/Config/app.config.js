@@ -43,7 +43,7 @@ export const Configuration = {
         defaultViewMode: "card", //list - card
       },
       footer: {
-        height: 30,
+        height: 65,
       },
       navbar: {
         height: 75,

@@ -18,8 +18,9 @@ import EditProduct from "../../Views/App/Admin/Products/EditProduct/EditProduct"
 import NewUser from "../../Views/App/Admin/Users/NewUser/NewUser";
 import Users from "../../Views/App/Admin/Users/AllUsers/Users";
 import EditUser from "../../Views/App/Admin/Users/EditUsers/EditUser";
-import PrivacyPolicy from "../../Views/App/Admin/PrivacyPolicy/PrivacyPolicy";
 import LoginUser from "../../Views/Auth/User/Login/login";
+import Home from "../../Views/App/User/Home";
+import PrivacyPolicy from "../../Views/App/PrivacyPolicy/PrivacyPolicy";
 
 
 const getRoute = (path, component, exact = true) => ({
@@ -35,7 +36,9 @@ export const AuthRoutes = [
 ];
 
 export const AppRoutes = [
+  getRoute(Paths[Views.home].path, Home),
 
+  getRoute(Paths[Views.privacyPolicyUser].path, PrivacyPolicy),
 ];
 
 // Region Admin

@@ -22,10 +22,13 @@ include_once $document_root . '/objects/customexception.php';
 include_once $document_root . '/objects/_media.php';
 
 
-//Resources
-include_once $document_root . '/resources/AdminResource.php';
-include_once $document_root . '/resources/CategoryResource.php';
-include_once $document_root . '/resources/ProductResource.php';
-include_once $document_root . '/resources/UserResource.php';
+//Resources user
+include_once $document_root . '/resources/user/UserLoginResource.php';
+
+//Resources admin
+include_once $document_root . '/resources/admin/AdminResource.php';
+include_once $document_root . '/resources/admin/CategoryResource.php';
+include_once $document_root . '/resources/admin/ProductResource.php';
+include_once $document_root . '/resources/admin/UserResource.php';
 
 

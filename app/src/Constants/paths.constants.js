@@ -27,19 +27,21 @@ export const Paths = {
   [Views.profileView]: getPath(`/my-admin/profile`),
   [Views.accountView]: getPath(`/my-admin/account`),
 
-  [Views.privacyPolicy]: getPath("/my-admin/privacy-Policy"),
-
+  [Views.privacyPolicy]: getPath("/my-admin/privacy-policy"),
+  //#endregion
+  
   //#region General
   [Views.default]: getPath(`/`),
   [Views.notFound]: getPath("*"),
   [Views.inMaintenance]: getPath("/in-maintenance"),
   //#endregion
-
-  //#region Auth
+  
+  //#region User
   [Views.login]: getPath(`/login`),
-  [Views.signUp]: getPath(`/sign-up`),
-  [Views.forgotPassword]: getPath(`/forgot-password`),
-  [Views.resetPassword]: getPath(`/reset-password/:recoverycode`),
+  [Views.home]: getPath(`/home`),
+
+  
+  [Views.privacyPolicyUser]: getPath("/privacy-policy"),
   //#endregion
 
   //#region Dashboard

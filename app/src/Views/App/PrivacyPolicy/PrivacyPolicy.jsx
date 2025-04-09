@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { StringsContext } from "../../../../Context/strings.context";
-import PanelLayout from "../../../../Layouts/PanelLayout/PanelLayout";
-import GeneralLayout from "../../../../Layouts/GeneralLayout/GeneralLayout";
-import ItemPrivacyPolicy from "../../../../Components/ItemPrivacyPolicy/ItemPrivacyPolicy";
+import { StringsContext } from "../../../Context/strings.context";
+import GeneralLayout from "../../../Layouts/GeneralLayout/GeneralLayout";
+import PanelLayout from "../../../Layouts/PanelLayout/PanelLayout";
+import ItemPrivacyPolicy from "../../../Components/ItemPrivacyPolicy/ItemPrivacyPolicy";
 
 const PrivacyPolicy = () => {
 
@@ -15,10 +15,10 @@ const PrivacyPolicy = () => {
                 <div className="d-flex my-4 justify-content-center">
                     <h1>{ViewStrings.title}</h1>
                 </div>
-                <ItemPrivacyPolicy 
-                num="1" 
-                title={ViewStrings.item1.title} 
-                description={ViewStrings.item1.description}
+                <ItemPrivacyPolicy
+                    num="1"
+                    title={ViewStrings.item1.title}
+                    description={ViewStrings.item1.description}
                 />
                 <ItemPrivacyPolicy
                     num="2"

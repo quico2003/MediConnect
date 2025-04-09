@@ -1,18 +1,17 @@
 import { useContext, useState } from "react";
 import Button from 'react-bootstrap/Button';
 import FormControl from "../../../../Components/Form/FormControl/FormControl";
-import { Card, Form, Image, InputGroup } from "react-bootstrap";
-import {  EndpointsAdmin, getEndpoint } from "../../../../Constants/endpoints.contants";
+import { Card, Image } from "react-bootstrap";
+import { EndpointsAdmin, getEndpoint } from "../../../../Constants/endpoints.contants";
 import useRequest from "../../../../Hooks/useRequest";
 import { Paths } from "../../../../Constants/paths.constants";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { Views } from "../../../../Constants/views.constants";
 import { StorageKeys } from "../../../../Constants/storekeys.constants";
-import { UserContext } from "../../../../Context/user.context";
-import logo from "../../../../Assets/images/Logo/logo-maximised-en.png"
+import logo from "../../../../Assets/images/Logo/logo-maximised-admin.png"
 import FormControlPassword from "../../../../Components/Form/FormControl/FormControlPassword";
 import { EmailRegex } from "../../../../Utils/Regex";
-import { validateLoginAdmin } from "../../../../Config/GeneralFunctions";
+import { validateLogin } from "../../../../Config/GeneralFunctions";
 import { StringsContext } from "../../../../Context/strings.context";
 import useNotification from "../../../../Hooks/useNotification";
 import { toggleAdminAvatar, toggleAdminEmail, toggleAdminName } from "../../../../Redux/actions/AdminInfoActions";
@@ -28,7 +27,6 @@ const LoginAdmin = () => {
     const request = useRequest();
     const { replace } = useHistory();
 
-    const { setUser } = useContext(UserContext);
 
     const { showNotification: successNotification } = useNotification("success");
     const { showNotification: errorNotification } = useNotification();
@@ -43,7 +41,6 @@ const LoginAdmin = () => {
     const handleInput = (e) => {
         const { id, value } = e.target;
         setData({ ...data, [id]: value });
-
     }
 
     //This function fetch the API to find the Administrator
@@ -65,12 +62,12 @@ const LoginAdmin = () => {
             replace(Paths[Views.homeAdmin].path);
             successNotification(ViewStrings.successNotification)
         })
-            .catch((err) => errorNotification(ViewStrings.errorNotification));
+            .catch(() => errorNotification(ViewStrings.errorNotification));
     };
 
     const checkForm = () => {
         const { email, password } = data;
-        return validateLoginAdmin(email, password);
+        return validateLogin(email, password);
     }
 
     //Render to DOM
@@ -80,7 +77,7 @@ const LoginAdmin = () => {
             <Card.Header className="d-flex justify-content-center">
                 <Image src={logo} fluid />
             </Card.Header>
-            <Card.Body className="">
+            <Card.Body>
                 <FormControl
                     title={ViewStrings.emailAddres}
                     required

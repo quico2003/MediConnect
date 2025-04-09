@@ -8,7 +8,7 @@ $db = $database->getConnection();
 $data = postInput();
 
 try {
-    
+
     $db->beginTransaction();
     checkAuthUser(false);
 
@@ -18,27 +18,27 @@ try {
     ]);
 
     $user = User::getByEmail($db, $input->email);
-    $userProfile = UserProfile::getById($db, $user->id);
-
+    logAPI($user);
+    $userProfile = UserProfile::getByUserId($db, $user->id);
+    logAPI($userProfile);
     $user->firstName = $userProfile->first_name;
-    $user->secondName = $userProfile->second_name;
+    $user->lastName = $userProfile->last_name;
     $user->specialty = $userProfile->specialty;
     $user->avatar = $userProfile->avatar;
-
     logAPI($user);
-    
+
     if ($user && password_verify($input->password, $user->password)) {
         $user->createSession();
-    }else{
+    } else {
         createException('Wrong password or email', 401);
     }
 
 
     $db->commit();
-    $data = UserResource::getSimpleUserWithLogin($user);
+    $data = UserLoginResource::getSimpleUserLogin($user);
 
     Response::sendResponse(['data' => $data]);
-    
+
 } catch (\Exception $th) {
     $db->rollBack();
     print_r(json_encode(array("status" => false, "message" => $th->getMessage(), 'code' => $th->getCode())));
