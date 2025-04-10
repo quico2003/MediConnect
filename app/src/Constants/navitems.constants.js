@@ -47,7 +47,7 @@ export const NavItemsUser = () => {
     {
       id: "dashboard_section",
       title: ViewStrings.Dashboard,
-      items: [Paths[Views.home]],
+      items: [Paths[Views.homeUser]],
     },
    
   ];

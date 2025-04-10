@@ -1,36 +1,27 @@
 <?php
 
-include_once '../../../config/config.php';
+include_once "../../../config/config.php";
 
 $database = new Database();
 $db = $database->getConnection();
 
-$data = getInput();
-
 try {
     $db->beginTransaction();
-    checkAuthAdmin();
+    $userId = checkAuthUser();
 
-    $input = validate($data, [
-        "guid" => "required|string"
-    ]);
-
-    $user = User::getByGuid($db, $input->guid);
-
+    $user = User::get($db, $userId);
     $userProfile = UserProfile::getByUserId($db, $user->id);
-
-    $admin = Admin::get($db, $user->created_by);
-
-    $user->creator = $admin->name;
     $user->firstName = $userProfile->first_name;
     $user->lastName = $userProfile->last_name;
     $user->specialty = $userProfile->specialty;
     $user->avatar = $userProfile->avatar;
 
-    $usersResource = UserResource::getSimpleUser($user);
+    $resourceUser = UserResource::getUserProfile($user);
 
     $db->commit();
-    Response::sendResponse(["data" => $usersResource]);
+    Response::sendResponse([
+        "data" => $resourceUser
+    ]);
 
 } catch (\Exception $th) {
     $db->rollBack();

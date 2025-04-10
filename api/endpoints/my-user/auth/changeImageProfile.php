@@ -1,19 +1,20 @@
 <?php
 
-include_once '../../../config/config.php';
+include_once "../../../config/config.php";
 
 $database = new Database();
 $db = $database->getConnection();
 
 try {
     $db->beginTransaction();
-    $adminId = checkAuthAdmin();
+    $userId = checkAuthUser();
 
     if (!$_FILES)
-        createException('No files selected');
+        createException("No files selected");
     $files = getFiles();
 
-    $admin = Admin::get($db, $adminId);
+    $user = User::get($db, $userId);
+    $userProfile = UserProfile::getByUserId($db, $user->id);
 
     foreach ($files as $index => $file) {
 
@@ -26,20 +27,21 @@ try {
 
         $extension = "." . pathinfo($file->fileName, PATHINFO_EXTENSION);
 
-        $filename = $admin->guid . $extension;
+        $filename = $user->guid . $extension;
 
-        $filePath = FileStorage::FilePathAdmin($filename);
+        $filePath = FileStorage::FilePathUser($filename);
 
         move_uploaded_file($file->tempPath, $filePath);
 
-        $admin->avatar = FileStorage::FileAdminURL($filename);
-        $admin->update();
+        $userProfile->avatar = FileStorage::FileUserURL($filename);
+        $userProfile->update();
     }
 
     $db->commit();
     Response::sendResponse([
-        "file" => $admin->avatar
+        "file" => $userProfile->avatar
     ]);
+
 } catch (\Exception $th) {
     $db->rollBack();
     print_r(json_encode(array("status" => false, "message" => $th->getMessage(), 'code' => $th->getCode())));

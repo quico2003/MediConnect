@@ -49,10 +49,14 @@ export const EndpointsAdmin = {
   }
 };
 
-export const EndpointUser = {
+export const EndpointsUser = {
   Auth: {
     loginUser: `${BASE_URL_USER}/auth/login`,
-    checkUser: `${BASE_URL_USER}/auth/checkUser`
+    get: `${BASE_URL_USER}/auth/get`,
+    checkUser: `${BASE_URL_USER}/auth/checkUser`,
+    completeUser: `${BASE_URL_USER}/auth/completeUser`,
+    logout: `${BASE_URL_USER}/auth/logout`,
+    changeImage: `${BASE_URL_USER}/auth/changeImageProfile`,
   },
 };
 

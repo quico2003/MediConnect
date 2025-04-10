@@ -7,9 +7,9 @@ $db = $database->getConnection();
 
 try {
     $db->beginTransaction();
-    $adminId = checkAuthAdmin();
+    $uderId = checkAuthUser();
 
-    $session = Admin::get($db, $adminId);
+    $session = User::get($db, $uderId);
     $session->logout();
 
     $db->commit();

@@ -44,7 +44,7 @@ const SideBar = ({ role }) => {
 
   const renderPrivacyPolicy = () => {
 
-    if (role) return "/privacy-policy";
+    if (role) return "/my-user/privacy-policy";
     else return "/my-admin/privacy-policy";
   }
 

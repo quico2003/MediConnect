@@ -14,7 +14,7 @@ class UserLoginResource
 
     public static function getSimpleUserLogin(User $user)
     {
-        $newItem = self::getUser($user, ["email", "firstName", "lastName", "specialty", "avatar", "token", "expiredate"]);
+        $newItem = self::getUser($user, ["guid", "email", "firstName", "lastName", "avatar", "token", "expiredate", "first_login"]);
         return $newItem;
     }
 

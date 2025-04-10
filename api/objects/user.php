@@ -16,6 +16,7 @@ class User
     public string|null $deleted_at;
     public string|null $token;
     public string|null $expiredate;
+    public bool $first_login;
 
     public function __construct(PDO $db)
     {
@@ -80,6 +81,13 @@ class User
             return $arrayToReturn;
         }
         createException($stmt->errorInfo());
+    }
+
+    function logout()
+    {
+        $this->token = null;
+        $this->expiredate = null;
+        return $this->update();
     }
 
     public static function getByGuid(PDO $db, string $guid): User
@@ -147,8 +155,8 @@ class User
         $query = "
             UPDATE `" . self::$table_name . "` 
             SET email=:email, password=:password, searchdata=:searchData,
-            token=:token, expiredate=:expiredate, deleted_at=:deleted_at
-            WHERE id=:id";
+            token=:token, expiredate=:expiredate, deleted_at=:deleted_at,
+            first_login=:first_login WHERE id=:id";
 
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(":email", $this->email);
@@ -156,6 +164,7 @@ class User
         $stmt->bindValue(":searchData", convertSearchValues($this->serchableValues()));
         $stmt->bindParam(":deleted_at", $this->deleted_at);
         $stmt->bindParam(":expiredate", $this->expiredate);
+        $stmt->bindParam(":first_login", $this->first_login);
         $stmt->bindParam(":token", $this->token);
         $stmt->bindParam(":id", $this->id);
 
@@ -229,6 +238,7 @@ class User
         $newObj->deleted_at = $row['deleted_at'];
         $newObj->token = $row['token'];
         $newObj->expiredate = $row['expiredate'];
+        $newObj->first_login = intval($row['first_login']);
         return $newObj;
     }
 }

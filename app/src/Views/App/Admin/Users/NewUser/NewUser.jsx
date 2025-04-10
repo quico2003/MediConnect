@@ -8,7 +8,7 @@ import { Button } from "react-bootstrap";
 import useRequest from "../../../../../Hooks/useRequest";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import useNotification from "../../../../../Hooks/useNotification";
-import { validateDataCreateUser } from "../../../../../Config/GeneralFunctions";
+import { validateData, validateDataCreateUser } from "../../../../../Config/GeneralFunctions";
 import { EmailRegex, PasswordRegex } from "../../../../../Utils/Regex";
 import { EndpointsAdmin, getEndpoint } from "../../../../../Constants/endpoints.contants";
 import { Paths } from "../../../../../Constants/paths.constants";
@@ -26,7 +26,7 @@ const NewUser = () => {
     const { showNotification: successNotification } = useNotification("success");
     const { showNotification: errorNotification } = useNotification();
 
-    const [data, setData] = useState({password: "Test1234!"});
+    const [data, setData] = useState({ password: "Test1234!" });
 
     const handleSubmit = () => {
         if (checkForm()) {
@@ -46,7 +46,8 @@ const NewUser = () => {
 
     const checkForm = () => {
         const { firstName, lastName, specialty, email, password } = data;
-        return validateDataCreateUser([firstName, lastName, specialty, email, password]);
+        return validateData([firstName, lastName, specialty, email, password]) &&
+            PasswordRegex.test(password) && EmailRegex.test(email);
     }
 
     return (
@@ -96,7 +97,7 @@ const NewUser = () => {
                     />
                     <FormControlPassword
                         required
-                        show = {true}
+                        show={true}
                         controlId="password"
                         vertical={true}
                         title={ViewStrings.password}

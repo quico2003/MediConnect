@@ -23,7 +23,7 @@ class UserProfile
             SET 
             user_id=:user_id,
             first_name=:first_name,
-            second_name=:second_name,
+            last_name=:last_name,
             specialty=:specialty,
             avatar=:avatar
             ";
@@ -31,7 +31,7 @@ class UserProfile
         $stmt = $this->conn->prepare($query);
         $stmt->bindValue(":user_id", $this->user_id);
         $stmt->bindParam(":first_name", $this->first_name);
-        $stmt->bindParam(":second_name", $this->last_name);
+        $stmt->bindParam(":last_name", $this->last_name);
         $stmt->bindParam(":specialty", $this->specialty);
         $stmt->bindParam(":avatar", $this->avatar);
 
@@ -45,12 +45,12 @@ class UserProfile
 
     function update(): bool
     {
-        $query = "UPDATE `" . self::$table_name . "` SET first_name=:first_name, second_name=:second_name
+        $query = "UPDATE `" . self::$table_name . "` SET first_name=:first_name, last_name=:last_name
         , specialty=:specialty, avatar=:avatar WHERE id=:id";
 
         $stmt = $this->conn->prepare($query);
         $stmt->bindValue(":first_name", $this->first_name);
-        $stmt->bindValue(":second_name", $this->last_name);
+        $stmt->bindValue(":last_name", $this->last_name);
         $stmt->bindValue(":specialty", $this->specialty);
         $stmt->bindValue(":avatar", $this->avatar);
         $stmt->bindValue(":id", $this->id);

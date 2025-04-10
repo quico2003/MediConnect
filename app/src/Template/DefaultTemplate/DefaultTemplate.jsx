@@ -3,7 +3,7 @@ import { Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import { Configuration } from "../../Config/app.config";
-import { EndpointsAdmin, EndpointUser, getEndpoint } from "../../Constants/endpoints.contants";
+import { EndpointsAdmin, EndpointsUser, getEndpoint } from "../../Constants/endpoints.contants";
 import { StorageKeys } from "../../Constants/storekeys.constants";
 import { UserContext } from "../../Context/user.context";
 import useRequest from "../../Hooks/useRequest";
@@ -13,6 +13,7 @@ import SideBar from "./SideBar/SideBar";
 import UpperNavbar from "./UpperNavbar/UpperNavbar";
 import { toggleAdminAvatar, toggleAdminEmail, toggleAdminName } from "../../Redux/actions/AdminInfoActions";
 import { useDispatch } from "react-redux";
+import { toggleUserAvatar, toggleUserEmail, toggleUserName } from "../../Redux/actions/UserInfoAction";
 
 const FOOTER_HEIGHT = Configuration.theme.general.footer.height;
 const NAVBAR_HEIGHT = Configuration.theme.general.navbar.height;
@@ -47,7 +48,9 @@ const DefaultTemplate = ({ children, role }) => {
     });
   };
   const checkUser = () => {
-    request("get", getEndpoint(EndpointUser.Auth.checkUser)).then((res) => {
+    request("get", getEndpoint(EndpointsUser.Auth.checkUser)).then((res) => {
+      console.log({ res });
+
       const { token, email, avatar, firstName, lastName } = res.data;
       dispatch(toggleUserName({ firstName, lastName }));
       dispatch(toggleUserEmail(email));

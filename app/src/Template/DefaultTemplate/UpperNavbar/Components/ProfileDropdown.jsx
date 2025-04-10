@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import {
   EndpointsAdmin,
+  EndpointsUser,
   getEndpoint,
 } from "../../../../Constants/endpoints.contants";
 import { Paths } from "../../../../Constants/paths.constants";
@@ -32,26 +33,37 @@ const ProfileDropdown = ({ role }) => {
   const profileUser = useSelector((state) => state.UserInfo)
 
   const handleSignOut = () => {
-    request("post", getEndpoint(EndpointsAdmin.Auth.logout))
-      .then((res) => {
-        localStorage.clear();
-        if (role) {
+    if (role) {
+      request("post", getEndpoint(EndpointsUser.Auth.logout))
+        .then((res) => {
+          localStorage.clear();
           dispatch(toogleClearAllUser());
           replace(Paths[Views.login].path);
-        } else {
+
+        })
+        .catch((err) => errorNotification(err.message));
+
+    } else {
+      request("post", getEndpoint(EndpointsAdmin.Auth.logout))
+        .then((res) => {
+          localStorage.clear();
           dispatch(toogleClearAllAdmin());
           replace(Paths[Views.loginAdmin].path);
-        }
-      })
-      .catch((err) => errorNotification(err.message));
+
+        })
+        .catch((err) => errorNotification(err.message));
+    }
+
   };
 
   const handleOpenProfile = () => {
-    if (!role) push(Paths[Views.profileView].path);
-
+    if (role) push(Paths[Views.profileViewUser].path) 
+    else push(Paths[Views.profileView].path)
   }
   const handleOpenAccount = () => {
-    if (!role) push(Paths[Views.accountView].path);
+    
+    if (role) push(Paths[Views.accountViewUser].path)
+      else push(Paths[Views.accountView].path)
   }
 
   return (
@@ -61,16 +73,33 @@ const ProfileDropdown = ({ role }) => {
         <Dropdown>
           <Dropdown.Toggle as={Button} variant="link">
 
-            <img
-              className="rounded-circle"
-              src={
-                profileAdmin.avatar ||
-                `https://www.gravatar.com/avatar/${profileAdmin.name}?d=identicon`
-              }
-              alt={ViewStrings.Profile}
-              width={25}
-              height={25}
-            />
+            {role ? (
+              <img
+                className="rounded-circle"
+                src={
+                  profileUser.userAvatar ||
+                  `https://www.gravatar.com/avatar/${profileUser.name}?d=identicon`
+                }
+                alt={ViewStrings.Profile}
+                width={25}
+                height={25}
+              />
+
+            ) : (
+
+              <img
+                className="rounded-circle"
+                src={
+                  profileAdmin.avatar ||
+                  `https://www.gravatar.com/avatar/${profileAdmin.name}?d=identicon`
+                }
+                alt={ViewStrings.Profile}
+                width={25}
+                height={25}
+              />
+
+            )}
+
 
           </Dropdown.Toggle>
 
@@ -106,9 +135,9 @@ const ProfileDropdown = ({ role }) => {
 
             <img
               className="rounded-circle"
-              src={
-                profileAdmin.avatar ||
-                `https://www.gravatar.com/avatar/${role ? profileAdmin.userName : profileAdmin.name}?d=identicon`
+              src={role ?
+                profileUser.userAvatar || `https://www.gravatar.com/avatar/${profileUser.userName}?d=identicon`
+                : profileAdmin.avatar || `https://www.gravatar.com/avatar/${profileAdmin.name}?d=identicon`
               }
               alt={ViewStrings.Profile}
               width={25}

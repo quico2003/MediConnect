@@ -346,5 +346,34 @@
       "errorNotification": "Email or Password incorrect",
       "successNotification": "Admin Loged in"
     }
+  },
+  "User": {
+    "profile": {
+      "title": "Profile",
+      "buttonChangeImage": "Change",
+      "messages": {
+        "errorImageType": "Error image type",
+        "errorCode": "Error in select image"
+      },
+      "sections": {
+        "profileImage": "Profile",
+        "basicSection": "Info"
+      },
+      "inputs": {
+        "firstName":{
+          "title": "First name",
+          "palceholder": "Insert First name..."
+        },
+        "lastName":{
+          "title": "Last name",
+          "palceholder": "Insert Last name..."
+        },
+        "specialty":{
+          "title": "Specialty",
+          "palceholder": "Insert Specialty..."
+        }
+      }
+    },
+    "account": {}
   }
 }

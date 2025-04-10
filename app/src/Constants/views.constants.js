@@ -2,7 +2,7 @@
 export const Views = {
 
   //#region Administrator
-  loginAdmin: "loginAdmin",
+ 
   homeAdmin: "homeAdmin",
 
   categories: "categories",
@@ -19,9 +19,18 @@ export const Views = {
 
   profileView: "profileView",
   accountView: "accountView",
-
+  
   privacyPolicy: "privaciPolicy",
+  
+  //#region user
+  homeUser: "homeUser",
+  
+  profileViewUser: "profileViewUser",
+  accountViewUser: "accountViewUser",
+  
   privacyPolicyUser: "privaciPolicyUser",
+  //#endregion
+
 
   //#region General
   auth: "auth",
@@ -33,12 +42,11 @@ export const Views = {
   //#endregion
 
   //#region Auth
+  loginAdmin: "loginAdmin",
   login: "login",
+  completeUser: "completUser",
   signUp: "signUp",
   resetPassword: "resetPassword",
   //#endregion
 
-  //#region Dashboard
-  home: "home",
-  //#endregion
 };

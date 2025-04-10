@@ -18,14 +18,13 @@ try {
     ]);
 
     $user = User::getByEmail($db, $input->email);
-    logAPI($user);
     $userProfile = UserProfile::getByUserId($db, $user->id);
-    logAPI($userProfile);
+   
     $user->firstName = $userProfile->first_name;
     $user->lastName = $userProfile->last_name;
     $user->specialty = $userProfile->specialty;
     $user->avatar = $userProfile->avatar;
-    logAPI($user);
+   
 
     if ($user && password_verify($input->password, $user->password)) {
         $user->createSession();

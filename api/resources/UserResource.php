@@ -24,7 +24,13 @@ class UserResource
 
     public static function getSimpleUser(User $user)
     {
-        $newItem = self::getUser($user, ["guid", "email", "firstName", "secondName", "specialty", "creator", "created_at", "updated_at", "avatar"]);
+        $newItem = self::getUser($user, ["guid", "email", "firstName", "lastName", "specialty", "creator", "created_at", "updated_at", "avatar"]);
+        return $newItem;
+    }
+    
+    public static function getUserProfile(User $user)
+    {
+        $newItem = self::getUser($user, ["guid", "email", "firstName", "lastName", "specialty", "avatar"]);
         return $newItem;
     }
 

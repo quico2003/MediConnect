@@ -15,8 +15,7 @@ try {
         'guid' => 'required|string',
         'email' => 'required|string',
         'firstName' => 'required|string',
-        'secondName' => 'required|string',
-        'password' => 'required|string',
+        'lastName' => 'required|string',
         'specialty' => 'required|string',
     ]);
 
@@ -24,9 +23,8 @@ try {
     $userProfile = UserProfile::getByUserId($db, $user->id);
 
     $user->email = $input->email;
-    $user->password = password_hash($input->password, PASSWORD_DEFAULT);
     $userProfile->first_name = $input->firstName;
-    $userProfile->last_name = $input->secondName;
+    $userProfile->last_name = $input->lastName;
     $userProfile->specialty = $input->specialty;
 
     $user->update();

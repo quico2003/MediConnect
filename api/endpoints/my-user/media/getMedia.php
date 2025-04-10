@@ -14,7 +14,7 @@ try {
         'file' => "required|string",
     ]);
 
-    $path = FileStorage::FilePathAdmin($input->file);
+    $path = FileStorage::FilePathUser($input->file);
 
     $file = fopen($path, 'r');
 

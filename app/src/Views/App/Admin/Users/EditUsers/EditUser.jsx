@@ -7,7 +7,7 @@ import GeneralLayout from "../../../../../Layouts/GeneralLayout/GeneralLayout";
 import PanelLayout from "../../../../../Layouts/PanelLayout/PanelLayout";
 import SectionLayout from "../../../../../Layouts/SectionLayout/SectionLayout";
 import { Button } from "react-bootstrap";
-import { validateDataCreateUser } from "../../../../../Config/GeneralFunctions";
+import { validateData } from "../../../../../Config/GeneralFunctions";
 import { EmailRegex } from "../../../../../Utils/Regex";
 import FormControl from "../../../../../Components/Form/FormControl/FormControl";
 import { Paths } from "../../../../../Constants/paths.constants";
@@ -63,8 +63,9 @@ const EditUser = () => {
     }
 
     const checkForm = () => {
-        const { firstName, secondName, specialty, email } = data;
-        return validateDataCreateUser([firstName, secondName, specialty, email])
+        const { firstName, lastName, specialty, email } = data;
+        return validateData([firstName, lastName, specialty, email])
+            && EmailRegex.test(email)
             && JSON.stringify(data) !== JSON.stringify(initialData);
     }
 
@@ -84,11 +85,11 @@ const EditUser = () => {
                     />
                     <FormControl
                         required
-                        controlId="secondName"
+                        controlId="lastName"
                         showMaxLength={true}
                         vertical={false}
                         title={ViewStrings.edit.lastName}
-                        value={data.secondName}
+                        value={data.lastName}
                         onChange={handleInput}
                         placeholder={ViewStrings.edit.placeholderLastName}
                     />

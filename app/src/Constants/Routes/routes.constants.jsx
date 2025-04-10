@@ -19,8 +19,11 @@ import NewUser from "../../Views/App/Admin/Users/NewUser/NewUser";
 import Users from "../../Views/App/Admin/Users/AllUsers/Users";
 import EditUser from "../../Views/App/Admin/Users/EditUsers/EditUser";
 import LoginUser from "../../Views/Auth/User/Login/login";
-import Home from "../../Views/App/User/Home";
+import Home from "../../Views/App/User/Dashboard/Home";
 import PrivacyPolicy from "../../Views/App/PrivacyPolicy/PrivacyPolicy";
+import CompleteUser from "../../Views/Auth/User/CompleteUser/CompleteUser";
+import AccountUser from "../../Views/App/User/Account/AccountUser";
+import ProfileUser from "../../Views/App/User/Profile/ProfileUser";
 
 
 const getRoute = (path, component, exact = true) => ({
@@ -29,25 +32,33 @@ const getRoute = (path, component, exact = true) => ({
   exact,
 });
 
+
+
+
 // Region User
 
 export const AuthRoutes = [
   getRoute(Paths[Views.login].path, LoginUser),
+  getRoute(Paths[Views.completeUser].path, CompleteUser),
 ];
 
 export const AppRoutes = [
-  getRoute(Paths[Views.home].path, Home),
+  getRoute(Paths[Views.homeUser].path, Home),
+  getRoute(Paths[Views.accountViewUser].path, AccountUser),
+  getRoute(Paths[Views.profileViewUser].path, ProfileUser),
 
   getRoute(Paths[Views.privacyPolicyUser].path, PrivacyPolicy),
 ];
+
+
+
+
 
 // Region Admin
 
 export const AuthAdminRoutes = [
   getRoute(Paths[Views.loginAdmin].path, LoginAdmin),
 ];
-
-
 
 export const AppAdminRoutes = [
   getRoute(Paths[Views.homeAdmin].path, HomeAdmin),
