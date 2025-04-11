@@ -1,11 +1,11 @@
 import { Button, Modal } from "react-bootstrap";
-import ModalLayout from "../../Layouts/ModalLayout/ModalLayout";
-import useRequest from "../../Hooks/useRequest";
-import useNotification from "../../Hooks/useNotification";
+import ModalLayout from "../../../Layouts/ModalLayout/ModalLayout";
+import useRequest from "../../../Hooks/useRequest";
+import useNotification from "../../../Hooks/useNotification";
 import { useContext, useEffect, useState } from "react";
-import { EndpointsAdmin, getEndpoint } from "../../Constants/endpoints.contants";
-import { StringsContext } from "../../Context/strings.context";
-import { dataFormater } from "../../Config/GeneralFunctions";
+import { EndpointsAdmin, getEndpoint } from "../../../Constants/endpoints.contants";
+import { StringsContext } from "../../../Context/strings.context";
+import { dataFormater } from "../../../Config/GeneralFunctions";
 
 const ViewCategoryModal = ({ show, onClose, data }) => {
 

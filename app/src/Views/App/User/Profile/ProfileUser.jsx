@@ -50,14 +50,14 @@ const ProfileUser = () => {
 
     const handleSubmit = () => {
         console.log(profile);
-        // if (checkForm()) {
-        //   request("post", getEndpoint(EndpointsAdmin.Auth.updateAdminProfile), { ...profile })
-        //     .then(() => {
-        //       successNotification(GeneralStrings.messages.profileUpdated)
-        //       window.location.reload();
-        //     })
-        //     .catch((err) => errorNotification(err.message))
-        // }
+        if (checkForm()) {
+          request("post", getEndpoint(EndpointsUser.Auth.updateUserProfile), { ...profile })
+            .then(() => {
+              successNotification(GeneralStrings.messages.profileUpdated)
+              window.location.reload();
+            })
+            .catch((err) => errorNotification(err.message))
+        }
     };
 
     const handleSubmitImage = (e) => {

@@ -1,39 +1,38 @@
-import { IoMdEye } from "react-icons/io";
+import { useContext } from "react"
+import { StringsContext } from "../../../../../Context/strings.context"
 import { getColumnValue } from "../../../../../Config/GeneralFunctions";
+import { IoMdEye } from "react-icons/io";
 import { MdDelete, MdEdit } from "react-icons/md";
 import IconButton from "../../../../../Components/Buttons/IconButton";
 import { ButtonGroup } from "react-bootstrap";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
-import { Paths, replacePaths } from "../../../../../Constants/paths.constants";
-import { Views } from "../../../../../Constants/views.constants";
-import { useContext } from "react";
-import { StringsContext } from "../../../../../Context/strings.context";
 
-export const UsersColumns = (openViewUserModal, openDeleteUserModal) => {
+
+
+export const ClientsColumns = (openViewClientModal, openDeleteClientModal) => { 
 
     const { strings } = useContext(StringsContext);
-    const ViewStrings = strings.user.columns;
+    const ViewStrings = strings.User.allClients.columns;
 
     const columns = [
         {
             Header: ViewStrings.firstName,
             Cell: (row) =>
-                getColumnValue(row, (item) => <p className="mb-0">{item.firstName}</p>)
+                getColumnValue(row, (item) => <p className="mb-0">{item.first_name}</p>) 
         },
         {
             Header: ViewStrings.lastName,
             Cell: (row) =>
-                getColumnValue(row, (item) => <p className="mb-0">{item.secondName}</p>)
+                getColumnValue(row, (item) => <p className="mb-0">{item.last_name}</p>) 
         },
         {
             Header: ViewStrings.email,
             Cell: (row) =>
-                getColumnValue(row, (item) => <p className="mb-0">{item.email}</p>)
+                getColumnValue(row, (item) => <p className="mb-0">{item.email}</p>) 
         },
         {
-            Header: ViewStrings.specialty,
+            Header: ViewStrings.phone,
             Cell: (row) =>
-                getColumnValue(row, (item) => <p className="mb-0">{item.specialty}</p>)
+                getColumnValue(row, (item) => <p className="mb-0">{item.phone}</p>) 
         },
         {
             Header: ViewStrings.actions,
@@ -43,19 +42,15 @@ export const UsersColumns = (openViewUserModal, openDeleteUserModal) => {
                         <ButtonGroup>
                             <IconButton
                                 Icon={IoMdEye}
-                                onClick={() => openViewUserModal(item.guid)}
+                                onClick={() => openViewClientModal(item.guid)}
                             />
                             <IconButton
                                 Icon={MdEdit}
-                                as={Link}
-                                to={replacePaths(Paths[Views.edit_user].path, [
-                                    { user_guid: item.guid },
-                                ])}
                             />
                             <IconButton
                                 variant="danger"
                                 Icon={MdDelete}
-                                onClick={() => openDeleteUserModal(item.guid)}
+                                onClick={() => openDeleteClientModal(item.guid)}
                             />
                         </ButtonGroup>
                     </div>
@@ -63,4 +58,4 @@ export const UsersColumns = (openViewUserModal, openDeleteUserModal) => {
         },
     ]
     return columns;
-};
+}

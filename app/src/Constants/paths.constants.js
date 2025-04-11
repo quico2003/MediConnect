@@ -35,8 +35,10 @@ export const Paths = {
   //#region User
   [Views.login]: getPath(`/my-user/login`),
   [Views.completeUser]: getPath(`/my-user/login/complete-user/:user_guid`),
-  
   [Views.homeUser]: getPath(`/my-user/home`, "SideBarHome", "e88a"),
+  
+  [Views.clients]: getPath(`/my-user/clients`, "SideBarClients", "e9ed"),
+  [Views.new_client]: getPath(`/my-user/client/new`),
   
   [Views.accountViewUser]: getPath(`/my-user/profile`),
   [Views.profileViewUser]: getPath(`/my-user/account`),

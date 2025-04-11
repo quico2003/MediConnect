@@ -1,10 +1,10 @@
 import { Button, FormLabel, Modal } from "react-bootstrap";
-import useRequest from "../../Hooks/useRequest"
-import ModalLayout from "../../Layouts/ModalLayout/ModalLayout";
+import useRequest from "../../../Hooks/useRequest"
+import ModalLayout from "../../../Layouts/ModalLayout/ModalLayout";
 import { useEffect, useState } from "react";
-import { EndpointsAdmin, getEndpoint } from "../../Constants/endpoints.contants";
-import useNotification from "../../Hooks/useNotification";
-import RequiredField from "../../Components/Form/RequiredField/RequiredField";
+import { EndpointsAdmin, getEndpoint } from "../../../Constants/endpoints.contants";
+import useNotification from "../../../Hooks/useNotification";
+import RequiredField from "../../../Components/Form/RequiredField/RequiredField";
 import Select from "react-select";
 
 const AssignNewCategoryModal = ({ show, onClose, data }) => {

@@ -25,6 +25,7 @@ try {
         $user->email = $input->email;
         $user->password = password_hash($input->password, PASSWORD_DEFAULT);
         $user->created_by = $adminId;
+        $user->first_login = 1;
         $user->store();
 
         $userProfile = new UserProfile($db);

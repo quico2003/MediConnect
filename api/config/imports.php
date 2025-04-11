@@ -20,6 +20,7 @@ include_once $document_root . '/objects/userprofile.php';
 include_once $document_root . '/objects/user.php';
 include_once $document_root . '/objects/customexception.php';
 include_once $document_root . '/objects/_media.php';
+include_once $document_root . '/objects/client.php';
 
 
 //Resources 
@@ -28,5 +29,6 @@ include_once $document_root . '/resources/AdminResource.php';
 include_once $document_root . '/resources/CategoryResource.php';
 include_once $document_root . '/resources/ProductResource.php';
 include_once $document_root . '/resources/UserResource.php';
+include_once $document_root . '/resources/ClientResource.php';
 
 

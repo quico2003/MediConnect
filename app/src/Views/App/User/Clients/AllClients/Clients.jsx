@@ -1,58 +1,59 @@
-import { Button } from "react-bootstrap";
-import ReactTable from "../../../../../Components/Table/Table";
-import GeneralLayout from "../../../../../Layouts/GeneralLayout/GeneralLayout";
-import PanelLayout from "../../../../../Layouts/PanelLayout/PanelLayout";
-import { Views } from "../../../../../Constants/views.constants";
-import { Paths } from "../../../../../Constants/paths.constants";
-import { Link, useLocation } from "react-router-dom/cjs/react-router-dom.min";
-import useRequest from "../../../../../Hooks/useRequest";
 import { useContext, useEffect, useState } from "react";
+import { StringsContext } from "../../../../../Context/strings.context";
+import useRequest from "../../../../../Hooks/useRequest";
+import { Link, useLocation } from "react-router-dom/cjs/react-router-dom.min";
+import useQuery from "../../../../../Hooks/useQuery";
 import useNotification from "../../../../../Hooks/useNotification";
 import useLoaded from "../../../../../Hooks/useLoaded";
-import { StringsContext } from "../../../../../Context/strings.context";
-import useQuery from "../../../../../Hooks/useQuery";
-import { Configuration } from "../../../../../Config/app.config";
-import { EndpointsAdmin, getEndpoint } from "../../../../../Constants/endpoints.contants";
-import { UsersColumns } from "./UsersColumns";
 import useModalManager from "../../../../../Hooks/useModalManager";
-import ViewUserModal from "../../../../../Modals/Admin/User/ViewUserModal";
-import DeleteUserModal from "../../../../../Modals/Admin/User/DeleteUserModal";
+import ViewClientModal from "../../../../../Modals/User/Clients/ViewClientModal";
+import DeleteClientModal from "../../../../../Modals/User/Clients/DeleteClientModal";
+import GeneralLayout from "../../../../../Layouts/GeneralLayout/GeneralLayout";
+import { Button, Placeholder } from "react-bootstrap";
+import PanelLayout from "../../../../../Layouts/PanelLayout/PanelLayout";
+import ReactTable from "../../../../../Components/Table/Table";
+import { ClientsColumns } from "./ClientsColumns";
+import { Configuration } from "../../../../../Config/app.config";
+import { EndpointsUser, getEndpoint } from "../../../../../Constants/endpoints.contants";
+import { Paths } from "../../../../../Constants/paths.constants";
+import { Views } from "../../../../../Constants/views.constants";
 
-const Users = () => {
+const Clients = () => {
 
     const { strings } = useContext(StringsContext);
-    const ViewStrings = strings.user;
+    const ViewStrings = strings.User.allClients;
     const GeneralViewStrings = strings.General.App;
 
     const request = useRequest();
     const { search } = useLocation();
-    const [data, setData] = useState();
-
     const [filterSelected] = useState();
     const [totalPages, setTotalPages] = useState(1);
     const searchParams = useQuery();
+
+    const [data, setData] = useState();
 
     const { startFetching, finishFetching, fetching, loaded } = useLoaded();
 
     const { showNotification: errorNotification } = useNotification();
 
     const {
-        closeModal: closeViewUserModal,
-        openModal: openViewUserModal,
-        show: showViewUserModal,
-        data: viewUserData,
+        closeModal: closeDeleteClientModal,
+        openModal: openDeleteClientModal,
+        show: showDeleteClientModal,
+        data: DeleteClientData,
     } = useModalManager();
 
     const {
-        closeModal: closeDeleteUserModal,
-        openModal: openDeleteUserModal,
-        show: showDeleteUserModal,
-        data: DeleteUserData,
+        closeModal: closeViewClientModal,
+        openModal: openViewClientModal,
+        show: showViewClientModal,
+        data: ViewClientData,
     } = useModalManager();
 
     useEffect(() => {
         fetchData();
-    }, [search])
+    }, [search]);
+
 
     const fetchData = async (
         page = 1,
@@ -63,7 +64,7 @@ const Users = () => {
         startFetching();
         return await request(
             "get",
-            getEndpoint(EndpointsAdmin.Users.getAll),
+            getEndpoint(EndpointsUser.Clients.getAll),
             {
                 page,
                 offset,
@@ -72,40 +73,40 @@ const Users = () => {
             }
         )
             .then((res) => {
-                setData(res.users);
+                setData(res.clients);
                 setTotalPages(res.totalPages);
             })
             .catch((err) => errorNotification(err))
             .finally(() => finishFetching());
-    }
 
-    const handleCloseDeleteUserModal = (refresh) => {
-        if (refresh) fetchData();
-        closeDeleteUserModal();
+
     };
 
-    const handleCloseViewUserModal = () => {
-        closeViewUserModal();
+    const handleCloseDeleteClientModal = (refresh) => {
+        if (refresh) fetchData();
+        closeDeleteClientModal();
+    };
+
+    const handleCloseViewClientModal = () => {
+        closeDeleteClientModal();
     };
 
     return (
-
         <>
-            <ViewUserModal
-                onClose={handleCloseViewUserModal}
-                show={showViewUserModal}
-                data={viewUserData}
+            <ViewClientModal
+                onClose={handleCloseViewClientModal}
+                show={showViewClientModal}
+                data={ViewClientData}
             />
 
-            <DeleteUserModal
-                onClose={handleCloseDeleteUserModal}
-                show={showDeleteUserModal}
-                data={DeleteUserData}
+            <DeleteClientModal
+                onClose={handleCloseDeleteClientModal}
+                show={showDeleteClientModal}
+                data={DeleteClientData}
             />
-
 
             <GeneralLayout title={ViewStrings.title} rightSection={
-                <Button size="sm" as={Link} to={Paths[Views.new_user].path}>
+                <Button size="sm" as={Link} to={Paths[Views.new_client].path}>
                     {ViewStrings.buttonAdd}
                 </Button>
             }>
@@ -122,14 +123,16 @@ const Users = () => {
                             text: ViewStrings.emptyData.text,
                             description: ViewStrings.emptyData.description
                         }}
-                        columns={UsersColumns(
-                            openViewUserModal,
-                            openDeleteUserModal
+                        columns={ClientsColumns(
+                            openViewClientModal,
+                            openDeleteClientModal
                         )}
                     />
                 </PanelLayout>
+
             </GeneralLayout>
         </>
     )
+
 }
-export default Users;
+export default Clients;

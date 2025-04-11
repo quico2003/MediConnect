@@ -14,7 +14,7 @@ export const EndpointsAdmin = {
     updateAdminEmail: `${BASE_URL_ADMIN}/auth/updateAdminEmail`,
     updateAdminPassword: `${BASE_URL_ADMIN}/auth/updateAdminPassword`,
   },
-
+  
   Categories: {
     getAll: `${BASE_URL_ADMIN}/category/getAll`,
     getList: `${BASE_URL_ADMIN}/category/getList`,
@@ -23,7 +23,7 @@ export const EndpointsAdmin = {
     update: `${BASE_URL_ADMIN}/category/update`,
     delete: `${BASE_URL_ADMIN}/category/delete`,
   },
-
+  
   Products: {
     getAll: `${BASE_URL_ADMIN}/product/getAll`,
     get: `${BASE_URL_ADMIN}/product/get`,
@@ -34,7 +34,7 @@ export const EndpointsAdmin = {
     getAllWithoutCategory: `${BASE_URL_ADMIN}/product/getAllWithoutCategory`,
     assignCategory: `${BASE_URL_ADMIN}/product/assignCategory`
   },
-
+  
   Users: {
     getAll: `${BASE_URL_ADMIN}/user/getAll`,
     get: `${BASE_URL_ADMIN}/user/get`,
@@ -42,7 +42,7 @@ export const EndpointsAdmin = {
     update: `${BASE_URL_ADMIN}/user/update`,
     delete: `${BASE_URL_ADMIN}/user/delete`,
   },
-
+  
   Dashboard: {
     countProductsForCategory: `${BASE_URL_ADMIN}/dashboard/countProductsForCategory`,
     typeCount: `${BASE_URL_ADMIN}/dashboard/typeCount`,
@@ -57,7 +57,14 @@ export const EndpointsUser = {
     completeUser: `${BASE_URL_USER}/auth/completeUser`,
     logout: `${BASE_URL_USER}/auth/logout`,
     changeImage: `${BASE_URL_USER}/auth/changeImageProfile`,
+    updateUserProfile: `${BASE_URL_USER}/auth/updateUserProfile`,
+    updateUserEmail: `${BASE_URL_USER}/auth/updateUserEmail`,
+    updateUserPassword: `${BASE_URL_USER}/auth/updateUserPassword`,
   },
+
+  Clients: {
+    getAll: `${BASE_URL_USER}/client/getAll`
+  }
 };
 
 export const getEndpoint = (path, params = null, isCustom = false) => {

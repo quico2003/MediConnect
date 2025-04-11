@@ -1,26 +1,25 @@
+
 import { Button, Modal } from "react-bootstrap";
-import useNotification from "../../Hooks/useNotification";
-import useRequest from "../../Hooks/useRequest";
-import { useContext, useEffect } from "react";
-import ModalLayout from "../../Layouts/ModalLayout/ModalLayout";
-import { EndpointsAdmin, getEndpoint } from "../../Constants/endpoints.contants";
-import { StringsContext } from "../../Context/strings.context";
+import useNotification from "../../../Hooks/useNotification";
+import useRequest from "../../../Hooks/useRequest";
+import ModalLayout from "../../../Layouts/ModalLayout/ModalLayout";
+import { EndpointsAdmin, getEndpoint } from "../../../Constants/endpoints.contants";
+import { useContext } from "react";
+import { StringsContext } from "../../../Context/strings.context";
 
-
-const DeleteCategoryModal = ({ show, onClose, data }) => {
+const DeleteUserModal = ({ show, onClose, data }) => {
 
     const { strings } = useContext(StringsContext);
-    const ViewStrings = strings.Categories.delete;
+    const ViewStrings = strings.user.delete;
 
     const request = useRequest();
 
     const { showNotification: errorNotification } = useNotification();
     const { showNotification: successNotification } = useNotification("success");
 
-
     const handleSubmit = () => {
-        request("post", getEndpoint(EndpointsAdmin.Categories.delete), { guid: data.guid })
-            .then((res) => {
+        request("post", getEndpoint(EndpointsAdmin.Users.delete), { guid: data })
+            .then(() => {
                 successNotification(ViewStrings.messageDeleted);
                 onClose(true);
             })
@@ -28,11 +27,11 @@ const DeleteCategoryModal = ({ show, onClose, data }) => {
                 errorNotification(err.message);
                 onClose(true);
             })
-    };
+    }
 
     const hideModal = () => {
         onClose(true);
-    };
+    }
 
     return (
         <ModalLayout
@@ -47,18 +46,20 @@ const DeleteCategoryModal = ({ show, onClose, data }) => {
             }
             footer={
                 <div className="d-flex justify-content-end gap-2">
-                    <Button variant="light" size="lm" onClick={hideModal}>
+                    <Button onClick={hideModal} size="lm">
                         {ViewStrings.buttonCancel}
                     </Button>
                     <Button onClick={handleSubmit} variant="danger" size="lm">
                         {ViewStrings.buttonDelete}
                     </Button>
                 </div>
-            }>
-            <div className="mb-1">
-                <p>{ViewStrings.body}'{data?.name}'{ViewStrings.body1}</p>
+            }
+        >
+            <div>
+                {ViewStrings.body}
             </div>
         </ModalLayout>
-    );
+    )
+
 }
-export default DeleteCategoryModal;
+export default DeleteUserModal;

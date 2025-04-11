@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from "react";
-import ModalLayout from "../../Layouts/ModalLayout/ModalLayout";
-import useRequest from "../../Hooks/useRequest";
+import ModalLayout from "../../../Layouts/ModalLayout/ModalLayout";
+import useRequest from "../../../Hooks/useRequest";
 import { Button, Modal } from "react-bootstrap";
-import { EndpointsAdmin, getEndpoint } from "../../Constants/endpoints.contants";
-import useNotification from "../../Hooks/useNotification";
-import { StringsContext } from "../../Context/strings.context";
+import { EndpointsAdmin, getEndpoint } from "../../../Constants/endpoints.contants";
+import useNotification from "../../../Hooks/useNotification";
+import { StringsContext } from "../../../Context/strings.context";
 
 const ViewUserModal = ({ show, onClose, data }) => {
 

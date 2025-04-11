@@ -12,7 +12,9 @@
     "ControlPanelUsers": "Control Panel Medical Team",
     "SideBarPrivacyPolicy": "Privacy policy",
     "Dashboard": "Dashboard",
-    "ControlPanelProducts": "Control Panel Products"
+    "ControlPanelProducts": "Control Panel Products",
+    "ControlPanelClients": "Control Panel Clients",
+    "SideBarClients": "Clients"
   },
   "dashboard": {
     "title": "Dashboard",
@@ -360,20 +362,81 @@
         "basicSection": "Info"
       },
       "inputs": {
-        "firstName":{
+        "firstName": {
           "title": "First name",
           "palceholder": "Insert First name..."
         },
-        "lastName":{
+        "lastName": {
           "title": "Last name",
           "palceholder": "Insert Last name..."
         },
-        "specialty":{
+        "specialty": {
           "title": "Specialty",
           "palceholder": "Insert Specialty..."
         }
       }
     },
-    "account": {}
+    "Account": {
+      "title": "Account",
+      "messages": {
+        "updateEmail": "Email updated, please log back in",
+        "updatePassword": "Password updated, please log back in"
+      },
+      "sections": {
+        "email": "Email",
+        "password": "Password"
+      },
+      "inputs": {
+        "currentEmailInput": {
+          "title": "Current Email",
+          "placeholder": "Insert current email"
+        },
+        "changeEmailButton": {
+          "title": "Update email"
+        },
+        "newEmail": {
+          "title": "New Email",
+          "placeholder": "Insert new email..."
+        },
+        "newEmailCopy": {
+          "title": "Repeat new Email",
+          "placeholder": "Repeat new email..."
+        },
+        "currentPasswordInput": {
+          "title": "Current password",
+          "placeholder": "Insert current password"
+        },
+        "newPassword": {
+          "title": "New Password",
+          "placeholder": "Insert new password..."
+        },
+        "newPasswordCopy": {
+          "title": "Repeat Password",
+          "placeholder": "Repeat new password..."
+        },
+        "changePasswordButton": {
+          "title": "Update Password"
+        }
+      }
+    },
+    "allClients": {
+      "title": "Clients",
+      "buttonAdd": "+Add new",
+      "emptyData": {
+        "text": "There is no registered clients",
+        "description": "Press the add button to create new clients"
+      },
+      "columns": {
+        "firstName": "asdf",
+        "lastName": "asdf",
+        "email": "adsf",
+        "phone": "adf", 
+        "actions": "adf"
+
+      }
+    },
+    "add":{
+      "title": "New Client"
+    }
   }
 }

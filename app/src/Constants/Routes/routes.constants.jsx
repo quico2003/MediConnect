@@ -24,6 +24,8 @@ import PrivacyPolicy from "../../Views/App/PrivacyPolicy/PrivacyPolicy";
 import CompleteUser from "../../Views/Auth/User/CompleteUser/CompleteUser";
 import AccountUser from "../../Views/App/User/Account/AccountUser";
 import ProfileUser from "../../Views/App/User/Profile/ProfileUser";
+import Clients from "../../Views/App/User/Clients/AllClients/Clients";
+import NewClient from "../../Views/App/User/Clients/NewClient/NewClient";
 
 
 const getRoute = (path, component, exact = true) => ({
@@ -44,6 +46,10 @@ export const AuthRoutes = [
 
 export const AppRoutes = [
   getRoute(Paths[Views.homeUser].path, Home),
+  
+  getRoute(Paths[Views.clients].path, Clients),
+  getRoute(Paths[Views.new_client].path, NewClient),
+
   getRoute(Paths[Views.accountViewUser].path, AccountUser),
   getRoute(Paths[Views.profileViewUser].path, ProfileUser),
 

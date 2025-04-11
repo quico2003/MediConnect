@@ -40,7 +40,7 @@ const CompleteUser = () => {
             request("post", getEndpoint(EndpointsUser.Auth.completeUser), { ...data, guid: user_guid })
                 .then(() => {
                     successNotification("Password updated.");
-                    replace(Paths[Views.home].path);
+                    replace(Paths[Views.homeUser].path);
                 })
                 .catch((err) => errorNotification(err.message));
 

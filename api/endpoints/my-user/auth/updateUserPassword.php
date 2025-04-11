@@ -9,7 +9,7 @@ $data = postInput();
 
 try {
     $db->beginTransaction();
-    $adminId = checkAuthAdmin();
+    $userId = checkAuthUser();
 
     $input = validate($data, [
         "currentPassword" => "required|string",
@@ -17,19 +17,18 @@ try {
         "newPasswordCopy" => "required|string",
     ]);
 
-    $admin = Admin::get($db, $adminId);
+    $user = User::get($db, $userId);
 
-    if ($admin && password_verify($input->currentPassword, $admin->password)) {
-        $admin->password = password_hash($input->newPassword, PASSWORD_DEFAULT);
-        $admin->update();
+    if ($user && password_verify($input->currentPassword, $user->password)) {
+        $user->password = password_hash($input->newPassword, PASSWORD_DEFAULT);
+        $user->update();
         $db->commit();
-    } else {
+    }else {
         createException("The password does not match", 500);
     }
 
     Response::sendResponse([]);
 
-} catch (\Exception $th) {
-    $db->rollBack();
-    print_r(json_encode(array("status" => false, "message" => $th->getMessage(), 'code' => $th->getCode())));
+} catch (\Throwable $th) {
+    //throw $th;
 }

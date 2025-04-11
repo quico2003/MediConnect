@@ -15,9 +15,9 @@ import useQuery from "../../../../../Hooks/useQuery";
 import { Button } from "react-bootstrap";
 import { Paths } from "../../../../../Constants/paths.constants";
 import { Views } from "../../../../../Constants/views.constants";
-import DeleteCategoryModal from "../../../../../Modals/Category/DeleteCategoryModal";
+import DeleteCategoryModal from "../../../../../Modals/Admin/Category/DeleteCategoryModal";
 import useModalManager from "../../../../../Hooks/useModalManager";
-import ViewCategoryModal from "../../../../../Modals/Category/viewCategoryModal";
+import ViewCategoryModal from "../../../../../Modals/Admin/Category/viewCategoryModal";
 import { StringsContext } from "../../../../../Context/strings.context";
 
 

@@ -15,11 +15,11 @@ import { EndpointsAdmin, getEndpoint } from "../../../../../Constants/endpoints.
 import useNotification from "../../../../../Hooks/useNotification";
 import { Configuration } from "../../../../../Config/app.config";
 import useModalManager from "../../../../../Hooks/useModalManager";
-import ViewProductModal from "../../../../../Modals/Products/ViewProductModal";
-import DeleteProductModal from "../../../../../Modals/Products/DeleteProductModal";
+import ViewProductModal from "../../../../../Modals/Admin/Products/ViewProductModal";
+import DeleteProductModal from "../../../../../Modals/Admin/Products/DeleteProductModal";
 import IconButton from "../../../../../Components/Buttons/IconButton";
 import { MdBarcodeReader } from "react-icons/md";
-import ViewBarcodeProductModal from "../../../../../Modals/Products/ViewBarcodeProductModal";
+import ViewBarcodeProductModal from "../../../../../Modals/Admin/Products/ViewBarcodeProductModal";
 const Products = () => {
 
     //Translations

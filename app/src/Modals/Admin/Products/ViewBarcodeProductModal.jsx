@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { StringsContext } from "../../Context/strings.context";
-import ModalLayout from "../../Layouts/ModalLayout/ModalLayout";
+import { StringsContext } from "../../../Context/strings.context";
+import ModalLayout from "../../../Layouts/ModalLayout/ModalLayout";
 import { Button, Modal } from "react-bootstrap";
 import Barcode from "react-barcode";
 
@@ -33,12 +33,12 @@ const ViewBarcodeProductModal = ({ show, onClose, data }) => {
                     </Button>
                 </div>
             }>
-        <div>
+            <div>
                 <div className="d-flex justify-content-center">
-                    <Barcode  value={data} displayValue={false} />
-                    </div>
-           
-        </div>
+                    <Barcode value={data} displayValue={false} />
+                </div>
+
+            </div>
 
         </ModalLayout>
     )

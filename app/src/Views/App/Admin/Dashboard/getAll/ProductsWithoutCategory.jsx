@@ -11,8 +11,8 @@ import useNotification from "../../../../../Hooks/useNotification";
 import { Configuration } from "../../../../../Config/app.config";
 import { ProductsWithoutCategoryColumns } from "./ProductsWithoutCategoryColumns";
 import useModalManager from "../../../../../Hooks/useModalManager";
-import DeleteProductModal from "../../../../../Modals/Products/DeleteProductModal";
-import AssignNewCategoryModal from "../../../../../Modals/Products/assignNewCategoryModal";
+import DeleteProductModal from "../../../../../Modals/Admin/Products/DeleteProductModal";
+import AssignNewCategoryModal from "../../../../../Modals/Admin/Products/assignNewCategoryModal";
 import { Placeholder } from "react-bootstrap";
 
 const ProductsWithoutCategory = ({ setNeedUpdate }) => {

@@ -1,9 +1,9 @@
 import { Button, Modal } from "react-bootstrap";
-import ModalLayout from "../../Layouts/ModalLayout/ModalLayout";
-import useRequest from "../../Hooks/useRequest";
-import { EndpointsAdmin, getEndpoint } from "../../Constants/endpoints.contants";
-import useNotification from "../../Hooks/useNotification";
-import { StringsContext } from "../../Context/strings.context";
+import ModalLayout from "../../../Layouts/ModalLayout/ModalLayout";
+import useRequest from "../../../Hooks/useRequest";
+import { EndpointsAdmin, getEndpoint } from "../../../Constants/endpoints.contants";
+import useNotification from "../../../Hooks/useNotification";
+import { StringsContext } from "../../../Context/strings.context";
 import { useContext } from "react";
 
 const DeleteProductModal = ({ show, onClose, data }) => {

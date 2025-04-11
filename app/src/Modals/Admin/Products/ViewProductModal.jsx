@@ -1,12 +1,12 @@
 import { Button, Col, Modal, Row } from "react-bootstrap";
-import ModalLayout from "../../Layouts/ModalLayout/ModalLayout";
+import ModalLayout from "../../../Layouts/ModalLayout/ModalLayout";
 import { useContext, useEffect, useState } from "react";
-import useRequest from "../../Hooks/useRequest";
-import useNotification from "../../Hooks/useNotification";
-import { EndpointsAdmin, getEndpoint } from "../../Constants/endpoints.contants";
-import { StringsContext } from "../../Context/strings.context";
+import useRequest from "../../../Hooks/useRequest";
+import useNotification from "../../../Hooks/useNotification";
+import { EndpointsAdmin, getEndpoint } from "../../../Constants/endpoints.contants";
+import { StringsContext } from "../../../Context/strings.context";
 import moment from "moment";
-import { dataFormater } from "../../Config/GeneralFunctions";
+import { dataFormater } from "../../../Config/GeneralFunctions";
 
 const ViewProductModal = ({ show, onClose, data }) => {
 

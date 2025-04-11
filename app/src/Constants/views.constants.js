@@ -25,6 +25,10 @@ export const Views = {
   //#region user
   homeUser: "homeUser",
   
+  clients: "clients",
+  new_client: "new_client",
+  edit_client: "edit_client",
+  
   profileViewUser: "profileViewUser",
   accountViewUser: "accountViewUser",
   
