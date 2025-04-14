@@ -88,7 +88,7 @@ const Clients = () => {
     };
 
     const handleCloseViewClientModal = () => {
-        closeDeleteClientModal();
+        closeViewClientModal();
     };
 
     return (

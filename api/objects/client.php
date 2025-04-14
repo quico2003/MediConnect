@@ -15,7 +15,7 @@ class Client
     public int $created_by;
     public string $created_at;
     public string $updated_at;
-    public string $deleted_at;
+    public string|null $deleted_at;
 
     public function __construct(PDO $db)
     {
@@ -24,7 +24,7 @@ class Client
 
     public function serchableValues(): array
     {
-        return[
+        return [
 
             $this->email,
             $this->first_name,
@@ -88,6 +88,36 @@ class Client
         }
         createException($stmt->errorInfo());
     }
+
+    function update(): bool
+    {
+        $query = "UPDATE `" . self::$table_name . "` SET
+        first_name=:first_name, last_name=:last_name, email=:email,
+        phone=:phone, searchData=:searchData, deleted_at=:deleted_at WHERE id=:id";
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(":first_name", $this->first_name);
+        $stmt->bindParam(":last_name", $this->last_name);
+        $stmt->bindParam(":email", $this->email);
+        $stmt->bindParam(":phone", $this->phone);
+        $stmt->bindValue(":searchData", convertSearchValues($this->serchableValues()));
+        $stmt->bindValue(":deleted_at", $this->deleted_at);
+        $stmt->bindValue(":id", $this->id);
+
+        try {
+            $stmt->execute();
+            return true;
+        } catch (\Exception $th) {
+            createException($stmt->errorInfo());
+        }
+    }
+
+    function delete(): bool
+    {
+        $this->deleted_at = newDate();
+        return $this->update();
+    }
+
     public static function getAllByUserID(PDO $db, int $page, int $offset, string $search = "", array $filters = [], int $user_id): array
     {
         $query = "SELECT * FROM `" . self::$table_name . "` WHERE deleted_at IS NULL AND created_by=:user_id";
@@ -99,7 +129,7 @@ class Client
         applySearchOnQuery($query);
         doPagination($offset, $page, $stmt);
 
-        
+
         $stmt = $db->prepare($query);
         $stmt->bindParam(":user_id", $user_id);
 
@@ -137,6 +167,24 @@ class Client
         createException("Client not foud");
     }
 
+    public static function getByEmail(PDO $db, string $email): Client|bool
+    {
+        $query = "SELECT * FROM `" . self::$table_name . "` WHERE email=:email AND deleted_at IS NULL";
+
+        $stmt = $db->prepare($query);
+
+        $stmt->bindParam(":email", $email);
+
+        if ($stmt->execute()) {
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                return self::getMainObject($db, $row);
+            }
+
+            return false;
+        }
+        createException($stmt->errorInfo());
+    }
+
 
     public static function get(PDO $db, int $id): Client
     {
@@ -153,8 +201,8 @@ class Client
         }
         createException("Client not foud");
     }
-    
-    
+
+
     public static function getAllCount(PDO $db, string $search = "", array $filters = []): int
     {
         $query = "SELECT COUNT(id) as total FROM `" . self::$table_name . "` c WHERE deleted_at IS NULL";

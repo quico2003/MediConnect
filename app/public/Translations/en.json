@@ -14,7 +14,9 @@
     "Dashboard": "Dashboard",
     "ControlPanelProducts": "Control Panel Products",
     "ControlPanelClients": "Control Panel Clients",
-    "SideBarClients": "Clients"
+    "SideBarClients": "Clients",
+    "ControlPanelSchedule": "Control Panel Schedule",
+    "SideBarSchedule": "Schedule"
   },
   "dashboard": {
     "title": "Dashboard",
@@ -427,16 +429,52 @@
         "description": "Press the add button to create new clients"
       },
       "columns": {
-        "firstName": "asdf",
-        "lastName": "asdf",
-        "email": "adsf",
-        "phone": "adf", 
-        "actions": "adf"
-
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "email": "Email",
+        "phone": "Phone",
+        "actions": "Actions"
       }
     },
-    "add":{
-      "title": "New Client"
+    "add": {
+      "title": "New Client",
+      "firstName": "First Name",
+      "pFirstName": "Insert First Name...",
+      "lastName": "Last Name",
+      "pLastName": "Insert Last Name...",
+      "email": "Email",
+      "pEmail": "Insert Email...",
+      "phone": "Phone",
+      "pPhone": "Insert Phone...",
+      "messageSuccess": "Created Client."
+    },
+    "delete": {
+      "messageDeleted": "Deleted Client.",
+      "title": "Delete Client",
+      "body": "Are you sure you want to delete this client?",
+      "buttonCancel": "Cancel",
+      "buttonDelete": "Delete"
+    },
+    "view": {
+      "errorMesage": "Error displaying Client.",
+      "title": "Client info",
+      "email": "Email:",
+      "firstName": "First Name:",
+      "lastName": "Last Name:",
+      "phone": "Phone:",
+      "close": "Close"
+    },
+    "edit": {
+      "title": "Edit Client",
+      "firstName": "First Name",
+      "pFirstName": "Insert First Name...",
+      "lastName": "Last Name",
+      "pLastname": "Insert Last Name...",
+      "email": "Email",
+      "pEmail": "Insert Email...",
+      "phone": "Phone",
+      "pPhone": "Insert Phone...",
+      "update": "Update"
     }
   }
 }

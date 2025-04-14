@@ -28,6 +28,8 @@ export const Views = {
   clients: "clients",
   new_client: "new_client",
   edit_client: "edit_client",
+
+  schedule: "schedule",
   
   profileViewUser: "profileViewUser",
   accountViewUser: "accountViewUser",

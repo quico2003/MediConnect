@@ -63,7 +63,11 @@ export const EndpointsUser = {
   },
 
   Clients: {
-    getAll: `${BASE_URL_USER}/client/getAll`
+    getAll: `${BASE_URL_USER}/client/getAll`,
+    get: `${BASE_URL_USER}/client/get`,
+    create: `${BASE_URL_USER}/client/register`,
+    update: `${BASE_URL_USER}/client/update`,
+    delete: `${BASE_URL_USER}/client/delete`,
   }
 };
 

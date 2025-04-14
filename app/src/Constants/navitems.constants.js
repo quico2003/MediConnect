@@ -54,6 +54,11 @@ export const NavItemsUser = () => {
       title: ViewStrings.ControlPanelClients,
       items: [Paths[Views.clients]],
     },
+    {
+      id: "schedule_section",
+      title: ViewStrings.ControlPanelSchedule,
+      items: [Paths[Views.schedule]],
+    },
    
   ];
   return items;

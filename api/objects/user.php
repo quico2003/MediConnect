@@ -155,7 +155,7 @@ class User
     {
         $query = "
             UPDATE `" . self::$table_name . "` 
-            SET email=:email, password=:password, searchdata=:searchData,
+            SET email=:email, password=:password, searchData=:searchData,
             token=:token, expiredate=:expiredate, deleted_at=:deleted_at,
             first_login=:first_login WHERE id=:id";
 

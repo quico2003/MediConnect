@@ -39,6 +39,9 @@ export const Paths = {
   
   [Views.clients]: getPath(`/my-user/clients`, "SideBarClients", "e9ed"),
   [Views.new_client]: getPath(`/my-user/client/new`),
+  [Views.edit_client]: getPath(`/my-user/client/edit/:client_guid`),
+  
+  [Views.schedule]: getPath(`/my-user/schedule`, "SideBarSchedule", "ebcc"),
   
   [Views.accountViewUser]: getPath(`/my-user/profile`),
   [Views.profileViewUser]: getPath(`/my-user/account`),

@@ -5,7 +5,9 @@ import { IoMdEye } from "react-icons/io";
 import { MdDelete, MdEdit } from "react-icons/md";
 import IconButton from "../../../../../Components/Buttons/IconButton";
 import { ButtonGroup } from "react-bootstrap";
-
+import { Paths, replacePaths } from "../../../../../Constants/paths.constants";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { Views } from "../../../../../Constants/views.constants";
 
 
 export const ClientsColumns = (openViewClientModal, openDeleteClientModal) => { 
@@ -46,6 +48,10 @@ export const ClientsColumns = (openViewClientModal, openDeleteClientModal) => {
                             />
                             <IconButton
                                 Icon={MdEdit}
+                                as={Link}
+                                to={replacePaths(Paths[Views.edit_client].path, [
+                                    { client_guid: item.guid },
+                                ])}
                             />
                             <IconButton
                                 variant="danger"
