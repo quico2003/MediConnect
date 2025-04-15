@@ -22,6 +22,16 @@ class ClientResource
         }
         return $itemsArray;
     }
+
+    public static function getClientsArraySection(array $clients): array
+    {
+        $itemsArray = [];
+        foreach ($clients as $client) {
+            $newItem = self::getClient($client, ["value", "label"]);
+            $itemsArray[] = $newItem;
+        }
+        return $itemsArray;
+    }
     
     public static function getClientResource(client $client)
     {

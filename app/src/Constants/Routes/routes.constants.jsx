@@ -28,6 +28,7 @@ import Clients from "../../Views/App/User/Clients/AllClients/Clients";
 import NewClient from "../../Views/App/User/Clients/NewClient/NewClient";
 import EditClient from "../../Views/App/User/Clients/EditClient/EditClient";
 import Schedule from "../../Views/App/User/Schedule/Schedule";
+import NewAppointment from "../../Views/App/User/Schedule/NewAppointment/NewAppointment";
 
 
 const getRoute = (path, component, exact = true) => ({
@@ -54,6 +55,7 @@ export const AppRoutes = [
   getRoute(Paths[Views.edit_client].path, EditClient),
   
   getRoute(Paths[Views.schedule].path, Schedule),
+  getRoute(Paths[Views.new_appointment].path, NewAppointment),
   
   getRoute(Paths[Views.accountViewUser].path, AccountUser),
   getRoute(Paths[Views.profileViewUser].path, ProfileUser),

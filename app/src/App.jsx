@@ -20,6 +20,8 @@ import { getLanguageSelected } from "./Utils/Translations";
 import InMaintenance from "./Views/InMaintenance";
 import AuthLayoutUser from "./Template/AuthLayout/AuthLayoutUser";
 
+import 'react-date-picker/dist/DatePicker.css';
+import 'react-calendar/dist/Calendar.css';
 
 const App = () => {
   //This will manage the mobile width

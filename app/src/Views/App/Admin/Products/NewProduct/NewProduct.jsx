@@ -156,6 +156,8 @@ const NewProduct = () => {
                         id="category"
                         onChange={handleSelect}
                         value={selectedOption}
+                        isSearchable
+                        isClearable
                     />
 
                     <FormControlPrice

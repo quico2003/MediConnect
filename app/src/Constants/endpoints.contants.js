@@ -64,10 +64,16 @@ export const EndpointsUser = {
 
   Clients: {
     getAll: `${BASE_URL_USER}/client/getAll`,
+    getAllWithoutPagination: `${BASE_URL_USER}/client/getAllWithoutPagination`,
     get: `${BASE_URL_USER}/client/get`,
     create: `${BASE_URL_USER}/client/register`,
     update: `${BASE_URL_USER}/client/update`,
     delete: `${BASE_URL_USER}/client/delete`,
+  },
+
+  Appointments: {
+    getAll: `${BASE_URL_USER}/appointment/getAll`,
+    create: `${BASE_URL_USER}/appointment/create`,
   }
 };
 

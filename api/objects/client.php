@@ -150,6 +150,37 @@ class Client
         }
         createException($stmt->errorInfo());
     }
+    
+    public static function getAllWithOutPaginationByUserID(PDO $db, string $search = "", array $filters = [], int $user_id): array
+    {
+        $query = "SELECT * FROM `" . self::$table_name . "` WHERE deleted_at IS NULL AND created_by=:user_id";
+
+        foreach ($filters as $index => $object) {
+            $query .= " AND $object->id = :val$index";
+        }
+
+        applySearchOnQuery($query);
+
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(":user_id", $user_id);
+
+        applySearchOnBindedValue($search, $stmt);
+
+        foreach ($filters as $index => $object) {
+            $value = $object->value;
+            $stmt->bindValue(":val$index", $value, PDO::PARAM_INT);
+        }
+
+        if ($stmt->execute()) {
+            $arrayToReturn = [];
+
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $arrayToReturn[] = ["value" => $row["guid"], "label" => $row["email"]];
+            }
+            return $arrayToReturn;
+        }
+        createException($stmt->errorInfo());
+    }
 
     public static function getByGuid(PDO $db, string $guid): Client
     {

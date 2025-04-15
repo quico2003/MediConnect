@@ -2,7 +2,6 @@
 export const Views = {
 
   //#region Administrator
- 
   homeAdmin: "homeAdmin",
 
   categories: "categories",
@@ -22,6 +21,9 @@ export const Views = {
   
   privacyPolicy: "privaciPolicy",
   
+
+
+
   //#region user
   homeUser: "homeUser",
   
@@ -30,12 +32,15 @@ export const Views = {
   edit_client: "edit_client",
 
   schedule: "schedule",
+  new_appointment: "new_appointment",
   
   profileViewUser: "profileViewUser",
   accountViewUser: "accountViewUser",
   
   privacyPolicyUser: "privaciPolicyUser",
   //#endregion
+
+
 
 
   //#region General
@@ -47,6 +52,9 @@ export const Views = {
   forgotPassword: "forgotPassword",
   //#endregion
 
+
+
+  
   //#region Auth
   loginAdmin: "loginAdmin",
   login: "login",

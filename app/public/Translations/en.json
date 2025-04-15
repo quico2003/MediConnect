@@ -475,6 +475,18 @@
       "phone": "Phone",
       "pPhone": "Insert Phone...",
       "update": "Update"
+    },
+    "Schedule": {
+      "title": "Schedule",
+      "buttonAdd": "+Add new",
+      "add":{
+        "title": "New Appointment",
+        "client": "Client",
+        "pClient": "Select a Client",
+        "reason": "Reason",
+        "pReason": "Insert Reason...",
+        "hours": "Hours"
+      }
     }
   }
 }
