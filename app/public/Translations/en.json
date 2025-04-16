@@ -479,13 +479,16 @@
     "Schedule": {
       "title": "Schedule",
       "buttonAdd": "+Add new",
-      "add":{
+      "add": {
         "title": "New Appointment",
         "client": "Client",
-        "pClient": "Select a Client",
+        "pClient": "Select a Client...",
         "reason": "Reason",
         "pReason": "Insert Reason...",
-        "hours": "Hours"
+        "hours": "Hours",
+        "successMessage": "appointment created.",
+        "date": "Date:",
+        "button": "Create"
       }
     }
   }

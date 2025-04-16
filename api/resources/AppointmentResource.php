@@ -17,7 +17,7 @@ class AppointmentResource
     {
         $itemsArray = [];
         foreach ($appointments as $appointment) {
-            $newItem = self::getAppointment($appointment, ["title", "start"]);
+            $newItem = self::getAppointment($appointment, ["id", "title", "start"]);
             $itemsArray[] = $newItem;
         }
         return $itemsArray;

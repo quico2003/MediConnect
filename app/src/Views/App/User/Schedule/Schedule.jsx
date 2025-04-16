@@ -14,6 +14,8 @@ import useRequest from '../../../../Hooks/useRequest';
 import useLoaded from '../../../../Hooks/useLoaded';
 import useNotification from '../../../../Hooks/useNotification';
 import { EndpointsUser, getEndpoint } from '../../../../Constants/endpoints.contants';
+import useModalManager from '../../../../Hooks/useModalManager';
+import MenuAppointmentsModal from '../../../../Modals/User/schedule/MenuAppointmentsModal';
 
 
 const Schedule = () => {
@@ -30,6 +32,13 @@ const Schedule = () => {
     const { startFetching, finishFetching, fetching, loaded } = useLoaded();
 
     const { showNotification: errorNotification } = useNotification();
+
+    const {
+        closeModal: closeMenuAppointmentsModal,
+        openModal: openMenuAppointmentsModal,
+        show: showMenuAppointmentsModal,
+        data: menuAppointmentsData,
+    } = useModalManager();
 
     useEffect(() => {
         fetchData();
@@ -50,6 +59,7 @@ const Schedule = () => {
             const startMoment = moment(appointment.start, "DD-MM-YYYY HH:mm");
 
             return {
+                id: appointment.id,
                 title: appointment.title,
                 start: startMoment.toDate(),
                 end: startMoment.clone().add(1, 'hour').toDate(),
@@ -57,27 +67,44 @@ const Schedule = () => {
         });
     };
 
+    const handleCloseMenuAppointmentsModal = () => {
+        closeMenuAppointmentsModal();
+    }
+
+    const handleSelectEvent = (e) => {
+        openMenuAppointmentsModal(e);
+    }
 
     return (
 
-        <GeneralLayout title={viewStrings.title} rightSection={
-            <Button size='sm' as={Link} to={Paths[Views.new_appointment].path}>
-                {viewStrings.buttonAdd}
-            </Button>
-        }>
-            <PanelLayout style={{ height: '500px', margin: '20px' }}>
-                <Calendar
-                    localizer={localizer}
-                    events={data}
-                    startAccessor="start"
-                    endAccessor="end"
-                    defaultView="week"
-                    views={['month', 'week', 'day']}
-                    culture="es"
-                />
-            </PanelLayout>
-        </GeneralLayout>
+        <>
+            <MenuAppointmentsModal
+                onClose={handleCloseMenuAppointmentsModal}
+                show={showMenuAppointmentsModal}
+                data={menuAppointmentsData}
+            />
+            <GeneralLayout title={viewStrings.title} rightSection={
+                <Button size='sm' as={Link} to={Paths[Views.new_appointment].path}>
+                    {viewStrings.buttonAdd}
+                </Button>
+            }>
+                <PanelLayout style={{ height: '500px', margin: '20px' }}>
+                    <Calendar
 
+                        localizer={localizer}
+                        events={data}
+                        startAccessor="start"
+                        endAccessor="end"
+                        defaultView="week"
+                        views={['month', 'week', 'day']}
+                        culture="es"
+                        selectable
+                        onSelectEvent={handleSelectEvent}
+                    />
+                </PanelLayout>
+            </GeneralLayout>
+
+        </>
     )
 };
 

@@ -36,7 +36,7 @@ const DeleteUserModal = ({ show, onClose, data }) => {
         <ModalLayout
             show={show}
             onHide={hideModal}
-            size="lm"
+            size="md"
             header={true}
             customHeader={
                 <div className="d-flex align-items-center justify-content-between w-100">
@@ -45,10 +45,10 @@ const DeleteUserModal = ({ show, onClose, data }) => {
             }
             footer={
                 <div className="d-flex justify-content-end gap-2">
-                    <Button onClick={hideModal} size="lm">
+                    <Button onClick={hideModal} size="md">
                         {ViewStrings.buttonCancel}
                     </Button>
-                    <Button onClick={handleSubmit} variant="danger" size="lm">
+                    <Button onClick={handleSubmit} variant="danger" size="md">
                         {ViewStrings.buttonDelete}
                     </Button>
                 </div>

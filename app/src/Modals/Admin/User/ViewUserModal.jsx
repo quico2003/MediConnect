@@ -39,7 +39,7 @@ const ViewUserModal = ({ show, onClose, data }) => {
         <ModalLayout
             show={show}
             onHide={hideModal}
-            size="lm"
+            size="md"
             header={true}
             customHeader={
                 <div className="d-flex align-items-center justify-content-between w-100">
@@ -48,7 +48,7 @@ const ViewUserModal = ({ show, onClose, data }) => {
             }
             footer={
                 <div className="d-flex justify-content-end gap-2">
-                    <Button onClick={hideModal} variant="danger" size="lm">
+                    <Button onClick={hideModal} variant="danger" size="md">
                         {ViewStrings.close}
                     </Button>
                 </div>

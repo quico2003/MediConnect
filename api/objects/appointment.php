@@ -21,12 +21,12 @@ class Appointment
 
     function store(): int
     {
-        $query = "INSERT INTO `" . self::$table_name .  "` SET created_by=:created_by, created_for=:created_for,
+        $query = "INSERT INTO `" . self::$table_name . "` SET created_by=:created_by, created_for=:created_for,
         date=:date, reason=:reason";
 
         $stmt = $this->conn->prepare($query);
 
-        
+
         $stmt->bindParam(":created_by", $this->created_by);
         $stmt->bindParam(":created_for", $this->created_for);
         $stmt->bindParam(":date", $this->date);
@@ -38,6 +38,25 @@ class Appointment
         } catch (\Exception $th) {
             createException($stmt->errorInfo());
         }
+    }
+
+    public static function getDateByDay(PDO $db, string $date): array
+    {
+        $query = "SELECT date FROM `" . self::$table_name . "` WHERE date LIKE :date";
+
+        $stmt = $db->prepare($query);
+        $stmt->bindValue(":date", $date."%");
+
+        if ($stmt->execute()) {
+            $arrayToReturn = [];
+
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $arrayToReturn[] = $row;
+            }
+            return $arrayToReturn;
+        }
+        createException($stmt->errorInfo());
+
     }
 
     public static function getAllWithOutPaginationByUserID(PDO $db, int $user_id): array

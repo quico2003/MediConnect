@@ -35,13 +35,13 @@ CREATE TABLE IF NOT EXISTS `admin` (
 
 -- La exportación de datos fue deseleccionada.
 
--- Volcando estructura para tabla mediconnect_db.appoinments
-CREATE TABLE IF NOT EXISTS `appoinments` (
+-- Volcando estructura para tabla mediconnect_db.appointments
+CREATE TABLE IF NOT EXISTS `appointments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `created_by` int(11) NOT NULL,
   `created_for` int(11) NOT NULL,
-  `date` date NOT NULL,
-  `reason` varchar(100) NOT NULL,
+  `date` varchar(50) NOT NULL DEFAULT '',
+  `reason` varchar(250) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `deleted_at` timestamp NULL DEFAULT NULL,
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `appoinments` (
   KEY `FK_appoinments_clients` (`created_for`),
   CONSTRAINT `FK_appoinments_clients` FOREIGN KEY (`created_for`) REFERENCES `clients` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
   CONSTRAINT `FK_appoinments_user` FOREIGN KEY (`created_by`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- La exportación de datos fue deseleccionada.
 
@@ -72,10 +72,12 @@ CREATE TABLE IF NOT EXISTS `category` (
 -- Volcando estructura para tabla mediconnect_db.clients
 CREATE TABLE IF NOT EXISTS `clients` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `guid` char(36) NOT NULL,
+  `email` varchar(255) NOT NULL,
   `first_name` varchar(50) NOT NULL,
-  `second_name` varchar(50) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `phone` int(11) NOT NULL,
+  `last_name` varchar(50) NOT NULL,
+  `phone` varchar(9) NOT NULL DEFAULT '',
+  `searchData` text NOT NULL,
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
@@ -83,7 +85,7 @@ CREATE TABLE IF NOT EXISTS `clients` (
   PRIMARY KEY (`id`),
   KEY `FK_clients_user` (`created_by`),
   CONSTRAINT `FK_clients_user` FOREIGN KEY (`created_by`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- La exportación de datos fue deseleccionada.
 
@@ -142,10 +144,11 @@ CREATE TABLE IF NOT EXISTS `user` (
   `deleted_at` timestamp NULL DEFAULT NULL,
   `token` varchar(500) DEFAULT NULL,
   `expiredate` timestamp NULL DEFAULT NULL,
+  `first_login` tinyint(1) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_user_admin` (`created_by`),
   CONSTRAINT `FK_user_admin` FOREIGN KEY (`created_by`) REFERENCES `admin` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- La exportación de datos fue deseleccionada.
 
@@ -160,7 +163,7 @@ CREATE TABLE IF NOT EXISTS `userprofile` (
   PRIMARY KEY (`id`),
   KEY `FK__user` (`user_id`),
   CONSTRAINT `FK__user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- La exportación de datos fue deseleccionada.
 

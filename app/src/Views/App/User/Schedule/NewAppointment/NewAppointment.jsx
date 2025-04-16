@@ -12,11 +12,10 @@ import { EndpointsUser, getEndpoint } from "../../../../../Constants/endpoints.c
 import Select from "react-select";
 import RequiredField from "../../../../../Components/Form/RequiredField/RequiredField";
 import FormControl from "../../../../../Components/Form/FormControl/FormControl";
-import TimePicker from "react-time-picker";
 import DatePicker from "react-date-picker";
-import moment from "moment";
 import { Paths } from "../../../../../Constants/paths.constants";
 import { Views } from "../../../../../Constants/views.constants";
+import moment from "moment";
 
 const NewAppointment = () => {
 
@@ -33,10 +32,11 @@ const NewAppointment = () => {
     const [clients, setClients] = useState({});
     const [selectedOption, setSelectedOption] = useState({});
 
-    const [fecha, setFecha] = useState(moment());
-    const [selectedHours] = useState();
-    const horas = [
-        { value: "9", label: "9:00 to 10:00" },
+    const [fecha, setFecha] = useState();
+    const [selectedHours, setSelectedHours] = useState();
+    const [chosenHours, setChosenHours] = useState([]);
+    const [horas, setHoras] = useState([
+        { value: "09", label: "9:00 to 10:00" },
         { value: "10", label: "10:00 to 11:00" },
         { value: "11", label: "11:00 to 12:00" },
         { value: "12", label: "12:00 to 13:00" },
@@ -44,8 +44,7 @@ const NewAppointment = () => {
         { value: "17", label: "17:00 to 18:00" },
         { value: "18", label: "18:00 to 19:00" },
         { value: "19", label: "19:00 to 20:00" }
-    ]
-
+    ]);
 
 
     useEffect(() => {
@@ -61,14 +60,12 @@ const NewAppointment = () => {
     }
 
     const handleSubmit = () => {
-        request("post", getEndpoint(EndpointsUser.Appointments.create), { ...data})
-        .then(() => {
-            successNotification();
-            push(Paths[Views.schedule].path);
-        })
-        .catch((err) => errorNotification(err.message))
-        
-
+        request("post", getEndpoint(EndpointsUser.Appointments.create), { ...data })
+            .then(() => {
+                successNotification(ViewStrings.successMessage);
+                push(Paths[Views.schedule].path);
+            })
+            .catch((err) => errorNotification(err.message))
     }
 
     const handleInput = (e) => {
@@ -81,14 +78,38 @@ const NewAppointment = () => {
         setData({ ...data, "created_for": obj.value });
     }
 
+    const handleSelectedDate = (obj) => {
+        const date = moment(obj);
+        const dateFormat = dataFormater(date, "DD-MM-YYYY");
+
+        if (dateFormat !== "Invalid date") {
+            setFecha(date);
+            setSelectedHours(null);
+            setData({ ...data, "date": dateFormat });
+            getAvaliableHours(dateFormat);
+        } else {
+            errorNotification("You cannot enter an incorrect date.")
+        }
+    }
+
     const handleSelectHours = (obj) => {
+        setSelectedHours(obj);
         const date = moment(fecha).add(obj.value, "hours");
         const dateFormat = dataFormater(date, "DD-MM-YYYY HH:mm");
-        setData({ ...data, "date": dateFormat});
+        setData({ ...data, "date": dateFormat });
+    }
+
+    const getAvaliableHours = (dateFormat) => {
+        request("post", getEndpoint(EndpointsUser.Appointments.getChosenHours), { dateFormat })
+            .then((res) => {
+                const availableHours = horas.filter(hora => !res.data.includes(hora.value));
+                setChosenHours(availableHours);
+            })
+            .catch((err) => errorNotification(err.message))
     }
 
     const checkForm = () => {
-        const { created_for, reason, date} = data;
+        const { created_for, reason, date } = data;
         return validateData([created_for, reason, date]);
     }
 
@@ -124,21 +145,21 @@ const NewAppointment = () => {
                     />
 
                     <div className="d-flex gap-2 align-items-center" style={{ position: 'relative' }}>
-                        <strong>Fecha: <RequiredField /></strong>
-
+                        <strong>{ViewStrings.date}<RequiredField /></strong>
                         <div className="datepicker-wrapper">
                             <DatePicker
-                                onChange={setFecha}
+                                onChange={handleSelectedDate}
                                 value={fecha}
                                 required
-                                calendarClassName="custom-calendar"
+                                minDate={moment().startOf('day').toDate()}
+                                clearIcon={null}
                             />
                         </div>
                     </div>
 
                     <FormLabel className="mb-0">{ViewStrings.hours}<RequiredField /></FormLabel>
                     <Select
-                        options={horas}
+                        options={chosenHours}
                         closeMenuOnSelect
                         menuPortalTarget={document.body}
                         className="pb-2 basic-single"
@@ -153,7 +174,7 @@ const NewAppointment = () => {
                 </SectionLayout>
                 <div className="d-flex justify-content-end align-items-center">
                     <Button disabled={!checkForm()} onClick={handleSubmit}>
-                        Create
+                        {ViewStrings.button}
                     </Button>
                 </div>
             </PanelLayout>

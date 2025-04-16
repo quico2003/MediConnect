@@ -39,7 +39,7 @@ const ViewClientModal = ({ show, onClose, data }) => {
         <ModalLayout
             show={show}
             onHide={hideModal}
-            size="lm"
+            size="md"
             header={true}
             customHeader={
                 <div>
@@ -48,7 +48,7 @@ const ViewClientModal = ({ show, onClose, data }) => {
             }
             footer={
                 <div>
-                    <Button onClick={hideModal} size="lm">
+                    <Button onClick={hideModal} size="md">
                         {ViewStrings.close}
                     </Button>
                 </div>
