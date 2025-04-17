@@ -15,7 +15,9 @@ import useLoaded from '../../../../Hooks/useLoaded';
 import useNotification from '../../../../Hooks/useNotification';
 import { EndpointsUser, getEndpoint } from '../../../../Constants/endpoints.contants';
 import useModalManager from '../../../../Hooks/useModalManager';
-import MenuAppointmentsModal from '../../../../Modals/User/schedule/MenuAppointmentsModal';
+import MenuAppointmentsModal from '../../../../Modals/User/Schedule/MenuAppointmentsModal';
+import DeleteAppointmentsModal from '../../../../Modals/User/Appointment/DeleteAppointmentsModal';
+import EditAppointmentsModal from '../../../../Modals/User/Appointment/EditAppointmentsModal';
 
 
 const Schedule = () => {
@@ -29,7 +31,7 @@ const Schedule = () => {
 
     const localizer = momentLocalizer(moment);
 
-    const { startFetching, finishFetching, fetching, loaded } = useLoaded();
+    const { startFetching, finishFetching } = useLoaded();
 
     const { showNotification: errorNotification } = useNotification();
 
@@ -38,6 +40,27 @@ const Schedule = () => {
         openModal: openMenuAppointmentsModal,
         show: showMenuAppointmentsModal,
         data: menuAppointmentsData,
+    } = useModalManager();
+
+    const {
+        closeModal: closeDeleteAppointmentModal,
+        openModal: openDeleteAppointmentModal,
+        show: showDeleteAppointmentModal,
+        data: deleteAppointmentsData,
+    } = useModalManager();
+
+    const {
+        closeModal: closeEditAppointmentModal,
+        openModal: openEditAppointmentModal,
+        show: showEditAppointmentModal,
+        data: editAppointmentsData,
+    } = useModalManager();
+
+    const {
+        closeModal: closeCompleteAppointmentModal,
+        openModal: openCompleteAppointmentModal,
+        show: showCompleteAppointmentModal,
+        data: completeAppointmentsData,
     } = useModalManager();
 
     useEffect(() => {
@@ -57,7 +80,6 @@ const Schedule = () => {
     const eventsFormatter = (appointments) => {
         return appointments.map(appointment => {
             const startMoment = moment(appointment.start, "DD-MM-YYYY HH:mm");
-
             return {
                 id: appointment.id,
                 title: appointment.title,
@@ -75,6 +97,28 @@ const Schedule = () => {
         openMenuAppointmentsModal(e);
     }
 
+    const handleCloseDeleteAppointmentsModal = (refresh) => {
+        if (refresh) {
+            closeDeleteAppointmentModal();
+            fetchData();
+        }
+    }
+
+    const handleOpenDelete = (data) => {
+        openDeleteAppointmentModal(data);
+    }
+
+    const handleColseEditAppointmentsModal = (refresh) => {
+        if (refresh) {
+            closeEditAppointmentModal();
+            fetchData();
+        }
+    }
+
+    const handleOpenEdit = (data) => {
+        openEditAppointmentModal(data);
+    }
+
     return (
 
         <>
@@ -82,6 +126,19 @@ const Schedule = () => {
                 onClose={handleCloseMenuAppointmentsModal}
                 show={showMenuAppointmentsModal}
                 data={menuAppointmentsData}
+                openDelete={handleOpenDelete}
+                openEdit={handleOpenEdit}
+
+            />
+            <DeleteAppointmentsModal
+                onClose={handleCloseDeleteAppointmentsModal}
+                show={showDeleteAppointmentModal}
+                data={deleteAppointmentsData}
+            />
+            <EditAppointmentsModal
+                onClose={handleColseEditAppointmentsModal}
+                show={showEditAppointmentModal}
+                data={editAppointmentsData}
             />
             <GeneralLayout title={viewStrings.title} rightSection={
                 <Button size='sm' as={Link} to={Paths[Views.new_appointment].path}>

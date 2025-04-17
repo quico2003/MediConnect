@@ -73,8 +73,11 @@ export const EndpointsUser = {
 
   Appointments: {
     getAll: `${BASE_URL_USER}/appointment/getAll`,
+    get: `${BASE_URL_USER}/appointment/get`,
+    getInfoAppointmentClient: `${BASE_URL_USER}/appointment/getInfoAppointmentClient`,
     getChosenHours: `${BASE_URL_USER}/appointment/getChosenHours`,
     create: `${BASE_URL_USER}/appointment/create`,
+    delete: `${BASE_URL_USER}/appointment/delete`,
   }
 };
 

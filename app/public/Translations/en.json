@@ -489,6 +489,35 @@
         "successMessage": "appointment created.",
         "date": "Date:",
         "button": "Create"
+      },
+      "event": {
+        "title": "Appointment info",
+        "close": "Close",
+        "client": "Client:",
+        "client_phone": "Phone:",
+        "client_email": "Email:",
+        "reason": "Reason:",
+        "start": "Start Appointment:",
+        "end": "Finish Appointment:",
+        "button1": "Delete",
+        "button2": "Update",
+        "button3": "Complete"
+      },
+      "delete": {
+        "title": "Delete Appointment",
+        "body": "Are you sure you want to delete ",
+        "body1": "'s appointment?",
+        "buttonCancel": "Cancel",
+        "buttonDelete": "Delete",
+        "messageDeleted": "Deleted Appointment."
+      },
+      "edit": {
+        "title": "Edit Appointment",
+        "reason": "Reason:",
+        "bUpdate": "Update",
+        "bCancel": "Cancel",
+        "date": "Date",
+        "hours": "Hours"
       }
     }
   }

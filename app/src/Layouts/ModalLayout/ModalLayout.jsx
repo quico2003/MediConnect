@@ -32,7 +32,7 @@ const ModalLayout = ({
       {header && (
         <Modal.Header className={headerClass}>
           {customHeader || (
-            <div className="d-flex align-items-center justify-content-between w-100 bg-dark">
+            <div className="d-flex align-items-center justify-content-between w-100">
               <Modal.Title className="mb-0">{title}</Modal.Title>
               <div>
                 {closeButton && (

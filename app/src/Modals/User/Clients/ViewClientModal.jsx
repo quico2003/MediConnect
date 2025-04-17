@@ -23,7 +23,7 @@ const ViewClientModal = ({ show, onClose, data }) => {
     }, [show])
 
     const fetchData = () => {
-        request("post", getEndpoint(EndpointsUser.Clients.get), { guid: data })
+        request("get", getEndpoint(EndpointsUser.Clients.get), { guid: data })
             .then((res) => {
                 setClient(res.data);
                 successNotification()
