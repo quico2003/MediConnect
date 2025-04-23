@@ -10,7 +10,7 @@ $data = postInput();
 try {
     $db->beginTransaction();
     checkAuthUser();
-    logAPI($data);
+
 
     $input = validate($data, [
         "guid" => "required|string"

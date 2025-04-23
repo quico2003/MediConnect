@@ -45,7 +45,7 @@ const EditClient = () => {
                 setData(res.data);
                 setInitialData(res.data);
             })
-            .catch(() => errorNotification())
+            .catch((err) => errorNotification(err.message))
             .finally(() => setLoaded(true))
     }
 

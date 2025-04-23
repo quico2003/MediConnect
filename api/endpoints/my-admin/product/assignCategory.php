@@ -19,9 +19,6 @@ try {
     $product = Product::getByGuid($db, $input->productGuid);
     $category = Category::getByGuid($db, $input->categoryGuid);
 
-    logAPI($product);
-    logAPI($category);
-
     $product->category_id = $category->id;
 
     $product->update();

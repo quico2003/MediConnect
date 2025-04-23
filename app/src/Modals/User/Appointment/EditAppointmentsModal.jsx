@@ -9,7 +9,7 @@ import { EndpointsUser, getEndpoint } from "../../../Constants/endpoints.contant
 import RequiredField from "../../../Components/Form/RequiredField/RequiredField";
 import DatePicker from "react-date-picker";
 import moment from "moment";
-import { dataFormater } from "../../../Config/GeneralFunctions";
+import { dataFormater, validateData } from "../../../Config/GeneralFunctions";
 import Select from "react-select";
 
 const EditAppointmentsModal = ({ show, onClose, data }) => {
@@ -38,24 +38,32 @@ const EditAppointmentsModal = ({ show, onClose, data }) => {
         { value: "18", label: "18:00 to 19:00" },
         { value: "19", label: "19:00 to 20:00" }
     ]);
-    
+
     useEffect(() => {
         if (show) fetchData();
     }, [show])
 
     const fetchData = async () => {
-        request("get", getEndpoint(EndpointsUser.Appointments.get), {id: data.id})
-        .then((res) => {
-            setAppointment(res.data);
-            setInitialAppointment(res.data);
-            const fechaFormateada = moment(res.data.date, "DD-MM-YYYY").toDate();
-            setFecha(fechaFormateada);
-        })
-        .catch((err) => errorNotification(err.message))
+        request("get", getEndpoint(EndpointsUser.Appointments.get), { id: data.id })
+            .then((res) => {
+                setAppointment(res.data);
+                setInitialAppointment(res.data);
+                const fechaFormateada = moment(res.data.date, "DD-MM-YYYY").toDate();
+                setFecha(fechaFormateada);
+            })
+            .catch((err) => errorNotification(err.message))
     }
 
     const handleSubmit = () => {
-
+       
+        if (checkForm()) {
+            request("post", getEndpoint(EndpointsUser.Appointments.update), { ...appointment})
+            .then(() => {
+                successNotification();
+                hideModal();
+            })
+            .catch((err) => errorNotification(err.message));
+        }
     }
 
     const handleInput = (e) => {
@@ -64,38 +72,46 @@ const EditAppointmentsModal = ({ show, onClose, data }) => {
     }
 
     const handleSelectedDate = (obj) => {
-            const date = moment(obj);
-            const dateFormat = dataFormater(date, "DD-MM-YYYY");
-    
-            if (dateFormat !== "Invalid date") {
-                setFecha(date);
-                setSelectedHours(null);
-                setData({ ...data, "date": dateFormat });
-                getAvaliableHours(dateFormat);
-            } else {
-                errorNotification("You cannot enter an incorrect date.")
-            }
+        console.log(obj);
+
+        const date = moment(obj);
+        const dateFormat = dataFormater(date, "DD-MM-YYYY");
+
+        if (dateFormat !== "Invalid date") {
+            setFecha(date);
+            setSelectedHours(null);
+            setAppointment({ ...appointment, "date": dateFormat });
+            getAvaliableHours(dateFormat);
+        } else {
+            errorNotification("You cannot enter an incorrect date.")
         }
-    
-        const handleSelectHours = (obj) => {
-            setSelectedHours(obj);
-            const date = moment(fecha).add(obj.value, "hours");
-            const dateFormat = dataFormater(date, "DD-MM-YYYY HH:mm");
-            setData({ ...data, "date": dateFormat });
-        }
-    
-        const getAvaliableHours = (dateFormat) => {
-            request("post", getEndpoint(EndpointsUser.Appointments.getChosenHours), { dateFormat })
-                .then((res) => {
-                    const availableHours = horas.filter(hora => !res.data.includes(hora.value));
-                    setChosenHours(availableHours);
-                })
-                .catch((err) => errorNotification(err.message))
-        }
+    }
+
+    const handleSelectHours = (obj) => {
+        setSelectedHours(obj);
+        const date = moment(fecha).add(obj.value, "hours");
+        const dateFormat = dataFormater(date, "DD-MM-YYYY HH:mm");
+        setAppointment({ ...appointment, "date": dateFormat });
+    }
+
+    const getAvaliableHours = (dateFormat) => {
+        request("post", getEndpoint(EndpointsUser.Appointments.getChosenHours), { dateFormat })
+            .then((res) => {
+                const availableHours = horas.filter(hora => !res.data.includes(hora.value));
+                setChosenHours(availableHours);
+            })
+            .catch((err) => errorNotification(err.message))
+    }
 
     const hideModal = () => {
         onClose(true);
     };
+
+    const checkForm = () => {
+        const { reason, date } = appointment;
+        return validateData([reason, date]) &&
+        appointment.reason !== initialAppointment.reason;
+    }
 
     return (
         <ModalLayout
@@ -109,7 +125,7 @@ const EditAppointmentsModal = ({ show, onClose, data }) => {
                     <Button variant="light" size="md" onClick={hideModal}>
                         {ViewStrings.bCancel}
                     </Button>
-                    <Button onClick={handleSubmit} variant="danger" size="md">
+                    <Button disabled={!checkForm()} onClick={handleSubmit} variant="danger" size="md">
                         {ViewStrings.bUpdate}
                     </Button>
                 </div>
@@ -145,8 +161,6 @@ const EditAppointmentsModal = ({ show, onClose, data }) => {
             <Select
                 options={chosenHours}
                 closeMenuOnSelect
-                menuPortalTarget={document.body}
-                className="pb-2 basic-single"
                 id="client"
                 onChange={handleSelectHours}
                 value={selectedHours}

@@ -11,17 +11,24 @@ try {
     $db->beginTransaction();
     checkAuthUser();
 
+    logAPI($data);
+    
     $input = validate($data, [
-        "guid" => "required|string"
+        "reason" => "required|string",
+        "date" => "required|string"
     ]);
 
-    $client = Client::getByGuid($db, $input->guid);
+    $appointment = Appointment::get($db, $input->id);
 
-    $client->delete();
+    $appointment->reason = $input->reason;
+    $appointment->date = $input->date;
+
+    $appointment->update();
 
     $db->commit();
 
     Response::sendResponse();
+
 } catch (\Exception $th) {
     $db->rollBack();
     print_r(json_encode(array("status" => false, "message" => $th->getMessage(), 'code' => $th->getCode())));

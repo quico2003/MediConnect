@@ -7,7 +7,7 @@ import useRequest from "../../../Hooks/useRequest";
 import { EndpointsUser, getEndpoint } from "../../../Constants/endpoints.contants";
 import useNotification from "../../../Hooks/useNotification";
 
-const MenuAppointmentsModal = ({ show, onClose, data, openDelete, openEdit }) => {
+const MenuAppointmentsModal = ({ show, onClose, data, openDelete, openEdit, openComplete }) => {
 
     const { strings } = useContext(StringsContext);
     const ViewStrings = strings.User.Schedule.event;
@@ -38,6 +38,11 @@ const MenuAppointmentsModal = ({ show, onClose, data, openDelete, openEdit }) =>
         hideModal();
         openEdit(data);
     }
+    
+    const eventComplete = () => {
+        hideModal();
+        openComplete(data);
+    }
 
     const hideModal = () => onClose();
 
@@ -55,7 +60,7 @@ const MenuAppointmentsModal = ({ show, onClose, data, openDelete, openEdit }) =>
                     <div className="d-flex justify-content-end">
                         <Button className="m-2" variant="danger" onClick={eventDelete}>{ViewStrings.button1}</Button>
                         <Button className="m-2" onClick={eventEdit}>{ViewStrings.button2}</Button>
-                        <Button className="m-2">{ViewStrings.button3}</Button>
+                        <Button className="m-2" onClick={eventComplete}>{ViewStrings.button3}</Button>
                     </div>
                 </div>
             }

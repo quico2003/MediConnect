@@ -1,10 +1,11 @@
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-import {  getToken } from "../Config/GeneralFunctions";
+import { getToken } from "../Config/GeneralFunctions";
 import { Configuration } from "../Config/app.config";
 import { Paths } from "../Constants/paths.constants";
 import { Views } from "../Constants/views.constants";
 import CustomError from "../Utils/CustomError";
+import moment from "moment";
 
 const useRequest = () => {
   const { replace, goBack } = useHistory();
@@ -108,6 +109,33 @@ const useRequest = () => {
         return await axios
           .get(finalUrl, { headers })
           .then(checkResponse)
+          .catch(checkError);
+      case "download":
+        return await axios
+          .post(url, payload, {
+            headers: { ...headers },
+            responseType: "blob",
+          })
+          .then(async (response) => {
+            // Verificamos si realmente es un PDF
+            const contentType = response.headers["content-type"];
+            if (contentType !== "application/pdf") {
+              const text = await response.data.text(); // Puede ser error del backend
+              throw new Error("Error en la respuesta: " + text);
+            }
+
+            const blob = new Blob([response.data], { type: "application/pdf" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            const filename = response.headers["content-disposition"]
+              ?.split("filename=")[1]
+              ?.replace(/["']/g, "") || `file_${moment().format("DD_MM_YYYY_hh_mm_ss")}.pdf`;
+            a.href = url;
+            a.download = filename;
+            a.click();
+            a.remove();
+            setTimeout(() => URL.revokeObjectURL(url), 3000);
+          })
           .catch(checkError);
       default:
         throw new CustomError("No method selected in useRequest() hook");

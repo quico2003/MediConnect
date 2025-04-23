@@ -77,7 +77,14 @@ export const EndpointsUser = {
     getInfoAppointmentClient: `${BASE_URL_USER}/appointment/getInfoAppointmentClient`,
     getChosenHours: `${BASE_URL_USER}/appointment/getChosenHours`,
     create: `${BASE_URL_USER}/appointment/create`,
+    update: `${BASE_URL_USER}/appointment/update`,
     delete: `${BASE_URL_USER}/appointment/delete`,
+  },
+
+  Recipes: {
+    create: `${BASE_URL_USER}/recipe/create`,
+    generatePDF: `${BASE_URL_USER}/recipe/generatePDF`,
+    getProductsWithRecipe: `${BASE_URL_USER}/recipe/getProductsWithRecipe`
   }
 };
 

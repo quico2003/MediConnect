@@ -242,6 +242,23 @@ class Product
         }
         createException($stmt->errorInfo());
     }
+    public static function getAllBySelectRecipes(PDO $db): array
+    {
+        $query = "SELECT * FROM `" . self::$table_name . "` WHERE deleted_at IS NULL AND category_id IS NOT NULL";
+    
+        $stmt = $db->prepare($query);
+
+        if ($stmt->execute()) {
+            $arrayToReturn = [];
+
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $arrayToReturn[] = ["value" => $row["guid"], "label" => $row["name"]];
+            }
+            return $arrayToReturn;
+        }
+        createException($stmt->errorInfo());
+
+    }
     public static function getByGuid(PDO $db, string $guid): Product
     {
 
@@ -250,6 +267,22 @@ class Product
         $stmt = $db->prepare($query);
 
         $stmt->bindParam(":guid", $guid);
+        if ($stmt->execute()) {
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                return self::getMainObject($db, $row);
+            }
+        }
+        createException("Product not found");
+    }
+
+    public static function get(PDO $db, string $id): Product
+    {
+
+        $query = "SELECT * FROM `" . self::$table_name . "` WHERE id=:id AND deleted_at IS NULL";
+
+        $stmt = $db->prepare($query);
+
+        $stmt->bindParam(":id", $id);
         if ($stmt->execute()) {
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 return self::getMainObject($db, $row);

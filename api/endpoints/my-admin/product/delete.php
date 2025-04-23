@@ -35,7 +35,6 @@ try {
         $product->category_id = null;
     }
 
-    logAPI($product);
 
     $product->delete();
 

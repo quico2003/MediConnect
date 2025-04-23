@@ -10,6 +10,7 @@ class Appointment
     public int $created_for;
     public string $date;
     public string $reason;
+    public string|null $final_description;
     public string $created_at;
     public string $updated_at;
     public string|null $deleted_at;
@@ -42,10 +43,10 @@ class Appointment
 
     public static function getDateByDay(PDO $db, string $date): array
     {
-        $query = "SELECT date FROM `" . self::$table_name . "` WHERE date LIKE :date";
+        $query = "SELECT date FROM `" . self::$table_name . "` WHERE date LIKE :date AND deleted_at IS NULL";
 
         $stmt = $db->prepare($query);
-        $stmt->bindValue(":date", $date."%");
+        $stmt->bindValue(":date", $date . "%");
 
         if ($stmt->execute()) {
             $arrayToReturn = [];
@@ -77,6 +78,49 @@ class Appointment
         createException($stmt->errorInfo());
     }
 
+    public static function get(PDO $db, int $id): Appointment
+    {
+        $query = "SELECT * FROM `" . self::$table_name . "` WHERE id=:id AND deleted_at IS NULL";
+
+        $stmt = $db->prepare($query);
+
+        $stmt->bindParam(":id", $id);
+
+        if ($stmt->execute()) {
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                return self::getMainObject($db, $row);
+            }
+        }
+        createException("Appointment not foud");
+    }
+
+    function update(): bool
+    {
+        $query = "Update `" . self::$table_name . "`
+        SET date=:date, reason=:reason, final_description=:final_description, deleted_at=:deleted_at
+        WHERE id=:id";
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(":date", $this->date);
+        $stmt->bindParam(":reason", $this->reason);
+        $stmt->bindParam(":final_description", $this->final_description);
+        $stmt->bindParam(":deleted_at", $this->deleted_at);
+        $stmt->bindParam(":id", $this->id);
+
+        try {
+            $stmt->execute();
+            return true;
+        } catch (\Exception $th) {
+            createException($stmt->errorInfo());
+        }
+    }
+
+    function delete(): bool
+    {
+        $this->deleted_at = newDate();
+        return $this->update();
+    }
+
     private static function getMainObject(PDO $db, array $row): Appointment
     {
         $newObj = new Appointment($db);
@@ -85,8 +129,9 @@ class Appointment
         $newObj->created_for = intval($row["created_for"]);
         $newObj->date = $row["date"];
         $newObj->reason = $row["reason"];
+        $newObj->final_description = $row["final_description"];
         $newObj->created_at = $row["created_at"];
-        $newObj->pudated_at = $row["updated_at"];
+        $newObj->updated_at = $row["updated_at"];
         $newObj->deleted_at = $row["deleted_at"];
         return $newObj;
     }

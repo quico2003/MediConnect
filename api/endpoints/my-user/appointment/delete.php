@@ -5,24 +5,25 @@ include_once "../../../config/config.php";
 $database = new Database();
 $db = $database->getConnection();
 
-$data = postInput();
+$data = getInput();
 
 try {
     $db->beginTransaction();
     checkAuthUser();
 
     $input = validate($data, [
-        "guid" => "required|string"
+        "id" => "required"
     ]);
 
-    $client = Client::getByGuid($db, $input->guid);
+    $appointment = Appointment::get($db, $input->id);
 
-    $client->delete();
+    $appointment->delete();
 
     $db->commit();
 
     Response::sendResponse();
+
 } catch (\Exception $th) {
     $db->rollBack();
-    print_r(json_encode(array("status" => false, "message" => $th->getMessage(), 'code' => $th->getCode())));
+    print_r(value: json_encode(array("status" => false, "message" => $th->getMessage(), 'code' => $th->getCode())));
 }

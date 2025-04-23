@@ -22,4 +22,18 @@ class AppointmentResource
         }
         return $itemsArray;
     }
+
+    public static function getAppointmentView(Appointment $appointment)
+    {
+        $newItem = new stdClass();
+        $newItem = self::getAppointment($appointment, ["id", "reason", "client", "client_phone", "client_email"]);
+        return $newItem;
+    }
+
+    public static function getAppointmentEdit(Appointment $appointment)
+    {
+        $newItem = new stdClass();
+        $newItem = self::getAppointment($appointment, ["id", "reason", "date", "hour"]);
+        return $newItem;
+    }
 }

@@ -67,7 +67,6 @@ const NewAppointment = () => {
             })
             .catch((err) => errorNotification(err.message))
     }
-
     const handleInput = (e) => {
         const { id, value } = e.target;
         setData({ ...data, [id]: value });

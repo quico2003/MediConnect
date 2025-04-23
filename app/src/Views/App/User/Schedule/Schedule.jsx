@@ -18,6 +18,7 @@ import useModalManager from '../../../../Hooks/useModalManager';
 import MenuAppointmentsModal from '../../../../Modals/User/Schedule/MenuAppointmentsModal';
 import DeleteAppointmentsModal from '../../../../Modals/User/Appointment/DeleteAppointmentsModal';
 import EditAppointmentsModal from '../../../../Modals/User/Appointment/EditAppointmentsModal';
+import CompleteAppointmentsModal from '../../../../Modals/User/Appointment/CompleteAppointmentsModal';
 
 
 const Schedule = () => {
@@ -92,7 +93,6 @@ const Schedule = () => {
     const handleCloseMenuAppointmentsModal = () => {
         closeMenuAppointmentsModal();
     }
-
     const handleSelectEvent = (e) => {
         openMenuAppointmentsModal(e);
     }
@@ -103,7 +103,6 @@ const Schedule = () => {
             fetchData();
         }
     }
-
     const handleOpenDelete = (data) => {
         openDeleteAppointmentModal(data);
     }
@@ -114,9 +113,18 @@ const Schedule = () => {
             fetchData();
         }
     }
-
     const handleOpenEdit = (data) => {
         openEditAppointmentModal(data);
+    }
+    
+    const handleCompleteAppointmentsModal = (refresh) => {
+        if (refresh) {
+            closeCompleteAppointmentModal();
+            fetchData();
+        }
+    }
+    const handleOpenComplete = (data) => {
+        openCompleteAppointmentModal(data);
     }
 
     return (
@@ -128,6 +136,7 @@ const Schedule = () => {
                 data={menuAppointmentsData}
                 openDelete={handleOpenDelete}
                 openEdit={handleOpenEdit}
+                openComplete={handleOpenComplete}
 
             />
             <DeleteAppointmentsModal
@@ -139,6 +148,11 @@ const Schedule = () => {
                 onClose={handleColseEditAppointmentsModal}
                 show={showEditAppointmentModal}
                 data={editAppointmentsData}
+            />
+            <CompleteAppointmentsModal
+                onClose={handleCompleteAppointmentsModal}
+                show={showCompleteAppointmentModal}
+                data={completeAppointmentsData}
             />
             <GeneralLayout title={viewStrings.title} rightSection={
                 <Button size='sm' as={Link} to={Paths[Views.new_appointment].path}>

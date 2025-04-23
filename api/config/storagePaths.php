@@ -14,12 +14,21 @@ class FileStorage
     {
         return FILE_STORAGE_PATH . "/products/$fileName";
     }
+    public static function FilePathLogo(): string
+    {
+        return API_URL . "/storage/logopdf.png";
+    }
+
+    public static function FilePathProduct(string $fileName = ""): string
+    {
+        return API_URL . "/storage/products/$fileName";
+    }
 
     public static function FileAdminURL(string $fileName): string
     {
         return API_URL . "/endpoints/my-admin/media/getMedia.php?file=$fileName";
     }
-    
+
     public static function FileUserURL(string $fileName): string
     {
         return API_URL . "/endpoints/my-user/media/getMedia.php?file=$fileName";
