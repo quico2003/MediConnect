@@ -25,13 +25,12 @@ const Users = () => {
     const GeneralViewStrings = strings.General.App;
 
     const request = useRequest();
+
     const { search } = useLocation();
     const [data, setData] = useState();
-
     const [filterSelected] = useState();
     const [totalPages, setTotalPages] = useState(1);
     const searchParams = useQuery();
-
     const { startFetching, finishFetching, fetching, loaded } = useLoaded();
 
     const { showNotification: errorNotification } = useNotification();
@@ -75,7 +74,7 @@ const Users = () => {
                 setData(res.users);
                 setTotalPages(res.totalPages);
             })
-            .catch((err) => errorNotification(err))
+            .catch((err) => errorNotification(err.message))
             .finally(() => finishFetching());
     }
 
@@ -96,14 +95,11 @@ const Users = () => {
                 show={showViewUserModal}
                 data={viewUserData}
             />
-
             <DeleteUserModal
                 onClose={handleCloseDeleteUserModal}
                 show={showDeleteUserModal}
                 data={DeleteUserData}
             />
-
-
             <GeneralLayout title={ViewStrings.title} rightSection={
                 <Button size="sm" as={Link} to={Paths[Views.new_user].path}>
                     {ViewStrings.buttonAdd}

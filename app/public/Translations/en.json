@@ -256,7 +256,8 @@
       "specialty": "Specialty",
       "placeholderSpecialty": "Write the practitioner's specialty",
       "password": "Password",
-      "placeholderPassword": "Ex: Jackson@142"
+      "placeholderPassword": "Ex: Jackson@142",
+      "buttonCreate": "Create"
     },
     "delete": {
       "messageDeleted": "Deleted Practitioner.",
@@ -446,7 +447,8 @@
       "pEmail": "Insert Email...",
       "phone": "Phone",
       "pPhone": "Insert Phone...",
-      "messageSuccess": "Created Client."
+      "messageSuccess": "Created Client.",
+      "buttonCreate": "Create"
     },
     "delete": {
       "messageDeleted": "Deleted Client.",
@@ -474,7 +476,8 @@
       "pEmail": "Insert Email...",
       "phone": "Phone",
       "pPhone": "Insert Phone...",
-      "update": "Update"
+      "update": "Update",
+      "messageSuccess": "Updated Client."
     },
     "Schedule": {
       "title": "Schedule",

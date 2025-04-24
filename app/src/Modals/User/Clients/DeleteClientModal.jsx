@@ -52,14 +52,11 @@ const DeleteClientModal = ({ show, onClose, data }) => {
                         {ViewStrings.buttonDelete}
                     </Button>
                 </div>
-            }
-        >
+            }>
             <div>
                 {ViewStrings.body}
             </div>
         </ModalLayout>
-
     )
-
 }
 export default DeleteClientModal;

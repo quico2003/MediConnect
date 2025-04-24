@@ -29,24 +29,24 @@ const NewCategory = () => {
 
     const [data, setData] = useState({});
 
-    const handleInput = (e) => {
-        const { id, value } = e.target;
-        setData({ ...data, [id]: value });
-    }
-
     const handleSubmit = () => {
         if (checkForm()) {
             setSubmiting(true);
             request("post", getEndpoint(EndpointsAdmin.Categories.create), { ...data })
-                .then(() => {
-                    push(Paths[Views.categories].path);
-                    successNotification(ViewStrings.messageSuccess);
-                })
-                .catch(() => errorNotification(ViewStrings.messageError))
-                .finally(() => setSubmiting(false))
+            .then(() => {
+                push(Paths[Views.categories].path);
+                successNotification(ViewStrings.messageSuccess);
+            })
+            .catch(() => errorNotification(ViewStrings.messageError))
+            .finally(() => setSubmiting(false))
         }
     }
-
+    
+    const handleInput = (e) => {
+        const { id, value } = e.target;
+        setData({ ...data, [id]: value });
+    }
+    
     const checkForm = () => {
         const { name, description } = data;
         return validateData([name, description]);

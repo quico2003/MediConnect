@@ -8,10 +8,11 @@ import GeneralLayout from "../../../../../Layouts/GeneralLayout/GeneralLayout";
 import PanelLayout from "../../../../../Layouts/PanelLayout/PanelLayout";
 import SectionLayout from "../../../../../Layouts/SectionLayout/SectionLayout";
 import FormControl from "../../../../../Components/Form/FormControl/FormControl";
-import { Button } from "react-bootstrap";
+import { Button, Spinner } from "react-bootstrap";
 import { EndpointsUser, getEndpoint } from "../../../../../Constants/endpoints.contants";
 import { Views } from "../../../../../Constants/views.constants";
 import { Paths } from "../../../../../Constants/paths.constants";
+import { EmailRegex, PhoneRegexSimple } from "../../../../../Utils/Regex";
 
 const NewClient = () => {
 
@@ -21,6 +22,8 @@ const NewClient = () => {
     const request = useRequest();
     const { push } = useHistory();
 
+    const [submiting, setSubmiting] = useState(false);
+
     const { showNotification: successNotification } = useNotification("success");
     const { showNotification: errorNotification } = useNotification();
 
@@ -28,12 +31,14 @@ const NewClient = () => {
 
     const handleSubmit = () => {
         if (checkForm()) {
+            setSubmiting(true);
             request("post", getEndpoint(EndpointsUser.Clients.create), { ...data })
-            .then(() => {
-                successNotification(ViewStrings.messageSuccess);
-                push(Paths[Views.clients].path);
-            })
-            .catch((err) => errorNotification(err.message));
+                .then(() => {
+                    push(Paths[Views.clients].path);
+                    successNotification(ViewStrings.messageSuccess);
+                })
+                .catch((err) => errorNotification(err.message))
+                .finally(() => setSubmiting(false))
         }
     }
 
@@ -44,22 +49,24 @@ const NewClient = () => {
 
     const checkForm = () => {
         const { firstName, lastName, email, phone } = data;
-        return validateData([ firstName, lastName, email, phone]);
+        return validateData([firstName, lastName, email, phone])
+            && PhoneRegexSimple.test(phone)
+            && EmailRegex.test(email);
     }
 
-    return(
+    return (
         <GeneralLayout showBackButton title={ViewStrings.title}>
             <PanelLayout>
                 <SectionLayout>
                     <FormControl
-                    required
-                    controlId="firstName"
-                    showMaxLength
-                    vertical={false}
-                    title={ViewStrings.firstName}
-                    value={data.firstName}
-                    onChange={handleInput}
-                    placeholder={ViewStrings.pFirstName}
+                        required
+                        controlId="firstName"
+                        showMaxLength
+                        vertical={false}
+                        title={ViewStrings.firstName}
+                        value={data.firstName}
+                        onChange={handleInput}
+                        placeholder={ViewStrings.pFirstName}
                     />
                     <FormControl
                         required
@@ -91,12 +98,10 @@ const NewClient = () => {
                         onChange={handleInput}
                         placeholder={ViewStrings.pPhone}
                     />
-
                 </SectionLayout>
-
                 <div className="d-flex justify-content-end align-items-center">
-                    <Button disabled={!checkForm()} onClick={handleSubmit}>
-                        Create
+                    <Button disabled={!checkForm() || submiting} onClick={handleSubmit}>
+                        {submiting ? <Spinner size="sm" /> : ViewStrings.buttonCreate}
                     </Button>
                 </div>
             </PanelLayout>

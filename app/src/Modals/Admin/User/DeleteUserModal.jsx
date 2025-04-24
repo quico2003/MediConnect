@@ -59,6 +59,5 @@ const DeleteUserModal = ({ show, onClose, data }) => {
             </div>
         </ModalLayout>
     )
-
 }
 export default DeleteUserModal;

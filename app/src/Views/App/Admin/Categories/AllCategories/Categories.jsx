@@ -1,6 +1,4 @@
-
 import GeneralLayout from "../../../../../Layouts/GeneralLayout/GeneralLayout";
-
 import PanelLayout from "../../../../../Layouts/PanelLayout/PanelLayout";
 import ReactTable from "../../../../../Components/Table/Table";
 import useRequest from "../../../../../Hooks/useRequest";
@@ -19,7 +17,6 @@ import DeleteCategoryModal from "../../../../../Modals/Admin/Category/DeleteCate
 import useModalManager from "../../../../../Hooks/useModalManager";
 import ViewCategoryModal from "../../../../../Modals/Admin/Category/viewCategoryModal";
 import { StringsContext } from "../../../../../Context/strings.context";
-
 
 const Categories = () => {
 
@@ -59,7 +56,6 @@ const Categories = () => {
         data: viewCategoryData,
     } = useModalManager();
 
-
     useEffect(() => {
         fetchData();
     }, [search]);
@@ -85,7 +81,7 @@ const Categories = () => {
                 setData(res.categories);
                 setTotalPages(res.totalPages);
             })
-            .catch(errorNotification)
+            .catch((err) => errorNotification(err.message))
             .finally(() => finishFetching());
     };
 

@@ -27,7 +27,7 @@ const Products = () => {
     const ViewStrings = strings.Products;
     const GeneralViewStrings = strings.General.App;
 
-    const [filterSelected, setFilterSelected] = useState();
+    const [filterSelected] = useState();
     const inputRef = useRef(null);
     //Use fetch database
     const request = useRequest();
@@ -37,7 +37,6 @@ const Products = () => {
 
     const [totalPages, setTotalPages] = useState(1);
     const searchParams = useQuery();
-    const ref = useRef();
 
     const { startFetching, finishFetching, fetching, loaded } = useLoaded();
 

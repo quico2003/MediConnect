@@ -5,7 +5,7 @@ import PanelLayout from "../../../../../Layouts/PanelLayout/PanelLayout";
 import SectionLayout from "../../../../../Layouts/SectionLayout/SectionLayout";
 import FormControl from "../../../../../Components/Form/FormControl/FormControl";
 import Select from "react-select";
-import { Button, FormLabel } from "react-bootstrap";
+import { Button, FormLabel, Spinner } from "react-bootstrap";
 import useRequest from "../../../../../Hooks/useRequest";
 import { EndpointsAdmin, getEndpoint } from "../../../../../Constants/endpoints.contants";
 import useNotification from "../../../../../Hooks/useNotification";
@@ -32,6 +32,9 @@ const EditProduct = () => {
     const { showNotification: successNotification } = useNotification("success");
     const { showNotification: errorNotification } = useNotification();
 
+    const [submiting, setSubmiting] = useState(false);
+    const [loaded, setLoaded] = useState(false);
+
     const [categories, setCategories] = useState({});
     const [data, setData] = useState({});
     const [initialData, setInitialData] = useState({});
@@ -43,12 +46,7 @@ const EditProduct = () => {
 
     useEffect(() => {
         fetchData();
-        console.log(existingImages);
-        console.log(existingImagesGuid);
-        console.log(newImages);
-        console.log(deleteImages);
-
-    }, []);
+    }, [product_guid]);
 
     const fetchData = async () => {
         try {
@@ -68,23 +66,27 @@ const EditProduct = () => {
             }
         } catch (err) {
             errorNotification("Error fetching product", true);
+        } finally {
+            setLoaded(true);
         }
     };
 
     const handleSubmit = () => {
-        request("file", getEndpoint(EndpointsAdmin.Products.update), {
-            accessor: "image",
-            image: newImages,
-            deleteImages: JSON.stringify(deleteImages),
-            ...data
-        })
-            .then((res) => {
-                push(Paths[Views.products].path);
-                successNotification("Product updated", true);
+        if (checkForm()) {
+            setSubmiting(true);
+            request("file", getEndpoint(EndpointsAdmin.Products.update), {
+                accessor: "image",
+                image: newImages,
+                deleteImages: JSON.stringify(deleteImages),
+                ...data
             })
-            .catch((err) => {
-                errorNotification("Error update product", err);
-            })
+                .then(() => {
+                    push(Paths[Views.products].path);
+                    successNotification("Product updated", true);
+                })
+                .catch((err) => errorNotification(err.message))
+                .finally(() => setSubmiting(false))
+        }
     }
 
     const handleInput = (e) => {
@@ -159,15 +161,15 @@ const EditProduct = () => {
         const changeImages = newImages.length !== 0 || deleteImages.length !== 0 && deleteImages.length == 0;
 
         const { name, category, price, brand, description } = data;
-        return validateData([name, category, price, brand, description]) 
-        && [...existingImages, ...newImages].length > 0 
-        && JSON.stringify(data) !== JSON.stringify(initialData)
-        || changeImages;
+        return validateData([name, category, price, brand, description])
+            && [...existingImages, ...newImages].length > 0
+            && JSON.stringify(data) !== JSON.stringify(initialData)
+            || changeImages;
     }
 
     return (
         <GeneralLayout showBackButton title={ViewStrings.newProduct}>
-            <PanelLayout>
+            <PanelLayout loaded={loaded}>
                 <SectionLayout>
                     <FormControl
                         required
@@ -228,13 +230,12 @@ const EditProduct = () => {
                 </SectionLayout>
 
                 <div className="d-flex justify-content-end align-items-center">
-                    <Button disabled={!checkForm()} onClick={handleSubmit}>
-                        {ViewStrings.update}
+                    <Button disabled={!checkForm() || submiting} onClick={handleSubmit}>
+                        {submiting ? <Spinner size="sm" /> : ViewStrings.update}
                     </Button>
                 </div>
             </PanelLayout>
         </GeneralLayout>
     );
 };
-
 export default EditProduct;

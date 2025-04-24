@@ -9,7 +9,7 @@ import useModalManager from "../../../../../Hooks/useModalManager";
 import ViewClientModal from "../../../../../Modals/User/Clients/ViewClientModal";
 import DeleteClientModal from "../../../../../Modals/User/Clients/DeleteClientModal";
 import GeneralLayout from "../../../../../Layouts/GeneralLayout/GeneralLayout";
-import { Button, Placeholder } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import PanelLayout from "../../../../../Layouts/PanelLayout/PanelLayout";
 import ReactTable from "../../../../../Components/Table/Table";
 import { ClientsColumns } from "./ClientsColumns";
@@ -25,14 +25,14 @@ const Clients = () => {
     const GeneralViewStrings = strings.General.App;
 
     const request = useRequest();
+
     const { search } = useLocation();
     const [filterSelected] = useState();
     const [totalPages, setTotalPages] = useState(1);
     const searchParams = useQuery();
+    const { startFetching, finishFetching, fetching, loaded } = useLoaded();
 
     const [data, setData] = useState();
-
-    const { startFetching, finishFetching, fetching, loaded } = useLoaded();
 
     const { showNotification: errorNotification } = useNotification();
 
@@ -76,10 +76,8 @@ const Clients = () => {
                 setData(res.clients);
                 setTotalPages(res.totalPages);
             })
-            .catch((err) => errorNotification(err))
+            .catch((err) => errorNotification(err.message))
             .finally(() => finishFetching());
-
-
     };
 
     const handleCloseDeleteClientModal = (refresh) => {
@@ -98,13 +96,11 @@ const Clients = () => {
                 show={showViewClientModal}
                 data={ViewClientData}
             />
-
             <DeleteClientModal
                 onClose={handleCloseDeleteClientModal}
                 show={showDeleteClientModal}
                 data={DeleteClientData}
             />
-
             <GeneralLayout title={ViewStrings.title} rightSection={
                 <Button size="sm" as={Link} to={Paths[Views.new_client].path}>
                     {ViewStrings.buttonAdd}
@@ -129,10 +125,8 @@ const Clients = () => {
                         )}
                     />
                 </PanelLayout>
-
             </GeneralLayout>
         </>
     )
-
 }
 export default Clients;

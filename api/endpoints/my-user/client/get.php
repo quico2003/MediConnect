@@ -5,12 +5,11 @@ include_once "../../../config/config.php";
 $database = new Database();
 $db = $database->getConnection();
 
-$data = postInput();
+$data = getInput();
 
 try {
     $db->beginTransaction();
     checkAuthUser();
-
 
     $input = validate($data, [
         "guid" => "required|string"

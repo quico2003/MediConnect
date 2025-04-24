@@ -127,10 +127,11 @@ class Client
         }
 
         applySearchOnQuery($query);
-        doPagination($offset, $page, $stmt);
+        doPagination($offset, $page, $query);
 
 
         $stmt = $db->prepare($query);
+
         $stmt->bindParam(":user_id", $user_id);
 
         applySearchOnBindedValue($search, $stmt);
@@ -234,9 +235,9 @@ class Client
     }
 
 
-    public static function getAllCount(PDO $db, string $search = "", array $filters = []): int
+    public static function getAllCount(PDO $db, string $search = "", array $filters = [], int $user_id): int
     {
-        $query = "SELECT COUNT(id) as total FROM `" . self::$table_name . "` c WHERE deleted_at IS NULL";
+        $query = "SELECT COUNT(id) as total FROM `" . self::$table_name . "` c WHERE deleted_at IS NULL AND created_by=:user_id";
 
         foreach ($filters as $index => $object) {
             $query .= " AND $object->id = :val$index";
@@ -245,6 +246,7 @@ class Client
         applySearchOnQuery($query);
 
         $stmt = $db->prepare($query);
+        $stmt->bindParam(":user_id", $user_id);
 
         applySearchOnBindedValue($search, $stmt);
 

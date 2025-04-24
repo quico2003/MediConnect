@@ -30,6 +30,8 @@ const EditUser = () => {
     const [data, setData] = useState({});
     const [initialData, setInitialData] = useState({});
 
+    const [submiting, setSubmiting] = useState(false);
+
     const [loaded, setLoded] = useState(false);
 
     useEffect(() => {
@@ -48,12 +50,14 @@ const EditUser = () => {
 
     const handleSubmit = () => {
         if (checkForm()) {
+            setSubmiting(true);
             request("post", getEndpoint(EndpointsAdmin.Users.update), { ...data })
                 .then(() => {
                     push(Paths[Views.users].path);
                     successNotification(ViewStrings.edit.userUpdated);
                 })
-                .catch((err) => errorNotification(err.message));
+                .catch((err) => errorNotification(err.message))
+                .finally(() => setSubmiting(false))
         }
     }
 
@@ -116,8 +120,8 @@ const EditUser = () => {
                     />
                 </SectionLayout>
                 <div className="d-flex justify-content-end align-items-center">
-                    <Button disabled={!checkForm()} onClick={handleSubmit}>
-                        {ViewStrings.buttonUpdate}
+                    <Button disabled={!checkForm() || submiting} onClick={handleSubmit}>
+                        {submiting ? <Spinner size="sm" /> : ViewStrings.buttonUpdate}
                     </Button>
                 </div>
             </PanelLayout>

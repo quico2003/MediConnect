@@ -5,11 +5,9 @@ import useRequest from "../../../Hooks/useRequest";
 import useNotification from "../../../Hooks/useNotification";
 import { EndpointsAdmin, getEndpoint } from "../../../Constants/endpoints.contants";
 import { StringsContext } from "../../../Context/strings.context";
-import moment from "moment";
 import { dataFormater } from "../../../Config/GeneralFunctions";
 
 const ViewProductModal = ({ show, onClose, data }) => {
-
 
     const { strings } = useContext(StringsContext);
     const ViewStrings = strings.Products.view;
@@ -66,9 +64,7 @@ const ViewProductModal = ({ show, onClose, data }) => {
                 </div>
             }
         >
-
             <Modal.Body className="d-flex flex-column gap-3">
-
                 <Row>
                     <Col sm={6}>
                         <div className="d-flex flex-column">
@@ -110,7 +106,6 @@ const ViewProductModal = ({ show, onClose, data }) => {
                         </div>
                     </Col>
                 </Row>
-
                 <Row>
                     <Col sm={12}>
                         <span className="fw-bold">{ViewStrings.images}:</span>
@@ -119,10 +114,7 @@ const ViewProductModal = ({ show, onClose, data }) => {
                         </div>
                     </Col>
                 </Row>
-
-
             </Modal.Body>
-
         </ModalLayout>
     )
 

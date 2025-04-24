@@ -12,16 +12,14 @@ const ViewCategoryModal = ({ show, onClose, data }) => {
     const { strings } = useContext(StringsContext);
     const ViewStrings = strings.Categories.view;
 
-    const [dataCategory, setDataCategory] = useState([]);
+    const [dataCategory, setDataCategory] = useState({});
 
     const request = useRequest();
 
     const { showNotification: errorNotification } = useNotification();
 
     useEffect(() => {
-        if (show) {
-            fetchDataCategory();
-        }
+        if (show) fetchDataCategory();
     }, [show]);
 
     const fetchDataCategory = async () => {

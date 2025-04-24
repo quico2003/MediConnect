@@ -12,6 +12,7 @@ import { Button, Spinner } from "react-bootstrap";
 import { validateData } from "../../../../../Config/GeneralFunctions";
 import { Paths } from "../../../../../Constants/paths.constants";
 import { Views } from "../../../../../Constants/views.constants";
+import { EmailRegex, PhoneRegexSimple } from "../../../../../Utils/Regex";
 
 
 const EditClient = () => {
@@ -39,8 +40,7 @@ const EditClient = () => {
     }, [client_guid])
 
     const fetchData = async () => {
-
-        request("post", getEndpoint(EndpointsUser.Clients.get), { guid: client_guid })
+        request("get", getEndpoint(EndpointsUser.Clients.get), { guid: client_guid })
             .then((res) => {
                 setData(res.data);
                 setInitialData(res.data);
@@ -52,13 +52,13 @@ const EditClient = () => {
     const handleSubmit = () => {
         if (checkForm()) {
             setSubmiting(true);
-            request("post", getEndpoint(EndpointsUser.Clients.update), { ...data})
-            .then(() => {
-                push(Paths[Views.clients].path);
-                successNotification();
-            })
-            .catch(() => errorNotification())
-            .finally(() => setSubmiting(false))
+            request("post", getEndpoint(EndpointsUser.Clients.update), { ...data })
+                .then(() => {
+                    push(Paths[Views.clients].path);
+                    successNotification(ViewStrings.messageSuccess);
+                })
+                .catch((err) => errorNotification(err.message))
+                .finally(() => setSubmiting(false))
         }
     }
 
@@ -69,9 +69,10 @@ const EditClient = () => {
 
     const checkForm = () => {
         const { first_name, last_name, email, phone } = data;
-        return validateData([ first_name, last_name, email, phone ])
-         && JSON.stringify(data) !== JSON.stringify(initialData);
-
+        return validateData([first_name, last_name, email, phone])
+            && EmailRegex.test(email)
+            && PhoneRegexSimple.test(phone)
+            && JSON.stringify(data) !== JSON.stringify(initialData);
     }
 
     return (

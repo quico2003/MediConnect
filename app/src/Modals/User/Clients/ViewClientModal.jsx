@@ -11,9 +11,9 @@ const ViewClientModal = ({ show, onClose, data }) => {
     const { strings } = useContext(StringsContext);
     const ViewStrings = strings.User.view;
 
-    const request = useRequest();
-
     const [client, setClient] = useState({});
+
+    const request = useRequest();
 
     const { showNotification: errorNotification } = useNotification();
     const { showNotification: successNotification } = useNotification("success");
@@ -26,9 +26,8 @@ const ViewClientModal = ({ show, onClose, data }) => {
         request("get", getEndpoint(EndpointsUser.Clients.get), { guid: data })
             .then((res) => {
                 setClient(res.data);
-                successNotification()
             })
-            .catch(() => errorNotification())
+            .catch(() => errorNotification(ViewStrings.errorMesage))
     }
 
     const hideModal = () => {
@@ -57,7 +56,6 @@ const ViewClientModal = ({ show, onClose, data }) => {
             <div className="mb-1">
                 <Modal.Body>
                     <div className="d-flex flex-column align-items-center gap-3">
-
                         <div className="d-flex align-items-center flex-column gap-2 mb-2">
                             <span className="fw-bold">{ViewStrings.firstName}</span><span>{client?.first_name}</span>
                         </div>
@@ -78,16 +76,11 @@ const ViewClientModal = ({ show, onClose, data }) => {
                             <div className="d-flex align-items-center flex-column gap-2 mb-2">
                                 <span className="fw-bold">{ViewStrings.lastName}</span><span>{client?.creator_last_name}</span>
                             </div>
-
                         </di>
-
-
                     </div>
                 </Modal.Body>
             </div>
-
         </ModalLayout>
     )
-
 }
 export default ViewClientModal;

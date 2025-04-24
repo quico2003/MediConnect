@@ -4,7 +4,7 @@ import SectionLayout from "../../../../../Layouts/SectionLayout/SectionLayout";
 import FormControlPassword from "../../../../../Components/Form/FormControl/FormControlPassword";
 import { useContext, useEffect, useState } from "react";
 import FormControl from "../../../../../Components/Form/FormControl/FormControl";
-import { Button } from "react-bootstrap";
+import { Button, Spinner } from "react-bootstrap";
 import useRequest from "../../../../../Hooks/useRequest";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import useNotification from "../../../../../Hooks/useNotification";
@@ -23,6 +23,8 @@ const NewUser = () => {
     const request = useRequest();
     const { push } = useHistory();
 
+    const [submiting, setSubmiting] = useState(false);
+
     const { showNotification: successNotification } = useNotification("success");
     const { showNotification: errorNotification } = useNotification();
 
@@ -30,12 +32,14 @@ const NewUser = () => {
 
     const handleSubmit = () => {
         if (checkForm()) {
+            setSubmiting(true);
             request("post", getEndpoint(EndpointsAdmin.Users.create), { ...data })
-                .then((res) => {
-                    successNotification(ViewStrings.userCreated);
+                .then(() => {
                     push(Paths[Views.users].path);
+                    successNotification(ViewStrings.userCreated);
                 })
-                .catch((err) => errorNotification(err.message));
+                .catch((err) => errorNotification(err.message))
+                .finally(() => setSubmiting(false));
         }
     }
 
@@ -109,8 +113,8 @@ const NewUser = () => {
                     />
                 </SectionLayout>
                 <div className="d-flex justify-content-end align-items-center">
-                    <Button disabled={!checkForm()} onClick={handleSubmit}>
-                        Create
+                    <Button disabled={!checkForm() || submiting} onClick={handleSubmit}>
+                        {submiting ? <Spinner size="sm" /> : ViewStrings.buttonCreate}
                     </Button>
                 </div>
             </PanelLayout>

@@ -16,19 +16,17 @@ const DeleteProductModal = ({ show, onClose, data }) => {
     const { showNotification: errorNotification } = useNotification();
     const { showNotification: successNotification } = useNotification("success");
 
-
     const handleSubmit = () => {
 
         request("post", getEndpoint(EndpointsAdmin.Products.delete), { guid: data })
-            .then((res) => {
+            .then(() => {
                 successNotification("Product deleted.")
                 onClose(true);
             })
-            .catch((err) => {
+            .catch(() => {
                 errorNotification("err.message");
                 onClose(true);
             })
-
     }
 
     const hideModal = () => {

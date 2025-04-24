@@ -9,8 +9,7 @@ import { Paths, replacePaths } from "../../../../../Constants/paths.constants";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import { Views } from "../../../../../Constants/views.constants";
 
-
-export const ClientsColumns = (openViewClientModal, openDeleteClientModal) => { 
+export const ClientsColumns = (openViewClientModal, openDeleteClientModal) => {
 
     const { strings } = useContext(StringsContext);
     const ViewStrings = strings.User.allClients.columns;
@@ -19,22 +18,22 @@ export const ClientsColumns = (openViewClientModal, openDeleteClientModal) => {
         {
             Header: ViewStrings.firstName,
             Cell: (row) =>
-                getColumnValue(row, (item) => <p className="mb-0">{item.first_name}</p>) 
+                getColumnValue(row, (item) => <p className="mb-0">{item.first_name}</p>)
         },
         {
             Header: ViewStrings.lastName,
             Cell: (row) =>
-                getColumnValue(row, (item) => <p className="mb-0">{item.last_name}</p>) 
+                getColumnValue(row, (item) => <p className="mb-0">{item.last_name}</p>)
         },
         {
             Header: ViewStrings.email,
             Cell: (row) =>
-                getColumnValue(row, (item) => <p className="mb-0">{item.email}</p>) 
+                getColumnValue(row, (item) => <p className="mb-0">{item.email}</p>)
         },
         {
             Header: ViewStrings.phone,
             Cell: (row) =>
-                getColumnValue(row, (item) => <p className="mb-0">{item.phone}</p>) 
+                getColumnValue(row, (item) => <p className="mb-0">{item.phone}</p>)
         },
         {
             Header: ViewStrings.actions,

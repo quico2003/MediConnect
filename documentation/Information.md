@@ -1,3 +1,28 @@
+# MediConnect
+## Introducción
+
+Mediconnect es una app que sirve para poder gestionar una clinica medica, presento Mediconnect con la base de un gavinete Auditivo pero se podria utilizar en cualquier otro tipo de clinica medica.
+Esta tiene 3 diferentes partes:
+
+- Admin Portal que tiene la funcion de que uno o mas de un Administrador puedan gestionar tanto los porductos que tienen en la clinica a la venta, las diferentescaegorias de 
+productos para asi poder agrupar productos de una forma mas eficiente como poder gestionar los usuarios de la app que en este caso son los medicos que trabajan en la clinica 
+creandolos desde este apartado para que luego estos trabajadores puedan acceder a la app, tambien permite a los administradores desde su apartado "home" poder visualizar graficas y datos sobre la pagina
+como numero de categorias activas, numero de productos activos, numero de usuarios activos, un apartado de recuperacion de productos si se elimina alguna categoria que no se pierdan esos productos y una grafica 
+de dos puntos en formato donut para visualizar cual es la categoria con mas productos o cual es la que menos tiene etc.
+
+- User Portal que tiene la funcion de una vez el administrador registra a un usuario este nuevo trabajador/medico de la clinica podra ya dirigirse a el apartado de login del usuario, este apartado en el 
+primer logeo pide que canvies la contraseña por seguridad ya que el administrador crea al usuario con una contraseña generica para que este pueda acceder y sustituirla por mayor seguridad, 
+a partir de este momento el usuario ya tiene su cuenta en mediconnect my-user y ya podra gestionar sus clientes/pacientes (Crear, visualizar toda su informacion, modificar y eliminar), podra 
+crear citas para cada uno de sus clientes añaciento un tipo de motivo para la cita, una fecha... Estas citas podra modificarlas por causas del paciente, anular la cita o completar la cita 
+que es cuando llega el momento de la cita reyenas un formulario con la conclusion de la cita y los productos que se recomiendan al usuario y esto te descargara un pdf con toda la informacion 
+sobre la cita y una pagina con los productos con su nombre, imagen y barcode de este para que puedas dirigirte a la farmacia o a la misma clinica y puedas pedir le producto.
+
+- El tercer apartado es la Landing Page, este es uno de los motivos por la creacio de este tipo de app para el gavinete auditivo, ya que este necesitava una app para gestion que son los dos puntos anteriores y tambien visualizar por internet su trabajo y productos, asi poder llegar a mas gente.
+En esta landing page simplemetne tenemos un diseño atractivo ya que todos los clientes seran lo que podras visualizar,
+en este se muestra un inicio con informacion sobre la clinica, un apartado de productos tambien sercheables por categorias, nombres etc. y el apartado de los usuarios para que estos puedan dirigirse al registro.
+
+
+
 # React
 ## Routes
 

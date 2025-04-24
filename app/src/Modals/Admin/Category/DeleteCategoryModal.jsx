@@ -1,7 +1,7 @@
 import { Button, Modal } from "react-bootstrap";
 import useNotification from "../../../Hooks/useNotification";
 import useRequest from "../../../Hooks/useRequest";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import ModalLayout from "../../../Layouts/ModalLayout/ModalLayout";
 import { EndpointsAdmin, getEndpoint } from "../../../Constants/endpoints.contants";
 import { StringsContext } from "../../../Context/strings.context";
@@ -17,10 +17,9 @@ const DeleteCategoryModal = ({ show, onClose, data }) => {
     const { showNotification: errorNotification } = useNotification();
     const { showNotification: successNotification } = useNotification("success");
 
-
     const handleSubmit = () => {
         request("post", getEndpoint(EndpointsAdmin.Categories.delete), { guid: data.guid })
-            .then((res) => {
+            .then(() => {
                 successNotification(ViewStrings.messageDeleted);
                 onClose(true);
             })
@@ -28,11 +27,11 @@ const DeleteCategoryModal = ({ show, onClose, data }) => {
                 errorNotification(err.message);
                 onClose(true);
             })
-    };
+    }
 
     const hideModal = () => {
         onClose(true);
-    };
+    }
 
     return (
         <ModalLayout
@@ -47,7 +46,7 @@ const DeleteCategoryModal = ({ show, onClose, data }) => {
             }
             footer={
                 <div className="d-flex justify-content-end gap-2">
-                    <Button variant="light" size="md" onClick={hideModal}>
+                    <Button onClick={hideModal} size="md">
                         {ViewStrings.buttonCancel}
                     </Button>
                     <Button onClick={handleSubmit} variant="danger" size="md">
@@ -55,7 +54,7 @@ const DeleteCategoryModal = ({ show, onClose, data }) => {
                     </Button>
                 </div>
             }>
-            <div className="mb-1">
+            <div>
                 <p>{ViewStrings.body}'{data?.name}'{ViewStrings.body1}</p>
             </div>
         </ModalLayout>

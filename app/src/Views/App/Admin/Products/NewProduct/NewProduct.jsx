@@ -34,6 +34,9 @@ const NewProduct = () => {
     const [dataInput, setDataInput] = useState({});
     const [selectedOption, setSelectedOption] = useState(null);
 
+    const [loaded, setLoaded] = useState(false);
+    const [submiting, setSubmiting] = useState(false);
+
     //Array save images
     const [images, setImages] = useState([]);
 
@@ -43,11 +46,12 @@ const NewProduct = () => {
 
     //Get of the categories
     const fetchData = async () => {
-        return await request("get", getEndpoint(EndpointsAdmin.Categories.getList))
+        request("get", getEndpoint(EndpointsAdmin.Categories.getList))
             .then((res) => {
                 setCategories(res.categories);
             })
             .catch((err) => errorNotification(err.message))
+            .finally(() => setLoaded(true))
     }
 
     //Save normal Input in dataInput
@@ -55,9 +59,9 @@ const NewProduct = () => {
         const { id, value } = e.target;
         setDataInput({ ...dataInput, [id]: value });
     }
-    
+
     const handleInputDescription = (e) => {
-        
+
         setDataInput({ ...dataInput, "description": e });
     }
 
@@ -75,14 +79,12 @@ const NewProduct = () => {
                 image: images,
                 ...dataInput
             })
-                .then((res) => {
+                .then(() => {
                     push(Paths[Views.products].path);
                     successNotification("Product created", true);
-
                 })
-                .catch(() => {
-                    errorNotification("Error create product", true);
-                })
+                .catch(() => errorNotification("Error create product", true))
+                .finally(() => setSubmiting(false))
         }
     }
 
@@ -132,9 +134,8 @@ const NewProduct = () => {
 
     return (
         <GeneralLayout showBackButton title={ViewStrings.newProduct}>
-            <PanelLayout>
+            <PanelLayout loaded={loaded}>
                 <SectionLayout>
-
                     <FormControl
                         required
                         controlId="name"
@@ -146,7 +147,6 @@ const NewProduct = () => {
                         onChange={handleInput}
                         placeholder={ViewStrings.placeholderName}
                     />
-
                     <FormLabel className="mb-0">{ViewStrings.category}<RequiredField /></FormLabel>
                     <Select
                         options={categories}
@@ -159,7 +159,6 @@ const NewProduct = () => {
                         isSearchable
                         isClearable
                     />
-
                     <FormControlPrice
                         required
                         controlId="price"
@@ -170,8 +169,6 @@ const NewProduct = () => {
                         onChange={handleInput}
                         value={dataInput.price}
                     />
-
-
                     <FormControl
                         required
                         controlId="brand"
@@ -202,8 +199,8 @@ const NewProduct = () => {
 
                 </SectionLayout>
                 <div className="d-flex justify-content-end align-items-center">
-                    <Button disabled={!checkForm()} onClick={handleSubmit}>
-                        {ViewStrings.create}
+                    <Button disabled={!checkForm() || submiting} onClick={handleSubmit}>
+                        {submiting ? <Spinner size="sm" /> : ViewStrings.create}
                     </Button>
                 </div>
             </PanelLayout>

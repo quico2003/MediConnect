@@ -20,6 +20,7 @@ class GeneratePDF
     {
         $this->conn = $db;
         $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
         $options->set('isRemoteEnabled', true);
         $this->pdf = new Dompdf($options);
         $this->fetchData($appointment_id);
@@ -36,18 +37,99 @@ class GeneratePDF
             $this->products[] = Product::get($this->conn, $id);
         }
     }
-
     function mountHtml()
     {
-        $this->finalHtml .= "<html><head>
-        </head><body>";
-        $this->finalHtml .= $this->html;
-        $this->finalHtml .= "</body></html>";
+        $fecha = date('d/m/Y');
+        $path = FileStorage::FilePathLogo();
+
+        $this->finalHtml = "
+            <html>
+            <head>
+                <style>
+                    @page {
+                        margin: 170px 30px 100px 30px; 
+                    }
+
+                    body {
+                        font-family: sans-serif;
+                        font-size: 12px;
+                        margin: 0px;
+                        padding: 0px;
+                    }
+
+                    header {
+                        position: fixed;
+                        top: -150px; 
+                        left: 0;
+                        right: 0;
+                        height: 150px;
+                        text-align: center;
+                        font-size: 10px;
+                        color: #555;
+                    }
+
+                    footer {
+                        position: fixed;
+                        bottom: -60px;
+                        left: 0px;
+                        right: 0px;
+                        height: 50px;
+                        text-align: center;
+                        font-size: 10px;
+                        color: #555;
+                        border-top: 1px solid #ccc;
+                        padding-top: 5px;
+                    }
+
+                    .footer .pagenum:before {
+                        content: counter(page);
+                    }
+
+                    .table {
+                        max-width: 100%;
+                        height: auto;
+                        border: 1px solid black;
+                        border-radius: 10px;
+                        border-style: groove;
+                    }
+
+                    .content {
+                        margin-top: 20px;
+                    }
+
+                    th, td {
+                        padding: 10px;
+                    }   
+
+                </style>
+            </head>
+            <body>
+
+                <header>
+                    <div>
+                        <table align='center'>
+                        <tr>
+                        <td><img src='$path' width='350' height='150'></td>
+                        </tr>
+                        </table>
+                    </div>
+                </header>
+
+                <footer class='footer'>
+                    Mediconnect© - Documento generado el $fecha | Página <span class='pagenum'></span>
+                </footer>
+
+                <div class='content'>
+                    {$this->html}
+                </div>
+            </body>
+            </html>";
     }
 
     function createPDF()
     {
         $this->init();
+        $this->mountHtml();
         $this->loadHtml();
     }
 
@@ -55,19 +137,19 @@ class GeneratePDF
     {
         $avatarUserPath = $this->userProfile->avatar;
 
-        $this->html .= "<table style='text-align:center;' border='1' width='540'>";
-        $this->html .= "<tr>";
-        $this->html .= "<th>Client Information:</th>";
-        $this->html .= "<th>Practicioner Information:</th>";
+        $this->html .= "<table class='table' style='text-align:center;' border='1' width='540'>";
+        $this->html .= "<tr class='tr'>";
+        $this->html .= "<th class='th'>Client Information:</th>";
+        $this->html .= "<th class='th'>Practicioner Information:</th>";
         $this->html .= "</tr>";
-        $this->html .= "<tr>";
-        $this->html .= "<td>";
+        $this->html .= "<tr class='tr'>";
+        $this->html .= "<td class='td'>";
         $this->renderValueLabel("First Name", $this->client->first_name);
         $this->renderValueLabel("Last Name", $this->client->last_name);
         $this->renderValueLabel("Email", $this->client->email);
         $this->renderValueLabel("Phone", $this->client->phone);
         $this->html .= "</td>";
-        $this->html .= "<td>";
+        $this->html .= "<td class='td'>";
         $this->html .= "<img src='$avatarUserPath' width='50' height='50'>";
         $this->renderValueLabel("First Name", $this->userProfile->first_name);
         $this->renderValueLabel("Last Name", $this->userProfile->last_name);
@@ -77,21 +159,9 @@ class GeneratePDF
         $this->html .= "</table>";
     }
 
-    function renderLogo()
-    {
-        $path = FileStorage::FilePathLogo();
-        $this->html .= "<div><table align='center'>";
-        $this->html .= "<tr>";
-        $this->html .= "<td>";
-        $this->html .= "<img src='$path' width='350' height='150'>";
-        $this->html .= "</td>";
-        $this->html .= "</tr>";
-        $this->html .= "</table></div>";
-    }
-
     function renderValueLabel($value, $label)
     {
-        $this->html .= "<p>" . $value . " : " . $label . "</p>";
+        $this->html .= "<p><strong>" . $value . " </strong>: " . $label . "</p>";
     }
 
     function descriptionAppointment()
@@ -108,7 +178,13 @@ class GeneratePDF
     function renderProducts()
     {
 
-        $this->html .= "<table style='page-break-before: always; text-align:center;' border='1' width='540'>";
+        $this->html .= "<table class='table' style='text-align:center; page-break-before: always;' border='1' width='540'>";
+        $this->html .= "<col>";
+        $this->html .= "<col>";
+        $this->html .= "<colgroup span='3'></colgroup>";
+        $this->html .= "<tr>";
+        $this->html .= "<th colspan='3' scope='colgroup'>Recomendes Products</th>";
+        $this->html .= "</tr>";
         $this->html .= "<tr>";
         $this->html .= "<th>Name product</th>";
         $this->html .= "<th>Images</th>";
@@ -118,7 +194,7 @@ class GeneratePDF
             $img = json_decode($product->images)[0];
 
             $image = FileStorage::FilePathProduct($img);
-            logAPI($image);
+
             $uniqid = $product->uniqid;
             $barcode = (new Picqer\Barcode\Types\TypeCode128())->getBarcode($uniqid);
             $render = new Picqer\Barcode\Renderers\HtmlRenderer();
@@ -126,30 +202,18 @@ class GeneratePDF
             $this->html .= "<tr>";
             $this->html .= "<td>" . $product->name . "</td>";
             $this->html .= "<td><img src='$image' width='50' heigth='50'/></td>";
-            $this->html .= "<td>" . $render->render($barcode) . "</td>";
+            $this->html .= "<td style='text-align: center; vertical-align: middle;'>
+                                <div style='display: inline-block;'>" . $render->render($barcode) . "</div>
+                            </td>";
             $this->html .= "</tr>";
         }
         $this->html .= "</table>";
-        // $uniqid = $this->product->uniqid;
 
-        // $barcode = (new Picqer\Barcode\Types\TypeCode128())->getBarcode($uniqid);
-        // logAPI($barcode);
-        // $render = new Picqer\Barcode\Renderers\HtmlRenderer();
-        // logAPI($render);
-        // $this->html .= "<table style='page-break-before: always;'>";
-        // $this->html .= "<tr>";
-        // $this->html .= "<td><strong>Recommended products:<strong></td>";
-        // $this->html .= "</tr>";
-        // $this->html .= "<tr>";
-        // $this->html .= $render->render($barcode);
-        // $this->html .= "</tr>";
-        // $this->html .= "</table>";
 
     }
 
     function init()
     {
-        $this->renderLogo();
         $this->renderInformation();
         $this->descriptionAppointment();
         $this->renderProducts();
@@ -157,7 +221,7 @@ class GeneratePDF
 
     function loadHtml()
     {
-        $this->mountHtml();
+
         $this->pdf->loadHtml($this->finalHtml);
         $this->pdf->render();
         $this->output();

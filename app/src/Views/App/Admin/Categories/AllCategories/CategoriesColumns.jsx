@@ -11,6 +11,7 @@ import { useContext } from "react";
 import { StringsContext } from "../../../../../Context/strings.context";
 
 export const CategoriesColumns = (openDeleteCategoryModal, openViewCategoryModal) => {
+
   const { strings } = useContext(StringsContext);
   const ViewStrings = strings.Categories.Columns;
 
