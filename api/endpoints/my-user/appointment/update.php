@@ -10,8 +10,6 @@ $data = postInput();
 try {
     $db->beginTransaction();
     checkAuthUser();
-
-    logAPI($data);
     
     $input = validate($data, [
         "reason" => "required|string",

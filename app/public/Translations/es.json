@@ -256,7 +256,8 @@
       "specialty": "Especialidad",
       "placeholderSpecialty": "Escribe la especialidad del profesional",
       "password": "Contraseña",
-      "placeholderPassword": "Ej: Jackson@142"
+      "placeholderPassword": "Ej: Jackson@142",
+      "buttonCreate": "Crear"
     },
     "delete": {
       "messageDeleted": "Profesional eliminado.",
@@ -446,7 +447,8 @@
       "pEmail": "Ingresa el correo...",
       "phone": "Teléfono",
       "pPhone": "Ingresa el teléfono...",
-      "messageSuccess": "Cliente creado."
+      "messageSuccess": "Cliente creado.",
+      "buttonCreate": "Crear"
     },
     "delete": {
       "messageDeleted": "Cliente eliminado.",
@@ -474,7 +476,8 @@
       "pEmail": "Ingresa el correo...",
       "phone": "Teléfono",
       "pPhone": "Ingresa el teléfono...",
-      "update": "Actualizar"
+      "update": "Actualizar",
+      "messageSuccess": "Cliente Actualizado."
     },
     "Schedule": {
       "title": "Horario",
@@ -489,6 +492,42 @@
         "successMessage": "Cita creada.",
         "date": "Fecha:",
         "button": "Crear"
+      },
+      "event": {
+        "title": "Información de la cita",
+        "close": "Cerrar",
+        "client": "Cliente:",
+        "client_phone": "Teléfono:",
+        "client_email": "Correo:",
+        "reason": "Motivo:",
+        "start": "Inicio de la cita:",
+        "end": "Fin de la cita:",
+        "button1": "Eliminar",
+        "button2": "Actualizar",
+        "button3": "Completar"
+      },
+      "delete": {
+        "title": "Eliminar Cita",
+        "body": "¿Estás seguro de que deseas eliminar ",
+        "body1": " la cita?",
+        "buttonCancel": "Cancelar",
+        "buttonDelete": "Eliminar",
+        "messageDeleted": "Cita eliminada."
+      },
+      "edit": {
+        "title": "Editar Cita",
+        "reason": "Motivo:",
+        "bUpdate": "Actualizar",
+        "bCancel": "Cancelar",
+        "date": "Fecha:",
+        "hours": "Horas:"
+      },
+      "complete": {
+        "successMessage": "Cita completada, descargando receta...",
+        "bComplete": "Completar",
+        "bCancel": "Cancelar",
+        "description": "Descripción:",
+        "products": "Productos:"
       }
     }
   }

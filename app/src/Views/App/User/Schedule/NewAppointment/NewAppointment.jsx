@@ -46,7 +46,6 @@ const NewAppointment = () => {
         { value: "19", label: "19:00 to 20:00" }
     ]);
 
-
     useEffect(() => {
         fetchData();
     }, [])
@@ -95,11 +94,11 @@ const NewAppointment = () => {
         setSelectedHours(obj);
         const date = moment(fecha).add(obj.value, "hours");
         const dateFormat = dataFormater(date, "DD-MM-YYYY HH:mm");
-        setData({ ...data, "date": dateFormat });
+        setData({ ...data, "date": dateFormat, "hour": dateFormat });
     }
 
     const getAvaliableHours = (dateFormat) => {
-        request("post", getEndpoint(EndpointsUser.Appointments.getChosenHours), { dateFormat })
+        request("get", getEndpoint(EndpointsUser.Appointments.getChosenHours), { dateFormat })
             .then((res) => {
                 const availableHours = horas.filter(hora => !res.data.includes(hora.value));
                 setChosenHours(availableHours);
@@ -108,8 +107,8 @@ const NewAppointment = () => {
     }
 
     const checkForm = () => {
-        const { created_for, reason, date } = data;
-        return validateData([created_for, reason, date]);
+        const { created_for, reason, date, hour } = data;
+        return validateData([created_for, reason, date, hour]);
     }
 
     return (
@@ -162,7 +161,7 @@ const NewAppointment = () => {
                         closeMenuOnSelect
                         menuPortalTarget={document.body}
                         className="pb-2 basic-single"
-                        id="client"
+                        id="hour"
                         onChange={handleSelectHours}
                         value={selectedHours}
                         isSearchable

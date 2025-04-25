@@ -5,7 +5,7 @@ include_once "../../../config/config.php";
 $database = new Database();
 $db = $database->getConnection();
 
-$data = getInput();
+$data = postInput();
 
 try {
     $db->beginTransaction();

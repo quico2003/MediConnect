@@ -519,8 +519,15 @@
         "reason": "Reason:",
         "bUpdate": "Update",
         "bCancel": "Cancel",
-        "date": "Date",
-        "hours": "Hours"
+        "date": "Date:",
+        "hours": "Hours:"
+      },
+      "complete": {
+        "successMessage": "Appointment completed, downloading recipe...",
+        "bComplete": "Complete",
+        "bCancel": "Cancel",
+        "description": "Description:",
+        "products": "Products:"
       }
     }
   }

@@ -77,6 +77,26 @@ class Appointment
         }
         createException($stmt->errorInfo());
     }
+    
+    public static function getAllAppointmentsByDay(PDO $db, int $user_id, String $day): array
+    {
+        $query = "SELECT * FROM `" . self::$table_name . "` WHERE date LIKE :day AND deleted_at IS NULL AND created_by=:user_id;";
+
+        $stmt = $db->prepare($query);
+        $stmt->bindValue(":day", $day . "%");
+        $stmt->bindParam(":user_id", $user_id);
+
+        if ($stmt->execute()) {
+            $arrayToReturn = [];
+
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $arrayToReturn[] = self::getMainObject($db, $row);
+            }
+            return $arrayToReturn;
+        }
+        createException($stmt->errorInfo());
+        
+    }
 
     public static function get(PDO $db, int $id): Appointment
     {
@@ -92,6 +112,38 @@ class Appointment
             }
         }
         createException("Appointment not foud");
+    }
+    
+    public static function getWithPDF(PDO $db, int $id): Appointment
+    {
+        $query = "SELECT * FROM `" . self::$table_name . "` WHERE id=:id";
+
+        $stmt = $db->prepare($query);
+
+        $stmt->bindParam(":id", $id);
+
+        if ($stmt->execute()) {
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                return self::getMainObject($db, $row);
+            }
+        }
+        createException("Appointment not foud");
+    }
+
+    public static function getAllCount(PDO $db, int $user_id): int
+    {
+        $query = "SELECT COUNT(id) as total FROM `" . self::$table_name . "` WHERE deleted_at IS NULL AND created_by=:user_id";
+
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(":user_id", $user_id);
+
+        if ($stmt->execute()) {
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                return intval($row['total']);
+            }
+            return 0;
+        }
+        createException($stmt->errorInfo());
     }
 
     function update(): bool

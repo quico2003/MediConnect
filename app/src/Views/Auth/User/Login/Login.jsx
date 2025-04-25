@@ -53,8 +53,7 @@ const LoginUser = () => {
                 dispatch(toggleUserAvatar(avatar));
                 localStorage.setItem(StorageKeys.TOKEN, token);
                 successNotification(ViewStrings.successNotification);
-                console.log(first_login);
-                
+
                 if (first_login === "1") replace(replacePaths(Paths[Views.completeUser].path, [{ user_guid: guid }]))
                 else replace(Paths[Views.homeUser].path)
 

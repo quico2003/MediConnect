@@ -27,9 +27,6 @@ try {
     $clientsResource = ClientResource::getClientsArray($clients);
     $totalPages = ceil($clientsCount / $input->offset);
 
-    logAPI($clientsResource);
-    logAPI($clients);
-
     $db->commit();
     Response::sendResponse([
         "clients" => $clientsResource,

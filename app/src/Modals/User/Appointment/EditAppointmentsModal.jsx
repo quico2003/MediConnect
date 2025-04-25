@@ -50,12 +50,15 @@ const EditAppointmentsModal = ({ show, onClose, data }) => {
                 setInitialAppointment(res.data);
                 const fechaFormateada = moment(res.data.date, "DD-MM-YYYY").toDate();
                 setFecha(fechaFormateada);
+                setSelectedHours(res.data.hour)
+                getAvaliableHours(fechaFormateada)
+                const objectHour = horas.filter(hora => res.data.hour.includes(hora.value));
+                setSelectedHours(objectHour)
             })
             .catch((err) => errorNotification(err.message))
     }
 
     const handleSubmit = () => {
-       
         if (checkForm()) {
             request("post", getEndpoint(EndpointsUser.Appointments.update), { ...appointment})
             .then(() => {
@@ -72,8 +75,6 @@ const EditAppointmentsModal = ({ show, onClose, data }) => {
     }
 
     const handleSelectedDate = (obj) => {
-        console.log(obj);
-
         const date = moment(obj);
         const dateFormat = dataFormater(date, "DD-MM-YYYY");
 
@@ -90,12 +91,14 @@ const EditAppointmentsModal = ({ show, onClose, data }) => {
     const handleSelectHours = (obj) => {
         setSelectedHours(obj);
         const date = moment(fecha).add(obj.value, "hours");
+        console.log(date);
         const dateFormat = dataFormater(date, "DD-MM-YYYY HH:mm");
-        setAppointment({ ...appointment, "date": dateFormat });
+        console.log(dateFormat);
+        setAppointment({ ...appointment, "date": dateFormat, "hour": date });
     }
 
     const getAvaliableHours = (dateFormat) => {
-        request("post", getEndpoint(EndpointsUser.Appointments.getChosenHours), { dateFormat })
+        request("get", getEndpoint(EndpointsUser.Appointments.getChosenHours), { dateFormat })
             .then((res) => {
                 const availableHours = horas.filter(hora => !res.data.includes(hora.value));
                 setChosenHours(availableHours);
@@ -108,9 +111,13 @@ const EditAppointmentsModal = ({ show, onClose, data }) => {
     };
 
     const checkForm = () => {
-        const { reason, date } = appointment;
-        return validateData([reason, date]) &&
-        appointment.reason !== initialAppointment.reason;
+        console.log(appointment)
+        console.log(initialAppointment)
+        const { reason, date, hour } = appointment;
+        return validateData([reason, date, hour]) && (
+            appointment.reason !== initialAppointment.reason ||
+            appointment.date !== initialAppointment.date
+        );
     }
 
     return (
@@ -169,6 +176,5 @@ const EditAppointmentsModal = ({ show, onClose, data }) => {
             />
         </ModalLayout>
     )
-
 }
 export default EditAppointmentsModal;

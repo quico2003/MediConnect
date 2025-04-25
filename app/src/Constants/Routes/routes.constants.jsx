@@ -19,7 +19,7 @@ import NewUser from "../../Views/App/Admin/Users/NewUser/NewUser";
 import Users from "../../Views/App/Admin/Users/AllUsers/Users";
 import EditUser from "../../Views/App/Admin/Users/EditUsers/EditUser";
 import LoginUser from "../../Views/Auth/User/Login/login";
-import Home from "../../Views/App/User/Dashboard/Home";
+import HomeUser from "../../Views/App/User/Dashboard/Home";
 import PrivacyPolicy from "../../Views/App/PrivacyPolicy/PrivacyPolicy";
 import CompleteUser from "../../Views/Auth/User/CompleteUser/CompleteUser";
 import AccountUser from "../../Views/App/User/Account/AccountUser";
@@ -48,15 +48,15 @@ export const AuthRoutes = [
 ];
 
 export const AppRoutes = [
-  getRoute(Paths[Views.homeUser].path, Home),
-  
+  getRoute(Paths[Views.homeUser].path, HomeUser),
+
   getRoute(Paths[Views.clients].path, Clients),
   getRoute(Paths[Views.new_client].path, NewClient),
   getRoute(Paths[Views.edit_client].path, EditClient),
-  
+
   getRoute(Paths[Views.schedule].path, Schedule),
   getRoute(Paths[Views.new_appointment].path, NewAppointment),
-  
+
   getRoute(Paths[Views.accountViewUser].path, AccountUser),
   getRoute(Paths[Views.profileViewUser].path, ProfileUser),
 

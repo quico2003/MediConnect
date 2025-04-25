@@ -17,25 +17,26 @@ try {
         "id" => "required"
     ]);
 
+    $appointment = Appointment::get($db, $input->id);
+    $appointment->final_description = $input->description;
+    
     foreach ($input->products as $product) {
-        logAPI($product);
+        $product = Product::getByGuid($db, $product);
         $recipe = new Recipe($db);
         $recipe->appointment_id = $input->id;
-
-        $product = Product::getByGuid($db, $product);
         $recipe->product_id = $product->id;
-
-        $appointment = Appointment::get($db, $input->id);
         $recipe->client_id = $appointment->created_for;
-        $appointment->final_description = $input->description;
         
-        $appointment->update();
         $recipe->store();
     }
 
+    $appointment->update();
 
-    (new GeneratePDF($db, $input->id))->createPDF();
+    $appointment->delete();
+    
     $db->commit();
+    (new GeneratePDF($db, $input->id))->createPDF();
+
     Response::sendResponse([]);
 } catch (\Exception $th) {
     $db->rollBack();

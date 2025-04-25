@@ -49,8 +49,6 @@ const DefaultTemplate = ({ children, role }) => {
   };
   const checkUser = () => {
     request("get", getEndpoint(EndpointsUser.Auth.checkUser)).then((res) => {
-      console.log({ res });
-
       const { token, email, avatar, firstName, lastName } = res.data;
       dispatch(toggleUserName({ firstName, lastName }));
       dispatch(toggleUserEmail(email));

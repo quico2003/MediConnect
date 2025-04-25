@@ -49,7 +49,6 @@ const ProfileUser = () => {
     };
 
     const handleSubmit = () => {
-        console.log(profile);
         if (checkForm()) {
           request("post", getEndpoint(EndpointsUser.Auth.updateUserProfile), { ...profile })
             .then(() => {

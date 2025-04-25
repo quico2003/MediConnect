@@ -13,7 +13,7 @@ import Select from "react-select";
 const CompleteAppointmentsModal = ({ show, onClose, data }) => {
 
     const { strings } = useContext(StringsContext);
-    const ViewStrings = strings.User.Schedule.delete;
+    const ViewStrings = strings.User.Schedule.complete;
 
     const request = useRequest();
 
@@ -25,9 +25,7 @@ const CompleteAppointmentsModal = ({ show, onClose, data }) => {
     const [selectedProducts, setSelectedProducts] = useState(null);
 
     useEffect(() => {
-        if (show) {
-            fetchData();
-        }
+        if (show) fetchData();
     }, [show])
 
     const fetchData = () => {
@@ -42,9 +40,9 @@ const CompleteAppointmentsModal = ({ show, onClose, data }) => {
             id: data.id
         })
             .then(() => {
-                successNotification()
-                hideModal();
-            
+                successNotification(ViewStrings.successMessage)
+                hideModal(true);
+
             })
             .catch((err) => errorNotification(err.message))
     }
@@ -60,10 +58,10 @@ const CompleteAppointmentsModal = ({ show, onClose, data }) => {
             ...prev,
             products: selectedGuids
         }));
-}
+    }
 
-    const hideModal = () => {
-        onClose(true);
+    const hideModal = (bool = false) => {
+        onClose(bool);
     };
 
     return (
@@ -76,23 +74,23 @@ const CompleteAppointmentsModal = ({ show, onClose, data }) => {
             footer={
                 <div className="d-flex justify-content-end gap-2">
                     <Button variant="light" size="md" onClick={hideModal}>
-                        Cancel
+                        {ViewStrings.bCancel}
                     </Button>
-                    <Button onClick={handleSubmit} variant="danger" size="md">
-                        Complete
+                    <Button onClick={handleSubmit} size="md">
+                        {ViewStrings.bComplete}
                     </Button>
                 </div>
             }
         >
 
-            <FormLabel className="mb-0">Description<RequiredField /></FormLabel>
+            <FormLabel className="mb-0">{ViewStrings.description}<RequiredField /></FormLabel>
             <ReactQuill
                 id="description"
                 theme="snow"
                 onChange={handleInputDescription}
                 value={recipe.description}
             />
-            <FormLabel className="mb-0">Products:<RequiredField /></FormLabel>
+            <FormLabel className="mb-0">{ViewStrings.products}<RequiredField /></FormLabel>
             <Select
                 options={products}
                 closeMenuOnSelect={true}

@@ -17,7 +17,7 @@ const DeleteAppointmentsModal = ({ show, onClose, data }) => {
     const { showNotification: successNotification } = useNotification("success");
 
     const handleSubmit = () => {
-        request("get", getEndpoint(EndpointsUser.Appointments.delete), {id: data.id})
+        request("post", getEndpoint(EndpointsUser.Appointments.delete), {id: data.id})
         .then(() => {
             successNotification(ViewStrings.messageDeleted);
             onClose(true);
@@ -52,6 +52,5 @@ const DeleteAppointmentsModal = ({ show, onClose, data }) => {
             </div>
         </ModalLayout>
     )
-
 }
 export default DeleteAppointmentsModal;

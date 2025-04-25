@@ -85,6 +85,12 @@ export const EndpointsUser = {
     create: `${BASE_URL_USER}/recipe/create`,
     generatePDF: `${BASE_URL_USER}/recipe/generatePDF`,
     getProductsWithRecipe: `${BASE_URL_USER}/recipe/getProductsWithRecipe`
+  },
+
+  Dashboard: {
+    getAllByDay: `${BASE_URL_USER}/dashboard/getAllByDay`,
+    typeCount: `${BASE_URL_USER}/dashboard/typeCount`,
+    
   }
 };
 

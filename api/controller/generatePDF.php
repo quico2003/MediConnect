@@ -28,7 +28,7 @@ class GeneratePDF
 
     public function fetchData($appointment_id)
     {
-        $this->appointment = Appointment::get($this->conn, $appointment_id);
+        $this->appointment = Appointment::getWithPDF($this->conn, $appointment_id);
         $this->user = User::get($this->conn, $this->appointment->created_by);
         $this->client = Client::get($this->conn, $this->appointment->created_for);
         $this->userProfile = UserProfile::getByUserId($this->conn, $this->user->id);

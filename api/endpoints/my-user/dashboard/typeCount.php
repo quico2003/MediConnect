@@ -1,8 +1,5 @@
 <?php
 
-use Carbon\Carbon;
-
-
 include_once "../../../config/config.php";
 
 $database = new Database();
@@ -12,24 +9,29 @@ $data = getInput();
 
 try {
     $db->beginTransaction();
-    checkAuthUser();
+
+    $userId = checkAuthUser();
 
     $input = validate($data, [
-        "dateFormat" => "required|string"
+        "type" => "string"
     ]);
 
-    $appointments = Appointment::getDateByDay($db, $input->dateFormat);
+    $count = 0;
 
-    $hora = [];
-    foreach ($appointments as $appointment) {
-        $carbonDate = Carbon::createFromFormat("d-m-Y H:i", $appointment["date"]);
-        $hora[] = $carbonDate->format("H");
+    switch ($input->type) {
+        case 'clients':
+            $count = Client::getAllCount($db, "",[],$userId);
+            break;
+        case 'appointments':
+            $count = Appointment::getAllCount($db,$userId);
+            break;
+
     }
 
     $db->commit();
 
     Response::sendResponse([
-        "data"=>$hora
+        "count" => $count
     ]);
 
 } catch (\Exception $th) {

@@ -33,19 +33,14 @@ const CompleteUser = () => {
     }
 
     const handleSubmit = (e) => {
-
-
         if (checkForm) {
-            console.log(data);
             request("post", getEndpoint(EndpointsUser.Auth.completeUser), { ...data, guid: user_guid })
                 .then(() => {
                     successNotification("Password updated.");
                     replace(Paths[Views.homeUser].path);
                 })
                 .catch((err) => errorNotification(err.message));
-
         }
-
     }
 
     const checkForm = () => {

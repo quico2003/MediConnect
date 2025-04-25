@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
-
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import moment from 'moment';
 import GeneralLayout from '../../../../Layouts/GeneralLayout/GeneralLayout';
@@ -99,9 +98,9 @@ const Schedule = () => {
 
     const handleCloseDeleteAppointmentsModal = (refresh) => {
         if (refresh) {
-            closeDeleteAppointmentModal();
             fetchData();
         }
+        closeDeleteAppointmentModal();
     }
     const handleOpenDelete = (data) => {
         openDeleteAppointmentModal(data);
@@ -109,9 +108,9 @@ const Schedule = () => {
 
     const handleColseEditAppointmentsModal = (refresh) => {
         if (refresh) {
-            closeEditAppointmentModal();
             fetchData();
         }
+        closeEditAppointmentModal();
     }
     const handleOpenEdit = (data) => {
         openEditAppointmentModal(data);
@@ -119,9 +118,9 @@ const Schedule = () => {
     
     const handleCompleteAppointmentsModal = (refresh) => {
         if (refresh) {
-            closeCompleteAppointmentModal();
             fetchData();
         }
+        closeCompleteAppointmentModal();
     }
     const handleOpenComplete = (data) => {
         openCompleteAppointmentModal(data);
@@ -137,7 +136,6 @@ const Schedule = () => {
                 openDelete={handleOpenDelete}
                 openEdit={handleOpenEdit}
                 openComplete={handleOpenComplete}
-
             />
             <DeleteAppointmentsModal
                 onClose={handleCloseDeleteAppointmentsModal}
@@ -161,13 +159,12 @@ const Schedule = () => {
             }>
                 <PanelLayout style={{ height: '500px', margin: '20px' }}>
                     <Calendar
-
                         localizer={localizer}
                         events={data}
                         startAccessor="start"
                         endAccessor="end"
-                        defaultView="week"
-                        views={['month', 'week', 'day']}
+                        defaultView="month"
+                        views={['month', 'week']}
                         culture="es"
                         selectable
                         onSelectEvent={handleSelectEvent}
