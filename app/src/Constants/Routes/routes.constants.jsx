@@ -29,6 +29,7 @@ import NewClient from "../../Views/App/User/Clients/NewClient/NewClient";
 import EditClient from "../../Views/App/User/Clients/EditClient/EditClient";
 import Schedule from "../../Views/App/User/Schedule/Schedule";
 import NewAppointment from "../../Views/App/User/Schedule/NewAppointment/NewAppointment";
+import LandingPage from "../../Views/LandingPage/LandingPage";
 
 
 const getRoute = (path, component, exact = true) => ({
@@ -100,14 +101,15 @@ export const AppAdminRoutes = [
 export const OtherRoutes = [
   //Special Routes
   getRoute(Paths[Views.inMaintenance].path, InMaintenance),
+  getRoute(Paths[Views.landing].path, LandingPage),
 
   //Default route must be before from NotFound route
   getRoute(
-    Paths[Views.default].path,
+    Paths[Views.landing].path,
     () => {
       const token = getToken();
       if (token) return <Redirect to={HomePath.path} />;
-      else return <Redirect to={Paths[Views.login].path} />;
+      else return <Redirect to={Paths[Views.landing].path} />;
     },
     true
   ),

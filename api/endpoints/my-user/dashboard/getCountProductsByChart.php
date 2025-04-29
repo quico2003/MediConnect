@@ -1,22 +1,22 @@
 <?php
 
-include_once '../../../config/config.php';
+include_once "../../../config/config.php";
 
 $database = new Database();
 $db = $database->getConnection();
 
-
 try {
     $db->beginTransaction();
-    checkAuthAdmin();
+    checkAuthUser();
 
-    $productsForCategories = Category::getProductsForCategories($db);
+    $products = Recipe::getAllCountAsignProducts($db);
 
     $db->commit();
 
     Response::sendResponse([
-        "categories" => $productsForCategories
+        "products" => $products
     ]);
+
 } catch (\Exception $th) {
     $db->rollBack();
     print_r(json_encode(array("status" => false, "message" => $th->getMessage(), 'code' => $th->getCode())));

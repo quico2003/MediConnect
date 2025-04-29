@@ -65,6 +65,25 @@ class Recipe
         return $productIds;
     }
 
+    public static function getAllCountAsignProducts(PDO $db)
+    {
+        $query = "SELECT p.`name`, COUNT(cp.id) AS value FROM `" . self::$table_name . "` AS cp INNER JOIN products AS p ON cp.product_id = p.id 
+        GROUP BY product_id ORDER BY value DESC LIMIT 10;";
+
+        $stmt = $db->prepare($query);
+
+        if ($stmt->execute()) {
+            $arrayToReturn = [];
+
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $arrayToReturn[] = ["name" => $row["name"], "value" => $row["value"]];
+            }
+            return $arrayToReturn;
+        }
+        createException($stmt->errorInfo());
+
+    }
+
 
     private static function getMainObject(PDO $db, array $row): Recipe
     {

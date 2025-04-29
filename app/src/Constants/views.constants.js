@@ -47,6 +47,7 @@ export const Views = {
   auth: "auth",
   app: "app",
   default: "default",
+  landing: "landing",
   notFound: "not_found",
   inMaintenance: "in_maintenance",
   forgotPassword: "forgotPassword",

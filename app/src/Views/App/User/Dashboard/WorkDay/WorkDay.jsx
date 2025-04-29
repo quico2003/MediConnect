@@ -14,9 +14,6 @@ import PanelLayout from "../../../../../Layouts/PanelLayout/PanelLayout";
 
 const WorkDay = () => {
 
-    const { strings } = useContext(StringsContext);
-    const ViewStrings = strings.User.home;
-
     const request = useRequest();
 
     const [data, setData] = useState();
@@ -55,25 +52,19 @@ const WorkDay = () => {
     };
 
     return (
-        <GeneralLayout title="Work Day" rightSection={
-            <IconButton
-                variant="secondary"
-                Icon={IoReload}
-                onClick={() => fetchData()}
+
+        <PanelLayout style={{ height: '500px', margin: '20px' }}>
+            <Calendar
+                localizer={localizer}
+                events={data}
+                startAccessor="start"
+                endAccessor="end"
+                defaultView="day"
+                views={['day']}
+                culture="es"
             />
-        }>
-            <PanelLayout style={{ height: '500px', margin: '20px' }}>
-                <Calendar
-                    localizer={localizer}
-                    events={data}
-                    startAccessor="start"
-                    endAccessor="end"
-                    defaultView="day"
-                    views={['day']}
-                    culture="es"
-                />
-            </PanelLayout>
-        </GeneralLayout>
+        </PanelLayout>
+
     )
 }
 export default WorkDay;

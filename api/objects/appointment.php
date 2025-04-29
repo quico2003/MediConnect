@@ -127,12 +127,63 @@ class Appointment
                 return self::getMainObject($db, $row);
             }
         }
-        createException("Appointment not foud");
+        createException("Appointment not foud with PDF");
     }
 
     public static function getAllCount(PDO $db, int $user_id): int
     {
         $query = "SELECT COUNT(id) as total FROM `" . self::$table_name . "` WHERE deleted_at IS NULL AND created_by=:user_id";
+
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(":user_id", $user_id);
+
+        if ($stmt->execute()) {
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                return intval($row['total']);
+            }
+            return 0;
+        }
+        createException($stmt->errorInfo());
+    }
+    
+    public static function getAllCountComplete(PDO $db, int $user_id): int
+    {
+        $query = "SELECT COUNT(id) as total FROM `" . self::$table_name . "` WHERE deleted_at 
+        IS NOT NULL AND final_description IS NOT NULL AND created_by=:user_id";
+
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(":user_id", $user_id);
+
+        if ($stmt->execute()) {
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                return intval($row['total']);
+            }
+            return 0;
+        }
+        createException($stmt->errorInfo());
+    }
+    
+    public static function getAllCountDeleted(PDO $db, int $user_id): int
+    {
+        $query = "SELECT COUNT(id) as total FROM `" . self::$table_name . "` WHERE deleted_at 
+        IS NOT NULL AND final_description IS NULL AND created_by=:user_id";
+
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(":user_id", $user_id);
+
+        if ($stmt->execute()) {
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                return intval($row['total']);
+            }
+            return 0;
+        }
+        createException($stmt->errorInfo());
+    }
+    
+    public static function getAllCountPeending(PDO $db, int $user_id): int
+    {
+        $query = "SELECT COUNT(id) as total FROM `" . self::$table_name . "` WHERE deleted_at 
+        IS NULL AND final_description IS NULL AND created_by=:user_id";
 
         $stmt = $db->prepare($query);
         $stmt->bindParam(":user_id", $user_id);

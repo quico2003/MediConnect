@@ -529,6 +529,12 @@
         "description": "Description:",
         "products": "Products:"
       }
+    },
+    "dashboard": {
+      "title": "Dashboard",
+      "workDay": "Work Day",
+      "status": "Appointment Status",
+      "top": "Top products"
     }
   }
 }

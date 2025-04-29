@@ -1,15 +1,15 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Cell, Pie } from 'recharts';
-import { EndpointsAdmin, getEndpoint } from '../../../../../Constants/endpoints.contants';
-import useRequest from '../../../../../Hooks/useRequest';
-import useLoaded from '../../../../../Hooks/useLoaded';
-import PanelLayout from '../../../../../Layouts/PanelLayout/PanelLayout';
-import useNotification from '../../../../../Hooks/useNotification';
+import { useEffect, useMemo, useState } from "react";
+import useRequest from "../../../../../Hooks/useRequest";
+import { EndpointsUser, getEndpoint } from "../../../../../Constants/endpoints.contants";
+import useLoaded from "../../../../../Hooks/useLoaded";
+import useNotification from "../../../../../Hooks/useNotification";
+import PanelLayout from "../../../../../Layouts/PanelLayout/PanelLayout";
+import { Cell, Legend, Pie, PieChart, ResponsiveContainer } from "recharts";
 
-const CategoriesChart = ({ needUpdate, setNeedUpdate }) => {
+const ChartAppointment = ({ needUpdate, setNeedUpdate }) => {
 
     const request = useRequest();
-    const [data, setData] = useState([])
+    const [data, setData] = useState([]);
 
     const { startFetching, finishFetching, loaded } = useLoaded();
     const { showNotification: errorNotification } = useNotification();
@@ -19,7 +19,7 @@ const CategoriesChart = ({ needUpdate, setNeedUpdate }) => {
             fetchData();
             setNeedUpdate(!needUpdate)
         }
-    }, [needUpdate])
+    }, [setNeedUpdate])
 
     useEffect(() => {
         fetchData();
@@ -27,22 +27,22 @@ const CategoriesChart = ({ needUpdate, setNeedUpdate }) => {
 
     const fetchData = async () => {
         startFetching();
-        await request("get", getEndpoint(EndpointsAdmin.Dashboard.countProductsForCategory))
-            .then((res) => setData(res.categories))
+        request("get", getEndpoint(EndpointsUser.Dashboard.getAppointmentsByChart))
+            .then((res) => setData(res.appointments))
             .catch((err) => errorNotification(err.message))
             .finally(() => finishFetching());
-    };
+    }
 
     const RADIAN = Math.PI / 180;
 
-    const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
+    const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, index }) => {
         const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
         const x = cx + radius * Math.cos(-midAngle * RADIAN);
         const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
         return (
             <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
-                {`${(percent * 100).toFixed(0)}%`}
+                {data[index].value}
             </text>
         );
     };
@@ -83,5 +83,5 @@ const CategoriesChart = ({ needUpdate, setNeedUpdate }) => {
             </ResponsiveContainer>
         </PanelLayout>
     );
-};
-export default CategoriesChart;
+}
+export default ChartAppointment;

@@ -90,7 +90,8 @@ export const EndpointsUser = {
   Dashboard: {
     getAllByDay: `${BASE_URL_USER}/dashboard/getAllByDay`,
     typeCount: `${BASE_URL_USER}/dashboard/typeCount`,
-    
+    getAppointmentsByChart: `${BASE_URL_USER}/dashboard/getAppointmentsByChart`,
+    getCountProductsByChart: `${BASE_URL_USER}/dashboard/getCountProductsByChart`
   }
 };
 

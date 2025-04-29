@@ -53,7 +53,7 @@ export const Paths = {
 
 
   //#region General
-  [Views.default]: getPath(`/`),
+  [Views.landing]: getPath(`/`),
   [Views.notFound]: getPath("*"),
   [Views.inMaintenance]: getPath("/in-maintenance"),
   //#endregion
