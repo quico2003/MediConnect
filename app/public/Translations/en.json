@@ -536,5 +536,27 @@
       "status": "Appointment Status",
       "top": "Top products"
     }
+  },
+  "LandingPage": {
+    "home": {
+      "title": "Escuchar bien es vivir mejor. Nosotros te ayudamos.",
+      "text": "En nuestra clínica auditiva, combinamos atención personalizada con tecnología de vanguardia para mejorar la calidad de vida de nuestros pacientes. Realizamos evaluaciones auditivas completas, adaptamos audífonos a medida y acompañamos a cada persona en su proceso de recuperación auditiva."
+    },
+    "feature": {
+      "title": "Funciones diseñadas para una atención auditiva de calidad",
+      "subtitle": "Descubre cómo nuestra plataforma optimiza la gestión de tu clínica auditiva, mejorando la experiencia de tus pacientes y facilitando el trabajo de tu equipo médico.",
+      "feature1": {
+        "title": "Evaluaciones auditivas completas y precisas",
+        "description": "Ofrecemos herramientas avanzadas para realizar evaluaciones auditivas de manera rápida y eficiente, con diagnósticos detallados que permiten a nuestros profesionales crear planes de tratamiento personalizados para cada paciente."
+      },
+      "feature2": {
+        "title": "Gestión personalizada de audífonos y accesorios",
+        "description": "Desde la elección del audífono adecuado hasta el seguimiento continuo, nuestra plataforma permite gestionar inventarios, ajustes y adaptaciones de dispositivos auditivos de forma organizada y eficiente, garantizando el mejor acompañamiento para cada paciente."
+      },
+      "feature3": {
+        "title": "Seguimiento continuo de la salud auditiva",
+        "description": "Asegura un seguimiento regular de los pacientes, permitiendo a los médicos registrar progresos, ajustar tratamientos y realizar revisiones de manera sencilla, todo desde un panel de control accesible y fácil de usar."
+      }
+    }
   }
 }

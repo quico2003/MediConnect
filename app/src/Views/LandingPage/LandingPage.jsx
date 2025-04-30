@@ -1,73 +1,26 @@
-import GeneralLayout from "../../Layouts/GeneralLayout/GeneralLayout";
-import SectionDefault from "./Components/SectionDefault";
+
+import { useContext } from "react";
+import { StringsContext } from "../../Context/strings.context";
+import HomeLanding from "./Components/HomeLanding/HomeLanding";
 import Footer from "./Footer/Footer";
 import NavBar from "./Navbar/NavBar";
+import FeaturesLanding from "./Components/FeaturesLanding/FeaturesLanding";
+import ProductsLanding from "./Components/ProductsLanding/ProductsLanding";
 
 const LandingPage = () => {
 
+    const { strings } = useContext(StringsContext);
+    const ViewStrings = strings.LandingPage.home;
+
     return (
-        <>
+        <div id="landingBody" style={{ height: "100svh", overflowY: "auto" }}>
 
             <NavBar />
-            <SectionDefault
-                title="Conoce nuestra plataforma"
-                text="MediConnect permite gestionar tus citas, tratamientos y seguimiento de pacientes con facilidad."
-                routeImg="../../Assets/LandingPageImages/f1.png"
-                format="top"
-                className="d-flex flex-column align-items-center gap-2"
-            />
-            <SectionDefault
-                title="Conoce nuestra plataforma"
-                text="MediConnect permite gestionar tus citas, tratamientos y seguimiento de pacientes con facilidad."
-                routeImg="../../Assets/LandingPageImages/f1.png"
-                format="top"
-                className="d-flex flex-column align-items-center gap-2"
-            />
-            <SectionDefault
-                title="Conoce nuestra plataforma"
-                text="MediConnect permite gestionar tus citas, tratamientos y seguimiento de pacientes con facilidad."
-                routeImg="../../Assets/LandingPageImages/f1.png"
-                format="top"
-                className="d-flex flex-column align-items-center gap-2"
-            />
-            <SectionDefault
-                title="Conoce nuestra plataforma"
-                text="MediConnect permite gestionar tus citas, tratamientos y seguimiento de pacientes con facilidad."
-                routeImg="../../Assets/LandingPageImages/f1.png"
-                format="top"
-                className="d-flex flex-column align-items-center gap-2"
-            />
-            <SectionDefault
-                title="Conoce nuestra plataforma"
-                text="MediConnect permite gestionar tus citas, tratamientos y seguimiento de pacientes con facilidad."
-                routeImg="../../Assets/LandingPageImages/f1.png"
-                format="top"
-                className="d-flex flex-column align-items-center gap-2"
-            />
-            <SectionDefault
-                title="Conoce nuestra plataforma"
-                text="MediConnect permite gestionar tus citas, tratamientos y seguimiento de pacientes con facilidad."
-                routeImg="../../Assets/LandingPageImages/f1.png"
-                format="top"
-                className="d-flex flex-column align-items-center gap-2"
-            />
-            <SectionDefault
-                title="Conoce nuestra plataforma"
-                text="MediConnect permite gestionar tus citas, tratamientos y seguimiento de pacientes con facilidad."
-                routeImg="../../Assets/LandingPageImages/f1.png"
-                format="top"
-                className="d-flex flex-column align-items-center gap-2"
-            />
-            <SectionDefault
-                title="Conoce nuestra plataforma"
-                text="MediConnect permite gestionar tus citas, tratamientos y seguimiento de pacientes con facilidad."
-                routeImg="../../Assets/LandingPageImages/f1.png"
-                format="top"
-                className="d-flex flex-column align-items-center gap-2"
-            />
-
+            <HomeLanding title={ViewStrings.title} text={ViewStrings.text}/>
+            <FeaturesLanding />
+            <ProductsLanding />
             <Footer />
-        </>
+        </div>
     )
 
 }

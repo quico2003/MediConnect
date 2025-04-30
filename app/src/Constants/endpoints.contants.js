@@ -2,6 +2,7 @@ import { Configuration } from "../Config/app.config";
 
 const BASE_URL_ADMIN = `${Configuration.API_URL}/endpoints/my-admin`;
 const BASE_URL_USER = `${Configuration.API_URL}/endpoints/my-user`;
+const BASE_URL_LANDINGPAGE = `${Configuration.API_URL}/endpoints/landing-page`;
 
 export const EndpointsAdmin = {
   Auth: {
@@ -14,7 +15,7 @@ export const EndpointsAdmin = {
     updateAdminEmail: `${BASE_URL_ADMIN}/auth/updateAdminEmail`,
     updateAdminPassword: `${BASE_URL_ADMIN}/auth/updateAdminPassword`,
   },
-  
+
   Categories: {
     getAll: `${BASE_URL_ADMIN}/category/getAll`,
     getList: `${BASE_URL_ADMIN}/category/getList`,
@@ -23,7 +24,7 @@ export const EndpointsAdmin = {
     update: `${BASE_URL_ADMIN}/category/update`,
     delete: `${BASE_URL_ADMIN}/category/delete`,
   },
-  
+
   Products: {
     getAll: `${BASE_URL_ADMIN}/product/getAll`,
     get: `${BASE_URL_ADMIN}/product/get`,
@@ -34,7 +35,7 @@ export const EndpointsAdmin = {
     getAllWithoutCategory: `${BASE_URL_ADMIN}/product/getAllWithoutCategory`,
     assignCategory: `${BASE_URL_ADMIN}/product/assignCategory`
   },
-  
+
   Users: {
     getAll: `${BASE_URL_ADMIN}/user/getAll`,
     get: `${BASE_URL_ADMIN}/user/get`,
@@ -42,7 +43,7 @@ export const EndpointsAdmin = {
     update: `${BASE_URL_ADMIN}/user/update`,
     delete: `${BASE_URL_ADMIN}/user/delete`,
   },
-  
+
   Dashboard: {
     countProductsForCategory: `${BASE_URL_ADMIN}/dashboard/countProductsForCategory`,
     typeCount: `${BASE_URL_ADMIN}/dashboard/typeCount`,
@@ -92,6 +93,12 @@ export const EndpointsUser = {
     typeCount: `${BASE_URL_USER}/dashboard/typeCount`,
     getAppointmentsByChart: `${BASE_URL_USER}/dashboard/getAppointmentsByChart`,
     getCountProductsByChart: `${BASE_URL_USER}/dashboard/getCountProductsByChart`
+  }
+};
+
+export const EndpointsLandingPage = {
+  Products: {
+    getAll: `${BASE_URL_LANDINGPAGE}/product/getAll`
   }
 };
 

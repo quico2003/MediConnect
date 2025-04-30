@@ -25,7 +25,6 @@ try {
 
     $product->categoryName = $category->name;
     
-
     //Realiza un array con la decodificacion del string de imagenes
     $imagesDecode = json_decode($product->images);
 
