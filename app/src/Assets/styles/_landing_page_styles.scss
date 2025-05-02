@@ -1,8 +1,8 @@
 .container1 {
-    height: 40svh;
+    height: 70svh;
     background: linear-gradient(to bottom, rgba(188, 188, 188, 0), rgb(255, 255, 255)), url(../images/LandingPageImages/image.png);
     background-size: cover;
-
+    background-repeat: no-repeat;
 }
 
 .img {
@@ -10,7 +10,6 @@
     border-radius: 10px;
 }
 
-#landingBody {
-    scroll-padding-top: 100px;
-    scroll-behavior: smooth;
+.sectionProducts {
+    background: linear-gradient(white, rgba(101, 101, 189, 0.361), white);
 }

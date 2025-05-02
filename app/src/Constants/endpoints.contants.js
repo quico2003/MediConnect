@@ -97,8 +97,9 @@ export const EndpointsUser = {
 };
 
 export const EndpointsLandingPage = {
-  Products: {
-    getAll: `${BASE_URL_LANDINGPAGE}/product/getAll`
+  LandingPage: {
+    getAll: `${BASE_URL_LANDINGPAGE}/product/getAll`,
+    typeCount: `${BASE_URL_LANDINGPAGE}/landing/typeCount`
   }
 };
 

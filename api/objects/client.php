@@ -263,6 +263,21 @@ class Client
         }
         createException($stmt->errorInfo());
     }
+    
+    public static function getAllCountWithoutUser(PDO $db): int
+    {
+        $query = "SELECT COUNT(id) as total FROM `" . self::$table_name . "` c WHERE deleted_at IS NULL";
+
+        $stmt = $db->prepare($query);
+
+        if ($stmt->execute()) {
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                return intval($row['total']);
+            }
+            return 0;
+        }
+        createException($stmt->errorInfo());
+    }
 
     private static function getMainObject(PDO $db, array $row): Client
     {

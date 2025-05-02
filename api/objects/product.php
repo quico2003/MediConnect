@@ -170,6 +170,25 @@ class Product
         createException($stmt->errorInfo());
     }
 
+    public static function getProductsTop(PDO $db)
+    {
+        $query = "SELECT p.*, COUNT(cp.id) AS value FROM client_products AS cp INNER JOIN products AS p ON cp.product_id = p.id 
+        GROUP BY product_id ORDER BY value DESC LIMIT 6";
+
+        $stmt = $db->prepare($query);
+
+        if ($stmt->execute()) {
+            $arrayToReturn = [];
+
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $arrayToReturn[] = self::getMainObject($db, $row);
+            }
+            return $arrayToReturn;
+        }
+        createException($stmt->errorInfo());
+
+    }
+
     public static function getAllWithoutPagination(PDO $db): array
     {
         $query = "SELECT * FROM `" . self::$table_name . "` WHERE deleted_at IS NULL";
