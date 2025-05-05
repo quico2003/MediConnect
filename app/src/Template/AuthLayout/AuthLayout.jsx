@@ -17,10 +17,10 @@ const AuthLayout = ({ children }) => {
   const { push } = useHistory();
 
   useEffect(() => {
-    checkUser();
+    checkAdmin();
   }, []);
 
-  const checkUser = () => {
+  const checkAdmin = () => {
     request("get", getEndpoint(EndpointsAdmin.Auth.checkAdmin)).then(() => push(Paths[Views.homeAdmin].path)).catch(() => push(Paths[Views.loginAdmin].path));
   };
 

@@ -37,7 +37,7 @@ class ClientResource
     {
         $newItem = new stdClass();
 
-        $newItem = self::getClient($client, ["guid", "first_name", "last_name", "email", "phone", "creator_first_name", "creator_last_name"]);
+        $newItem = self::getClient($client, ["guid", "first_name", "last_name", "email", "phone", "anotations", "creator_first_name", "creator_last_name"]);
 
         return $newItem;
     }

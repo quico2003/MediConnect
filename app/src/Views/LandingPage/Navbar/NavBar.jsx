@@ -1,5 +1,6 @@
 import { useState } from "react";
 import logo from "../../../Assets/images/Logo/logo-maximised-user.png"
+import LanguageSelector from "../../../Components/LanguageSelector/LanguageSelector";
 
 const NavBar = ({ }) => {
 
@@ -10,7 +11,7 @@ const NavBar = ({ }) => {
     }
 
     return (
-        <nav style={{ height: "80px", zIndex: 999}} className="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow py-0 px-5 w-100 position-fixed">
+        <nav style={{ height: "80px", zIndex: 999 }} className="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow py-0 px-5 w-100 position-fixed">
             <span className="navbar-brand">
                 <img src={logo} alt="logo" width="200px" />
             </span>
@@ -44,6 +45,8 @@ const NavBar = ({ }) => {
                     </li>
                 </ul>
             </div>
+            <LanguageSelector showFlag={true} />
+
         </nav>
     )
 }

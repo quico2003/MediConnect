@@ -19,16 +19,37 @@ try {
         'specialty' => 'required|string',
     ]);
 
-    $user = User::getByGuid($db, $input->guid);
-    $userProfile = UserProfile::getByUserId($db, $user->id);
+    $user_exist = User::getByEmail($db, $input->email);
+    if (!$user_exist) {
+        $user = User::getByGuid($db, $input->guid);
+        $userProfile = UserProfile::getByUserId($db, $user->id);
 
-    $user->email = $input->email;
-    $userProfile->first_name = $input->firstName;
-    $userProfile->last_name = $input->lastName;
-    $userProfile->specialty = $input->specialty;
+        $user->email = $input->email;
+        $userProfile->first_name = $input->firstName;
+        $userProfile->last_name = $input->lastName;
+        $userProfile->specialty = $input->specialty;
 
-    $user->update();
-    $userProfile->update();
+        $user->update();
+        $userProfile->update();
+    } else {
+        $user = User::getByGuid($db, $input->guid);
+        $userProfile = UserProfile::getByUserId($db, $user->id);
+        if ($input->email === $user->email) {
+            $user = User::getByGuid($db, $input->guid);
+            $userProfile = UserProfile::getByUserId($db, $user->id);
+
+            $user->email = $input->email;
+            $userProfile->first_name = $input->firstName;
+            $userProfile->last_name = $input->lastName;
+            $userProfile->specialty = $input->specialty;
+
+            $user->update();
+            $userProfile->update();
+        } else {
+            createException("Email alredy exist", 409);
+        }
+    }
+
 
     $db->commit();
 

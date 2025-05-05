@@ -16,6 +16,7 @@ try {
         "lastName" => "required|string",
         "email" => "required|string",
         "phone" => "required|string",
+        "anotations" => "required|string",
     ]);
 
     $client_exist = Client::getByEmail($db, $input->email);
@@ -25,6 +26,7 @@ try {
         $client->last_name = $input->lastName;
         $client->email = $input->email;
         $client->phone = $input->phone;
+        $client->anotations = $input->anotations;
         $client->created_by = $userId;
 
         $client->store();

@@ -1,8 +1,27 @@
 import { Container } from "react-bootstrap";
 import { useSelector } from "react-redux";
+import useRequest from "../../Hooks/useRequest";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useEffect } from "react";
+import { EndpointsUser, getEndpoint } from "../../Constants/endpoints.contants";
+import { Views } from "../../Constants/views.constants";
+import { Paths } from "../../Constants/paths.constants";
 
 const AuthLayoutUser = ({ children }) => {
+
   const { isMobileView } = useSelector((state) => state.Config);
+
+  const request = useRequest();
+
+  const { push } = useHistory();
+
+  useEffect(() => {
+    checkUser();
+  }, []);
+
+  const checkUser = () => {
+    request("get", getEndpoint(EndpointsUser.Auth.checkUser)).then(() => push(Paths[Views.homeUser].path)).catch(() => push(Paths[Views.login].path));
+  };
 
   return (
     <div className="w-100 overflow-hidden custom_layout" style={{ height: "100vh" }}>

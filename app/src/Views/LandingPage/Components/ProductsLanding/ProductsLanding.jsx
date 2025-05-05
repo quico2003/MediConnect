@@ -3,7 +3,7 @@ import useRequest from "../../../../Hooks/useRequest";
 import { EndpointsLandingPage, getEndpoint } from "../../../../Constants/endpoints.contants";
 import useNotification from "../../../../Hooks/useNotification";
 import CardProduct from "./CardProduct";
-import { Col, Container, Row } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 
 const ProductsLanding = () => {
 
@@ -12,6 +12,8 @@ const ProductsLanding = () => {
     const request = useRequest();
 
     const [data, setData] = useState([]);
+
+    const [showMoreItems, setShowNumberItems] = useState(false);
 
     useEffect(() => {
         fetchData();
@@ -23,16 +25,27 @@ const ProductsLanding = () => {
             .catch((err) => errorNotification(err.message))
     }
 
+    const handleViewMore = () => {
+        setShowNumberItems(!showMoreItems);
+    }
+
+
     return (
-        <div id="products" className="py-5 my-5 sectionProducts">
+        <div id="products" className="py-5 my-5 ">
             <div className="text-center mb-4">
                 <h2>Un poco sobre nuestros productos en stock</h2>
             </div>
             <Container>
+                <div className="d-flex justify-content-end mb-4">
+
+                    <Button onClick={handleViewMore} >
+                        {showMoreItems ? "See less ▲" : "See more ▼"}
+                    </Button>
+                </div>
                 {data.length > 0 ? (
                     <>
                         <Row className="g-4">
-                            {data.slice(0, 6).map((product, index) => (
+                            {data.slice(0, showMoreItems ? 20 : 6).map((product, index) => (
                                 <Col key={index} xs={12} sm={6} md={4}>
                                     <div className="my-tooltip">
                                         <CardProduct product={product} />
@@ -45,7 +58,7 @@ const ProductsLanding = () => {
                     <p className="text-center">No hay productos disponibles en este momento.</p>
                 )}
             </Container>
-        </div>
+        </div >
     )
 
 }

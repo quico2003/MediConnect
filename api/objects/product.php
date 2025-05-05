@@ -173,7 +173,7 @@ class Product
     public static function getProductsTop(PDO $db)
     {
         $query = "SELECT p.*, COUNT(cp.id) AS value FROM client_products AS cp INNER JOIN products AS p ON cp.product_id = p.id 
-        GROUP BY product_id ORDER BY value DESC LIMIT 6";
+        GROUP BY product_id ORDER BY value DESC LIMIT 20";
 
         $stmt = $db->prepare($query);
 

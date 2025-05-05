@@ -38,7 +38,7 @@ const ProfileDropdown = ({ role }) => {
         .then((res) => {
           localStorage.clear();
           dispatch(toogleClearAllUser());
-          replace(Paths[Views.login].path);
+          replace(Paths[Views.landing].path);
 
         })
         .catch((err) => errorNotification(err.message));
@@ -48,7 +48,7 @@ const ProfileDropdown = ({ role }) => {
         .then((res) => {
           localStorage.clear();
           dispatch(toogleClearAllAdmin());
-          replace(Paths[Views.loginAdmin].path);
+          replace(Paths[Views.landing].path);
 
         })
         .catch((err) => errorNotification(err.message));

@@ -6,7 +6,7 @@ import { useContext, useState } from "react";
 import { StringsContext } from "../../../../Context/strings.context";
 import { useDispatch } from "react-redux";
 import useRequest from "../../../../Hooks/useRequest";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import useNotification from "../../../../Hooks/useNotification";
 import { validateLogin } from "../../../../Config/GeneralFunctions";
 import { EmailRegex } from "../../../../Utils/Regex";
@@ -15,6 +15,7 @@ import { StorageKeys } from "../../../../Constants/storekeys.constants";
 import { Paths, replacePaths } from "../../../../Constants/paths.constants";
 import { Views } from "../../../../Constants/views.constants";
 import { toggleUserAvatar, toggleUserEmail, toggleUserName } from "../../../../Redux/actions/UserInfoAction";
+import { FaArrowLeft } from "react-icons/fa";
 
 const LoginUser = () => {
 
@@ -52,6 +53,7 @@ const LoginUser = () => {
                 dispatch(toggleUserEmail(email));
                 dispatch(toggleUserAvatar(avatar));
                 localStorage.setItem(StorageKeys.TOKEN, token);
+                localStorage.setItem(StorageKeys.ROLE, "1")
                 successNotification(ViewStrings.successNotification);
 
                 if (first_login === "1") replace(replacePaths(Paths[Views.completeUser].path, [{ user_guid: guid }]))
@@ -93,7 +95,10 @@ const LoginUser = () => {
                     isInvalid={data.password && data.password.length < 6}
                 />
 
-                <div className="d-flex justify-content-end">
+                <div className="d-flex justify-content-between">
+                    <Button variant="ligt">
+                        <Link to="/"><FaArrowLeft /></Link>
+                    </Button>
                     <Button disabled={!checkForm()} onClick={handleSubmit}>
                         {ViewStrings.buttonLogin}
                     </Button>

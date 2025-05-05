@@ -8,11 +8,13 @@ import GeneralLayout from "../../../../../Layouts/GeneralLayout/GeneralLayout";
 import PanelLayout from "../../../../../Layouts/PanelLayout/PanelLayout";
 import SectionLayout from "../../../../../Layouts/SectionLayout/SectionLayout";
 import FormControl from "../../../../../Components/Form/FormControl/FormControl";
-import { Button, Spinner } from "react-bootstrap";
+import { Button, FormLabel, Spinner } from "react-bootstrap";
 import { EndpointsUser, getEndpoint } from "../../../../../Constants/endpoints.contants";
 import { Views } from "../../../../../Constants/views.constants";
 import { Paths } from "../../../../../Constants/paths.constants";
 import { EmailRegex, PhoneRegexSimple } from "../../../../../Utils/Regex";
+import ReactQuill from "react-quill";
+import RequiredField from "../../../../../Components/Form/RequiredField/RequiredField";
 
 const NewClient = () => {
 
@@ -47,9 +49,13 @@ const NewClient = () => {
         setData({ ...data, [id]: value });
     }
 
+    const handleInputDescription = (e) => {
+        setData({ ...data, "anotations": e })
+    }
+
     const checkForm = () => {
-        const { firstName, lastName, email, phone } = data;
-        return validateData([firstName, lastName, email, phone])
+        const { firstName, lastName, email, phone, anotations } = data;
+        return validateData([firstName, lastName, email, phone, anotations])
             && PhoneRegexSimple.test(phone)
             && EmailRegex.test(email);
     }
@@ -97,6 +103,13 @@ const NewClient = () => {
                         value={data.phone}
                         onChange={handleInput}
                         placeholder={ViewStrings.pPhone}
+                    />
+                    <FormLabel className="mb-0">{ViewStrings.anotations}<RequiredField /></FormLabel>
+                    <ReactQuill
+                        id="anotations"
+                        theme="snow"
+                        onChange={handleInputDescription}
+                        value={data.anotations}
                     />
                 </SectionLayout>
                 <div className="d-flex justify-content-end align-items-center">

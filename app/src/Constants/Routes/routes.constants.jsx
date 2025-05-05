@@ -101,8 +101,7 @@ export const AppAdminRoutes = [
 export const OtherRoutes = [
   //Special Routes
   getRoute(Paths[Views.inMaintenance].path, InMaintenance),
-  getRoute(Paths[Views.landing].path, LandingPage),
-
+  
   //Default route must be before from NotFound route
   getRoute(
     Paths[Views.landing].path,
@@ -116,3 +115,8 @@ export const OtherRoutes = [
   //NotFound Route must to be the last one
   getRoute(Paths[Views.notFound].path, NotFound, false),
 ];
+
+export const PublicRoutes = [
+  getRoute(Paths[Views.landing].path, LandingPage, true),
+
+]

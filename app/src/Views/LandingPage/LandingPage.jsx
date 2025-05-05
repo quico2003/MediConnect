@@ -14,18 +14,25 @@ const LandingPage = () => {
     const { strings } = useContext(StringsContext);
     const ViewStrings = strings.LandingPage.home;
 
+
     return (
         <div style={{ height: "100svh", overflowY: "auto" }}>
-
             <NavBar />
             <HomeLanding title={ViewStrings.title} text={ViewStrings.text} />
-            <FeaturesLanding />
-            <hr />
-            <Information />
-            <hr />
+            <div className="container">
+
+                <FeaturesLanding />
+                <hr />
+                <Reviews />
+
+            </div>
             <ProductsLanding />
-            <Reviews />
+            <div className="container">
+                <Information />
+
+            </div>
             <Footer />
+
         </div>
     )
 

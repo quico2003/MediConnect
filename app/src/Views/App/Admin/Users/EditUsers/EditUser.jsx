@@ -6,7 +6,7 @@ import { EndpointsAdmin, getEndpoint } from "../../../../../Constants/endpoints.
 import GeneralLayout from "../../../../../Layouts/GeneralLayout/GeneralLayout";
 import PanelLayout from "../../../../../Layouts/PanelLayout/PanelLayout";
 import SectionLayout from "../../../../../Layouts/SectionLayout/SectionLayout";
-import { Button } from "react-bootstrap";
+import { Button, Spinner } from "react-bootstrap";
 import { validateData } from "../../../../../Config/GeneralFunctions";
 import { EmailRegex } from "../../../../../Utils/Regex";
 import FormControl from "../../../../../Components/Form/FormControl/FormControl";

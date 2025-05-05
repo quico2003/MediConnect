@@ -175,6 +175,17 @@ class GeneratePDF
 
     }
 
+    function anotationsClient()
+    {
+        $anotations = $this->client->anotations;
+
+        $this->html .= "<div style='margin:40px;'>";
+        $this->html .= "<h3>Anotations Client:</h3>";
+        $this->html .= "<div>$anotations</div>";
+        $this->html .= "</div>";
+
+    }
+
     function renderProducts()
     {
 
@@ -215,6 +226,7 @@ class GeneratePDF
     function init()
     {
         $this->renderInformation();
+        $this->anotationsClient();
         $this->descriptionAppointment();
         $this->renderProducts();
     }
@@ -237,6 +249,4 @@ class GeneratePDF
         echo $pdfOutput;
         exit;
     }
-
-
 }

@@ -18,16 +18,20 @@ try {
         
     ]);
 
-    $newAdmin = new Admin($db);
-    $newAdmin->name = $input->name;
-    $newAdmin->email = $input->email;
-    $newAdmin->password = password_hash($input->password, PASSWORD_DEFAULT);
+    $admin_exist = Admin::getByEmail($db, $input->email);
 
-    $newAdmin->store();
-
+    if (!$admin_exist) {
+        $newAdmin = new Admin($db);
+        $newAdmin->name = $input->name;
+        $newAdmin->email = $input->email;
+        $newAdmin->password = password_hash($input->password, PASSWORD_DEFAULT);
+    
+        $newAdmin->store();
+    } else {
+        createException("Email alredy exist", 409);
+    }
 
     $db->commit();
-
     Response::sendResponse();
 }catch (\Exception $th) {
     $db->rollBack();

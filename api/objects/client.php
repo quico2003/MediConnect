@@ -11,6 +11,7 @@ class Client
     public string $first_name;
     public string $last_name;
     public string $phone;
+    public string $anotations;
     public string $searchData;
     public int $created_by;
     public string $created_at;
@@ -36,7 +37,7 @@ class Client
     function store(): int
     {
         $query = "INSERT INTO `" . self::$table_name . "` SET guid=:guid, email=:email,
-        first_name=:first_name, last_name=:last_name, phone=:phone, searchData=:searchData,
+        first_name=:first_name, last_name=:last_name, phone=:phone, anotations=:anotations, searchData=:searchData,
         created_by=:created_by";
 
         $stmt = $this->conn->prepare($query);
@@ -47,6 +48,7 @@ class Client
         $stmt->bindParam(":first_name", $this->first_name);
         $stmt->bindParam(":last_name", $this->last_name);
         $stmt->bindParam(":phone", $this->phone);
+        $stmt->bindParam(":anotations", $this->anotations);
         $stmt->bindValue(":searchData", convertSearchValues($this->serchableValues()));
         $stmt->bindValue(":created_by", $this->created_by);
 
@@ -93,13 +95,14 @@ class Client
     {
         $query = "UPDATE `" . self::$table_name . "` SET
         first_name=:first_name, last_name=:last_name, email=:email,
-        phone=:phone, searchData=:searchData, deleted_at=:deleted_at WHERE id=:id";
+        phone=:phone, anotations=:anotations, searchData=:searchData, deleted_at=:deleted_at WHERE id=:id";
 
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(":first_name", $this->first_name);
         $stmt->bindParam(":last_name", $this->last_name);
         $stmt->bindParam(":email", $this->email);
         $stmt->bindParam(":phone", $this->phone);
+        $stmt->bindParam(":anotations", $this->anotations);
         $stmt->bindValue(":searchData", convertSearchValues($this->serchableValues()));
         $stmt->bindValue(":deleted_at", $this->deleted_at);
         $stmt->bindValue(":id", $this->id);
@@ -288,6 +291,7 @@ class Client
         $newObj->first_name = $row['first_name'];
         $newObj->last_name = $row['last_name'];
         $newObj->phone = $row['phone'];
+        $newObj->anotations = $row['anotations'];
         $newObj->searchData = $row['searchData'];
         $newObj->created_by = intval($row['created_by']);
         $newObj->created_at = $row['created_at'];

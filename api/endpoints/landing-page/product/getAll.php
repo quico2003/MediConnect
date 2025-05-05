@@ -11,7 +11,7 @@ try {
     $productsTop = Product::getProductsTop($db);
     $productTopIds = array_map(fn($p) => $p->id, $productsTop);
 
-    if (count($productsTop) < 6) {
+    if (count($productsTop) < 20) {
         $products = Product::getAll($db, 0, 0, "", []);
 
         foreach ($products as $product) {
@@ -19,8 +19,6 @@ try {
                 $productsTop[] = $product;
                 $productTopIds[] = $product->id;
 
-                if (count($productsTop) >= 6)
-                    break;
             }
         }
     }

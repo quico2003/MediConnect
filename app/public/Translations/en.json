@@ -447,6 +447,7 @@
       "pEmail": "Insert Email...",
       "phone": "Phone",
       "pPhone": "Insert Phone...",
+      "anotations": "Anotations:",
       "messageSuccess": "Created Client.",
       "buttonCreate": "Create"
     },
@@ -464,6 +465,8 @@
       "firstName": "First Name:",
       "lastName": "Last Name:",
       "phone": "Phone:",
+      "anotations": "Anotations:",
+      "doctorInfo": "Doctor Info:",
       "close": "Close"
     },
     "edit": {
@@ -477,7 +480,8 @@
       "phone": "Phone",
       "pPhone": "Insert Phone...",
       "update": "Update",
-      "messageSuccess": "Updated Client."
+      "messageSuccess": "Updated Client.",
+      "anotations": "Anotations:"
     },
     "Schedule": {
       "title": "Schedule",

@@ -8,11 +8,13 @@ import GeneralLayout from "../../../../../Layouts/GeneralLayout/GeneralLayout";
 import PanelLayout from "../../../../../Layouts/PanelLayout/PanelLayout";
 import SectionLayout from "../../../../../Layouts/SectionLayout/SectionLayout";
 import FormControl from "../../../../../Components/Form/FormControl/FormControl";
-import { Button, Spinner } from "react-bootstrap";
+import { Button, FormLabel, Spinner } from "react-bootstrap";
 import { validateData } from "../../../../../Config/GeneralFunctions";
 import { Paths } from "../../../../../Constants/paths.constants";
 import { Views } from "../../../../../Constants/views.constants";
 import { EmailRegex, PhoneRegexSimple } from "../../../../../Utils/Regex";
+import ReactQuill from "react-quill";
+import RequiredField from "../../../../../Components/Form/RequiredField/RequiredField";
 
 
 const EditClient = () => {
@@ -62,14 +64,18 @@ const EditClient = () => {
         }
     }
 
+    const handleInputDescription = (e) => {
+        setData({ ...data, "anotations":e});
+    }
+
     const handleInput = (e) => {
         const { id, value } = e.target;
         setData({ ...data, [id]: value });
     }
 
     const checkForm = () => {
-        const { first_name, last_name, email, phone } = data;
-        return validateData([first_name, last_name, email, phone])
+        const { first_name, last_name, email, phone, anotations } = data;
+        return validateData([first_name, last_name, email, phone, anotations])
             && EmailRegex.test(email)
             && PhoneRegexSimple.test(phone)
             && JSON.stringify(data) !== JSON.stringify(initialData);
@@ -118,6 +124,13 @@ const EditClient = () => {
                         title={ViewStrings.phone}
                         onChange={handleInput}
                         placeholder={ViewStrings.pPhone}
+                    />
+                    <FormLabel className="mb-0">{ViewStrings.anotations}<RequiredField /></FormLabel>
+                    <ReactQuill
+                        id="anotations"
+                        theme="snow"
+                        onChange={handleInputDescription}
+                        value={data.anotations}
                     />
                 </SectionLayout>
                 <div className="d-flex justify-content-end align-items-center">

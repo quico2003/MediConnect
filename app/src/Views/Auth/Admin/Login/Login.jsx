@@ -59,6 +59,7 @@ const LoginAdmin = () => {
             dispatch(toggleAdminEmail(email));
             dispatch(toggleAdminAvatar(avatar));
             localStorage.setItem(StorageKeys.TOKEN, token);
+            localStorage.setItem(StorageKeys.ROLE, "0")
             replace(Paths[Views.homeAdmin].path);
             successNotification(ViewStrings.successNotification)
         })
