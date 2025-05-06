@@ -56,9 +56,11 @@ const LoginUser = () => {
                 localStorage.setItem(StorageKeys.ROLE, "1")
                 successNotification(ViewStrings.successNotification);
 
-                if (first_login === "1") replace(replacePaths(Paths[Views.completeUser].path, [{ user_guid: guid }]))
-                else replace(Paths[Views.homeUser].path)
-
+                if (first_login === "1") {
+                    replace(replacePaths(Paths[Views.completeUser].path, [{ user_guid: guid }]))
+                } else {
+                    replace(Paths[Views.homeUser].path)
+                }
             }).catch(() => errorNotification(ViewStrings.errorNotification))
         }
     }

@@ -16,9 +16,9 @@ const LandingPage = () => {
 
 
     return (
-        <div style={{ height: "100svh", overflowY: "auto" }}>
+        <div className="scroll-section" style={{ height: "100svh", overflowY: "auto" }}>
             <NavBar />
-            <HomeLanding title={ViewStrings.title} text={ViewStrings.text} />
+            <HomeLanding text={ViewStrings.text} />
             <div className="container">
 
                 <FeaturesLanding />

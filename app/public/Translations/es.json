@@ -447,6 +447,7 @@
       "pEmail": "Ingresa el correo...",
       "phone": "Teléfono",
       "pPhone": "Ingresa el teléfono...",
+      "anotations": "Anotaciones:",
       "messageSuccess": "Cliente creado.",
       "buttonCreate": "Crear"
     },
@@ -464,6 +465,8 @@
       "firstName": "Nombre:",
       "lastName": "Apellido:",
       "phone": "Teléfono:",
+      "anotations": "Anotaciones:",
+      "doctorInfo": "Informacion del doctor:",
       "close": "Cerrar"
     },
     "edit": {
@@ -477,7 +480,8 @@
       "phone": "Teléfono",
       "pPhone": "Ingresa el teléfono...",
       "update": "Actualizar",
-      "messageSuccess": "Cliente Actualizado."
+      "messageSuccess": "Cliente Actualizado.",
+      "anotations": "Anotaciones:"
     },
     "Schedule": {
       "title": "Horario",
@@ -528,6 +532,105 @@
         "bCancel": "Cancelar",
         "description": "Descripción:",
         "products": "Productos:"
+      }
+    },
+    "dashboard": {
+      "title": "Dashboard",
+      "workDay": "Work Day",
+      "status": "Appointment Status",
+      "top": "Top products"
+    }
+  },
+  "LandingPage": {
+    "home": {
+      "title": "Escuchar bien es vivir mejor",
+      "subtitle": "Nosotros te ayudamos",
+      "text": "En Clínica Audiológica Mico, combinamos atención humana, tecnología innovadora y un entorno confortable para que cada persona recupere su audición y su calidad de vida. Desde la primera visita, nuestros pacientes reciben explicaciones claras, pruebas completas y un acompañamiento real durante todo el proceso de adaptación auditiva."
+    },
+    "natbar": {
+      "home": "Inicio",
+      "feature": "Funciones",
+      "reviews": "Reseñas",
+      "products": "Productos",
+      "information": "Informacion",
+      "logIn": "Iniciar sesión"
+    },
+    "feature": {
+      "title": "Funciones diseñadas para una atención auditiva de calidad",
+      "subtitle": "Descubre cómo nuestra clínica está preparada para optimizar cada etapa del cuidado auditivo, mejorando la experiencia del paciente y facilitando el trabajo de nuestros profesionales con herramientas modernas y eficientes.",
+      "feature1": {
+        "title": "✅ Evaluaciones auditivas completas y explicadas paso a paso",
+        "description": "Contamos con tecnología avanzada para realizar pruebas como audiometrías, impedanciometrías, acufenometría y simulaciones con realidad virtual en campo libre. Cada evaluación incluye una explicación detallada, facilitando la comprensión del diagnóstico y aumentando la confianza del paciente."
+      },
+      "feature2": {
+        "title": "🎧 Gestión personalizada de audífonos y accesorios",
+        "description": "Desde la selección del audífono hasta su ajuste y revisión periódica, ofrecemos un seguimiento postventa gratuito durante 4 años. Nuestros dispositivos se adaptan a cada necesidad y estilo de vida, con opciones invisibles, potentes o infantiles. También contamos con un programa de audífono solidario para personas con recursos limitados."
+      },
+      "feature3": {
+        "title": "🏥 Un centro moderno y acogedor",
+        "description": "La clínica, situada en el corazón de Canals (Valencia), ha sido reformada y diseñada para ofrecer una experiencia auditiva cómoda, accesible y profesional. Disponemos de cabina insonorizada, salas amplias y tecnología de simulación sonora realista, donde el paciente puede comprobar cómo oirá en diferentes entornos antes de adquirir su audífono."
+      }
+    },
+    "testimonials": {
+      "title": "¿Qué dice la gente sobre nosotros?",
+      "testimonialsArray": [
+        {
+          "text": "Nunca pensé que volvería a escuchar con tanta claridad. Los audífonos son discretos y cómodos. El equipo fue muy paciente y resolvió todas mis dudas.",
+          "name": "María González",
+          "image": "https://codingyaar.com/wp-content/uploads/square-headshot-1.png",
+          "role": "Paciente de 68 años"
+        },
+        {
+          "text": "Gracias a los audífonos, volví a disfrutar de las conversaciones con mi familia. ¡Ha sido un cambio increíble en mi día a día!",
+          "name": "Javier Martínez",
+          "image": "https://codingyaar.com/wp-content/uploads/square-headshot-2.png",
+          "role": "Ingeniero de 45 años"
+        },
+        {
+          "text": "Desde que uso audífonos, me siento más conectada con el mundo. Incluso he vuelto a salir a caminar solo para oír la naturaleza.",
+          "name": "Luisa Fernández",
+          "image": "https://www.gravatar.com/avatar/1@gmail.com?d=identicon",
+          "role": "Jubilada de 67 años"
+        },
+        {
+          "text": "No sabía cuánto me estaba perdiendo. Con los audífonos volví a escuchar hasta los sonidos más sutiles. Me siento más viva.",
+          "name": "Beatriz Sánchez",
+          "image": "https://www.gravatar.com/avatar/0cc175b9c0f1b6a831c399e269772661",
+          "role": "Ama de casa de 69 años"
+        },
+        {
+          "text": "Temía no adaptarme, pero los especialistas me acompañaron en todo el proceso. ¡Ahora escucho perfectamente!",
+          "name": "Carlos Ramírez",
+          "image": "https://www.gravatar.com/avatar/2@gmail.com?d=identicon",
+          "role": "Profesor de 38 años"
+        },
+        {
+          "text": "Recuperé mi seguridad al atender clientes. Antes evitaba reuniones, pero ahora participo sin problemas. ¡Gracias!",
+          "name": "Miguel Torres",
+          "image": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
+          "role": "Comerciante de 55 años"
+        }
+      ]
+    },
+    "products": {
+      "title": "Un poco sobre nuestros productos en stock",
+      "more": "Ver Mas ▼",
+      "less": "Ver Menos ▲",
+      "dontProducts": "No hay productos disponibles en este momento."
+    },
+    "information": {
+      "title": "Activo en la web...",
+      "t1": {
+        "title": "Clientes",
+        "description": "Clientes que confían en nosotros."
+      },
+      "t2": {
+        "title": "Productos",
+        "description": "Total de productos que te podemos ofrecer."
+      },
+      "t3": {
+        "title": "Especialistas médicos",
+        "description": "Número de especialistas dispuestos a mejorar tu vida."
       }
     }
   }

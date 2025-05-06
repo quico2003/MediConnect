@@ -25,7 +25,6 @@ try {
     $user->specialty = $userProfile->specialty;
     $user->avatar = $userProfile->avatar;
    
-
     if ($user && password_verify($input->password, $user->password)) {
         $user->createSession();
     } else {

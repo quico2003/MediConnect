@@ -1,11 +1,15 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import useRequest from "../../../../Hooks/useRequest";
 import { EndpointsLandingPage, getEndpoint } from "../../../../Constants/endpoints.contants";
 import useNotification from "../../../../Hooks/useNotification";
 import CardProduct from "./CardProduct";
 import { Button, Col, Container, Row } from "react-bootstrap";
+import { StringsContext } from "../../../../Context/strings.context";
 
 const ProductsLanding = () => {
+
+    const { strings } = useContext(StringsContext);
+    const ViewStrings = strings.LandingPage.products;
 
     const { showNotification: errorNotification } = useNotification();
 
@@ -31,15 +35,15 @@ const ProductsLanding = () => {
 
 
     return (
-        <div id="products" className="py-5 my-5 ">
+        <div id="products" className="scroll-section py-5 my-5 ">
             <div className="text-center mb-4">
-                <h2>Un poco sobre nuestros productos en stock</h2>
+                <h2>{ViewStrings.title}</h2>
             </div>
             <Container>
                 <div className="d-flex justify-content-end mb-4">
 
                     <Button onClick={handleViewMore} >
-                        {showMoreItems ? "See less ▲" : "See more ▼"}
+                        {showMoreItems ? ViewStrings.less : ViewStrings.more}
                     </Button>
                 </div>
                 {data.length > 0 ? (
@@ -55,7 +59,7 @@ const ProductsLanding = () => {
                         </Row>
                     </>
                 ) : (
-                    <p className="text-center">No hay productos disponibles en este momento.</p>
+                    <p className="text-center">{ViewStrings.dontProducts}</p>
                 )}
             </Container>
         </div >

@@ -13,7 +13,7 @@ const FeaturesLanding = () => {
     const ViewStrings = strings.LandingPage.feature;
 
     return (
-        <div id="feature" className="d-flex flex-column container gap-5 mt-5 py-3">
+        <div id="feature" className="d-flex flex-column container gap-5 mt-5 py-3 scroll-section">
             <div className="d-flex flex-column align-items-center justify-content-center">
                 <div className="mb-5">
                     <h2>{ViewStrings.title}</h2>

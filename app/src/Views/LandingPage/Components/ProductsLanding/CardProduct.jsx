@@ -10,7 +10,7 @@ const CardProduct = ({ product }) => {
     return (
         <>
             <div
-                className="card text-center border-0 rounded-4 overflow-hidden my-tooltip"
+                className="card text-center border-0 rounded-4 overflow-hidden my-tooltip shadow"
                 data-tooltip-id={tooltipId}
                 style={{
                     background:
@@ -22,16 +22,16 @@ const CardProduct = ({ product }) => {
                     <img
                         src={product.urlimage}
                         className="mx-auto d-block h-100 object-fit-cover"
-                        style={{ width: "16rem" }}
+                        style={{ width: "14rem" }}
                         alt={product.name}
                     />
                 </div>
                 <div className="d-flex flex-column justify-content-center">
-                    <div className="fs-1 fw-semibold text-black lh-1 mt-2">
+                    <div className="fs-1 fw-semibold text-black lh-1 mt-0">
                         {product.name}
                     </div>
                     <br />
-                    <div className="fs-3 fw-semibold text-black lh-1 mt-2">
+                    <div className="fs-3 fw-semibold text-black lh-1 mt-0">
                         {product.brand}
                     </div>
                 </div>

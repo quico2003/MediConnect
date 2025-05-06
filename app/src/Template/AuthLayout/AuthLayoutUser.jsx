@@ -20,7 +20,13 @@ const AuthLayoutUser = ({ children }) => {
   }, []);
 
   const checkUser = () => {
-    request("get", getEndpoint(EndpointsUser.Auth.checkUser)).then(() => push(Paths[Views.homeUser].path)).catch(() => push(Paths[Views.login].path));
+    request("get", getEndpoint(EndpointsUser.Auth.checkUser))
+    .then((res) => {
+       if (res.data.first_login === 0) {
+         push(Paths[Views.homeUser].path)
+       }
+    })
+    .catch(() => push(Paths[Views.login].path));
   };
 
   return (

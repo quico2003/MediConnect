@@ -173,7 +173,7 @@ class Product
     public static function getProductsTop(PDO $db)
     {
         $query = "SELECT p.*, COUNT(cp.id) AS value FROM client_products AS cp INNER JOIN products AS p ON cp.product_id = p.id 
-        GROUP BY product_id ORDER BY value DESC LIMIT 20";
+     WHERE p.deleted_at IS NULL GROUP BY product_id ORDER BY value DESC LIMIT 20;";
 
         $stmt = $db->prepare($query);
 
@@ -264,7 +264,7 @@ class Product
     public static function getAllBySelectRecipes(PDO $db): array
     {
         $query = "SELECT * FROM `" . self::$table_name . "` WHERE deleted_at IS NULL AND category_id IS NOT NULL";
-    
+
         $stmt = $db->prepare($query);
 
         if ($stmt->execute()) {

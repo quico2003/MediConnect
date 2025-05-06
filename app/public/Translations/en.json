@@ -543,23 +543,94 @@
   },
   "LandingPage": {
     "home": {
-      "title": "Escuchar bien es vivir mejor. Nosotros te ayudamos.",
-      "text": "En nuestra clínica auditiva, combinamos atención personalizada con tecnología de vanguardia para mejorar la calidad de vida de nuestros pacientes. Realizamos evaluaciones auditivas completas, adaptamos audífonos a medida y acompañamos a cada persona en su proceso de recuperación auditiva."
+      "title": "Hearing well is living better",
+      "subtitle": "We're here to help you",
+      "text": "In our hearing clinic, we combine personalized care with cutting-edge technology to improve our patients' quality of life. We perform comprehensive hearing evaluations, customize hearing aids, and support each person throughout their hearing recovery process."
+    },
+    "natbar": {
+      "home": "Home",
+      "feature": "Feature",
+      "reviews": "Reviews",
+      "products": "Products",
+      "information": "Information",
+      "logIn": "Sign In"
     },
     "feature": {
-      "title": "Funciones diseñadas para una atención auditiva de calidad",
-      "subtitle": "Descubre cómo nuestra plataforma optimiza la gestión de tu clínica auditiva, mejorando la experiencia de tus pacientes y facilitando el trabajo de tu equipo médico.",
+      "title": "Features designed for quality hearing care",
+      "subtitle": "Discover how our platform optimizes the management of your hearing clinic, enhancing your patients’ experience and making your medical team’s work easier.",
       "feature1": {
-        "title": "Evaluaciones auditivas completas y precisas",
-        "description": "Ofrecemos herramientas avanzadas para realizar evaluaciones auditivas de manera rápida y eficiente, con diagnósticos detallados que permiten a nuestros profesionales crear planes de tratamiento personalizados para cada paciente."
+        "title": "Comprehensive and accurate hearing evaluations",
+        "description": "We offer advanced tools to perform hearing evaluations quickly and efficiently, with detailed diagnostics that allow our professionals to create personalized treatment plans for each patient."
       },
       "feature2": {
-        "title": "Gestión personalizada de audífonos y accesorios",
-        "description": "Desde la elección del audífono adecuado hasta el seguimiento continuo, nuestra plataforma permite gestionar inventarios, ajustes y adaptaciones de dispositivos auditivos de forma organizada y eficiente, garantizando el mejor acompañamiento para cada paciente."
+        "title": "Personalized management of hearing aids and accessories",
+        "description": "From selecting the right hearing aid to continuous follow-up, our platform allows for organized and efficient management of inventory, adjustments, and device customization, ensuring the best support for each patient."
       },
       "feature3": {
-        "title": "Seguimiento continuo de la salud auditiva",
-        "description": "Asegura un seguimiento regular de los pacientes, permitiendo a los médicos registrar progresos, ajustar tratamientos y realizar revisiones de manera sencilla, todo desde un panel de control accesible y fácil de usar."
+        "title": "Ongoing hearing health monitoring",
+        "description": "Ensure regular follow-ups with patients, allowing doctors to track progress, adjust treatments, and carry out check-ups easily—all from an accessible and user-friendly control panel."
+      }
+    },
+    "testimonials": {
+      "title": "What do people say about us?",
+      "testimonialsArray": [
+        {
+          "text": "I never thought I would hear so clearly again. The hearing aids are discreet and comfortable. The team was very patient and answered all my questions.",
+          "name": "María González",
+          "image": "https://codingyaar.com/wp-content/uploads/square-headshot-1.png",
+          "role": "68-year-old patient"
+        },
+        {
+          "text": "Thanks to the hearing aids, I can enjoy conversations with my family again. It’s been an incredible change in my daily life!",
+          "name": "Javier Martínez",
+          "image": "https://codingyaar.com/wp-content/uploads/square-headshot-2.png",
+          "role": "45-year-old engineer"
+        },
+        {
+          "text": "Since I started using hearing aids, I feel more connected to the world. I even go out walking just to hear the sounds of nature.",
+          "name": "Luisa Fernández",
+          "image": "https://www.gravatar.com/avatar/1@gmail.com?d=identicon",
+          "role": "67-year-old retiree"
+        },
+        {
+          "text": "I didn’t realize how much I was missing. With hearing aids, I can now hear even the softest sounds. I feel more alive.",
+          "name": "Beatriz Sánchez",
+          "image": "https://www.gravatar.com/avatar/0cc175b9c0f1b6a831c399e269772661",
+          "role": "69-year-old homemaker"
+        },
+        {
+          "text": "I was afraid I wouldn’t adapt, but the specialists guided me through the entire process. Now I can hear perfectly!",
+          "name": "Carlos Ramírez",
+          "image": "https://www.gravatar.com/avatar/b822f99a7142e909d1b0df5b7f73270e083a1900bc11003d8e4dfcf5f53f7f5e",
+          "role": "38-year-old teacher"
+        },
+        {
+          "text": "I regained my confidence dealing with customers. I used to avoid meetings, but now I participate with no problems. Thank you!",
+          "name": "Miguel Torres",
+          "image": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
+          "role": "55-year-old shop owner"
+        }
+      ]
+    },
+    "products": {
+      "title": "A bit about our products in stock",
+      "more": "See more ▼",
+      "less": "See Less ▲",
+      "dontProducts": "There are no products available at this time."
+    },
+    "information": {
+      "title": "Live on the web...",
+      "t1": {
+        "title": "Clients",
+        "description": "Clients who trust us."
+      },
+      "t2": {
+        "title": "Products",
+        "description": "Total products we can offer you."
+      },
+      "t3": {
+        "title": "Medical Specialists",
+        "description": "Number of specialists ready to improve your life."
       }
     }
   }
