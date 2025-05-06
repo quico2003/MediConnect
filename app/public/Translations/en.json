@@ -543,9 +543,9 @@
   },
   "LandingPage": {
     "home": {
-      "title": "Hearing well is living better",
-      "subtitle": "We're here to help you",
-      "text": "In our hearing clinic, we combine personalized care with cutting-edge technology to improve our patients' quality of life. We perform comprehensive hearing evaluations, customize hearing aids, and support each person throughout their hearing recovery process."
+      "title": "Hearing Well Is Living Better",
+      "subtitle": "We Are Here to Help You",
+      "text": "At Clínica Audiológica Mico, we combine compassionate care, innovative technology, and a comfortable environment to help each person regain their hearing and improve their quality of life. From the very first visit, our patients receive clear explanations, comprehensive tests, and real support throughout the entire hearing adaptation process."
     },
     "natbar": {
       "home": "Home",
@@ -556,19 +556,19 @@
       "logIn": "Sign In"
     },
     "feature": {
-      "title": "Features designed for quality hearing care",
-      "subtitle": "Discover how our platform optimizes the management of your hearing clinic, enhancing your patients’ experience and making your medical team’s work easier.",
+      "title": "Features Designed for High-Quality Hearing Care",
+      "subtitle": "Discover how our clinic is equipped to optimize every stage of hearing care, enhancing the patient experience and supporting our professionals with modern and efficient tools.",
       "feature1": {
-        "title": "Comprehensive and accurate hearing evaluations",
-        "description": "We offer advanced tools to perform hearing evaluations quickly and efficiently, with detailed diagnostics that allow our professionals to create personalized treatment plans for each patient."
+        "title": "✅ Comprehensive Hearing Assessments Explained Step by Step",
+        "description": "We use advanced technology to perform tests such as audiometries, tympanometries, tinnitus pitch matching, and virtual reality simulations in free field environments. Each evaluation includes a detailed explanation, helping patients understand their diagnosis and increasing their confidence."
       },
       "feature2": {
-        "title": "Personalized management of hearing aids and accessories",
-        "description": "From selecting the right hearing aid to continuous follow-up, our platform allows for organized and efficient management of inventory, adjustments, and device customization, ensuring the best support for each patient."
+        "title": "🎧 Personalized Management of Hearing Aids and Accessories",
+        "description": "From selecting the hearing aid to its fitting and regular check-ups, we offer free post-sale follow-up for 4 years. Our devices adapt to each person's needs and lifestyle, with invisible, powerful, or child-friendly options. We also have a solidarity hearing aid program for people with limited resources."
       },
       "feature3": {
-        "title": "Ongoing hearing health monitoring",
-        "description": "Ensure regular follow-ups with patients, allowing doctors to track progress, adjust treatments, and carry out check-ups easily—all from an accessible and user-friendly control panel."
+        "title": "🏥 A Modern and Welcoming Center",
+        "description": "The clinic, located in the heart of Canals (Valencia), has been renovated and designed to provide a comfortable, accessible, and professional hearing care experience. We have a soundproof booth, spacious rooms, and realistic sound simulation technology that allows patients to hear how they will experience different environments before purchasing their hearing aid."
       }
     },
     "testimonials": {

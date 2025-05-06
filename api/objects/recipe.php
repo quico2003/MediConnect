@@ -67,7 +67,7 @@ class Recipe
 
     public static function getAllCountAsignProducts(PDO $db)
     {
-        $query = "SELECT p.`name`, COUNT(cp.id) AS value FROM `" . self::$table_name . "` AS cp INNER JOIN products AS p ON cp.product_id = p.id 
+        $query = "SELECT p.`name`, COUNT(cp.id) AS value FROM `" . self::$table_name . "` AS cp INNER JOIN products AS p ON cp.product_id = p.id WHERE p.deleted_at IS NULL
         GROUP BY product_id ORDER BY value DESC LIMIT 10;";
 
         $stmt = $db->prepare($query);
