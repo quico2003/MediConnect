@@ -122,7 +122,8 @@ const Categories = () => {
                         data={data}
                         emptyData={{
                             text: ViewStrings.notFoundComponent.title,
-                            description: ViewStrings.notFoundComponent.description
+                            description: ViewStrings.notFoundComponent.description,
+                            
                         }
                         }
                         columns={CategoriesColumns(

@@ -21,6 +21,9 @@ const EditAppointmentsModal = ({ show, onClose, data }) => {
 
     const { showNotification: errorNotification } = useNotification();
     const { showNotification: successNotification } = useNotification("success");
+    const { showNotification: warnNotification } = useNotification("warning");
+
+    const [dateInitial, setDateInitial] = useState({});
 
     const [appointment, setAppointment] = useState({});
     const [initialAppointment, setInitialAppointment] = useState({});
@@ -50,22 +53,31 @@ const EditAppointmentsModal = ({ show, onClose, data }) => {
                 setInitialAppointment(res.data);
                 const fechaFormateada = moment(res.data.date, "DD-MM-YYYY").toDate();
                 setFecha(fechaFormateada);
-                setSelectedHours(res.data.hour)
-                getAvaliableHours(fechaFormateada)
+                setSelectedHours(res.data.hour);
+                getAvaliableHours(fechaFormateada);
                 const objectHour = horas.filter(hora => res.data.hour.includes(hora.value));
-                setSelectedHours(objectHour)
+                setSelectedHours(objectHour);
+                setDateInitial(res.data.date + " " + res.data.hour + ":00");
             })
-            .catch((err) => errorNotification(err.message))
+            .catch((err) => warnNotification(err.message))
     }
 
     const handleSubmit = () => {
+        let appointmentToSend = { ...appointment };
+
+        if (appointment.date.length < 16) {
+            console.log("Necesita introducir una fecha válida");
+            console.log("Última fecha válida:", dateInitial);
+            appointmentToSend.date = dateInitial;
+        }
+
         if (checkForm()) {
-            request("post", getEndpoint(EndpointsUser.Appointments.update), { ...appointment})
-            .then(() => {
-                successNotification();
-                hideModal();
-            })
-            .catch((err) => errorNotification(err.message));
+            request("post", getEndpoint(EndpointsUser.Appointments.update), appointmentToSend)
+                .then(() => {
+                    successNotification(ViewStrings.successMessage);
+                    hideModal();
+                })
+                .catch((err) => errorNotification(err.message));
         }
     }
 
@@ -81,8 +93,9 @@ const EditAppointmentsModal = ({ show, onClose, data }) => {
         if (dateFormat !== "Invalid date") {
             setFecha(date);
             setSelectedHours(null);
-            setAppointment({ ...appointment, "date": dateFormat });
+            setAppointment({ ...appointment, "date": dateFormat, "hour":"" });
             getAvaliableHours(dateFormat);
+            console.log(appointment);
         } else {
             errorNotification("You cannot enter an incorrect date.")
         }
@@ -91,9 +104,7 @@ const EditAppointmentsModal = ({ show, onClose, data }) => {
     const handleSelectHours = (obj) => {
         setSelectedHours(obj);
         const date = moment(fecha).add(obj.value, "hours");
-        console.log(date);
         const dateFormat = dataFormater(date, "DD-MM-YYYY HH:mm");
-        console.log(dateFormat);
         setAppointment({ ...appointment, "date": dateFormat, "hour": date });
     }
 
@@ -111,8 +122,6 @@ const EditAppointmentsModal = ({ show, onClose, data }) => {
     };
 
     const checkForm = () => {
-        console.log(appointment)
-        console.log(initialAppointment)
         const { reason, date, hour } = appointment;
         return validateData([reason, date, hour]) && (
             appointment.reason !== initialAppointment.reason ||

@@ -1,12 +1,16 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Cell, Pie } from 'recharts';
 import { EndpointsAdmin, getEndpoint } from '../../../../../Constants/endpoints.contants';
 import useRequest from '../../../../../Hooks/useRequest';
 import useLoaded from '../../../../../Hooks/useLoaded';
 import PanelLayout from '../../../../../Layouts/PanelLayout/PanelLayout';
 import useNotification from '../../../../../Hooks/useNotification';
+import { StringsContext } from '../../../../../Context/strings.context';
 
 const CategoriesChart = ({ needUpdate, setNeedUpdate }) => {
+
+    const { strings } = useContext(StringsContext);
+    const ViewStrings = strings.dashboard;
 
     const request = useRequest();
     const [data, setData] = useState([])
@@ -63,24 +67,32 @@ const CategoriesChart = ({ needUpdate, setNeedUpdate }) => {
     }, [data]);
 
     return (
+
         <PanelLayout loaded={loaded}>
-            <ResponsiveContainer width="100%" height={435}>
-                <PieChart width={400} height={400}>
-                    <Pie
-                        data={data}
-                        cx="50%"
-                        cy="50%"
-                        labelLine={false}
-                        label={renderCustomizedLabel}
-                        outerRadius={150}
-                        fill="#8884d8"
-                        dataKey="value"
-                    >
-                        {cells}
-                    </Pie>
-                    <Legend />
-                </PieChart>
-            </ResponsiveContainer>
+            {data.length != 0 ? (
+
+                <ResponsiveContainer width="100%" height={435}>
+                    <PieChart width={400} height={400}>
+                        <Pie
+                            data={data}
+                            cx="50%"
+                            cy="50%"
+                            labelLine={false}
+                            label={renderCustomizedLabel}
+                            outerRadius={150}
+                            fill="#8884d8"
+                            dataKey="value"
+                        >
+                            {cells}
+                        </Pie>
+                        <Legend />
+                    </PieChart>
+                </ResponsiveContainer>
+            ) : (
+                <div className='d-flex justify-content-center align-items-center'>
+                    <p>{ViewStrings.dontP}</p>
+                </div>
+            )}
         </PanelLayout>
     );
 };

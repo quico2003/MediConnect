@@ -59,12 +59,14 @@ const NewAppointment = () => {
     }
 
     const handleSubmit = () => {
-        request("post", getEndpoint(EndpointsUser.Appointments.create), { ...data })
-            .then(() => {
-                successNotification(ViewStrings.successMessage);
-                push(Paths[Views.schedule].path);
-            })
-            .catch((err) => errorNotification(err.message))
+        if (checkForm()) {
+            request("post", getEndpoint(EndpointsUser.Appointments.create), { ...data })
+                .then(() => {
+                    successNotification(ViewStrings.successMessage);
+                    push(Paths[Views.schedule].path);
+                })
+                .catch((err) => errorNotification(err.message))
+        }
     }
     const handleInput = (e) => {
         const { id, value } = e.target;

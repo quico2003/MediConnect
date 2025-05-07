@@ -20,6 +20,10 @@
   },
   "dashboard": {
     "title": "Dashboard",
+    "products": "Products",
+    "categories": "Categories",
+    "medicalTeam": "Medical Team",
+    "dontP": "No products found.",
     "withoutCategories": {
       "title": "Products without categories",
       "isEmpty": "No products without categories"
@@ -75,7 +79,7 @@
     },
     "notFoundComponent": {
       "title": "There are no saved product categories.",
-      "description": "Click the button to add new categories."
+      "description": "Click the button to 'add new' categories."
     }
   },
   "Products": {
@@ -524,7 +528,8 @@
         "bUpdate": "Update",
         "bCancel": "Cancel",
         "date": "Date:",
-        "hours": "Hours:"
+        "hours": "Hours:",
+        "successMessage": "Updated Appoitment"
       },
       "complete": {
         "successMessage": "Appointment completed, downloading recipe...",

@@ -20,7 +20,7 @@ try {
 
     $appointment->reason = $input->reason;
     $appointment->date = $input->date;
-
+    
     $appointment->update();
 
     $db->commit();

@@ -20,6 +20,10 @@
   },
   "dashboard": {
     "title": "Panel",
+    "products": "Productos",
+    "categories": "Categorias",
+    "medicalTeam": "Equipo Medico",
+    "dontP": "No se han econtrado productos.",
     "withoutCategories": {
       "title": "Productos sin categorías",
       "isEmpty": "No hay productos sin categorías"
@@ -524,7 +528,8 @@
         "bUpdate": "Actualizar",
         "bCancel": "Cancelar",
         "date": "Fecha:",
-        "hours": "Horas:"
+        "hours": "Horas:",
+        "successMessage": "Cita actualizada"
       },
       "complete": {
         "successMessage": "Cita completada, descargando receta...",
