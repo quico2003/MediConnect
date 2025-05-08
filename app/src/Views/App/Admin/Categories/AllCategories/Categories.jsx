@@ -108,9 +108,14 @@ const Categories = () => {
                 data={viewCategoryData}
             />
 
-            <GeneralLayout title={ViewStrings.title} rightSection={<Button size="sm" as={Link} to={Paths[Views.new_category].path}>
-                {ViewStrings.buttonAdd}
-            </Button>} >
+            <GeneralLayout
+                title={ViewStrings.title}
+                rightSection={
+                    data.length > 0 && (
+                        <Button size="sm" as={Link} to={Paths[Views.new_category].path}>
+                            {ViewStrings.buttonAdd}
+                        </Button>)}
+            >
                 <PanelLayout loaded={loaded}>
                     <ReactTable
                         searcherProps={{
@@ -121,9 +126,10 @@ const Categories = () => {
                         onEventChange={fetchData}
                         data={data}
                         emptyData={{
+                            buttonText: ViewStrings.buttonAdd,
                             text: ViewStrings.notFoundComponent.title,
-                            description: ViewStrings.notFoundComponent.description,
-                            
+                            subDescription: ViewStrings.notFoundComponent.description,
+                            to: Paths[Views.new_category].path
                         }
                         }
                         columns={CategoriesColumns(
@@ -132,7 +138,7 @@ const Categories = () => {
                         )}
                     />
                 </PanelLayout>
-            </GeneralLayout>
+            </GeneralLayout >
         </>
     )
 

@@ -81,9 +81,9 @@ const NewProduct = () => {
             })
                 .then(() => {
                     push(Paths[Views.products].path);
-                    successNotification("Product created", true);
+                    successNotification(ViewStrings.successMessage, true);
                 })
-                .catch(() => errorNotification("Error create product", true))
+                .catch((err) => errorNotification(err.message, true))
                 .finally(() => setSubmiting(false))
         }
     }
@@ -183,6 +183,7 @@ const NewProduct = () => {
                     <ReactQuill
                         id="description"
                         theme="snow"
+                        
                         onChange={handleInputDescription}
                         value={dataInput.description}
                     />

@@ -124,32 +124,31 @@ const Products = () => {
                 show={showViewProductModal}
                 data={viewProductData}
             />
-
             <ViewBarcodeProductModal
                 onClose={handleCloseViewBarcodeProductModal}
                 show={showViewBarcodeProductModal}
                 data={viewBarcodeProductData}
             />
-
             <DeleteProductModal
                 onClose={handleCloseDeleteProductModal}
                 show={showDeleteProductModal}
                 data={DeleteProductData}
             />
 
-            <GeneralLayout title={ViewStrings.title}
+            <GeneralLayout
+                title={ViewStrings.title}
                 rightSection={
-                    <div className="d-flex gap-2">
-                        <IconButton
-                            Icon={MdBarcodeReader}
-                            onClick={handleAutofocus}
-                        />
-                        <Button size="sm" as={Link} to={Paths[Views.new_product].path}>
-                            {ViewStrings.buttonAdd}
-                        </Button>
-
-                    </div>
-                }
+                    data.length > 0 && (
+                        <div className="d-flex gap-2">
+                            <IconButton
+                                Icon={MdBarcodeReader}
+                                onClick={handleAutofocus}
+                            />
+                            <Button size="sm" as={Link} to={Paths[Views.new_product].path}>
+                                {ViewStrings.buttonAdd}
+                            </Button>
+                        </div>
+                    )}
             >
                 <PanelLayout loaded={loaded}>
                     <ReactTable

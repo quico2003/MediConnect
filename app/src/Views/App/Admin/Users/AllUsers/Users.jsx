@@ -1,3 +1,4 @@
+
 import { Button } from "react-bootstrap";
 import ReactTable from "../../../../../Components/Table/Table";
 import GeneralLayout from "../../../../../Layouts/GeneralLayout/GeneralLayout";
@@ -27,7 +28,7 @@ const Users = () => {
     const request = useRequest();
 
     const { search } = useLocation();
-    const [data, setData] = useState();
+    const [data, setData] = useState([]);
     const [filterSelected] = useState();
     const [totalPages, setTotalPages] = useState(1);
     const searchParams = useQuery();
@@ -100,11 +101,15 @@ const Users = () => {
                 show={showDeleteUserModal}
                 data={DeleteUserData}
             />
-            <GeneralLayout title={ViewStrings.title} rightSection={
-                <Button size="sm" as={Link} to={Paths[Views.new_user].path}>
-                    {ViewStrings.buttonAdd}
-                </Button>
-            }>
+            <GeneralLayout
+                title={ViewStrings.title}
+                rightSection={
+                    data.length > 0 && (
+                        <Button size="sm" as={Link} to={Paths[Views.new_user].path}>
+                            {ViewStrings.buttonAdd}
+                        </Button>
+                    )
+                }>
                 <PanelLayout loaded={loaded}>
                     <ReactTable
                         searcherProps={{

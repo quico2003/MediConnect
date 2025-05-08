@@ -103,7 +103,8 @@
       "placeholderBrand": "Marca del producto",
       "description": "Descripción",
       "placeholderDescription": "Descripción del producto...",
-      "placeholderImages": "Haz clic o arrastra una imagen..."
+      "placeholderImages": "Haz clic o arrastra una imagen...",
+      "successMessage": "Producto creado"
     },
     "view": {
       "title": "Info. Producto",
@@ -353,7 +354,9 @@
       "password": "Contraseña",
       "buttonLogin": "Iniciar sesión",
       "errorNotification": "Correo o contraseña incorrectos",
-      "successNotification": "Administrador conectado"
+      "successNotification": "Administrador conectado",
+      "uSuccessNotification": "Usuario conectado",
+      "completeUser": "Contraseña actualizada"
     }
   },
   "User": {
@@ -540,10 +543,13 @@
       }
     },
     "dashboard": {
-      "title": "Dashboard",
-      "workDay": "Work Day",
-      "status": "Appointment Status",
-      "top": "Top products"
+      "title": "Panel",
+      "workDay": "Trabajo del Dia",
+      "status": "Estado de las citas",
+      "top": "Top de productos",
+      "clients": "Clientes",
+      "appointments": "Num. Citas",
+      "noAppointments": "No hay citas."
     }
   },
   "LandingPage": {

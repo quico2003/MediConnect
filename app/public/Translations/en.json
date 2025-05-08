@@ -103,7 +103,8 @@
       "placeholderBrand": "Brand of the product",
       "description": "Description",
       "placeholderDescription": "Description of the product...",
-      "placeholderImages": "Click or drag an image..."
+      "placeholderImages": "Click or drag an image...",
+      "successMessage": "Product created"
     },
     "view": {
       "title": "Product Info.",
@@ -353,7 +354,9 @@
       "password": "Password",
       "buttonLogin": "Login",
       "errorNotification": "Email or Password incorrect",
-      "successNotification": "Admin Loged in"
+      "successNotification": "Admin Loged in",
+      "uSuccessNotification": "User Loged in",
+      "completeUser": "Password updated"
     }
   },
   "User": {
@@ -543,7 +546,10 @@
       "title": "Dashboard",
       "workDay": "Work Day",
       "status": "Appointment Status",
-      "top": "Top products"
+      "top": "Top products",
+      "clients": "Clients",
+      "appointments": "Num. Appointments",
+      "noAppointments": "no appointments."
     }
   },
   "LandingPage": {

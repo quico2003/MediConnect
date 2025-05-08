@@ -32,8 +32,8 @@ const CompleteUser = () => {
         setData({ ...data, [id]: value });
     }
 
-    const handleSubmit = (e) => {
-        if (checkForm) {
+    const handleSubmit = () => {
+        if (checkForm()) {
             request("post", getEndpoint(EndpointsUser.Auth.completeUser), { ...data, guid: user_guid })
                 .then(() => {
                     successNotification("Password updated.");

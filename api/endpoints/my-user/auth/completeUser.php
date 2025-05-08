@@ -9,6 +9,7 @@ $data = postInput();
 
 try {
     $db->beginTransaction();
+    checkAuthUser();
 
     $input = validate($data, [
         "guid" => "required|string",

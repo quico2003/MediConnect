@@ -18,10 +18,10 @@ const HomeUser = () => {
         <GeneralLayout title={ViewStrings.title}>
             <Row>
                 <Col>
-                    <TypeRenderCount title="Clients" type="clients" />
+                    <TypeRenderCount title={ViewStrings.clients} type="clients" />
                 </Col>
                 <Col>
-                    <TypeRenderCount title="Num. Appointments" type="appointments" />
+                    <TypeRenderCount title={ViewStrings.appointments} type="appointments" />
                 </Col>
             </Row>
             <Row>

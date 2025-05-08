@@ -32,7 +32,7 @@ const Clients = () => {
     const searchParams = useQuery();
     const { startFetching, finishFetching, fetching, loaded } = useLoaded();
 
-    const [data, setData] = useState();
+    const [data, setData] = useState([]);
 
     const { showNotification: errorNotification } = useNotification();
 
@@ -101,11 +101,15 @@ const Clients = () => {
                 show={showDeleteClientModal}
                 data={DeleteClientData}
             />
-            <GeneralLayout title={ViewStrings.title} rightSection={
+            <GeneralLayout 
+            title={ViewStrings.title}
+            rightSection={
+                data.length > 0 && (
                 <Button size="sm" as={Link} to={Paths[Views.new_client].path}>
                     {ViewStrings.buttonAdd}
                 </Button>
-            }>
+            )}
+            >
                 <PanelLayout loaded={loaded}>
                     <ReactTable
                         searcherProps={{
@@ -116,8 +120,10 @@ const Clients = () => {
                         onEventChange={fetchData}
                         data={data}
                         emptyData={{
+                            buttonText: ViewStrings.buttonAdd,
                             text: ViewStrings.emptyData.text,
-                            description: ViewStrings.emptyData.description
+                            subDescription: ViewStrings.emptyData.description,
+                            to: Paths[Views.new_client].path
                         }}
                         columns={ClientsColumns(
                             openViewClientModal,
