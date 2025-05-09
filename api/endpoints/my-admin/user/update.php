@@ -43,8 +43,8 @@ try {
             $userProfile->last_name = $input->lastName;
             $userProfile->specialty = $input->specialty;
 
-            $user->update();
             $userProfile->update();
+            $user->update();
         } else {
             createException("Email alredy exist", 409);
         }

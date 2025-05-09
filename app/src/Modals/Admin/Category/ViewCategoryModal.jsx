@@ -57,10 +57,10 @@ const ViewCategoryModal = ({ show, onClose, data }) => {
             <div className="mb-1">
                 <Modal.Body>
                     <div className="category-info">
-                        <div className="d-flex flex-column gap-2 mb-2">
+                        <div className="d-flex flex-column gap-2 mb-2 text-break">
                             <span className="fw-bold">{ViewStrings.name}:</span><span>{dataCategory?.name}</span>
                         </div>
-                        <div className="d-flex flex-column gap-2 mb-2">
+                        <div className="d-flex flex-column gap-2 mb-2 text-break">
                             <span className="fw-bold">{ViewStrings.description}:</span><span>{dataCategory?.description}</span>
                         </div>
                         <div className="d-flex flex-column gap-2 mb-2">

@@ -176,7 +176,7 @@ const EditProduct = () => {
                         controlId="name"
                         maxLength={50}
                         showMaxLength={true}
-                        vertical={false}
+                        vertical={true}
                         value={data.name}
                         title={ViewStrings.name}
                         onChange={handleInput}
@@ -191,12 +191,13 @@ const EditProduct = () => {
                         id="category"
                         onChange={handleSelect}
                         value={selectedOption}
+                        isSearchable
+                        isClearable
                     />
                     <FormControlPrice
                         required
                         controlId="price"
                         vertical={true}
-                        className="pb-2"
                         title={ViewStrings.price}
                         placeholder={ViewStrings.placeholderPrice}
                         onChange={handleInput}
@@ -205,8 +206,7 @@ const EditProduct = () => {
                     <FormControl
                         required
                         controlId="brand"
-                        vertical={false}
-                        className="pb-2"
+                        vertical={true}
                         title={ViewStrings.brand}
                         placeholder={ViewStrings.placeholderBrand}
                         onChange={handleInput}
@@ -219,12 +219,12 @@ const EditProduct = () => {
                         onChange={handleInputDescription}
                         value={data.description}
                     />
-                    <FormLabel className="mb-2">{ViewStrings.images}<RequiredField /></FormLabel>
+                    <FormLabel className="my-2">{ViewStrings.images}<RequiredField /></FormLabel>
                     <div {...getRootProps({ className: "dropzone d-flex align-items-center justify-content-center border border-3 rounded-4 p-5" })}>
                         <input {...getInputProps()} />
                         <span>{ViewStrings.placeholderImages}</span>
                     </div>
-                    <aside className=" p-4 gap-4">
+                    <aside className=" p-2 gap-4">
                         {files}
                     </aside>
                 </SectionLayout>

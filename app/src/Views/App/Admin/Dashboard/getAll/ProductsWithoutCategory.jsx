@@ -13,7 +13,6 @@ import { ProductsWithoutCategoryColumns } from "./ProductsWithoutCategoryColumns
 import useModalManager from "../../../../../Hooks/useModalManager";
 import DeleteProductModal from "../../../../../Modals/Admin/Products/DeleteProductModal";
 import AssignNewCategoryModal from "../../../../../Modals/Admin/Products/assignNewCategoryModal";
-import { Placeholder } from "react-bootstrap";
 
 const ProductsWithoutCategory = ({ setNeedUpdate }) => {
 

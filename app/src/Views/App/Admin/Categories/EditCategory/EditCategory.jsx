@@ -98,6 +98,7 @@ const EditCategory = () => {
                         placeholder={ViewStrings.placeholderName}
                     />
                     <FormControl
+                        style={{ minHeight: "100px" }}
                         required
                         as="textarea"
                         controlId="description"

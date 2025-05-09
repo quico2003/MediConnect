@@ -67,7 +67,7 @@ const ViewUserModal = ({ show, onClose, data }) => {
                             <span className="fw-bold">{ViewStrings.firstName}</span><span>{dataUser?.firstName}</span>
                         </div>
                         <div className="d-flex align-items-center flex-column gap-2 mb-2">
-                            <span className="fw-bold">{ViewStrings.lastName}</span><span>{dataUser?.secondName}</span>
+                            <span className="fw-bold">{ViewStrings.lastName}</span><span>{dataUser?.lastName}</span>
                         </div>
                         <div className="d-flex align-items-center flex-column gap-2 mb-2">
                             <span className="fw-bold">{ViewStrings.specialty}</span><span>{dataUser?.specialty}</span>

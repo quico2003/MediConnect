@@ -6,6 +6,7 @@ import useLoaded from '../../../../../Hooks/useLoaded';
 import PanelLayout from '../../../../../Layouts/PanelLayout/PanelLayout';
 import useNotification from '../../../../../Hooks/useNotification';
 import { StringsContext } from '../../../../../Context/strings.context';
+import NotFoundComponent from '../../../../../Components/NotFoundComponent';
 
 const CategoriesChart = ({ needUpdate, setNeedUpdate }) => {
 
@@ -89,9 +90,10 @@ const CategoriesChart = ({ needUpdate, setNeedUpdate }) => {
                     </PieChart>
                 </ResponsiveContainer>
             ) : (
-                <div className='d-flex justify-content-center align-items-center'>
-                    <p>{ViewStrings.dontP}</p>
-                </div>
+                    <NotFoundComponent
+                        text={ViewStrings.dontP}
+                        size={0.73}
+                    />
             )}
         </PanelLayout>
     );

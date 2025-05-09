@@ -46,7 +46,7 @@ const FormControlPrice = ({
 
     const renderInput = () => {
         return (
-            <InputGroup className="mb-3">
+            <InputGroup className="mb-1">
                 <Form.Control
                     {...props}
                     value={value}

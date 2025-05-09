@@ -23,7 +23,13 @@
     "products": "Productos",
     "categories": "Categorias",
     "medicalTeam": "Equipo Medico",
-    "dontP": "No se han econtrado productos.",
+    "dontP": "No se han econtrado productos",
+    "assign": {
+        "title": "Asignar nueva categoria a el producto",
+        "category": "Categoria",
+        "cancel": "Cancelar",
+        "assign": "Asignar"
+    },
     "withoutCategories": {
       "title": "Productos sin categorías",
       "isEmpty": "No hay productos sin categorías"
@@ -51,9 +57,9 @@
       "placeholderName": "Nombre de la categoría",
       "description": "Descripción",
       "placeholderDescription": "Descripción de la categoría...",
-      "buttonUpdate": "Actualizar",
-      "categoryNotFound": "Categoría no encontrada.",
-      "categoryUpdated": "Categoría actualizada",
+      "buttonUpdate": "Editar",
+      "categoryNotFound": "Categoría no encontrada",
+      "categoryUpdated": "Categoría editada",
       "categoryError": "Error al actualizar la categoría"
     },
     "delete": {
@@ -69,7 +75,7 @@
       "name": "Nombre",
       "description": "Descripción",
       "created_at": "Creado el",
-      "updated_at": "Actualizado el",
+      "updated_at": "Editado el",
       "close": "Cerrar",
       "errorNotification": "Error al mostrar la categoría."
     },
@@ -78,8 +84,8 @@
       "actions": "Acciones"
     },
     "notFoundComponent": {
-      "title": "No hay categorías de productos guardadas.",
-      "description": "Haz clic en el botón para agregar nuevas categorías."
+      "title": "No se an encontrado categorias",
+      "description": "Haz clic en el botón para agregar nuevas categorías"
     }
   },
   "Products": {
@@ -113,7 +119,7 @@
       "brand": "Marca",
       "close": "Cerrar",
       "createdAt": "Creado el",
-      "updatedAt": "Actualizado el",
+      "updatedAt": "Editado el",
       "category": "Categoría",
       "description": "Descripción",
       "creator": "Creador",
@@ -132,7 +138,7 @@
       "brand": "Marca",
       "category": "Categoría",
       "images": "Imágenes",
-      "update": "Actualizar",
+      "update": "Editar",
       "delete": "Eliminar",
       "placeholderName": "Nombre del producto",
       "placeholderPrice": "Precio del producto",
@@ -163,7 +169,7 @@
       },
       "sections": {
         "profileImage": "Perfil",
-        "basicSection": "Información"
+        "basicSection": "Información Basica"
       },
       "inputs": {
         "nameInput": {
@@ -219,7 +225,7 @@
   "user": {
     "title": "Equipo Médico",
     "buttonAdd": "+Agregar nuevo",
-    "buttonUpdate": "Actualizar",
+    "buttonUpdate": "Editar",
     "emptyData": {
       "text": "No hay profesionales registrados",
       "description": "Presiona el botón agregar para crear nuevos profesionales"
@@ -280,7 +286,7 @@
       "specialty": "Especialidad:",
       "creator": "Creador:",
       "created_at": "Creado el:",
-      "updated_at": "Actualizado el:",
+      "updated_at": "Editado el:",
       "close": "Cerrar"
     }
   },
@@ -369,7 +375,7 @@
       },
       "sections": {
         "profileImage": "Perfil",
-        "basicSection": "Información"
+        "basicSection": "Información Basica"
       },
       "inputs": {
         "firstName": {

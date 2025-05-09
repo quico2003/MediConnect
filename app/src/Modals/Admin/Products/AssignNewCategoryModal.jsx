@@ -1,13 +1,17 @@
 import { Button, FormLabel, Modal } from "react-bootstrap";
 import useRequest from "../../../Hooks/useRequest"
 import ModalLayout from "../../../Layouts/ModalLayout/ModalLayout";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { EndpointsAdmin, getEndpoint } from "../../../Constants/endpoints.contants";
 import useNotification from "../../../Hooks/useNotification";
 import RequiredField from "../../../Components/Form/RequiredField/RequiredField";
 import Select from "react-select";
+import { StringsContext } from "../../../Context/strings.context";
 
 const AssignNewCategoryModal = ({ show, onClose, data }) => {
+
+    const { strings } = useContext(StringsContext);
+    const ViewStrings = strings.dashboard.assign;
 
     const { showNotification: successNotification } = useNotification("success");
     const { showNotification: errorNotification } = useNotification();
@@ -56,17 +60,17 @@ const AssignNewCategoryModal = ({ show, onClose, data }) => {
             onHide={hideModal}
             header={true}
             customHeader={
-                <Modal.Title>Assign a new Category for product</Modal.Title>
+                <Modal.Title>{ViewStrings.title}</Modal.Title>
             }
             footer={
                 <div>
-                    <Button onClick={hideModal} variant="ligth">Cancel</Button>
-                    <Button onClick={handleSubmit} variant="success">Assign</Button>
+                    <Button onClick={hideModal} variant="ligth">{ViewStrings.cancel}</Button>
+                    <Button onClick={handleSubmit} disabled={!selectedOption} variant="dark">{ViewStrings.assign}</Button>
                 </div>
             }
         >
             <div>
-                <FormLabel className="mb-0">asdfsadf<RequiredField /></FormLabel>
+                <FormLabel className="mb-0">{ViewStrings.category}<RequiredField /></FormLabel>
                 <Select
                     options={categories}
                     closeMenuOnSelect={true}
@@ -74,7 +78,8 @@ const AssignNewCategoryModal = ({ show, onClose, data }) => {
                     id="category"
                     onChange={handleSelect}
                     value={selectedOption}
-
+                    isClearable
+                    isSearchable
                 />
             </div>
 

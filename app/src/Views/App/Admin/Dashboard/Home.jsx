@@ -17,13 +17,13 @@ const HomeAdmin = () => {
         <GeneralLayout title={ViewStrings.title}>
             <Row>
                 <Col>
-                    <TypeRenderCount type="products" title="Products" />
+                    <TypeRenderCount type="products" title={ViewStrings.products} />
                 </Col>
                 <Col>
-                    <TypeRenderCount type="categories" title="Categories" />
+                    <TypeRenderCount type="categories" title={ViewStrings.categories} />
                 </Col>
                 <Col>
-                    <TypeRenderCount type="users" title="Medical Team" />
+                    <TypeRenderCount type="users" title={ViewStrings.medicalTeam} />
                 </Col>
             
             </Row>

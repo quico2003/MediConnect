@@ -64,56 +64,37 @@ const ViewProductModal = ({ show, onClose, data }) => {
                 </div>
             }
         >
-            <Modal.Body className="d-flex flex-column gap-3">
-                <Row>
-                    <Col sm={6}>
-                        <div className="d-flex flex-column">
-                            <span className="fw-bold">{ViewStrings.name}:</span><span>{dataProduct?.name}</span>
-                        </div>
-                    </Col>
-                    <Col sm={3}>
-                        <div className="d-flex flex-column">
-                            <span className="fw-bold">{ViewStrings.price}:</span><span>{dataProduct?.price}€</span>
-                        </div>
-                    </Col>
-                    <Col sm={3}>
-                        <div className="d-flex flex-column">
-                            <span className="fw-bold">{ViewStrings.brand}:</span><span>{dataProduct?.brand}</span>
-                        </div>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col sm={6}>
-                        <div className="d-flex flex-column">
-                            <span className="fw-bold">{ViewStrings.category}:</span><span>{dataProduct?.categoryName}</span>
-                        </div>
-                    </Col>
-                    <Col sm={3}>
-                        <div className="d-flex flex-column">
-                            <span className="fw-bold">{ViewStrings.createdAt}:</span><span>{dataFormater(dataProduct?.created_at)}</span>
-                        </div>
-                    </Col>
-                    <Col sm={3}>
-                        <div className="d-flex flex-column">
-                            <span className="fw-bold">{ViewStrings.updatedAt}:</span><span>{dataFormater(dataProduct?.updated_at)}</span>
-                        </div>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col sm={12}>
-                        <div className="d-flex flex-column">
-                            <span className="fw-bold">{ViewStrings.description}:</span><div dangerouslySetInnerHTML={{ __html: dataProduct?.description }}></div>
-                        </div>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col sm={12}>
+            <Modal.Body>
+                <div className="d-flex flex-column gap-4">
+                    <div className="d-flex gap-2">
+                        <span className="fw-bold">{ViewStrings.name}:</span><span>{dataProduct?.name}</span>
+                    </div>
+                    <div className="d-flex gap-2">
+                        <span className="fw-bold">{ViewStrings.price}:</span><span>{dataProduct?.price}€</span>
+                    </div>
+                    <div className="d-flex gap-2">
+                        <span className="fw-bold">{ViewStrings.brand}:</span><span>{dataProduct?.brand}</span>
+                    </div>
+                    <div className="d-flex gap-2">
+                        <span className="fw-bold">{ViewStrings.category}:</span><span>{dataProduct?.categoryName}</span>
+                    </div>
+                    <div className="d-flex gap-2">
+                        <span className="fw-bold">{ViewStrings.createdAt}:</span><span>{dataFormater(dataProduct?.created_at)}</span>
+                    </div>
+                    <div className="d-flex gap-2">
+                        <span className="fw-bold">{ViewStrings.updatedAt}:</span><span>{dataFormater(dataProduct?.updated_at)}</span>
+                    </div>
+                    <div className="d-flex flex-column gap-2 text-break">
+                        <span className="fw-bold">{ViewStrings.description}:</span><div dangerouslySetInnerHTML={{ __html: dataProduct?.description }}></div>
+                    </div>
+                    <div className="d-flex flex-column">
                         <span className="fw-bold">{ViewStrings.images}:</span>
                         <div className="d-flex overflow-auto m-3">
                             {renderImages()}
                         </div>
-                    </Col>
-                </Row>
+
+                    </div>
+                </div>
             </Modal.Body>
         </ModalLayout>
     )

@@ -162,8 +162,10 @@ const Products = () => {
                         onEventChange={fetchData}
                         data={data}
                         emptyData={{
+                            buttonText: ViewStrings.buttonAdd,
                             text: ViewStrings.notFoundComponent.title,
-                            description: ViewStrings.notFoundComponent.description
+                            subDescription: ViewStrings.notFoundComponent.description,
+                            to: Paths[Views.new_product].path
                         }}
                         columns={ProductsColumns(
                             openViewProductModal,

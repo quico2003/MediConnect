@@ -16,12 +16,12 @@ export const ProductsWithoutCategoryColumns = (openDeleteProductModal, openAssig
         {
             Header: ViewStrings.name,
             Cell: (row) =>
-                getColumnValue(row, (item) => <p className="mb-0">{item.name}</p>),
+                getColumnValue(row, (item) => <p className="mb-0 text-truncate" style={{ maxWidth: "200px" }}>{item.name}</p>),
         },
         {
             Header: ViewStrings.brand,
             Cell: (row) =>
-                getColumnValue(row, (item) => <p className="mb-0">{item.brand}</p>),
+                getColumnValue(row, (item) => <p className="mb-0 text-truncate" style={{ maxWidth: "200px" }}>{item.brand}</p>),
         },
         {
             Header: ViewStrings.price,

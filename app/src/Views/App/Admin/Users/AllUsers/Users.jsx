@@ -120,8 +120,10 @@ const Users = () => {
                         onEventChange={fetchData}
                         data={data}
                         emptyData={{
+                            buttonText: ViewStrings.buttonAdd,
                             text: ViewStrings.emptyData.text,
-                            description: ViewStrings.emptyData.description
+                            subDescription: ViewStrings.emptyData.description,
+                            to: Paths[Views.new_user].path
                         }}
                         columns={UsersColumns(
                             openViewUserModal,

@@ -23,17 +23,19 @@ class User
         $this->conn = $db;
     }
 
-    private function serchableValues(): array
+    private function serchableValues(int $id): array
     {
+        $userProfile = UserProfile::getByUserId($this->conn, $id);
         return [
-            $this->email
+            $this->email,
+            $userProfile->specialty
         ];
     }
 
     function store(): int
     {
         $query = "INSERT INTO `" . self::$table_name . "` SET guid=:guid, email=:email, password=:password,
-        first_login=:first_login, created_by=:created_by , searchData=:searchData";
+        first_login=:first_login, created_by=:created_by";
 
         $stmt = $this->conn->prepare($query);
 
@@ -43,7 +45,6 @@ class User
         $stmt->bindParam(":password", $this->password);
         $stmt->bindParam(":created_by", $this->created_by);
         $stmt->bindValue(":first_login", $this->first_login);
-        $stmt->bindValue(":searchData", convertSearchValues($this->serchableValues()));
 
         try {
             $stmt->execute();
@@ -62,7 +63,7 @@ class User
         }
 
         applySearchOnQuery($query);
-        doPagination($offset, $page, $stmt);
+        doPagination($offset, $page, $query);
 
         $stmt = $db->prepare($query);
 
@@ -162,7 +163,7 @@ class User
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(":email", $this->email);
         $stmt->bindParam(":password", $this->password);
-        $stmt->bindValue(":searchData", convertSearchValues($this->serchableValues()));
+        $stmt->bindValue(":searchData", convertSearchValues($this->serchableValues($this->id)));
         $stmt->bindParam(":deleted_at", $this->deleted_at);
         $stmt->bindParam(":expiredate", $this->expiredate);
         $stmt->bindParam(":first_login", $this->first_login);

@@ -23,7 +23,13 @@
     "products": "Products",
     "categories": "Categories",
     "medicalTeam": "Medical Team",
-    "dontP": "No products found.",
+    "dontP": "Products not found",
+    "assign": {
+      "title": "Assign a new Category for product",
+      "category": "Category",
+      "cancel": "Cancel",
+      "assign": "Assign"
+    },
     "withoutCategories": {
       "title": "Products without categories",
       "isEmpty": "No products without categories"
@@ -41,19 +47,19 @@
       "placeholderName": "Name of the category",
       "description": "Description",
       "placeholderDescription": "Description of the category...",
-      "buttonCreate": "Create",
+      "buttonCreate": "Created",
       "messageSuccess": "Category created",
       "messageError": "Error create category"
     },
     "edit": {
-      "editCategory": "Edit Category",
+      "editCategory": "Update Category",
       "name": "Name",
       "placeholderName": "Name of the category",
       "description": "Description",
       "placeholderDescription": "Description of the category...",
       "buttonUpdate": "Update",
-      "categoryNotFound": "Category Not Found.",
-      "categoryUpdated": "Category Updated",
+      "categoryNotFound": "Category not found",
+      "categoryUpdated": "Category updated",
       "categoryError": "Error updated category"
     },
     "delete": {
@@ -78,8 +84,8 @@
       "actions": "Actions"
     },
     "notFoundComponent": {
-      "title": "There are no saved product categories.",
-      "description": "Click the button to 'add new' categories."
+      "title": "Categories not found",
+      "description": "Click the button below to add new"
     }
   },
   "Products": {
@@ -96,7 +102,7 @@
       "brand": "Brand",
       "category": "Category",
       "images": "Images",
-      "create": "Create",
+      "create": "Created",
       "delete": "Delete",
       "placeholderName": "Name of the product",
       "placeholderPrice": "Price of the product",
@@ -126,7 +132,7 @@
       "delete": "Delete"
     },
     "update": {
-      "newProduct": "Edit Product",
+      "newProduct": "Update Product",
       "name": "Name",
       "price": "Price",
       "brand": "Brand",
@@ -149,8 +155,8 @@
       "actions": "Actions"
     },
     "notFoundComponent": {
-      "title": "Not found products",
-      "description": "Add new product."
+      "title": "Products not found",
+      "description": "Click the button below to add new"
     }
   },
   "Admin": {
@@ -163,7 +169,7 @@
       },
       "sections": {
         "profileImage": "Profile",
-        "basicSection": "Info"
+        "basicSection": "Basic Info."
       },
       "inputs": {
         "nameInput": {
@@ -262,7 +268,7 @@
       "placeholderSpecialty": "Write the practitioner's specialty",
       "password": "Password",
       "placeholderPassword": "Ex: Jackson@142",
-      "buttonCreate": "Create"
+      "buttonCreate": "Created"
     },
     "delete": {
       "messageDeleted": "Deleted Practitioner.",
@@ -369,7 +375,7 @@
       },
       "sections": {
         "profileImage": "Profile",
-        "basicSection": "Info"
+        "basicSection": "Basic Info."
       },
       "inputs": {
         "firstName": {
