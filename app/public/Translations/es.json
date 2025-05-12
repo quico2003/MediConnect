@@ -25,10 +25,10 @@
     "medicalTeam": "Equipo Medico",
     "dontP": "No se han econtrado productos",
     "assign": {
-        "title": "Asignar nueva categoria a el producto",
-        "category": "Categoria",
-        "cancel": "Cancelar",
-        "assign": "Asignar"
+      "title": "Asignar nueva categoria a el producto",
+      "category": "Categoria",
+      "cancel": "Cancelar",
+      "assign": "Asignar"
     },
     "withoutCategories": {
       "title": "Productos sin categorías",
@@ -492,7 +492,7 @@
       "pEmail": "Ingresa el correo...",
       "phone": "Teléfono",
       "pPhone": "Ingresa el teléfono...",
-      "update": "Actualizar",
+      "update": "Editar",
       "messageSuccess": "Cliente Actualizado.",
       "anotations": "Anotaciones:"
     },
@@ -555,7 +555,8 @@
       "top": "Top de productos",
       "clients": "Clientes",
       "appointments": "Num. Citas",
-      "noAppointments": "No hay citas."
+      "noAppointments": "No hay citas.",
+      "noProducts": "No hay productos."
     }
   },
   "LandingPage": {

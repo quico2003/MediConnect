@@ -9,9 +9,6 @@ include_once $document_root . '/helpers/http_codes.php';
 include_once $document_root . '/helpers/Response.php';
 include_once $document_root . '/helpers/Validator.php';
 
-//Email content
-include_once $document_root . '/helpers/emails/forgot_password_content.php';
-
 //Objects
 include_once $document_root . '/objects/admin.php';
 include_once $document_root . '/objects/category.php';

@@ -13,7 +13,7 @@ const Reviews = () => {
 
     const scroll = (direction) => {
         const container = scrollRef.current;
-        const scrollAmount = 320;
+        const scrollAmount = 100;
 
         if (direction === "left") {
             container.scrollBy({ left: -scrollAmount, behavior: "smooth" });

@@ -93,7 +93,7 @@ const ChartAppointment = ({ needUpdate, setNeedUpdate }) => {
                 </ResponsiveContainer>
             ) : (
                 <div className='d-flex justify-content-center align-items-center'>
-                    <p>asd</p>
+                    <p>{ViewStrings.noAppointments}</p>
                 </div>
             )}
         </PanelLayout>

@@ -6,9 +6,21 @@ class UserResource
     public static function getUser(User $user, array $params)
     {
         $newItem = new stdClass();
-        foreach ($params as $key){
-            $newItem->{$key} = $user->{$key};
+
+        $madridTimezone = new DateTimeZone('Europe/Madrid');
+        $utcTimezone = new DateTimeZone('UTC');
+
+        foreach ($params as $key) {
+            $value = $user->{$key};
+
+            if (in_array($key, ['created_at', 'updated_at']) && $value !== null) {
+                $date = new DateTime($value, $utcTimezone);
+                $value = $date->setTimezone($madridTimezone)->format('Y-m-d H:i:s');
+            }
+
+            $newItem->{$key} = $value;
         }
+
         return $newItem;
     }
 

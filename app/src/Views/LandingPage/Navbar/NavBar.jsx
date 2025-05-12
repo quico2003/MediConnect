@@ -53,9 +53,10 @@ const NavBar = () => {
                 className={`collapse navbar-collapse ${isOpen ? "show mobile-menu" : ""}`}
                 id="navbarSupportedContent"
             >
-                <ul className={`d-flex ${isOpen ? "flex-column mt-3" : "flex-row"} justify-content-around navbar-nav ms-auto gap-2 gap-lg-4 align-items-lg-center`}>                    <li className="nav-item">
-                    <a href="#home" className="btn1 nav-link text-reset">{ViewStrings.home}</a>
-                </li>
+                <ul className={`d-flex ${isOpen ? "flex-column mt-2 align-items-center" : "flex-row justify-content-around "} navbar-nav ms-auto gap-2 gap-lg-4 align-items-lg-center`}>
+                    <li className="nav-item">
+                        <a href="#home" className="btn1 nav-link text-reset">{ViewStrings.home}</a>
+                    </li>
                     <li className="nav-item">
                         <a href="#feature" className="btn1 nav-link text-reset">{ViewStrings.feature}</a>
                     </li>

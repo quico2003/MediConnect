@@ -11,7 +11,7 @@ const Footer = () => {
         <footer className="footerClass d-flex justify-content-center align-items-center">
             <Container className="d-flex flex-column">
 
-                <ul className="d-flex flex-row justify-content-center navbar-nav gap-4 mt-4">
+                <ul className="d-flex flex-row justify-content-center navbar-nav gap-3 mt-4">
                     <li className="nav-item">
                         <a href="#home" className="btn1 nav-link text-reset">{ViewStrings.home}</a>
                     </li>

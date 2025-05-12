@@ -74,7 +74,7 @@ const ViewClientModal = ({ show, onClose, data }) => {
                             <span className="fw-bold">{ViewStrings.phone}</span><span>{client?.phone}</span>
                         </div>
 
-                        <div className="d-flex flex-column gap-2 mb-2">
+                        <div className="d-flex flex-column gap-2 mb-2 text-break">
                             <span className="fw-bold">{ViewStrings.anotations}</span><div dangerouslySetInnerHTML={{ __html: client?.anotations }}></div>
                         </div>
                         <hr />

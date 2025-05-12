@@ -1,5 +1,7 @@
 <?php
 
+date_default_timezone_set('Europe/Madrid');
+
 include_once '../../../config/config.php';
 
 $database = new Database();

@@ -243,7 +243,7 @@
     },
     "edit": {
       "userUpdated": "The user has been updated successfully.",
-      "title": "Edit Practitioner",
+      "title": "Update Practitioner",
       "firstName": "First Name",
       "placeholderFirstName": "Write the practitioner's first name",
       "lastName": "Last Name",
@@ -439,8 +439,8 @@
       "title": "Clients",
       "buttonAdd": "+Add new",
       "emptyData": {
-        "text": "There is no registered clients",
-        "description": "Press the add button to create new clients"
+        "text": "Clients not found",
+        "description": "click the button below to add new"
       },
       "columns": {
         "firstName": "First Name",
@@ -462,7 +462,7 @@
       "pPhone": "Insert Phone...",
       "anotations": "Anotations:",
       "messageSuccess": "Created Client.",
-      "buttonCreate": "Create"
+      "buttonCreate": "Created"
     },
     "delete": {
       "messageDeleted": "Deleted Client.",
@@ -483,7 +483,7 @@
       "close": "Close"
     },
     "edit": {
-      "title": "Edit Client",
+      "title": "Update Client",
       "firstName": "First Name",
       "pFirstName": "Insert First Name...",
       "lastName": "Last Name",
@@ -532,7 +532,7 @@
         "messageDeleted": "Deleted Appointment."
       },
       "edit": {
-        "title": "Edit Appointment",
+        "title": "Update Appointment",
         "reason": "Reason:",
         "bUpdate": "Update",
         "bCancel": "Cancel",
@@ -555,7 +555,8 @@
       "top": "Top products",
       "clients": "Clients",
       "appointments": "Num. Appointments",
-      "noAppointments": "no appointments."
+      "noAppointments": "Appointments not found",
+      "noProducts": "Products not found"
     }
   },
   "LandingPage": {

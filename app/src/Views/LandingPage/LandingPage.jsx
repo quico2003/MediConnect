@@ -1,5 +1,5 @@
 
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { StringsContext } from "../../Context/strings.context";
 import HomeLanding from "./Components/HomeLanding/HomeLanding";
 import Footer from "./Footer/Footer";
@@ -16,7 +16,7 @@ const LandingPage = () => {
 
 
     return (
-        <div className="scroll-section" style={{ height: "100svh", overflowY: "auto" }}>
+        <div className="scroll-section" style={{ height: "100svh", overflowY: "auto", textAlign: "center"}}>
             <NavBar />
             <HomeLanding text={ViewStrings.text} />
             <div className="container">
