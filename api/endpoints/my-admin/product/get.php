@@ -1,7 +1,8 @@
 <?php
 
-include_once '../../../config/config.php';
+use Carbon\Carbon;
 
+include_once '../../../config/config.php';
 
 $database = new Database();
 $db = $database->getConnection();
@@ -19,6 +20,12 @@ try {
 
     //Product found by guid
     $product = Product::getByGuid($db, $input->guid);
+
+    $timeZoneCreated_at = Carbon::createFromFormat('Y-m-d H:i:s', $product->created_at, 'UTC')->timezone('Europe/Madrid');
+    $timeZoneUpdated_at = Carbon::createFromFormat('Y-m-d H:i:s', $product->updated_at, 'UTC')->timezone('Europe/Madrid');
+
+    $product->created_at = $timeZoneCreated_at;
+    $product->updated_at = $timeZoneUpdated_at;
 
     //category of product
     $category = Category::getById($db, $product->category_id);

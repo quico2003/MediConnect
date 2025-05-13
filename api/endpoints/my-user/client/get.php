@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\Carbon;
+
 include_once "../../../config/config.php";
 
 $database = new Database();
@@ -17,6 +19,13 @@ try {
 
 
     $client = Client::getByGuid($db, $input->guid);
+    
+    $timeZoneCreated_at = Carbon::createFromFormat('Y-m-d H:i:s', $client->created_at, 'UTC')->timezone('Europe/Madrid');
+    $timeZoneUpdated_at = Carbon::createFromFormat('Y-m-d H:i:s', $client->updated_at, 'UTC')->timezone('Europe/Madrid');
+
+    $client->created_at = $timeZoneCreated_at;
+    $client->updated_at = $timeZoneUpdated_at;
+
     $user = User::get($db, $client->created_by);
     $userProfile = UserProfile::getByUserId($db, $user->id);
 
@@ -24,7 +33,6 @@ try {
     $client->creator_last_name = $userProfile->last_name;
 
     $clientResource = ClientResource::getClientResource($client);
-
 
     Response::sendResponse([
         "data" => $clientResource

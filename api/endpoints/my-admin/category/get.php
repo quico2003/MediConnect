@@ -1,6 +1,6 @@
 <?php
 
-date_default_timezone_set('Europe/Madrid');
+use Carbon\Carbon;
 
 include_once '../../../config/config.php';
 
@@ -20,6 +20,12 @@ try {
 
     //check if category exist
     $category = Category::getByGuid($db, $input->guid);
+
+    $timeZoneCreated_at = Carbon::createFromFormat('Y-m-d H:i:s', $category->created_at, 'UTC')->timezone('Europe/Madrid');
+    $timeZoneUpdated_at = Carbon::createFromFormat('Y-m-d H:i:s', $category->updated_at, 'UTC')->timezone('Europe/Madrid');
+
+    $category->created_at = $timeZoneCreated_at;
+    $category->updated_at = $timeZoneUpdated_at;
 
     $categoryFormat = CategoryResource::getCategorySimpleResource($category);
 

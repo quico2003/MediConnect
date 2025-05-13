@@ -7,18 +7,8 @@ class CategoryResource
     {
         $newItem = new stdClass();
 
-        $madridTimezone = new DateTimeZone('Europe/Madrid');
-        $utcTimezone = new DateTimeZone('UTC');
-
         foreach ($params as $key) {
-            $value = $category->{$key};
-
-            if (in_array($key, ['created_at', 'updated_at']) && $value !== null) {
-                $date = new DateTime($value, $utcTimezone);
-                $value = $date->setTimezone($madridTimezone)->format('Y-m-d H:i:s');
-            }
-
-            $newItem->{$key} = $value;
+            $newItem->{$key} = $category->{$key};
         }
 
         return $newItem;
