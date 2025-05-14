@@ -9,7 +9,6 @@ $data = getInput();
 
 try {
     $db ->beginTransaction();
-
     checkAuthAdmin();
 
     $input = validate($data, [
