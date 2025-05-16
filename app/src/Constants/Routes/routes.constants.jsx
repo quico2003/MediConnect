@@ -39,8 +39,6 @@ const getRoute = (path, component, exact = true) => ({
 });
 
 
-
-
 // Region User
 
 export const AuthRoutes = [
@@ -63,10 +61,6 @@ export const AppRoutes = [
 
   getRoute(Paths[Views.privacyPolicyUser].path, PrivacyPolicy),
 ];
-
-
-
-
 
 // Region Admin
 
@@ -94,9 +88,6 @@ export const AppAdminRoutes = [
 
   getRoute(Paths[Views.privacyPolicy].path, PrivacyPolicy),
 ];
-
-
-
 
 export const OtherRoutes = [
   //Special Routes
