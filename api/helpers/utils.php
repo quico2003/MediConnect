@@ -103,7 +103,6 @@ if (!function_exists('getFiles')) {
 if (!function_exists('sanitizeFiles')) {
     function sanitizeFiles(&$file_post)
     {
-        logAPI($file_post);
         $file_arr = array();
         $file_count = count($file_post['name']);
         $file_keys = array_keys($file_post);

@@ -66,8 +66,6 @@ const EditAppointmentsModal = ({ show, onClose, data }) => {
         let appointmentToSend = { ...appointment };
 
         if (appointment.date.length < 16) {
-            console.log("Necesita introducir una fecha válida");
-            console.log("Última fecha válida:", dateInitial);
             appointmentToSend.date = dateInitial;
         }
 
@@ -95,7 +93,7 @@ const EditAppointmentsModal = ({ show, onClose, data }) => {
             setSelectedHours(null);
             setAppointment({ ...appointment, "date": dateFormat, "hour":"" });
             getAvaliableHours(dateFormat);
-            console.log(appointment);
+           
         } else {
             errorNotification("You cannot enter an incorrect date.")
         }
