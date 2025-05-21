@@ -20,8 +20,10 @@ const TypeRenderCount = ({ type, title }) => {
                 return Colors.lightRed
             case "users":
                 return Colors.lightGreen
-            default:
+            case "clients":
                 return Colors.darkBlue
+            default:
+                return Colors.darkOrange
         }
     }
 

@@ -7,6 +7,5 @@ class CustomException extends Exception
     {
         $this->message = $message;
         $this->code = $code;
-   
     }
 }

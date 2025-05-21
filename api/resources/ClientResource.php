@@ -5,11 +5,9 @@ class ClientResource
     public static function getClient(Client $client, array $params)
     {
         $newItem = new stdClass();
-
         foreach ($params as $key) {
             $newItem->{$key} = $client->{$key};
         }
-
         return $newItem;
     }
 
@@ -36,9 +34,7 @@ class ClientResource
     public static function getClientResource(client $client)
     {
         $newItem = new stdClass();
-
         $newItem = self::getClient($client, ["guid", "first_name", "last_name", "email", "phone", "anotations", "creator_first_name", "creator_last_name"]);
-
         return $newItem;
     }
 }

@@ -20,9 +20,9 @@ try {
 
     $search = isset($input->search) ? $input->search : '';
     $filter = $input->filter ? json_decode($input->filter) : [];
-    
+
     $clients = Client::getAllByUserID($db, $input->page, $input->offset, $input->search, $filter, $userId);
-    $clientsCount = Client::getAllCount($db, $input->search, $filter, $userId);
+    $clientsCount = Client::getAllCountByUser($db, $input->search, $filter, $userId);
 
     $clientsResource = ClientResource::getClientsArray($clients);
     $totalPages = ceil($clientsCount / $input->offset);

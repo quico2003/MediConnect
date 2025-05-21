@@ -1,18 +1,19 @@
 import { useContext, useEffect, useState } from "react";
-import { StringsContext } from "../../../../../Context/strings.context";
-import PanelLayout from "../../../../../Layouts/PanelLayout/PanelLayout";
-import useRequest from "../../../../../Hooks/useRequest";
-import useLoaded from "../../../../../Hooks/useLoaded";
-import ReactTable from "../../../../../Components/Table/Table";
+import { StringsContext } from "../../../../../../Context/strings.context";
+import useRequest from "../../../../../../Hooks/useRequest";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
-import useQuery from "../../../../../Hooks/useQuery";
-import { EndpointsAdmin, getEndpoint } from "../../../../../Constants/endpoints.contants";
-import useNotification from "../../../../../Hooks/useNotification";
-import { Configuration } from "../../../../../Config/app.config";
+import useQuery from "../../../../../../Hooks/useQuery";
+import useLoaded from "../../../../../../Hooks/useLoaded";
+import useNotification from "../../../../../../Hooks/useNotification";
+import useModalManager from "../../../../../../Hooks/useModalManager";
+import { EndpointsAdmin, getEndpoint } from "../../../../../../Constants/endpoints.contants";
+import DeleteProductModal from "../../../../../../Modals/Admin/Products/DeleteProductModal";
+import AssignNewCategoryModal from "../../../../../../Modals/Admin/Products/AssignNewCategoryModal";
+import PanelLayout from "../../../../../../Layouts/PanelLayout/PanelLayout";
+import ReactTable from "../../../../../../Components/Table/Table";
 import { ProductsWithoutCategoryColumns } from "./ProductsWithoutCategoryColumns";
-import useModalManager from "../../../../../Hooks/useModalManager";
-import DeleteProductModal from "../../../../../Modals/Admin/Products/DeleteProductModal";
-import AssignNewCategoryModal from "../../../../../Modals/Admin/Products/assignNewCategoryModal";
+import { Configuration } from "../../../../../../Config/app.config";
+
 
 const ProductsWithoutCategory = ({ setNeedUpdate }) => {
 
@@ -71,7 +72,7 @@ const ProductsWithoutCategory = ({ setNeedUpdate }) => {
                 setData(res.products);
                 setTotalPages(res.totalPages);
             })
-            .catch(errorNotification)
+            .catch((err) => errorNotification(err.message))
             .finally(() => finishFetching());
     }
 

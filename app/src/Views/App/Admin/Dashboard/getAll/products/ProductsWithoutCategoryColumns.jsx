@@ -1,10 +1,12 @@
-import { useContext } from "react"
-import { StringsContext } from "../../../../../Context/strings.context"
-import { getColumnValue } from "../../../../../Config/GeneralFunctions";
-import { ButtonGroup } from "react-bootstrap";
-import IconButton from "../../../../../Components/Buttons/IconButton";
+import { useContext } from "react";
+import { StringsContext } from "../../../../../../Context/strings.context";
+import { Cell } from "recharts";
+import { getColumnValue } from "../../../../../../Config/GeneralFunctions";
+
+import IconButton from "../../../../../../Components/Buttons/IconButton";
 import { IoIosAdd } from "react-icons/io";
 import { MdDelete } from "react-icons/md";
+import { ButtonGroup } from "react-bootstrap";
 
 
 export const ProductsWithoutCategoryColumns = (openDeleteProductModal, openAssignCategoryModal) => {

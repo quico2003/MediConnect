@@ -78,8 +78,6 @@ class UserProfile
         createException("Profile User Not found");
     }
 
-
-
     private static function getMainObject(PDO $db, array $row): UserProfile
     {
         $newObj = new UserProfile($db);

@@ -1,10 +1,12 @@
 import { useContext, useState } from "react";
-import ProductsWithoutCategory from "./getAll/ProductsWithoutCategory";
 import CategoriesChart from "./categoriesChart/CategoriesChart";
 import { Col, Row } from "react-bootstrap";
 import GeneralLayout from "../../../../Layouts/GeneralLayout/GeneralLayout";
 import { StringsContext } from "../../../../Context/strings.context";
 import TypeRenderCount from "./typeRenderCount/TypeRenderCount";
+import UsersChart from "./usersChart/UsersChart";
+import ClientsWithoutUsers from "./getAll/clients/ClientsWithoutUsers";
+import ProductsWithoutCategory from "./getAll/products/ProductsWithoutCategory";
 
 const HomeAdmin = () => {
 
@@ -22,8 +24,13 @@ const HomeAdmin = () => {
                 <Col>
                     <TypeRenderCount type="categories" title={ViewStrings.categories} />
                 </Col>
+            </Row>
+            <Row>
                 <Col>
                     <TypeRenderCount type="users" title={ViewStrings.medicalTeam} />
+                </Col>
+                <Col>
+                    <TypeRenderCount type="clients" title={ViewStrings.clients} />
                 </Col>
             
             </Row>
@@ -33,8 +40,18 @@ const HomeAdmin = () => {
                     <ProductsWithoutCategory setNeedUpdate={setNeedUpdate} />
                 </Col >
                 <Col xs={12} xxl={6}>
+                    <h5 className="text-secondary px-2">{ViewStrings.withoutUsers.title}</h5>
+                    <ClientsWithoutUsers setNeedUpdate={setNeedUpdate} />
+                </Col >
+            </Row>
+            <Row>
+                <Col xs={12} xxl={6}>
                     <h5 className="text-secondary px-2">{ViewStrings.productByCategoties.title}</h5>
                     <CategoriesChart needUpdate={needUpdate} setNeedUpdate={setNeedUpdate} />
+                </Col >
+                <Col xs={12} xxl={6}>
+                    <h5 className="text-secondary px-2">{ViewStrings.clientsByUsers.title}</h5>
+                    <UsersChart needUpdate={needUpdate} setNeedUpdate={setNeedUpdate} />
                 </Col >
             </Row>
 

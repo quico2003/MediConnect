@@ -3,9 +3,7 @@
 class Admin
 {
     private PDO $conn;
-
     private static string $table_name = "admin";
-
     public int $id;
     public string $guid;
     public string $name;
@@ -43,7 +41,6 @@ class Admin
 
     public static function getByEmail(PDO $db, string $email): Admin|bool
     {
-
         $query = "SELECT * FROM `" . self::$table_name . "` WHERE email=:email";
 
         $stmt = $db->prepare($query);
@@ -58,11 +55,10 @@ class Admin
             return false;
         }
         createException($stmt->errorInfo());
-
     }
+
     public static function get(PDO $db, int $id): Admin|bool
     {
-
         $query = "SELECT * FROM `" . self::$table_name . "` WHERE id=:id";
 
         $stmt = $db->prepare($query);
@@ -77,7 +73,6 @@ class Admin
             return false;
         }
         createException($stmt->errorInfo());
-
     }
 
     function createSession(): bool
@@ -99,7 +94,7 @@ class Admin
 
         $query = "UPDATE `" . self::$table_name . "`
         SET name=:name, email=:email, password=:password,
-         token=:token, expiredate=:expiredate, avatar=:avatar WHERE id=:id";
+        token=:token, expiredate=:expiredate, avatar=:avatar WHERE id=:id";
 
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(":name", $this->name);
@@ -117,7 +112,6 @@ class Admin
         } catch (\Exception $th) {
             createException($stmt->errorInfo());
         }
-
     }
 
     public static function checkToken($db, $token)

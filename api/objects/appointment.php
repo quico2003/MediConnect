@@ -4,7 +4,6 @@ class Appointment
 {
     private PDO $conn;
     private static string $table_name = "appointments";
-
     public int $id;
     public int $created_by;
     public int $created_for;
@@ -26,7 +25,6 @@ class Appointment
         date=:date, reason=:reason";
 
         $stmt = $this->conn->prepare($query);
-
 
         $stmt->bindParam(":created_by", $this->created_by);
         $stmt->bindParam(":created_for", $this->created_for);

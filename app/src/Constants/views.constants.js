@@ -30,6 +30,7 @@ export const Views = {
   clients: "clients",
   new_client: "new_client",
   edit_client: "edit_client",
+  allInformation_client: " allInformation_client",
 
   schedule: "schedule",
   new_appointment: "new_appointment",

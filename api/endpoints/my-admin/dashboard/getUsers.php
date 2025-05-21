@@ -1,6 +1,6 @@
 <?php
 
-include_once '../../../config/config.php';
+include_once "../../../config/config.php";
 
 $database = new Database();
 $db = $database->getConnection();
@@ -9,12 +9,12 @@ try {
     $db->beginTransaction();
     checkAuthAdmin();
 
-    $productsForCategories = Category::getProductsForCategories($db);
+    $users = User::getAllByList($db);
 
     $db->commit();
 
     Response::sendResponse([
-        "categories" => $productsForCategories
+        "users" => $users
     ]);
 } catch (\Exception $th) {
     $db->rollBack();

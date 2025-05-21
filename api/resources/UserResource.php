@@ -2,7 +2,6 @@
 
 class UserResource
 {
-
     public static function getUser(User $user, array $params)
     {
         $newItem = new stdClass();

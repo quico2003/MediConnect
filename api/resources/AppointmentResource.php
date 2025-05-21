@@ -5,11 +5,9 @@ class AppointmentResource
     public static function getAppointment(Appointment $appointment, array $params)
     {
         $newItem = new stdClass();
-
         foreach ($params as $key) {
             $newItem->{$key} = $appointment->{$key};
         }
-
         return $newItem;
     }
 

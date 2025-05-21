@@ -20,11 +20,11 @@ const DeleteProductModal = ({ show, onClose, data }) => {
 
         request("post", getEndpoint(EndpointsAdmin.Products.delete), { guid: data })
             .then(() => {
-                successNotification("Product deleted.")
+                successNotification(ViewStrings.succesAction)
                 onClose(true);
             })
-            .catch(() => {
-                errorNotification("err.message");
+            .catch((err) => {
+                errorNotification(err.message);
                 onClose(true);
             })
     }

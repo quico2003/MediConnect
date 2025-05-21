@@ -23,7 +23,9 @@
     "products": "Productos",
     "categories": "Categorias",
     "medicalTeam": "Equipo Medico",
+    "clients": "Clientes Registrados",
     "dontP": "No se han econtrado productos",
+    "dontC": "No se han econtrado clientes",
     "assign": {
       "title": "Asignar nueva categoria a el producto",
       "category": "Categoria",
@@ -34,8 +36,29 @@
       "title": "Productos sin categorías",
       "isEmpty": "No hay productos sin categorías"
     },
+    "withoutUsers": {
+      "title": "Clientes sin medicos",
+      "isEmpty": "No hay Clientes sin medicos",
+      "deleteModal": {
+        "messageDeleted": "Cliente eliminado.",
+        "title": "Eliminar Cliente",
+        "body": "¿Estás seguro de que deseas eliminar este cliente?",
+        "buttonCancel": "Cancelar",
+        "buttonDelete": "Eliminar"
+      },
+      "assignModal": {
+        "title": "Asignar nuevo doctor al cliente",
+        "users": "Equipo Medico",
+        "cancel": "Cancelar",
+        "assign": "Asignar",
+        "errorMessage": "Error."
+      }
+    },
     "productByCategoties": {
       "title": "Productos por categoría"
+    },
+    "clientsByUsers": {
+      "title": "Clientes por usuarios medicos"
     }
   },
   "Categories": {
@@ -129,7 +152,8 @@
       "title": "Eliminar Producto",
       "descriptionAction": "¿Estás seguro de que deseas eliminar este producto?",
       "cancel": "Cancelar",
-      "delete": "Eliminar"
+      "delete": "Eliminar",
+      "succesAction": "Producto eliminado"
     },
     "update": {
       "newProduct": "Editar Producto",
@@ -449,6 +473,12 @@
         "phone": "Teléfono",
         "actions": "Acciones"
       }
+    },
+    "historial": {
+      "title": "Historial",
+      "event1": "Informacion Basica",
+      "event2": "Historial de Recetas",
+      "event3": "Productos Recomendados"
     },
     "add": {
       "title": "Nuevo Cliente",

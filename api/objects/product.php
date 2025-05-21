@@ -4,7 +4,6 @@ class Product
 {
     private PDO $conn;
     private static string $table_name = "products";
-
     public int $id;
     public string $guid;
     public string $name;
@@ -19,8 +18,6 @@ class Product
     public string|null $deleted_at;
     public string|null $images;
     public string|null $uniqid;
-
-
 
     public function __construct(PDO $db)
     {
@@ -45,7 +42,6 @@ class Product
             ];
         }
     }
-
 
     function store(): int
     {
@@ -72,7 +68,6 @@ class Product
         } catch (\Exception $th) {
             createException($stmt->errorInfo());
         }
-
     }
 
     function update(): bool
@@ -98,7 +93,6 @@ class Product
         } catch (\Exception $th) {
             createException($stmt->errorInfo());
         }
-
     }
 
     function delete(): bool
@@ -138,6 +132,7 @@ class Product
         }
         createException($stmt->errorInfo());
     }
+
     public static function getAllWithoutCategory(PDO $db, int $page, int $offset, string $search = "", array $filters = []): array
     {
 
@@ -186,7 +181,6 @@ class Product
             return $arrayToReturn;
         }
         createException($stmt->errorInfo());
-
     }
 
     public static function getAllWithoutPagination(PDO $db): array
@@ -261,6 +255,7 @@ class Product
         }
         createException($stmt->errorInfo());
     }
+
     public static function getAllBySelectRecipes(PDO $db): array
     {
         $query = "SELECT * FROM `" . self::$table_name . "` WHERE deleted_at IS NULL AND category_id IS NOT NULL";
@@ -278,6 +273,7 @@ class Product
         createException($stmt->errorInfo());
 
     }
+
     public static function getByGuid(PDO $db, string $guid): Product
     {
 
@@ -330,6 +326,5 @@ class Product
         $newObj->deleted_at = $row['deleted_at'];
         $newObj->uniqid = $row['uniqid'];
         return $newObj;
-
     }
 }

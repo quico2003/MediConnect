@@ -27,7 +27,9 @@ try {
         case 'users':
             $count = User::getAllCount($db);
             break;
-
+        case 'clients':
+            $count = Client::getAllCount($db);
+            break;
     }
 
     $db->commit();

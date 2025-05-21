@@ -1,6 +1,6 @@
 <?php
 
-include_once '../../../config/config.php';
+include_once "../../../config/config.php";
 
 $database = new Database();
 $db = $database->getConnection();
@@ -21,19 +21,20 @@ try {
     $search = isset($input->search) ? $input->search : '';
     $filter = $input->filter ? json_decode($input->filter) : [];
 
-    $products = Product::getAllWithoutCategory($db, $input->page, $input->offset, $search, $filter);
-    $productsCount = Product::getAllCountWithoutCategory($db, $input->search, $filter);
+    $clients = Client::getAllWithoutUser($db, $input->page, $input->offset, $search, $filter);
 
-    $productsFormat = ProductResource::getProductsArrayWithoutCategory($products);
-    $totalPages = ceil($productsCount / $input->offset);
+    $clientsCount = Client::getAllCountWithoutUserRecuperate($db, $search, $filter);
+
+
+    $clientsFormat = ClientResource::getClientsArray($clients);
+    $totalPages = ceil($clientsCount / $input->offset);
 
     $db->commit();
 
     Response::sendResponse([
-        "products" => $productsFormat,
+        "clients" => $clientsFormat,
         "totalPages" => $totalPages
     ]);
-
 
 } catch (\Exception $th) {
     $db->rollBack();

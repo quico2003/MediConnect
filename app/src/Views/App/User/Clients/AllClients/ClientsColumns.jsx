@@ -8,6 +8,7 @@ import { ButtonGroup } from "react-bootstrap";
 import { Paths, replacePaths } from "../../../../../Constants/paths.constants";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import { Views } from "../../../../../Constants/views.constants";
+import { IoFileTraySharp } from "react-icons/io5";
 
 export const ClientsColumns = (openViewClientModal, openDeleteClientModal) => {
 
@@ -49,13 +50,21 @@ export const ClientsColumns = (openViewClientModal, openDeleteClientModal) => {
                                 Icon={MdEdit}
                                 as={Link}
                                 to={replacePaths(Paths[Views.edit_client].path, [
-                                    { client_guid: item.guid },
+                                    { client_guid: item.guid }
                                 ])}
                             />
                             <IconButton
                                 variant="danger"
                                 Icon={MdDelete}
                                 onClick={() => openDeleteClientModal(item.guid)}
+                            />
+                            <IconButton
+                                variant="dark"
+                                Icon={IoFileTraySharp}
+                                as={Link}
+                                to={replacePaths(Paths[Views.allInformation_client].path, [
+                                    { client_guid: item.guid}
+                                ])}
                             />
                         </ButtonGroup>
                     </div>

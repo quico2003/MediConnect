@@ -30,14 +30,13 @@ import EditClient from "../../Views/App/User/Clients/EditClient/EditClient";
 import Schedule from "../../Views/App/User/Schedule/Schedule";
 import NewAppointment from "../../Views/App/User/Schedule/NewAppointment/NewAppointment";
 import LandingPage from "../../Views/LandingPage/LandingPage";
-
+import AllInfoClients from "../../Views/App/User/Clients/AllInfoClients/AllInfoClients";
 
 const getRoute = (path, component, exact = true) => ({
   path,
   component,
   exact,
 });
-
 
 // Region User
 
@@ -52,6 +51,7 @@ export const AppRoutes = [
   getRoute(Paths[Views.clients].path, Clients),
   getRoute(Paths[Views.new_client].path, NewClient),
   getRoute(Paths[Views.edit_client].path, EditClient),
+  getRoute(Paths[Views.allInformation_client].path, AllInfoClients),
 
   getRoute(Paths[Views.schedule].path, Schedule),
   getRoute(Paths[Views.new_appointment].path, NewAppointment),
@@ -92,7 +92,6 @@ export const AppAdminRoutes = [
 export const OtherRoutes = [
   //Special Routes
   getRoute(Paths[Views.inMaintenance].path, InMaintenance),
-  
   //Default route must be before from NotFound route
   getRoute(
     Paths[Views.landing].path,
@@ -109,5 +108,4 @@ export const OtherRoutes = [
 
 export const PublicRoutes = [
   getRoute(Paths[Views.landing].path, LandingPage, true),
-
 ]

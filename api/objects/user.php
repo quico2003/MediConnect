@@ -4,7 +4,6 @@ class User
 {
     private PDO $conn;
     private static string $table_name = "user";
-
     public int $id;
     public string $guid;
     public string $email;
@@ -85,6 +84,23 @@ class User
         createException($stmt->errorInfo());
     }
 
+    public static function getAllByList(PDO $db): array
+    {
+        $query = "SELECT * FROM `" . self::$table_name . "` WHERE deleted_at IS NULL";
+
+        $stmt = $db->prepare($query);
+
+        if ($stmt->execute()) {
+            $arrayToReturn = [];
+
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $arrayToReturn[] = ["value" => $row["guid"], "label" => $row["email"]];
+            }
+            return $arrayToReturn;
+        }
+        createException($stmt->errorInfo());
+    }
+
     function logout()
     {
         $this->token = null;
@@ -107,7 +123,7 @@ class User
         }
         createException("User not foud");
     }
-   
+
     public static function get(PDO $db, int $id): User
     {
         $query = "SELECT * FROM `" . self::$table_name . "` WHERE id=:id AND deleted_at IS NULL";
@@ -200,7 +216,6 @@ class User
             return false;
         }
         createException($stmt->errorInfo());
-
     }
 
     public static function checkToken($db, $token)

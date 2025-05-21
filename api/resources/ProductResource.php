@@ -5,11 +5,9 @@ class ProductResource
     public static function getProduct(Product $product, array $params)
     {
         $newItem = new stdClass();
-
         foreach ($params as $key) {
             $newItem->{$key} = $product->{$key};
         }
-
         return $newItem;
     }
 

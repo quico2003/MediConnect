@@ -68,7 +68,6 @@ class Media
 
     function update()
     {
-
         $query = "UPDATE `" . self::$table_name . "` SET title=:title, description=:description, alt=:alt, meta=:meta, searchdata=:searchdata WHERE id=:id";
 
         $stmt = $this->conn->prepare($query);
@@ -79,7 +78,6 @@ class Media
         $stmt->bindValue(":meta", json_encode($this->meta));
         $stmt->bindValue(":searchdata", convertSearchValues($this->searchableValues()));
         $stmt->bindParam(":id", $this->id);
-
 
         return $stmt->execute();
     }

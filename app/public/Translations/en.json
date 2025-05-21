@@ -23,7 +23,9 @@
     "products": "Products",
     "categories": "Categories",
     "medicalTeam": "Medical Team",
+    "clients": "Registered Clients",
     "dontP": "Products not found",
+    "dontC": "Clients not found",
     "assign": {
       "title": "Assign a new Category for product",
       "category": "Category",
@@ -34,8 +36,29 @@
       "title": "Products without categories",
       "isEmpty": "No products without categories"
     },
+    "withoutUsers": {
+      "title": "Clients without practitioner",
+      "isEmpty": "No clients without practitioner",
+      "deleteModal": {
+        "messageDeleted": "Client deleted.",
+        "title": "Delete Client",
+        "body": "Are you sure you want to delete this client?",
+        "buttonCancel": "Cancel",
+        "buttonDelete": "Delete"
+      },
+      "assignModal": {
+        "title": "Assign a new medical for client",
+        "users": "Medical team",
+        "cancel": "Cancel",
+        "assign": "Assign",
+        "errorMessage": "Error."
+      }
+    },
     "productByCategoties": {
       "title": "Products by category"
+    },
+    "clientsByUsers": {
+      "title": "Clients by users"
     }
   },
   "Categories": {
@@ -129,7 +152,8 @@
       "title": "Delete Product",
       "descriptionAction": "Are you sure you want to delete this product?",
       "cancel": "Cancel",
-      "delete": "Delete"
+      "delete": "Delete",
+      "succesAction": "Product deleted"
     },
     "update": {
       "newProduct": "Update Product",
@@ -449,6 +473,12 @@
         "phone": "Phone",
         "actions": "Actions"
       }
+    },
+    "historial": {
+      "title": "Historial",
+      "event1": "Basic Information",
+      "event2": "Recipes Historial",
+      "event3": "Recommended Products"
     },
     "add": {
       "title": "New Client",

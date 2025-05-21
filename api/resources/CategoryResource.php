@@ -6,11 +6,9 @@ class CategoryResource
     public static function getCategory(Category $category, array $params)
     {
         $newItem = new stdClass();
-
         foreach ($params as $key) {
             $newItem->{$key} = $category->{$key};
         }
-
         return $newItem;
     }
 
@@ -36,9 +34,7 @@ class CategoryResource
 
     public static function getCategorySimpleResource(Category $category)
     {
-
         $newItem = self::getCategory($category, ["guid", "name", "description", "created_at", "updated_at"]);
         return $newItem;
-
     }
 }

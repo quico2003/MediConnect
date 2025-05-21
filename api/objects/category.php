@@ -2,28 +2,18 @@
 
 class Category
 {
-
     private PDO $conn;
-
     private static string $table_name = "category";
-
     public int $id;
-
     public string $guid;
-
     public string $name;
-
     public string $description;
-
     public string $created_at;
-
     public string $updated_at;
-
     public string|null $deleted_at;
 
     public function __construct(PDO $db)
     {
-
         $this->conn = $db;
     }
 
@@ -33,7 +23,6 @@ class Category
             $this->name,
         ];
     }
-
 
     function store(): int
     {
@@ -53,7 +42,6 @@ class Category
         } catch (\Exception $th) {
             createException($stmt->errorInfo());
         }
-
     }
 
 
@@ -94,7 +82,6 @@ class Category
 
         $stmt = $db->prepare($query);
 
-
         if ($stmt->execute()) {
             $arrayToReturn = [];
 
@@ -126,12 +113,12 @@ class Category
         createException($stmt->errorInfo());
 
     }
+
     public static function getList(PDO $db): array
     {
         $query = "SELECT * FROM `" . self::$table_name . "` WHERE deleted_at IS NULL";
 
         $stmt = $db->prepare($query);
-
 
         if ($stmt->execute()) {
             $arrayToReturn = [];
@@ -220,7 +207,6 @@ class Category
         } catch (\Exception $th) {
             createException($stmt->errorInfo());
         }
-
     }
 
     function delete(): bool
@@ -232,7 +218,6 @@ class Category
 
     private static function getMainObject(PDO $db, array $row): Category
     {
-
         $newObj = new Category($db);
         $newObj->id = intval($row['id']);
         $newObj->guid = $row['guid'];
@@ -242,8 +227,5 @@ class Category
         $newObj->updated_at = $row['updated_at'];
         $newObj->deleted_at = $row['deleted_at'];
         return $newObj;
-
     }
-
-
 }

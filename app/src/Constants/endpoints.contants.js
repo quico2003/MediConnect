@@ -46,7 +46,12 @@ export const EndpointsAdmin = {
 
   Dashboard: {
     countProductsForCategory: `${BASE_URL_ADMIN}/dashboard/countProductsForCategory`,
+    countClientsForUsers: `${BASE_URL_ADMIN}/dashboard/countClientsForUsers`,
     typeCount: `${BASE_URL_ADMIN}/dashboard/typeCount`,
+    getAllWithoutUser: `${BASE_URL_ADMIN}/dashboard/getAllWithoutUser`,
+    deleteClient: `${BASE_URL_ADMIN}/dashboard/deleteClient`,
+    getUsers: `${BASE_URL_ADMIN}/dashboard/getUsers`,
+    assignNewUser: `${BASE_URL_ADMIN}/dashboard/assignNewUser`,
   }
 };
 

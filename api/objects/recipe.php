@@ -3,9 +3,7 @@
 class Recipe
 {
     private PDO $conn;
-
     private static string $table_name = "client_products";
-
     public int $id;
     public int $client_id;
     public int $product_id;
@@ -44,7 +42,6 @@ class Recipe
         } catch (\Exception $th) {
             createException($stmt->errorInfo());
         }
-
     }
 
     public static function getAllProductsByAppointment(PDO $db, int $id)
@@ -61,7 +58,6 @@ class Recipe
                 $productIds[] = intval($row['product_id']);
             }
         }
-
         return $productIds;
     }
 
@@ -81,10 +77,8 @@ class Recipe
             return $arrayToReturn;
         }
         createException($stmt->errorInfo());
-
     }
-
-
+    
     private static function getMainObject(PDO $db, array $row): Recipe
     {
         $newObj = new Recipe($db);

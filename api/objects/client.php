@@ -4,7 +4,6 @@ class Client
 {
     private PDO $conn;
     private static string $table_name = "clients";
-
     public int $id;
     public string $guid;
     public string $email;
@@ -95,7 +94,7 @@ class Client
     {
         $query = "UPDATE `" . self::$table_name . "` SET
         first_name=:first_name, last_name=:last_name, email=:email,
-        phone=:phone, anotations=:anotations, searchData=:searchData, deleted_at=:deleted_at WHERE id=:id";
+        phone=:phone, anotations=:anotations, searchData=:searchData, created_by=:created_by, deleted_at=:deleted_at WHERE id=:id";
 
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(":first_name", $this->first_name);
@@ -104,6 +103,7 @@ class Client
         $stmt->bindParam(":phone", $this->phone);
         $stmt->bindParam(":anotations", $this->anotations);
         $stmt->bindValue(":searchData", convertSearchValues($this->serchableValues()));
+        $stmt->bindValue(":created_by", $this->created_by);
         $stmt->bindValue(":deleted_at", $this->deleted_at);
         $stmt->bindValue(":id", $this->id);
 
@@ -132,7 +132,6 @@ class Client
         applySearchOnQuery($query);
         doPagination($offset, $page, $query);
 
-
         $stmt = $db->prepare($query);
 
         $stmt->bindParam(":user_id", $user_id);
@@ -154,7 +153,7 @@ class Client
         }
         createException($stmt->errorInfo());
     }
-    
+
     public static function getAllWithOutPaginationByUserID(PDO $db, string $search = "", array $filters = [], int $user_id): array
     {
         $query = "SELECT * FROM `" . self::$table_name . "` WHERE deleted_at IS NULL AND created_by=:user_id";
@@ -180,6 +179,44 @@ class Client
 
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 $arrayToReturn[] = ["value" => $row["guid"], "label" => $row["email"]];
+            }
+            return $arrayToReturn;
+        }
+        createException($stmt->errorInfo());
+    }
+
+    public static function getAllWithoutUser(PDO $db, int $page, int $offset, string $search = "", array $filters = []): array
+    {
+        $query = "SELECT c.* FROM `" . self::$table_name . "` c INNER JOIN user u ON c.created_by = u.id
+                    WHERE u.deleted_at IS NOT NULL AND c.deleted_at IS NULL";
+
+        foreach ($filters as $index => $object) {
+            $query .= " AND $object->id = :val$index";
+        }
+
+        if (!empty($search)) {
+
+            $query .= " AND LOWER(c.searchdata) LIKE LOWER(:search)";
+        }
+
+        doPagination($offset, $page, $query);
+
+        $stmt = $db->prepare($query);
+
+        if (!empty($search)) {
+            applySearchOnBindedValue($search, $stmt);
+        }
+
+        foreach ($filters as $index => $object) {
+            $value = $object->value;
+            $stmt->bindValue(":val$index", $value, PDO::PARAM_INT);
+        }
+
+        if ($stmt->execute()) {
+            $arrayToReturn = [];
+
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $arrayToReturn[] = self::getMainObject($db, $row);
             }
             return $arrayToReturn;
         }
@@ -237,8 +274,7 @@ class Client
         createException("Client not foud");
     }
 
-
-    public static function getAllCount(PDO $db, string $search = "", array $filters = [], int $user_id): int
+    public static function getAllCountByUser(PDO $db, string $search = "", array $filters = [], int $user_id): int
     {
         $query = "SELECT COUNT(id) as total FROM `" . self::$table_name . "` c WHERE deleted_at IS NULL AND created_by=:user_id";
 
@@ -266,12 +302,83 @@ class Client
         }
         createException($stmt->errorInfo());
     }
-    
+
+    public static function getClientsForUsers(PDO $db): array
+    {
+        $query = "SELECT u.email AS name, COUNT(*) AS value
+                    FROM `" . self::$table_name . "` c
+                    INNER JOIN user u ON c.created_by = u.id
+                    WHERE c.deleted_at IS NULL AND u.deleted_at IS NULL
+                    GROUP BY u.email";
+
+        $stmt = $db->prepare($query);
+
+        if ($stmt->execute()) {
+            $arrayToReturn = [];
+
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $arrayToReturn[] = $row;
+            }
+            return $arrayToReturn;
+        }
+        createException($stmt->errorInfo());
+    }
+
+    public static function getAllCount(PDO $db): int
+    {
+        $query = "SELECT COUNT(id) as total FROM `" . self::$table_name . "` c WHERE deleted_at IS NULL";
+
+        $stmt = $db->prepare($query);
+
+        if ($stmt->execute()) {
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                return intval($row['total']);
+            }
+            return 0;
+        }
+        createException($stmt->errorInfo());
+    }
+
     public static function getAllCountWithoutUser(PDO $db): int
     {
         $query = "SELECT COUNT(id) as total FROM `" . self::$table_name . "` c WHERE deleted_at IS NULL";
 
         $stmt = $db->prepare($query);
+
+        if ($stmt->execute()) {
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                return intval($row['total']);
+            }
+            return 0;
+        }
+        createException($stmt->errorInfo());
+    }
+
+    public static function getAllCountWithoutUserRecuperate(PDO $db, string $search = "", array $filters = []): int
+    {
+        $query = "SELECT COUNT(c.id) AS total
+                    FROM `" . self::$table_name . "` c
+                    INNER JOIN user u ON c.created_by = u.id
+                    WHERE u.deleted_at IS NOT NULL AND c.deleted_at IS NULL";
+
+        foreach ($filters as $index => $object) {
+            $query .= " AND $object->id = :val$index";
+        }
+
+        if (!empty($search)) {
+            $query .= " AND LOWER(c.searchdata) LIKE LOWER(:search)";
+        }
+
+        $stmt = $db->prepare($query);
+
+        if (!empty($search)) {
+            applySearchOnBindedValue($search, $stmt);
+        }
+
+        foreach ($filters as $index => $object) {
+            $value = $object->value;
+            $stmt->bindValue(":val$index", $value, PDO::PARAM_INT);
+        }
 
         if ($stmt->execute()) {
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {

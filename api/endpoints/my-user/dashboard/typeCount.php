@@ -20,10 +20,10 @@ try {
 
     switch ($input->type) {
         case 'clients':
-            $count = Client::getAllCount($db, "",[],$userId);
+            $count = Client::getAllCountByUser($db, "", [], $userId);
             break;
         case 'appointments':
-            $count = Appointment::getAllCount($db,$userId);
+            $count = Appointment::getAllCount($db, $userId);
             break;
 
     }
