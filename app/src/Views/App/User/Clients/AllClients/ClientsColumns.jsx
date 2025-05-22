@@ -1,7 +1,6 @@
 import { useContext } from "react"
 import { StringsContext } from "../../../../../Context/strings.context"
 import { getColumnValue } from "../../../../../Config/GeneralFunctions";
-import { IoMdEye } from "react-icons/io";
 import { MdDelete, MdEdit } from "react-icons/md";
 import IconButton from "../../../../../Components/Buttons/IconButton";
 import { ButtonGroup } from "react-bootstrap";
@@ -10,7 +9,7 @@ import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import { Views } from "../../../../../Constants/views.constants";
 import { IoFileTraySharp } from "react-icons/io5";
 
-export const ClientsColumns = (openViewClientModal, openDeleteClientModal) => {
+export const ClientsColumns = (openDeleteClientModal) => {
 
     const { strings } = useContext(StringsContext);
     const ViewStrings = strings.User.allClients.columns;
@@ -43,8 +42,11 @@ export const ClientsColumns = (openViewClientModal, openDeleteClientModal) => {
                     <div className="d-flex">
                         <ButtonGroup>
                             <IconButton
-                                Icon={IoMdEye}
-                                onClick={() => openViewClientModal(item.guid)}
+                                Icon={IoFileTraySharp}
+                                as={Link}
+                                to={replacePaths(Paths[Views.allInformation_client].path, [
+                                    { client_guid: item.guid }
+                                ])}
                             />
                             <IconButton
                                 Icon={MdEdit}
@@ -57,14 +59,6 @@ export const ClientsColumns = (openViewClientModal, openDeleteClientModal) => {
                                 variant="danger"
                                 Icon={MdDelete}
                                 onClick={() => openDeleteClientModal(item.guid)}
-                            />
-                            <IconButton
-                                variant="dark"
-                                Icon={IoFileTraySharp}
-                                as={Link}
-                                to={replacePaths(Paths[Views.allInformation_client].path, [
-                                    { client_guid: item.guid}
-                                ])}
                             />
                         </ButtonGroup>
                     </div>

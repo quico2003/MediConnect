@@ -75,8 +75,8 @@ class Appointment
         }
         createException($stmt->errorInfo());
     }
-    
-    public static function getAllAppointmentsByDay(PDO $db, int $user_id, String $day): array
+
+    public static function getAllAppointmentsByDay(PDO $db, int $user_id, string $day): array
     {
         $query = "SELECT * FROM `" . self::$table_name . "` WHERE date LIKE :day AND deleted_at IS NULL AND created_by=:user_id;";
 
@@ -93,7 +93,62 @@ class Appointment
             return $arrayToReturn;
         }
         createException($stmt->errorInfo());
-        
+
+    }
+
+    public static function getByClient(PDO $db, int $page, int $offset, array $filters = [], int $client_id): array
+    {
+        $query = "SELECT * FROM `" . self::$table_name . "` WHERE created_for=:client_id";
+
+        foreach ($filters as $index => $object) {
+            $query .= " AND $object->id = :val$index";
+        }
+
+        doPagination($offset, $page, $query);
+
+        $stmt = $db->prepare($query);
+        $stmt->bindValue(":client_id", $client_id);
+
+        foreach ($filters as $index => $object) {
+            $value = $object->value;
+            $stmt->bindValue(":val$index", $value, PDO::PARAM_INT);
+        }
+
+        if ($stmt->execute()) {
+            $arrayToReturn = [];
+
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $arrayToReturn[] = self::getMainObject($db, $row);
+            }
+            return $arrayToReturn;
+        }
+        createException($stmt->errorInfo());
+    }
+
+    public static function getByClientCount(PDO $db, array $filters = [], int $client_id)
+    {
+        $query = "SELECT COUNT(id) as total FROM `" . self::$table_name . "` where created_for=:client_id";
+
+        foreach ($filters as $index => $object) {
+            $query .= " AND $object->id = :val$index";
+        }
+
+
+        $stmt = $db->prepare($query);
+        $stmt->bindValue(":client_id", $client_id);
+
+        foreach ($filters as $index => $object) {
+            $value = $object->value;
+            $stmt->bindValue(":val$index", $value, PDO::PARAM_INT);
+        }
+
+        if ($stmt->execute()) {
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                return intval($row['total']);
+            }
+            return 0;
+        }
+        createException($stmt->errorInfo());
     }
 
     public static function get(PDO $db, int $id): Appointment
@@ -111,7 +166,7 @@ class Appointment
         }
         createException("Appointment not foud");
     }
-    
+
     public static function getWithPDF(PDO $db, int $id): Appointment
     {
         $query = "SELECT * FROM `" . self::$table_name . "` WHERE id=:id";
@@ -143,7 +198,7 @@ class Appointment
         }
         createException($stmt->errorInfo());
     }
-    
+
     public static function getAllCountComplete(PDO $db, int $user_id): int
     {
         $query = "SELECT COUNT(id) as total FROM `" . self::$table_name . "` WHERE deleted_at 
@@ -160,7 +215,7 @@ class Appointment
         }
         createException($stmt->errorInfo());
     }
-    
+
     public static function getAllCountDeleted(PDO $db, int $user_id): int
     {
         $query = "SELECT COUNT(id) as total FROM `" . self::$table_name . "` WHERE deleted_at 
@@ -177,7 +232,7 @@ class Appointment
         }
         createException($stmt->errorInfo());
     }
-    
+
     public static function getAllCountPeending(PDO $db, int $user_id): int
     {
         $query = "SELECT COUNT(id) as total FROM `" . self::$table_name . "` WHERE deleted_at 

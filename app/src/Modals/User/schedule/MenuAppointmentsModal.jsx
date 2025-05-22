@@ -7,7 +7,7 @@ import useRequest from "../../../Hooks/useRequest";
 import { EndpointsUser, getEndpoint } from "../../../Constants/endpoints.contants";
 import useNotification from "../../../Hooks/useNotification";
 
-const MenuAppointmentsModal = ({ show, onClose, data, openDelete, openEdit, openComplete }) => {
+const MenuAppointmentsModal = ({ show, onClose, data }) => {
 
     const { strings } = useContext(StringsContext);
     const ViewStrings = strings.User.Schedule.event;
@@ -27,21 +27,6 @@ const MenuAppointmentsModal = ({ show, onClose, data, openDelete, openEdit, open
             .then((res) => {
                 setDataFetch(res.data);
             }).catch((err) => errorNotification(err.message))
-    }
-
-    const eventDelete = () => {
-        hideModal();
-        openDelete(data);
-    }
-
-    const eventEdit = () => {
-        hideModal();
-        openEdit(data);
-    }
-    
-    const eventComplete = () => {
-        hideModal();
-        openComplete(data);
     }
 
     const hideModal = () => onClose();
@@ -77,7 +62,7 @@ const MenuAppointmentsModal = ({ show, onClose, data, openDelete, openEdit, open
                     <div className="d-flex gap-2"><span className="fw-bold">{ViewStrings.start}</span><span>{moment(data?.start).format('DD-MM-YYYY HH:mm')}</span></div>
                     <div className="d-flex gap-2"><span className="fw-bold">{ViewStrings.end}</span><span>{moment(data?.end).format('DD-MM-YYYY HH:mm')}</span></div>
                 </div>
-                
+
             </Container>
         </ModalLayout>
     )

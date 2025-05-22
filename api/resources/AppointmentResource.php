@@ -34,4 +34,11 @@ class AppointmentResource
         $newItem = self::getAppointment($appointment, ["id", "reason", "date", "hour"]);
         return $newItem;
     }
+
+    public static function getAppointmentViews(Appointment $appointment)
+    {
+        $newItem = new stdClass();
+        $newItem = self::getAppointment($appointment, []);
+        return $newItem;
+    }
 }

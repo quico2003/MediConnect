@@ -30,7 +30,9 @@
       "title": "Assign a new Category for product",
       "category": "Category",
       "cancel": "Cancel",
-      "assign": "Assign"
+      "assign": "Assign",
+      "errorMessage": "Error.",
+      "successMessage": "Product assigned correctly."
     },
     "withoutCategories": {
       "title": "Products without categories",
@@ -51,7 +53,8 @@
         "users": "Medical team",
         "cancel": "Cancel",
         "assign": "Assign",
-        "errorMessage": "Error."
+        "errorMessage": "Error.",
+        "successMessage": "Client assigned correctly."
       }
     },
     "productByCategoties": {
@@ -475,10 +478,19 @@
       }
     },
     "historial": {
-      "title": "Historial",
+      "title": "Client info",
       "event1": "Basic Information",
-      "event2": "Recipes Historial",
-      "event3": "Recommended Products"
+      "event2": "Appointments Historial",
+      "event3": "Recommended Products",
+      "appointmentsHistorial": {
+        "emptyData": "Don't found appointments",
+        "columns": {
+          "doctor": "Doctor",
+          "client": "Client",
+          "date": "Date appointments",
+          "actions": "Actions"
+        }
+      }
     },
     "add": {
       "title": "New Client",

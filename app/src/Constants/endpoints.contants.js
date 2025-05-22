@@ -75,10 +75,12 @@ export const EndpointsUser = {
     create: `${BASE_URL_USER}/client/register`,
     update: `${BASE_URL_USER}/client/update`,
     delete: `${BASE_URL_USER}/client/delete`,
+    createPDF: `${BASE_URL_USER}/client/createPDF`,
   },
 
   Appointments: {
     getAll: `${BASE_URL_USER}/appointment/getAll`,
+    getAllByClient: `${BASE_URL_USER}/appointment/getAllByClient`,
     get: `${BASE_URL_USER}/appointment/get`,
     getInfoAppointmentClient: `${BASE_URL_USER}/appointment/getInfoAppointmentClient`,
     getChosenHours: `${BASE_URL_USER}/appointment/getChosenHours`,

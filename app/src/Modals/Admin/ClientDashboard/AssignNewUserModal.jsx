@@ -42,7 +42,7 @@ const AssignNewUserModal = ({ show, onClose, data }) => {
                 userGuid: selectedOption.value
             })
             .then(() => {
-                successNotification(ViewString.errorMessage);
+                successNotification(ViewString.successMessage);
                 onClose(true);
             })
             .catch((err) => errorNotification(err.message))

@@ -30,7 +30,9 @@
       "title": "Asignar nueva categoria a el producto",
       "category": "Categoria",
       "cancel": "Cancelar",
-      "assign": "Asignar"
+      "assign": "Asignar",
+      "errorMessage": "Error.",
+      "successMessage": "Producto asignado correctamente."
     },
     "withoutCategories": {
       "title": "Productos sin categorías",
@@ -51,7 +53,8 @@
         "users": "Equipo Medico",
         "cancel": "Cancelar",
         "assign": "Asignar",
-        "errorMessage": "Error."
+        "errorMessage": "Error.",
+        "successMessage": "Cliente asignado correctamente."
       }
     },
     "productByCategoties": {
@@ -475,10 +478,19 @@
       }
     },
     "historial": {
-      "title": "Historial",
+      "title": "Info. Cliente",
       "event1": "Informacion Basica",
-      "event2": "Historial de Recetas",
-      "event3": "Productos Recomendados"
+      "event2": "Historial de Citas",
+      "event3": "Productos Recomendados",
+      "appointmentsHistorial": {
+        "emptyData": "No se an encontrado citas",
+        "columns": {
+          "doctor": "Doctor",
+          "client": "Cliente",
+          "date": "Fecha de la cita",
+          "actions": "Acciones"
+        }
+      }
     },
     "add": {
       "title": "Nuevo Cliente",
