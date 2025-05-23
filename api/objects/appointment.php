@@ -108,8 +108,7 @@ class Appointment
             $query = "SELECT * FROM `" . self::$table_name . "` WHERE created_for=:client_id AND deleted_at IS NOT NULL AND final_description IS NULL";
 
 
-        doPagination($
-        , $page, $query);
+        doPagination($offset, $page, $query);
 
         $stmt = $db->prepare($query);
         $stmt->bindValue(":client_id", $client_id);
