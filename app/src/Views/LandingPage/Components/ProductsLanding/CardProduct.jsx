@@ -4,13 +4,13 @@ const HtmlContent = ({ html }) => {
     return <div dangerouslySetInnerHTML={{ __html: html }} />;
 };
 
-const CardProduct = ({ product }) => {
+const CardProduct = ({ product, clasName }) => {
     const tooltipId = `tooltip-${product.id}`;
 
     return (
         <>
             <div
-                className="card text-center border-0 rounded-4 overflow-hidden my-tooltip shadow"
+                className={`card text-center border-0 rounded-4 overflow-hidden my-tooltip shadow ${clasName}`}
                 data-tooltip-id={tooltipId}
                 style={{
                     background:

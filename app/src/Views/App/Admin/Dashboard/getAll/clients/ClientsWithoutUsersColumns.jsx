@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import { StringsContext } from "../../../../../../Context/strings.context";
-import { Cell } from "recharts";
 import { getColumnValue } from "../../../../../../Config/GeneralFunctions";
 import { ButtonGroup } from "react-bootstrap";
 import IconButton from "../../../../../../Components/Buttons/IconButton";

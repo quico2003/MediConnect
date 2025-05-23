@@ -76,6 +76,7 @@ export const EndpointsUser = {
     update: `${BASE_URL_USER}/client/update`,
     delete: `${BASE_URL_USER}/client/delete`,
     createPDF: `${BASE_URL_USER}/client/createPDF`,
+    getProductsRecomendate: `${BASE_URL_USER}/client/getProductsRecomendate`,
   },
 
   Appointments: {

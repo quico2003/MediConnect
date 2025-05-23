@@ -96,23 +96,23 @@ class Appointment
 
     }
 
-    public static function getByClient(PDO $db, int $page, int $offset, array $filters = [], int $client_id): array
+    public static function getByClient(PDO $db, int $page, int $offset, string $filter, int $client_id): array
     {
-        $query = "SELECT * FROM `" . self::$table_name . "` WHERE created_for=:client_id";
+        if ($filter === "all")
+            $query = "SELECT * FROM `" . self::$table_name . "` WHERE created_for=:client_id";
+        if ($filter === "completed")
+            $query = "SELECT * FROM `" . self::$table_name . "` WHERE created_for=:client_id AND deleted_at IS NOT NULL AND final_description IS NOT NULL";
+        if ($filter === "pending")
+            $query = "SELECT * FROM `" . self::$table_name . "` WHERE created_for=:client_id AND deleted_at IS NULL AND final_description IS NULL";
+        if ($filter === "canceled")
+            $query = "SELECT * FROM `" . self::$table_name . "` WHERE created_for=:client_id AND deleted_at IS NOT NULL AND final_description IS NULL";
 
-        foreach ($filters as $index => $object) {
-            $query .= " AND $object->id = :val$index";
-        }
 
-        doPagination($offset, $page, $query);
+        doPagination($
+        , $page, $query);
 
         $stmt = $db->prepare($query);
         $stmt->bindValue(":client_id", $client_id);
-
-        foreach ($filters as $index => $object) {
-            $value = $object->value;
-            $stmt->bindValue(":val$index", $value, PDO::PARAM_INT);
-        }
 
         if ($stmt->execute()) {
             $arrayToReturn = [];
@@ -125,22 +125,19 @@ class Appointment
         createException($stmt->errorInfo());
     }
 
-    public static function getByClientCount(PDO $db, array $filters = [], int $client_id)
+    public static function getByClientCount(PDO $db, string $filter, int $client_id)
     {
-        $query = "SELECT COUNT(id) as total FROM `" . self::$table_name . "` where created_for=:client_id";
-
-        foreach ($filters as $index => $object) {
-            $query .= " AND $object->id = :val$index";
-        }
-
+        if ($filter === "all")
+            $query = "SELECT COUNT(id) as total FROM `" . self::$table_name . "` where created_for=:client_id";
+        if ($filter === "completed")
+            $query = "SELECT COUNT(id) as total FROM `" . self::$table_name . "` where created_for=:client_id AND deleted_at IS NOT NULL AND final_description IS NOT NULL";
+        if ($filter === "pending")
+            $query = "SELECT COUNT(id) as total FROM `" . self::$table_name . "` where created_for=:client_id AND deleted_at IS NULL AND final_description IS NULL";
+        if ($filter === "canceled")
+            $query = "SELECT COUNT(id) as total FROM `" . self::$table_name . "` where created_for=:client_id AND deleted_at IS NOT NULL AND final_description IS NULL";
 
         $stmt = $db->prepare($query);
         $stmt->bindValue(":client_id", $client_id);
-
-        foreach ($filters as $index => $object) {
-            $value = $object->value;
-            $stmt->bindValue(":val$index", $value, PDO::PARAM_INT);
-        }
 
         if ($stmt->execute()) {
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {

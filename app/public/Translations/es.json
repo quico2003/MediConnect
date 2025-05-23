@@ -488,8 +488,22 @@
           "doctor": "Doctor",
           "client": "Cliente",
           "date": "Fecha de la cita",
-          "actions": "Acciones"
+          "actions": "Acciones",
+          "success": "PDF creado.",
+          "pending": "Pendiente",
+          "cancel": "Cancelada",
+          "complete": "Completada",
+          "error": "Error"
         }
+      },
+      "view": {
+        "title": "Información de la cita",
+        "client": "Cliente:",
+        "doctor": "Doctór:",
+        "date_create": "Fecha creacion de la cita:",
+        "date": "Fecha de la cita:",
+        "reason": "Razon:",
+        "conclusion": "Conclusión:"
       }
     },
     "add": {

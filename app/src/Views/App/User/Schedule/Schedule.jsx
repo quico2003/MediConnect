@@ -97,6 +97,8 @@ const Schedule = () => {
     }
 
     const handleCloseDeleteAppointmentsModal = (refresh) => {
+        console.log(refresh);
+
         if (refresh) {
             fetchData();
         }
@@ -115,7 +117,7 @@ const Schedule = () => {
     const handleOpenEdit = (data) => {
         openEditAppointmentModal(data);
     }
-    
+
     const handleCompleteAppointmentsModal = (refresh) => {
         if (refresh) {
             fetchData();
@@ -141,16 +143,19 @@ const Schedule = () => {
                 onClose={handleCloseDeleteAppointmentsModal}
                 show={showDeleteAppointmentModal}
                 data={deleteAppointmentsData}
+                openMenuModal={handleSelectEvent}
             />
             <EditAppointmentsModal
                 onClose={handleColseEditAppointmentsModal}
                 show={showEditAppointmentModal}
                 data={editAppointmentsData}
+                openMenuModal={handleSelectEvent}
             />
             <CompleteAppointmentsModal
                 onClose={handleCompleteAppointmentsModal}
                 show={showCompleteAppointmentModal}
                 data={completeAppointmentsData}
+                openMenuModal={handleSelectEvent}
             />
             <GeneralLayout title={viewStrings.title} rightSection={
                 <Button size='sm' as={Link} to={Paths[Views.new_appointment].path}>

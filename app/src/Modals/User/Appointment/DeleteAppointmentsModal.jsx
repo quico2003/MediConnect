@@ -6,7 +6,7 @@ import useNotification from "../../../Hooks/useNotification";
 import { Button } from "react-bootstrap";
 import { EndpointsUser, getEndpoint } from "../../../Constants/endpoints.contants";
 
-const DeleteAppointmentsModal = ({ show, onClose, data }) => {
+const DeleteAppointmentsModal = ({ show, onClose, data, openMenuModal }) => {
 
     const { strings } = useContext(StringsContext);
     const ViewStrings = strings.User.Schedule.delete;
@@ -17,16 +17,17 @@ const DeleteAppointmentsModal = ({ show, onClose, data }) => {
     const { showNotification: successNotification } = useNotification("success");
 
     const handleSubmit = () => {
-        request("post", getEndpoint(EndpointsUser.Appointments.delete), {id: data.id})
-        .then(() => {
-            successNotification(ViewStrings.messageDeleted);
-            onClose(true);
-        })
-        .catch((err) => errorNotification(err.message))
+        request("post", getEndpoint(EndpointsUser.Appointments.delete), { id: data.id })
+            .then(() => {
+                successNotification(ViewStrings.messageDeleted);
+                onClose(true);
+            })
+            .catch((err) => errorNotification(err.message))
     }
 
     const hideModal = () => {
         onClose(true);
+        openMenuModal();
     };
 
     return (

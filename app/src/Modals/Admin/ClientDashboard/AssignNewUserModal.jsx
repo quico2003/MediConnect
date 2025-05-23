@@ -71,7 +71,7 @@ const AssignNewUserModal = ({ show, onClose, data }) => {
                 </div>
             }
         >
-            <FormLabel className="mb-0"><RequiredField />{ViewString.users}</FormLabel>
+            <FormLabel className="mb-2"><RequiredField />{ViewString.users}</FormLabel>
             <Select
                 options={users}
                 closeMenuOnSelect={true}

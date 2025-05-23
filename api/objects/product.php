@@ -103,7 +103,6 @@ class Product
 
     public static function getAll(PDO $db, int $page, int $offset, string $search = "", array $filters = []): array
     {
-
         $query = "SELECT * FROM `" . self::$table_name . "` WHERE deleted_at IS NULL AND category_id IS NOT NULL";
 
         foreach ($filters as $index => $object) {
@@ -135,7 +134,6 @@ class Product
 
     public static function getAllWithoutCategory(PDO $db, int $page, int $offset, string $search = "", array $filters = []): array
     {
-
         $query = "SELECT * FROM `" . self::$table_name . "` WHERE deleted_at IS NULL AND category_id IS NULL";
 
         foreach ($filters as $index => $object) {
@@ -188,6 +186,26 @@ class Product
         $query = "SELECT * FROM `" . self::$table_name . "` WHERE deleted_at IS NULL";
 
         $stmt = $db->prepare($query);
+
+        if ($stmt->execute()) {
+            $arrayToReturn = [];
+
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $arrayToReturn[] = self::getMainObject($db, $row);
+            }
+            return $arrayToReturn;
+        }
+        createException($stmt->errorInfo());
+    }
+
+    public static function getAllAssign(PDO $db, int $client_id): array
+    {
+        $query = "SELECT * FROM `" . self::$table_name . "` AS p INNER JOIN client_products AS cp 
+                ON p.id = cp.product_id WHERE cp.client_id=:client_id AND p.deleted_at IS NULL GROUP BY p.id";
+
+        $stmt = $db->prepare($query);
+
+        $stmt->bindParam(":client_id", $client_id);
 
         if ($stmt->execute()) {
             $arrayToReturn = [];

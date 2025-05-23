@@ -91,11 +91,6 @@ const Clients = () => {
 
     return (
         <>
-            <ViewClientModal
-                onClose={handleCloseViewClientModal}
-                show={showViewClientModal}
-                data={ViewClientData}
-            />
             <DeleteClientModal
                 onClose={handleCloseDeleteClientModal}
                 show={showDeleteClientModal}
@@ -126,7 +121,6 @@ const Clients = () => {
                             to: Paths[Views.new_client].path
                         }}
                         columns={ClientsColumns(
-                            openViewClientModal,
                             openDeleteClientModal
                         )}
                     />

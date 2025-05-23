@@ -70,7 +70,7 @@ const AssignNewCategoryModal = ({ show, onClose, data }) => {
             }
         >
             <div>
-                <FormLabel className="mb-0">{ViewStrings.category}<RequiredField /></FormLabel>
+                <FormLabel className="mb-2">{ViewStrings.category}<RequiredField /></FormLabel>
                 <Select
                     options={categories}
                     closeMenuOnSelect={true}

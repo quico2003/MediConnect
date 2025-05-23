@@ -18,7 +18,14 @@ try {
         'filter' => 'sometimes|string'
     ]);
 
-    $filter = $input->filter ? json_decode($input->filter) : [];
+    $filter = $input->filter ?? "all";
+
+    $stats = [
+        ["value" => "all", "label" => "All"],
+        ["value" => "completed", "label" => "Completed"],
+        ["value" => "pending", "label" => "Pending"],
+        ["value" => "canceled", "label" => "Canceled"],
+    ];
 
     $client = Client::getByGuid($db, $input->guid);
     $user = User::get($db, $id);
@@ -38,7 +45,8 @@ try {
 
     Response::sendResponse([
         "appointments" => $appointmens,
-        "totalPages" => $totalPages
+        "totalPages" => $totalPages,
+        "stats" => $stats
     ]);
 
 } catch (\Exception $th) {

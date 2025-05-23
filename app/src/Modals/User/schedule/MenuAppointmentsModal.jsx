@@ -1,13 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 import ModalLayout from "../../../Layouts/ModalLayout/ModalLayout";
 import { StringsContext } from "../../../Context/strings.context";
-import { Button, ButtonGroup, Col, Container, Row } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import moment from "moment";
 import useRequest from "../../../Hooks/useRequest";
 import { EndpointsUser, getEndpoint } from "../../../Constants/endpoints.contants";
 import useNotification from "../../../Hooks/useNotification";
 
-const MenuAppointmentsModal = ({ show, onClose, data }) => {
+const MenuAppointmentsModal = ({ show, onClose, data, openDelete, openEdit, openComplete }) => {
 
     const { strings } = useContext(StringsContext);
     const ViewStrings = strings.User.Schedule.event;
@@ -31,6 +31,21 @@ const MenuAppointmentsModal = ({ show, onClose, data }) => {
 
     const hideModal = () => onClose();
 
+    const eventDelete = () => {
+        openDelete(data);
+        onClose();
+    }
+
+    const eventEdit = () => {
+        openEdit(data);
+        onClose();
+    }
+
+    const eventComplete = () => {
+        openComplete(data);
+        onClose();
+    }
+
     return (
         <ModalLayout
             closeButton={true}
@@ -41,7 +56,6 @@ const MenuAppointmentsModal = ({ show, onClose, data }) => {
             title={ViewStrings.title}
             footer={
                 <div className="w-100">
-
                     <div className="d-flex justify-content-end">
                         <Button className="m-2" variant="danger" onClick={eventDelete}>{ViewStrings.button1}</Button>
                         <Button className="m-2" onClick={eventEdit}>{ViewStrings.button2}</Button>
@@ -50,7 +64,6 @@ const MenuAppointmentsModal = ({ show, onClose, data }) => {
                 </div>
             }
         >
-
             <Container className="d-flex flex-column gap-4">
                 <div className="d-flex justify-content-start gap-5">
                     <div className="d-flex gap-2"><span className="fw-bold">{ViewStrings.client}</span><span>{dataFetch?.client}</span></div>
@@ -58,15 +71,12 @@ const MenuAppointmentsModal = ({ show, onClose, data }) => {
                 </div>
                 <div className="d-flex flex-column gap-3">
                     <div className="d-flex gap-2"><span className="fw-bold">{ViewStrings.client_email}</span><span>{dataFetch?.client_email}</span></div>
-                    <div className="d-flex gap-2"><span className="fw-bold">{ViewStrings.reason}</span><span>{dataFetch?.reason}</span></div>
+                    <div className="d-flex gap-2"><span className="fw-bold">{ViewStrings.reason}</span><span className="text-break">{dataFetch?.reason}</span></div>
                     <div className="d-flex gap-2"><span className="fw-bold">{ViewStrings.start}</span><span>{moment(data?.start).format('DD-MM-YYYY HH:mm')}</span></div>
                     <div className="d-flex gap-2"><span className="fw-bold">{ViewStrings.end}</span><span>{moment(data?.end).format('DD-MM-YYYY HH:mm')}</span></div>
                 </div>
-
             </Container>
         </ModalLayout>
     )
-
-
 }
 export default MenuAppointmentsModal;

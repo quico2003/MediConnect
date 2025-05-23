@@ -24,31 +24,20 @@ export const AppointmentHistorialColumns = (openViewAppointmentModal) => {
         request("download", getEndpoint(EndpointsUser.Clients.createPDF), {
             id: item.id
         })
-            .then(() => { successNotification() })
+            .then(() => { successNotification(ViewStrings.success) })
             .catch((err) => errorNotification(err.message))
     }
 
-    const columns = [
-        {
-            Header: ViewStrings.doctor,
-            Cell: (row) =>
-                getColumnValue(row, (item) => <p className="mb-0">{item.doctor}</p>)
-        },
-        {
-            Header: ViewStrings.client,
-            Cell: (row) =>
-                getColumnValue(row, (item) => <p className="mb-0">{item.client}</p>)
-        },
-        {
-            Header: ViewStrings.date,
-            Cell: (row) =>
-                getColumnValue(row, (item) => <p className="mb-0">{item.date}</p>)
-        },
-        {
-            Header: ViewStrings.actions,
-            Cell: (row) =>
-                getColumnValue(row, (item) => (
-                    <div className="d-flex">
+    const renderStatAppointment = (item) => {
+        if (item.deleted_at === null && item.final_description === null) {
+            return <p className="text-warning">{ViewStrings.pending}</p>;
+        } else if (item.deleted_at !== null && item.final_description === null) {
+            return <p className="text-danger">{ViewStrings.cancel}</p>;
+        } else if (item.deleted_at !== null && item.final_description !== null) {
+            return (
+                <>
+                    <div className="d-flex gap-4">
+                        <p className="text-success">{ViewStrings.complete}</p>
                         <ButtonGroup>
                             <IconButton
                                 Icon={IoMdEye}
@@ -59,6 +48,36 @@ export const AppointmentHistorialColumns = (openViewAppointmentModal) => {
                                 onClick={() => generatePDF(item)}
                             />
                         </ButtonGroup>
+                    </div>
+                </>
+            );
+        } else {
+            return <p>{ViewStrings.error}</p>;
+        }
+    }
+
+    const columns = [
+        {
+            Header: ViewStrings.doctor,
+            Cell: (row) =>
+                getColumnValue(row, (item) => <p className="mb-0">{item.doctor}</p>),
+        },
+        {
+            Header: ViewStrings.client,
+            Cell: (row) =>
+                getColumnValue(row, (item) => <p className="mb-0">{item.client}</p>),
+        },
+        {
+            Header: ViewStrings.date,
+            Cell: (row) =>
+                getColumnValue(row, (item) => <p className="mb-0">{item.date}</p>),
+        },
+        {
+            Header: ViewStrings.actions,
+            Cell: (row) =>
+                getColumnValue(row, (item) => (
+                    <div className="d-flex">
+                        {renderStatAppointment(item)}
                     </div>
                 )),
         }

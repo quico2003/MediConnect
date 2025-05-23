@@ -12,7 +12,7 @@ import moment from "moment";
 import { dataFormater, validateData } from "../../../Config/GeneralFunctions";
 import Select from "react-select";
 
-const EditAppointmentsModal = ({ show, onClose, data }) => {
+const EditAppointmentsModal = ({ show, onClose, data, openMenuModal }) => {
 
     const { strings } = useContext(StringsContext);
     const ViewStrings = strings.User.Schedule.edit;
@@ -73,7 +73,7 @@ const EditAppointmentsModal = ({ show, onClose, data }) => {
             request("post", getEndpoint(EndpointsUser.Appointments.update), appointmentToSend)
                 .then(() => {
                     successNotification(ViewStrings.successMessage);
-                    hideModal();
+                    onClose(true);
                 })
                 .catch((err) => errorNotification(err.message));
         }
@@ -91,9 +91,9 @@ const EditAppointmentsModal = ({ show, onClose, data }) => {
         if (dateFormat !== "Invalid date") {
             setFecha(date);
             setSelectedHours(null);
-            setAppointment({ ...appointment, "date": dateFormat, "hour":"" });
+            setAppointment({ ...appointment, "date": dateFormat, "hour": "" });
             getAvaliableHours(dateFormat);
-           
+
         } else {
             errorNotification("You cannot enter an incorrect date.")
         }
@@ -117,6 +117,7 @@ const EditAppointmentsModal = ({ show, onClose, data }) => {
 
     const hideModal = () => {
         onClose(true);
+        openMenuModal();
     };
 
     const checkForm = () => {

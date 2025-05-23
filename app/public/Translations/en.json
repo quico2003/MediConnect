@@ -488,8 +488,22 @@
           "doctor": "Doctor",
           "client": "Client",
           "date": "Date appointments",
-          "actions": "Actions"
+          "actions": "Actions",
+          "success": "Created PDF.",
+          "pending": "Pending",
+          "cancel": "Canceled",
+          "complete": "Complete",
+          "error": "Error"
         }
+      },
+      "view": {
+        "title": "Information Appointment",
+        "client": "Client:",
+        "doctor": "Doctor:",
+        "date_create": "Date create appointment:",
+        "date": "Date appointment:",
+        "reason": "Reason:",
+        "conclusion": "Conclusion:"
       }
     },
     "add": {

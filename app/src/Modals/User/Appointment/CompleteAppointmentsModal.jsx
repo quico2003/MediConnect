@@ -10,7 +10,7 @@ import RequiredField from "../../../Components/Form/RequiredField/RequiredField"
 import Select from "react-select";
 
 
-const CompleteAppointmentsModal = ({ show, onClose, data }) => {
+const CompleteAppointmentsModal = ({ show, onClose, data, openMenuModal }) => {
 
     const { strings } = useContext(StringsContext);
     const ViewStrings = strings.User.Schedule.complete;
@@ -41,7 +41,7 @@ const CompleteAppointmentsModal = ({ show, onClose, data }) => {
         })
             .then(() => {
                 successNotification(ViewStrings.successMessage)
-                hideModal(true);
+                onClose(true);
 
             })
             .catch((err) => errorNotification(err.message))
@@ -62,6 +62,7 @@ const CompleteAppointmentsModal = ({ show, onClose, data }) => {
 
     const hideModal = (bool = false) => {
         onClose(bool);
+        openMenuModal();
     };
 
     return (
