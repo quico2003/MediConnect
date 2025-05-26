@@ -31,7 +31,6 @@ const TypeRenderCount = ({ type, title }) => {
         fetchData();
     }, [])
 
-
     const fetchData = async () => {
         await request("get", getEndpoint(EndpointsAdmin.Dashboard.typeCount), {type})
         .then((res) => {
@@ -39,7 +38,6 @@ const TypeRenderCount = ({ type, title }) => {
         })
         .catch((err) => errorNotification(err.message))
     }
-
 
     return (
         <div className="card my-4">
@@ -51,10 +49,7 @@ const TypeRenderCount = ({ type, title }) => {
                     {data}
                 </div>
             </div>
-
         </div>
     )
-
-
 }
 export default TypeRenderCount;

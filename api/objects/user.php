@@ -140,6 +140,22 @@ class User
         createException("User not foud");
     }
 
+    public static function getWithoutDeleted(PDO $db, int $id): User
+    {
+        $query = "SELECT * FROM `" . self::$table_name . "` WHERE id=:id";
+
+        $stmt = $db->prepare($query);
+
+        $stmt->bindParam(":id", $id);
+
+        if ($stmt->execute()) {
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                return self::getMainObject($db, $row);
+            }
+        }
+        createException("User not foud");
+    }
+
     public static function getAllCount(PDO $db, string $search = "", array $filters = []): int
     {
         $query = "SELECT COUNT(id) as total FROM `" . self::$table_name . "` c WHERE deleted_at IS NULL";

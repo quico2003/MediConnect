@@ -1,12 +1,17 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import { Paths } from "../Constants/paths.constants";
 import { StorageKeys } from "../Constants/storekeys.constants";
 import { Views } from "../Constants/views.constants";
 import NotFoundComponent from "../Components/NotFoundComponent";
+import { StringsContext } from "../Context/strings.context";
 
 export const NotFound = () => {
+
+  const { strings } = useContext(StringsContext);
+  const ViewStrings = strings.context404;
+  
   const { pathname } = useLocation();
   const { isMobileView } = useSelector((state) => state.Config);
 
@@ -16,9 +21,9 @@ export const NotFound = () => {
     text: "404",
     description: (
       <span>
-        This page does not exist.
+        {ViewStrings.title}
         <br />
-        Please press following button to be redirected to Home page
+       {ViewStrings.subTitle}
       </span>
     ),
   });
@@ -38,8 +43,17 @@ export const NotFound = () => {
 
   useEffect(() => {
     let token = localStorage.getItem(StorageKeys.TOKEN);
-    if (token) setHomePath(Paths[Views.homeAdmin].path);
-    else setHomePath(Paths[Views.loginAdmin].path);
+    let role = localStorage.getItem(StorageKeys.ROLE);
+
+    if (token) {
+      if (role) {
+        setHomePath(Paths[Views.homeUser].path);
+      }else {
+        setHomePath(Paths[Views.homeAdmin].path);
+      }
+    }else{
+      setHomePath(Paths[Views.landing].path);
+    }
   }, []);
 
  const handleRedirect = () => {

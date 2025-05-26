@@ -78,6 +78,7 @@ class Appointment
 
     public static function getAllAppointmentsByDay(PDO $db, int $user_id, string $day): array
     {
+
         $query = "SELECT * FROM `" . self::$table_name . "` WHERE date LIKE :day AND deleted_at IS NULL AND created_by=:user_id;";
 
         $stmt = $db->prepare($query);
@@ -96,17 +97,10 @@ class Appointment
 
     }
 
-    public static function getByClient(PDO $db, int $page, int $offset, string $filter, int $client_id): array
+    public static function getByClient(PDO $db, int $page, int $offset, int $client_id): array
     {
-        if ($filter === "all")
-            $query = "SELECT * FROM `" . self::$table_name . "` WHERE created_for=:client_id";
-        if ($filter === "completed")
-            $query = "SELECT * FROM `" . self::$table_name . "` WHERE created_for=:client_id AND deleted_at IS NOT NULL AND final_description IS NOT NULL";
-        if ($filter === "pending")
-            $query = "SELECT * FROM `" . self::$table_name . "` WHERE created_for=:client_id AND deleted_at IS NULL AND final_description IS NULL";
-        if ($filter === "canceled")
-            $query = "SELECT * FROM `" . self::$table_name . "` WHERE created_for=:client_id AND deleted_at IS NOT NULL AND final_description IS NULL";
 
+        $query = "SELECT * FROM `" . self::$table_name . "` WHERE created_for=:client_id AND deleted_at IS NOT NULL AND final_description IS NOT NULL ORDER BY created_at DESC";
 
         doPagination($offset, $page, $query);
 
@@ -124,16 +118,10 @@ class Appointment
         createException($stmt->errorInfo());
     }
 
-    public static function getByClientCount(PDO $db, string $filter, int $client_id)
+    public static function getByClientCount(PDO $db, int $client_id)
     {
-        if ($filter === "all")
-            $query = "SELECT COUNT(id) as total FROM `" . self::$table_name . "` where created_for=:client_id";
-        if ($filter === "completed")
-            $query = "SELECT COUNT(id) as total FROM `" . self::$table_name . "` where created_for=:client_id AND deleted_at IS NOT NULL AND final_description IS NOT NULL";
-        if ($filter === "pending")
-            $query = "SELECT COUNT(id) as total FROM `" . self::$table_name . "` where created_for=:client_id AND deleted_at IS NULL AND final_description IS NULL";
-        if ($filter === "canceled")
-            $query = "SELECT COUNT(id) as total FROM `" . self::$table_name . "` where created_for=:client_id AND deleted_at IS NOT NULL AND final_description IS NULL";
+        $query = "SELECT COUNT(id) as total FROM `" . self::$table_name . "` WHERE created_for = :client_id AND deleted_at IS NOT NULL AND final_description IS NOT NULL";
+
 
         $stmt = $db->prepare($query);
         $stmt->bindValue(":client_id", $client_id);
@@ -144,6 +132,7 @@ class Appointment
             }
             return 0;
         }
+
         createException($stmt->errorInfo());
     }
 

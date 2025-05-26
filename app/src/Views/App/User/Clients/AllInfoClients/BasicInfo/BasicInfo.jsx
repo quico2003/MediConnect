@@ -45,8 +45,8 @@ const BasicInfo = ({ data, active }) => {
                     <span className="fw-bold">{ViewStrings.phone}</span><span>{client?.phone}</span>
                 </div>
                 <hr />
-                <div className="d-flex flex-column gap-2 mb-2 text-break">
-                    <span className="fw-bold">{ViewStrings.anotations}</span><div dangerouslySetInnerHTML={{ __html: client?.anotations }}></div>
+                <div className="d-flex flex-column gap-4 mb-2 text-break">
+                    <h4 className="fw-bold">{ViewStrings.anotations}</h4><div dangerouslySetInnerHTML={{ __html: client?.anotations }}></div>
                 </div>
             </div>
         </div>

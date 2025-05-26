@@ -49,7 +49,6 @@ export const ProductsWithoutCategoryColumns = (openDeleteProductModal, openAssig
                     </div>
                 )),
         },
-
     ];
     return columns;
 };

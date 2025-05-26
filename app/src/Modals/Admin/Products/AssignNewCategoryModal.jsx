@@ -22,8 +22,10 @@ const AssignNewCategoryModal = ({ show, onClose, data }) => {
     const [selectedOption, setSelectedOption] = useState(null);
 
     useEffect(() => {
-        if (show)
+        if (show) {
             fetchData();
+            setSelectedOption(null);
+        } 
     }, [show]);
 
     const fetchData = async () => {

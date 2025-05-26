@@ -124,7 +124,6 @@ const NewProduct = () => {
     const files = images.map((file, index) => (
         <div key={index} className="d-flex w-100 justify-content-around align-items-center">
             <img src={URL.createObjectURL(file)} className="p-2" alt={`Imagen ${index + 1}`} style={{ width: '200px', height: 'auto', objectFit: 'cover' }} />
-            {file.name}
             <Button onClick={() => deleteImage(index)} variant="danger">
                 {ViewStrings.delete}
             </Button>

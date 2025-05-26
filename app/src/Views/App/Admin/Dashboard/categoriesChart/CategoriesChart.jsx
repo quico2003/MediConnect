@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useMemo, useState } from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Cell, Pie } from 'recharts';
+import { Legend, ResponsiveContainer, PieChart, Cell, Pie } from 'recharts';
 import { EndpointsAdmin, getEndpoint } from '../../../../../Constants/endpoints.contants';
 import useRequest from '../../../../../Hooks/useRequest';
 import useLoaded from '../../../../../Hooks/useLoaded';

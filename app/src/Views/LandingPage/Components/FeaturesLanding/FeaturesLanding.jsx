@@ -3,6 +3,7 @@ import TextFeatureLanding from "./TextFeatureLanding";
 import feature1 from "../../../../Assets/images/LandingPageImages/feature1.jpg"
 import feature2 from "../../../../Assets/images/LandingPageImages/feature2.jpg"
 import feature3 from "../../../../Assets/images/LandingPageImages/feature3.jpg"
+import feature4 from "../../../../Assets/images/LandingPageImages/feature4.jpg"
 import { Col, Row } from "react-bootstrap";
 import { StringsContext } from "../../../../Context/strings.context";
 import { useContext } from "react";
@@ -54,7 +55,7 @@ const FeaturesLanding = () => {
                     <TextFeatureLanding title={ViewStrings.feature2.title} description={ViewStrings.feature2.description} />
                 </Col>
                 <Col md={12} lg={6}>
-                    <ImgFeatureLanding ruteImg={feature2} />
+                    <ImgFeatureLanding ruteImg={feature4} />
                 </Col>
 
             </Row>

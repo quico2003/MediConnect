@@ -57,7 +57,6 @@ const ProductsWithoutCategory = ({ setNeedUpdate }) => {
         search = searchParams.get("search"),
         filter = filterSelected
     ) => {
-
         startFetching();
         return await request(
             "get",
@@ -88,14 +87,12 @@ const ProductsWithoutCategory = ({ setNeedUpdate }) => {
     }
 
     return (
-
         <>
             <DeleteProductModal
                 onClose={handleCloseDeleteProductModal}
                 show={showDeleteProductModal}
                 data={deleteProductData}
             />
-
             <AssignNewCategoryModal
                 onClose={handleCloseAssignCategoryModal}
                 show={showAssignCategoryModal}

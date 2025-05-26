@@ -56,30 +56,32 @@ const ViewUserModal = ({ show, onClose, data }) => {
         >
             <div className="mb-1">
                 <Modal.Body>
-                    <div className="d-flex flex-column align-items-center gap-3">
+                    <div className="d-flex flex-column align-items-center gap-4">
                         <div className="d-flex align-items-center gap-2 mb-2">
-                            <img src={dataUser?.avatar} className="border border-5 border-dark rounded-circle w-100" />
+                            <img src={dataUser?.avatar} className="border border-2 border-dark rounded-circle" width={150} height={150} />
                         </div>
-                        <div className="d-flex align-items-center flex-column gap-2 mb-2">
-                            <span className="fw-bold">{ViewStrings.email}</span><span>{dataUser?.email}</span>
-                        </div>
-                        <div className="d-flex align-items-center flex-column gap-2 mb-2">
-                            <span className="fw-bold">{ViewStrings.firstName}</span><span>{dataUser?.firstName}</span>
-                        </div>
-                        <div className="d-flex align-items-center flex-column gap-2 mb-2">
-                            <span className="fw-bold">{ViewStrings.lastName}</span><span>{dataUser?.lastName}</span>
-                        </div>
-                        <div className="d-flex align-items-center flex-column gap-2 mb-2">
-                            <span className="fw-bold">{ViewStrings.specialty}</span><span>{dataUser?.specialty}</span>
-                        </div>
-                        <div className="d-flex align-items-center flex-column gap-2 mb-2">
-                            <span className="fw-bold">{ViewStrings.creator}</span><span>{dataUser?.creator}</span>
-                        </div>
-                        <div className="d-flex align-items-center flex-column gap-2 mb-2">
-                            <span className="fw-bold">{ViewStrings.created_at}</span><span>{dataUser?.created_at}</span>
-                        </div>
-                        <div className="d-flex align-items-center flex-column gap-2 mb-2">
-                            <span className="fw-bold">{ViewStrings.updated_at}</span><span>{dataUser?.updated_at}</span>
+                        <div className="d-flex flex-column gap-3">
+                            <div className="d-flex align-items-center gap-2">
+                                <span className="fw-bold">{ViewStrings.email}</span><span>{dataUser?.email}</span>
+                            </div>
+                            <div className="d-flex align-items-center gap-2">
+                                <span className="fw-bold">{ViewStrings.firstName}</span><span>{dataUser?.firstName}</span>
+                            </div>
+                            <div className="d-flex align-items-center gap-2">
+                                <span className="fw-bold">{ViewStrings.lastName}</span><span>{dataUser?.lastName}</span>
+                            </div>
+                            <div className="d-flex align-items-center gap-2">
+                                <span className="fw-bold">{ViewStrings.specialty}</span><span>{dataUser?.specialty}</span>
+                            </div>
+                            <div className="d-flex align-items-center gap-2">
+                                <span className="fw-bold">{ViewStrings.creator}</span><span>{dataUser?.creator}</span>
+                            </div>
+                            <div className="d-flex align-items-center gap-2">
+                                <span className="fw-bold">{ViewStrings.created_at}</span><span>{dataUser?.created_at}</span>
+                            </div>
+                            <div className="d-flex align-items-center gap-2">
+                                <span className="fw-bold">{ViewStrings.updated_at}</span><span>{dataUser?.updated_at}</span>
+                            </div>
                         </div>
                     </div>
                 </Modal.Body>

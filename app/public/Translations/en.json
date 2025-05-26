@@ -1,4 +1,8 @@
 {
+  "context404": {
+    "title": "This page does not exist",
+    "subTitle": "Please press following button to be redirected to Home page"
+  },
   "ProfileDropdown": {
     "Profile": "Profile",
     "Account": "Account",
@@ -258,8 +262,8 @@
       "description": "Press the add button to create new practitioners"
     },
     "errors": {
-      "usersNotFound": "practitioners not found.",
-      "userNotFound": "practitioner not found."
+      "usersNotFound": "Practitioners not found.",
+      "userNotFound": "Practitioner not found."
     },
     "columns": {
       "firstName": "First Name",
@@ -467,7 +471,7 @@
       "buttonAdd": "+Add new",
       "emptyData": {
         "text": "Clients not found",
-        "description": "click the button below to add new"
+        "description": "Click the button below to add new"
       },
       "columns": {
         "firstName": "First Name",
@@ -534,7 +538,7 @@
       "firstName": "First Name:",
       "lastName": "Last Name:",
       "phone": "Phone:",
-      "anotations": "Anotations:",
+      "anotations": "Anotations",
       "doctorInfo": "Doctor Info:",
       "close": "Close"
     },

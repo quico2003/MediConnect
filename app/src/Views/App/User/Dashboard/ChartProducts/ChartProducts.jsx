@@ -53,11 +53,7 @@ const ChartProducts = ({ needUpdate, setNeedUpdate }) => {
         Z`;
     };
 
-    const TriangleBar = (props) => {
-        const { fill, x, y, width, height } = props;
-
-        return <path d={getPath(x, y, width, height)} stroke="none" fill={fill} />;
-    };
+ 
 
 
     const cells = useMemo(() => {
@@ -82,7 +78,7 @@ const ChartProducts = ({ needUpdate, setNeedUpdate }) => {
                             bottom: 5,
                         }}
                     >
-                        <Bar dataKey="value" fill="#8884d8" shape={<TriangleBar />} label={{ position: 'top' }}>
+                        <Bar dataKey="value" fill="#8884d8" label={{ position: 'top' }}>
                             {data.map((entry, index) => (
                                 <Cell key={`cell-${index}`} fill={getRandomColor()} />
                             ))}

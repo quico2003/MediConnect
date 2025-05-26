@@ -45,7 +45,6 @@ export const ClientsWithoutUsersColumns = (openDeleteProductModal, openAssignUse
                     </div>
                 )),
         },
-
     ];
     return columns;
 }

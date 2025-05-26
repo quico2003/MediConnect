@@ -9,31 +9,21 @@ $data = getInput();
 
 try {
     $db->beginTransaction();
-    $id = checkAuthUser();
+    checkAuthUser();
 
     $input = validate($data, [
         "guid" => "required|string",
         'page' => 'required|numeric',
-        'offset' => 'required|numeric',
-        'filter' => 'sometimes|string'
+        'offset' => 'required|numeric'
     ]);
 
-    $filter = $input->filter ?? "all";
-
-    $stats = [
-        ["value" => "all", "label" => "All"],
-        ["value" => "completed", "label" => "Completed"],
-        ["value" => "pending", "label" => "Pending"],
-        ["value" => "canceled", "label" => "Canceled"],
-    ];
-
     $client = Client::getByGuid($db, $input->guid);
-    $user = User::get($db, $id);
 
-    $appointmens = Appointment::getByClient($db, $input->page, $input->offset, $filter, $client->id);
-    $appointmensCount = Appointment::getByClientCount($db, $filter, $client->id);
+    $appointmens = Appointment::getByClient($db, $input->page, $input->offset, $client->id);
+    $appointmensCount = Appointment::getByClientCount($db, $client->id);
 
     foreach ($appointmens as $appointmen) {
+        $user = User::getWithoutDeleted($db, $appointmen->created_by);
         $userProfile = UserProfile::getByUserId($db, $user->id);
         $appointmen->doctor = $userProfile->first_name;
         $appointmen->client = $client->first_name;
@@ -45,8 +35,7 @@ try {
 
     Response::sendResponse([
         "appointments" => $appointmens,
-        "totalPages" => $totalPages,
-        "stats" => $stats
+        "totalPages" => $totalPages
     ]);
 
 } catch (\Exception $th) {

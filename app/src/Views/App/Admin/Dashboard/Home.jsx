@@ -32,7 +32,6 @@ const HomeAdmin = () => {
                 <Col>
                     <TypeRenderCount type="clients" title={ViewStrings.clients} />
                 </Col>
-            
             </Row>
             <Row>
                 <Col xs={12} xxl={6}>
@@ -54,11 +53,8 @@ const HomeAdmin = () => {
                     <UsersChart needUpdate={needUpdate} setNeedUpdate={setNeedUpdate} />
                 </Col >
             </Row>
-
         </GeneralLayout>
     )
-
-
 }
 
 export default HomeAdmin;

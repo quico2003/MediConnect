@@ -1,4 +1,8 @@
 {
+  "context404": {
+    "title": "Esta pagina no existe",
+    "subTitle": "Por favor, presione el botón que le indica que se dirige al apartado de inicio para regresar a la página principal"
+  },
   "ProfileDropdown": {
     "Profile": "Perfil",
     "Account": "Cuenta",
@@ -24,10 +28,10 @@
     "categories": "Categorias",
     "medicalTeam": "Equipo Medico",
     "clients": "Clientes Registrados",
-    "dontP": "No se han econtrado productos",
-    "dontC": "No se han econtrado clientes",
+    "dontP": "No se han encontrado productos",
+    "dontC": "No se han encontrado clientes",
     "assign": {
-      "title": "Asignar nueva categoria a el producto",
+      "title": "Asignar nueva categoria al producto",
       "category": "Categoria",
       "cancel": "Cancelar",
       "assign": "Asignar",
@@ -40,7 +44,7 @@
     },
     "withoutUsers": {
       "title": "Clientes sin medicos",
-      "isEmpty": "No hay Clientes sin medicos",
+      "isEmpty": "No hay clientes sin médicos",
       "deleteModal": {
         "messageDeleted": "Cliente eliminado.",
         "title": "Eliminar Cliente",
@@ -402,7 +406,7 @@
       },
       "sections": {
         "profileImage": "Perfil",
-        "basicSection": "Información Basica"
+        "basicSection": "Información Básica"
       },
       "inputs": {
         "firstName": {
@@ -479,11 +483,11 @@
     },
     "historial": {
       "title": "Info. Cliente",
-      "event1": "Informacion Basica",
+      "event1": "Información Básica",
       "event2": "Historial de Citas",
       "event3": "Productos Recomendados",
       "appointmentsHistorial": {
-        "emptyData": "No se an encontrado citas",
+        "emptyData": "No se han encontrado citas",
         "columns": {
           "doctor": "Doctor",
           "client": "Cliente",
@@ -499,10 +503,10 @@
       "view": {
         "title": "Información de la cita",
         "client": "Cliente:",
-        "doctor": "Doctór:",
-        "date_create": "Fecha creacion de la cita:",
+        "doctor": "Doctor:",
+        "date_create": "Fecha creación de la cita:",
         "date": "Fecha de la cita:",
-        "reason": "Razon:",
+        "reason": "Razón:",
         "conclusion": "Conclusión:"
       }
     },
@@ -534,7 +538,7 @@
       "firstName": "Nombre:",
       "lastName": "Apellido:",
       "phone": "Teléfono:",
-      "anotations": "Anotaciones:",
+      "anotations": "Anotaciones",
       "doctorInfo": "Informacion del doctor:",
       "close": "Cerrar"
     },
@@ -688,7 +692,7 @@
     },
     "products": {
       "title": "Un poco sobre nuestros productos en stock",
-      "more": "Ver Mas ▼",
+      "more": "Ver Más ▼",
       "less": "Ver Menos ▲",
       "dontProducts": "No hay productos disponibles en este momento."
     },

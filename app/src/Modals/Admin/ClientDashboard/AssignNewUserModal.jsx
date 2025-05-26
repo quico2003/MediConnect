@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+ import { useContext, useEffect, useState } from "react";
 import { StringsContext } from "../../../Context/strings.context";
 import useNotification from "../../../Hooks/useNotification";
 import useRequest from "../../../Hooks/useRequest";
@@ -22,7 +22,10 @@ const AssignNewUserModal = ({ show, onClose, data }) => {
     const [selectedOption, setSelectedOption] = useState(null);
 
     useEffect(() => {
-        if (show) fetchData();
+        if (show){
+            fetchData();
+            setSelectedOption(null);
+        } 
     }, [show])
 
     const fetchData = async () => {
@@ -78,6 +81,7 @@ const AssignNewUserModal = ({ show, onClose, data }) => {
                 className="pb-2"
                 id="users"
                 onChange={handleSelect}
+                value={selectedOption}
                 isClearable
                 isSearchable
             />

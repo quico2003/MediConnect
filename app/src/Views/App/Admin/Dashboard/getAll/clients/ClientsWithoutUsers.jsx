@@ -73,7 +73,6 @@ const ClientsWithoutUsers = ({ setNeedUpdate }) => {
             })
             .catch((err) => errorNotification(err.message))
             .finally(() => finishFetching());
-
     }
 
     const handleColseDeleteClientModal = (refresh) => {
@@ -88,20 +87,17 @@ const ClientsWithoutUsers = ({ setNeedUpdate }) => {
     }
 
     return (
-
         <>
             <DeleteClientModal
                 onClose={handleColseDeleteClientModal}
                 show={showDeleteClientModal}
                 data={deleteClientModal}
             />
-
             <AssignNewUserModal
                 onClose={handleCloseAssignClientModal}
                 show={showAssignClientModal}
                 data={assignClientModal}
             />
-
             <PanelLayout loaded={loaded}>
                 <ReactTable
                     searcherProps={{

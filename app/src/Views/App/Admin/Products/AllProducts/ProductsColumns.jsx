@@ -32,7 +32,7 @@ export const ProductsColumns = (openViewProductModal, openViewBarcodeProductModa
         {
             Header: ViewStrings.categoryName,
             Cell: (row) =>
-                getColumnValue(row, (item) => <p className="mb-0">{item.categoryName}</p>),
+                getColumnValue(row, (item) => <p className="mb-0 text-truncate" style={{ maxWidth: "200px" }}>{item.categoryName}</p>),
             
         },
         {

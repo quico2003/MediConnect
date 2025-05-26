@@ -36,7 +36,6 @@ const UsersChart = ({ needUpdate, setNeedUpdate }) => {
                     .then((res) => setData(res.users))
                     .catch((err) => errorNotification(err.message))
                     .finally(() => finishFetching());
-
     }
     const RADIAN = Math.PI / 180;
 
@@ -71,7 +70,6 @@ const UsersChart = ({ needUpdate, setNeedUpdate }) => {
 
         <PanelLayout loaded={loaded}>
             {data.length != 0 ? (
-
                 <ResponsiveContainer width="100%" height={435}>
                     <PieChart width={400} height={400}>
                         <Pie

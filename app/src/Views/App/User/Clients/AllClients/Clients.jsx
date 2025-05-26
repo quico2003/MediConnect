@@ -6,7 +6,6 @@ import useQuery from "../../../../../Hooks/useQuery";
 import useNotification from "../../../../../Hooks/useNotification";
 import useLoaded from "../../../../../Hooks/useLoaded";
 import useModalManager from "../../../../../Hooks/useModalManager";
-import ViewClientModal from "../../../../../Modals/User/Clients/ViewClientModal";
 import DeleteClientModal from "../../../../../Modals/User/Clients/DeleteClientModal";
 import GeneralLayout from "../../../../../Layouts/GeneralLayout/GeneralLayout";
 import { Button } from "react-bootstrap";
@@ -43,12 +42,12 @@ const Clients = () => {
         data: DeleteClientData,
     } = useModalManager();
 
-    const {
-        closeModal: closeViewClientModal,
-        openModal: openViewClientModal,
-        show: showViewClientModal,
-        data: ViewClientData,
-    } = useModalManager();
+    // const {
+    //     closeModal: closeViewClientModal,
+    //     openModal: openViewClientModal,
+    //     show: showViewClientModal,
+    //     data: ViewClientData,
+    // } = useModalManager();
 
     useEffect(() => {
         fetchData();
@@ -85,9 +84,9 @@ const Clients = () => {
         closeDeleteClientModal();
     };
 
-    const handleCloseViewClientModal = () => {
-        closeViewClientModal();
-    };
+    // const handleCloseViewClientModal = () => {
+    //     closeViewClientModal();
+    // };
 
     return (
         <>

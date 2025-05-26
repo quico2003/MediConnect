@@ -3,7 +3,7 @@ import { FaArrowAltCircleRight } from "react-icons/fa";
 const TextFeatureLanding = ({ title, subtitle, description, items }) => {
 
     return (
-        <div style={{ minWidth: "50%", height: "100%" }} className="px-2 d-flex flex-column">
+        <div style={{ minWidth: "50%", height: "100%" }} className="px-2 d-flex flex-column align-items-center justify-content-center">
             <div className="d-flex flex-column align-items-center justify-content-center">
                 {title && <h3> {title} </h3>}
                 {subtitle && <h5> {subtitle} </h5>}

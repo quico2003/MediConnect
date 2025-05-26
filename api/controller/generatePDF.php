@@ -29,7 +29,7 @@ class GeneratePDF
     public function fetchData($appointment_id)
     {
         $this->appointment = Appointment::getWithPDF($this->conn, $appointment_id);
-        $this->user = User::get($this->conn, $this->appointment->created_by);
+        $this->user = User::getWithoutDeleted($this->conn, $this->appointment->created_by);
         $this->client = Client::get($this->conn, $this->appointment->created_for);
         $this->userProfile = UserProfile::getByUserId($this->conn, $this->user->id);
         $products_id = Recipe::getAllProductsByAppointment($this->conn, $appointment_id);
@@ -37,6 +37,7 @@ class GeneratePDF
             $this->products[] = Product::get($this->conn, $id);
         }
     }
+
     function mountHtml()
     {
         $fecha = date('d/m/Y');
@@ -137,7 +138,7 @@ class GeneratePDF
     {
         $avatarUserPath = $this->userProfile->avatar;
 
-        $this->html .= "<table class='table' style='text-align:center;' border='1' width='540'>";
+        $this->html .= "<table class='table' style='text-align:center; margin-bottom:20px'; border='1' width='540'>";
         $this->html .= "<tr class='tr'>";
         $this->html .= "<th class='th'>Client Information:</th>";
         $this->html .= "<th class='th'>Practicioner Information:</th>";
@@ -164,26 +165,30 @@ class GeneratePDF
         $this->html .= "<p><strong>" . $value . " </strong>: " . $label . "</p>";
     }
 
+    function renderTableBasic(string $title, string $text)
+    {
+        $this->html .= "<table style='width: 100%; border-collapse: collapse;'>";
+        $this->html .= "<tr>";
+        $this->html .= "<td><h2 style='margin: 0;'>$title</h2></td>";
+        $this->html .= "</tr>";
+        $this->html .= "<tr>";
+        $this->html .= "<td style='word-wrap: break-word; word-break: break-all; max-width: 500px;'>$text</td>";
+        $this->html .= "</tr>";
+        $this->html .= "</table>";
+    }
+
     function descriptionAppointment()
     {
         $description = $this->appointment->final_description;
 
-        $this->html .= "<div style='margin:40px;'>";
-        $this->html .= "<h3>Description Appointment:</h3>";
-        $this->html .= "<div>$description</div>";
-        $this->html .= "</div>";
-
+        $this->renderTableBasic("Anotations Client", $description);
     }
 
     function anotationsClient()
     {
         $anotations = $this->client->anotations;
 
-        $this->html .= "<div style='margin:40px;'>";
-        $this->html .= "<h3>Anotations Client:</h3>";
-        $this->html .= "<div>$anotations</div>";
-        $this->html .= "</div>";
-
+        $this->renderTableBasic("Description Appointments", $anotations);
     }
 
     function renderProducts()
@@ -219,8 +224,6 @@ class GeneratePDF
             $this->html .= "</tr>";
         }
         $this->html .= "</table>";
-
-
     }
 
     function init()
@@ -233,7 +236,6 @@ class GeneratePDF
 
     function loadHtml()
     {
-
         $this->pdf->loadHtml($this->finalHtml);
         $this->pdf->render();
         $this->output();

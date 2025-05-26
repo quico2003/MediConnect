@@ -12,7 +12,6 @@ import useModalManager from "../../../../../../Hooks/useModalManager";
 import ViewAppointmentModal from "../../../../../../Modals/User/Clients/ViewAppointmentModal";
 import Select from "react-select";
 import { FormLabel } from "react-bootstrap";
-import RequiredField from "../../../../../../Components/Form/RequiredField/RequiredField";
 
 const AppointmentHistorial = ({ data, active }) => {
 
@@ -25,8 +24,6 @@ const AppointmentHistorial = ({ data, active }) => {
     const { startFetching, finishFetching, fetching, loaded } = useLoaded();
 
     const [appointments, setAppointments] = useState([]);
-    const [stats, setStats] = useState([]);
-    const [selectedStat, setSelectedStat] = useState({value: "all", label: "All"});
 
     const { showNotification: errorNotification } = useNotification();
 
@@ -39,14 +36,13 @@ const AppointmentHistorial = ({ data, active }) => {
 
     useEffect(() => {
         if (active === "recipeHistorial") {
-            fetchData(1, Configuration.tables.defaultPageSize, selectedStat.value);
+            fetchData();
         }
-    }, [active])
+    }, [active]);
 
     const fetchData = async (
         page = 1,
-        offset = Configuration.tables.defaultPageSize,
-        filter = selectedStat.value
+        offset = Configuration.tables.defaultPageSize
     ) => {
         startFetching();
         return await request(
@@ -55,22 +51,17 @@ const AppointmentHistorial = ({ data, active }) => {
             {
                 guid: data,
                 page,
-                offset,
-                filter: filter,
+                offset
             })
             .then((res) => {
                 setAppointments(res.appointments);
                 setTotalPages(res.totalPages);
-                setStats(res.stats);
             })
             .catch((err) => errorNotification(err.message))
             .finally(() => finishFetching());
     }
-
-    const handleSelectStat = (e) => {
-        setSelectedStat(e);
-        fetchData(1, Configuration.tables.defaultPageSize, e?.value || "all");
-    };
+    
+    
 
     const handleCloseViewAppointmentModal = () => {
         closeViewAppointmentModal();
@@ -86,21 +77,6 @@ const AppointmentHistorial = ({ data, active }) => {
 
             <div className="bg-white ">
                 <PanelLayout loaded={loaded}>
-                    <div className="d-flex justify-content-end mb-3 gap-4 align-items-center">
-                        <FormLabel className="mb-0">Filters:</FormLabel>
-                        <Select
-                            options={stats}
-                            closeMenuOnSelect={true}
-                            className="pb-2 w-25"
-                            menuPortalTarget={document.body}
-                            id="stat"
-                            onChange={handleSelectStat}
-                            value={selectedStat}
-                            isSearchable
-                            isClearable
-                        />
-
-                    </div>
                     <ReactTable
 
                         showSearcher={false}
