@@ -200,7 +200,7 @@ class Product
 
     public static function getAllAssign(PDO $db, int $client_id): array
     {
-        $query = "SELECT * FROM `" . self::$table_name . "` AS p INNER JOIN client_products AS cp 
+        $query = "SELECT p.* FROM `" . self::$table_name . "` AS p INNER JOIN client_products AS cp 
                 ON p.id = cp.product_id WHERE cp.client_id=:client_id AND p.deleted_at IS NULL GROUP BY p.id";
 
         $stmt = $db->prepare($query);

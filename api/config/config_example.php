@@ -20,8 +20,8 @@ define('API_URL', 'https://api.blesadev.es' . $middleware); // si es production 
 //Database Config
 define('DB_HOST', "127.0.0.1");
 define('DB_NAME', 'mediconnect_db'); // nombre de la base detos
-define('DB_USERNAME', ''); 
-define('DB_PASSWORD', ''); 
+define('DB_USERNAME', 'user'); 
+define('DB_PASSWORD', 'User@123'); 
 
 
 
