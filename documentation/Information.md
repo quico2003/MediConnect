@@ -149,3 +149,7 @@ Una vez ya hemos creado el objeto con todos los parametros necesarios tenemos qu
 En storagePaths.php se encuentran las rutas en las cuales se encuentran las imagenes de los productos/avatar y como se deven llamar.
 
 En el endpoint media/... son los enpoints para llamar a las imagenes.
+
+# Enlace presentación
+
+## https://view.genially.com/6836cef81ac258b3c88e89ec/presentation-presentacion-tfg-mediconnect
