@@ -153,3 +153,7 @@ En el endpoint media/... son los enpoints para llamar a las imagenes.
 # Enlace presentación
 
 ## https://view.genially.com/6836cef81ac258b3c88e89ec/presentation-presentacion-tfg-mediconnect
+
+# Presentacion en ingles para VidaVia
+
+## https://view.genially.com/683d8829ee5ab9223604a7b3/presentation-presentation-mediconnect-by-vidavia
